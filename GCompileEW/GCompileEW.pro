@@ -14,5 +14,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+
+HEADERS += Modules/module.h \
+    Modules/lexanalysis.h \
+    Exceptions/exception.h \
+    Exceptions/filenotfoundexception.h \
+    Tools/filter.h \
+    compiler.h \
+    Modules/analysisstructure.h
+
 SOURCES += \
-        main.cpp
+        main.cpp \
+    Modules/module.cpp \
+    Modules/lexanalysis.cpp \
+    Exceptions/exception.cpp \
+    Exceptions/filenotfoundexception.cpp \
+    Tools/filter.cpp \
+    compiler.cpp \
+    Modules/analysisstructure.cpp
+
