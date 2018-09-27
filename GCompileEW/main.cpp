@@ -1,8 +1,11 @@
 #include <QCoreApplication>
+#include <Tools/filter.h>
+#include <iostream>
+#include <compiler.h>
+#include <Modules/lexanalysis.h>
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
-
-    return a.exec();
+    Compiler compiler;
+    LexAnalysis lex(&compiler);
 }
