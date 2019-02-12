@@ -5,32 +5,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using GCEWWeb.Models;
+using Microsoft.Extensions.Options;
+using GCEWWeb.Services;
 
 namespace GCEWWeb.Controllers
 {
     public class HomeController : Controller
     {
+        public IOptions<CustomConfiguration> Options { get; set; }
+
+        public HomeController(IOptions<CustomConfiguration> options)
+        {
+            Options = options ?? throw new ArgumentNullException(nameof(options));
+        }
+
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            TempData["Configuration"] = Options.Value;
             return View();
         }
 

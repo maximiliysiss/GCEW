@@ -1,5 +1,6 @@
 #ifndef COMPILER_H
 #define COMPILER_H
+#include <iostream>
 #include <vector>
 #include <Modules/module.h>
 #include <algorithm>
@@ -23,6 +24,7 @@ public:
         std::for_each(modules.begin(), modules.end(), [](Module * module){ module->Start();});
         }
         catch(Exception * ex){
+            std::cout<< ex->What();
             return false;
         }
         return true;
