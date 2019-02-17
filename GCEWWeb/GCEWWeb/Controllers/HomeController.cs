@@ -17,11 +17,12 @@ namespace GCEWWeb.Controllers
         public HomeController(IOptions<CustomConfiguration> options)
         {
             Options = options ?? throw new ArgumentNullException(nameof(options));
+            SiteTemplateInit.InitAllModules(Options.Value);
         }
 
         public IActionResult Index()
         {
-            TempData["Configuration"] = Options.Value;
+            ViewBag.Configuration = Options.Value;
             return View();
         }
 

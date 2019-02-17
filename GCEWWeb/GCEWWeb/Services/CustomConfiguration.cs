@@ -8,5 +8,6 @@ namespace GCEWWeb.Services
     public class CustomConfiguration
     {
         public string SiteTemplateFile { get; set; }
+        public string ContextMenuTemplate { get; set; }
     }
 }

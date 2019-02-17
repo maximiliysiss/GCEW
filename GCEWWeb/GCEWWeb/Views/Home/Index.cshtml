@@ -1,8 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var templatesSite = SiteTemplate<TemplateSite>.Instance();
 }
 
 <style>
+
+    body {
+        scrollbar-color: grey #dddddd;
+    }
 
     .window {
         position: absolute;
@@ -11,8 +16,7 @@
         width: 100%;
         height: 100%;
         display: flex;
-        flex-direction: row;
-        background-color: black;
+        flex-direction: column;
     }
 
     .solution-view {
@@ -41,10 +45,11 @@
 
     .tabs-solution {
         display: flex;
-        width: 100%;
+        flex: 1;
         min-height: 30px;
-        background-color: chartreuse;
         flex-direction: row;
+        overflow-x: auto;
+        scrollbar-width: thin;
     }
 
     .second-column {
@@ -52,7 +57,7 @@
         display: flex;
         flex: 1;
         flex-direction: column;
-        background-color: crimson;
+        overflow-x: auto;
     }
 
     .text-editor {
@@ -64,8 +69,8 @@
 
     .tab {
         background-color: white;
-        display: inline-block;
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
         padding: 0px 10px 0px 10px;
@@ -90,15 +95,13 @@
 
     .tabs {
         display: flex;
-        width: 100%;
         min-height: 30px;
-        background-color: chartreuse;
         flex-direction: row;
     }
 
     .tab > span {
         font-weight: bold;
-        padding-left: 2px;
+        padding-left: 5px;
     }
 
         .tab > span:hover {
@@ -112,62 +115,122 @@
         cursor: pointer;
         border-color: black;
     }
+
+    .window-in {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .tabs-header {
+        margin-bottom: 5px;
+        min-height: 20px;
+    }
+
+    .buttons {
+        margin: 2px 5px 2px 5px;
+    }
+
+    .btn-tabs {
+        padding: 1.5px 8px;
+        background-color: white;
+        border: 1.2px solid;
+        border-color: grey;
+    }
+
+        .btn-tabs:hover {
+            background-color: #a4a4a4;
+        }
+
+        .btn-tabs > img {
+            height: 15px;
+        }
+
+    .buttons {
+        display: none;
+    }
+
+    .flipped, .flipped span, .flipped div {
+        transform: rotateX(180deg);
+        -ms-transform: rotateX(180deg); /* IE 9 */
+        -webkit-transform: rotateX(180deg); /* Safari and Chrome */
+    }
+
+    .dropdown-submenu {
+        position: relative;
+        padding: 0px;
+    }
+
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
+        }
+
+    .dropdown-toggle {
+        padding: 4px 6px;
+        border: none;
+        border-radius: 0px;
+        background-color: #eeeeee;
+    }
+
+    .menu {
+        padding-left: 10px;
+        background-color: #eeeeee;
+    }
+
+    .dropdown {
+        background-color: #eeeeee;
+        display: inline-block;
+        float: left;
+    }
+
+    .space {
+        margin-left: auto;
+    }
+
+    .menu-element {
+        display: flex;
+    }
 </style>
 
 
 <div class="window">
-    <div class="solution-view">
-        <div class="user-info"></div>
-        <div class="solution-context"></div>
-        <div class="tabs">
-            <div class="tabs-solution">
-                <span class="tab third-up-border">sdfsdfdsfsdfsdf</span>
-                <span class="tab third-up-border">Osdfsfsdfsdfsdfne</span>
-                <span class="tab third-up-border">One</span>
-            </div>
-        </div>
+    <div class="menu">
+        @Html.Raw(Html.MenuContainerHtml())
     </div>
-    <div class="second-column">
-        <div class="tabs">
-            <div class="tabs-solution">
-                <span class="tab third-down-border">
-                    One
-                    <span>x</span>
-                </span>
-                <span class="tab third-down-border">
-                    One
-                    <span>x</span>
-                </span>
-                <span class="tab third-down-border">
-                    One
-                    <span>x</span>
-                </span>
-            </div>
+
+    <div class="window-in">
+        <div class="solution-view">
+            <partial name="~/Views/SitePartical/Leftpanel.cshtml" />
         </div>
-        <div class="text-editor"></div>
+        <div class="second-column">
+            <partial name="~/Views/SitePartical/Workspace.cshtml" />
+        </div>
     </div>
 </div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
+    var siteTemplates = { @Html.Raw(string.Join(", ",templatesSite.TemplateSites.Select(x=>$"'{x.Key}':'{x.Value.Template}'"))) };
+</script>
+<script>
 
     function resizeAllTabs() {
-        $(".tabs-solution").each(function () {
-            var total = 0;
-            $(this).find(".tab").each(function () {
-                total += $(this).outerWidth();
-            });
-            if (total > $(this).outerWidth()) {
-                var tabs = $(this);
-                tabs.css("width", "auto");
-                tabs.css("flex", "1");
-                console.log(total + " " + $(this).outerWidth());
-            }
-        });
     }
 
     $(function () {
         resizeAllTabs();
+
+        $('.dropdown-submenu a.test').on("click", function (e) {
+            var visible = $(this).next("ul").is(":visible");
+            $(this).parent().parent().find("li ul").each(function () { $(this).css("display", "none"); });
+            if (!visible)
+                $(this).next("ul").toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+
     });
 
 </script>

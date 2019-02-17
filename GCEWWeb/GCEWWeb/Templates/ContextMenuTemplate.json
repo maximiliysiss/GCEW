@@ -1,0 +1,101 @@
+[
+  {
+    "Name": "File",
+    "Caption": "File",
+    "Function": "",
+    "InnerMenu": [
+      {
+        "Name": "Test",
+        "Caption": "Test",
+        "Function": ""
+      },
+      {
+        "Name": "New",
+        "Caption": "New",
+        "Function": "",
+        "InnerMenu": [
+          {
+            "Name": "Project",
+            "Caption": "Project",
+            "Function": "",
+            "InnerMenu": [
+              {
+                "Name": "Test",
+                "Caption": "One",
+                "Functon": ""
+              }
+            ]
+          },
+          {
+            "Name": "File",
+            "Caption": "File",
+            "Function": ""
+          }
+        ]
+      },
+      {
+        "Name": "Open",
+        "Caption": "Open",
+        "Function": "",
+        "InnerMenu": [
+          {
+            "Name": "Project",
+            "Caption": "Project",
+            "Function": ""
+          },
+          {
+            "Name": "File",
+            "Caption": "File",
+            "Function": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Open",
+    "Caption": "File",
+    "Function": "",
+    "InnerMenu": [
+      {
+        "Name": "Test",
+        "Caption": "Test",
+        "Function": ""
+      },
+      {
+        "Name": "New",
+        "Caption": "New",
+        "Function": "",
+        "InnerMenu": [
+          {
+            "Name": "Project",
+            "Caption": "Project",
+            "Function": ""
+          },
+          {
+            "Name": "File",
+            "Caption": "File",
+            "Function": ""
+          }
+        ]
+      },
+      {
+        "Name": "Open",
+        "Caption": "Open",
+        "Function": "",
+        "InnerMenu": [
+          {
+            "Name": "Project",
+            "Caption": "Project",
+            "Function": ""
+          },
+          {
+            "Name": "File",
+            "Caption": "File",
+            "Function": ""
+          }
+        ]
+      }
+    ]
+  }
+]

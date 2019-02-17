@@ -1,28 +1,33 @@
-[
+﻿[
   {
-    "template": {
-      "Name": "TabWithClose",
-      "Template": "<span class=\"tab third-up-border\">{0}</span>",
-      "Count": 1,
-      "Argument": [ "content" ]
-    }
+    "Name": "TabWithClose",
+    "Template": "<span class=\"tab third-up-border\">{content}<\/span>",
+    "Count": 1,
+    "Arguments": [ "content" ]
   },
 
   {
-    "template": {
-      "Name": "Tab",
-      "Template": "<span class=\"tab third-down-border\">{0}<span>{1}</span></span>",
-      "Count": 2,
-      "Argument": [ "content", "close" ]
-    }
+    "Name": "Tab",
+    "Template": "<span class=\"tab third-down-border\">{content}<span>{close}<\/span><\/span>",
+    "Count": 2,
+    "Arguments": [ "content", "close" ]
   },
-
   {
-    "template": {
-      "Name": "TabButtons",
-      "Template": "<span class=\"tab third-down-border\">{0}<span>{1}</span></span>",
-      "Count": 2,
-      "Argument": [ "content", "close" ]
-    }
+    "Name": "TabButtons",
+    "Template": "<span class=\"tab third-down-border\">{content}<span>{close}<\/span><\/span>",
+    "Count": 2,
+    "Arguments": [ "content", "close" ]
+  },
+  {
+    "Name": "MenuElementRoot",
+    "Template": "<div class=\"dropdown\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">{caption}<\/button><ul class=\"dropdown-menu\">{innermenu}<\/ul><\/div>",
+    "Count": 2,
+    "Arguments": [ "caption", "innermenu" ]
+  },
+  {
+    "Name": "MenuElement",
+    "Template": "<li class=\"dropdown-submenu\"><a class=\"test\" tabindex=\"-1\" href=\"#\"><span class=\"menu-element\"><span>{caption}<\/span><span class=\"space\"><\/span><span>►<\/span><\/span><\/a><ul class=\"dropdown-menu\">{innermenu}<\/ul><\/li>",
+    "Count": 2,
+    "Arguments": [ "caption", "innermenu" ]
   }
 ]
