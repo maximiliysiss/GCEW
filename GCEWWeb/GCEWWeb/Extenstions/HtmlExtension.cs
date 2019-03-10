@@ -13,16 +13,22 @@ namespace GCEWWeb.Extenstions
     {
         public static string MenuContainerHtml(this IHtmlHelper htmlHelper)
         {
-            var headers = SiteTemplate<ContextMenu>.Instance().TemplateSites.Select(x => x.Value);
-            return GenerateMenuLevel(headers);
+            var headers = SiteTemplate<MenuElements>.Instance().TemplateSites.Select(x => x.Value);
+            return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span><span>►</span></span></a><ul class=\"dropdown-menu\"></ul>", replaceTo: "</span></a>");
         }
 
-        private static string GenerateMenuLevel(IEnumerable<ContextMenu> contextMenus, bool isRoot = false)
+        private static string GenerateMenuLevel<T>(IEnumerable<T> contextMenus, bool isRoot = false, string replace = "", string replaceTo = "") where T : class
         {
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var contextMenu in contextMenus)
-                stringBuilder.Append(TemplateSerialize.Serialize(contextMenu).Replace("<span class=\"space\"></span><span>►</span></span></a><ul class=\"dropdown-menu\"></ul>", "</span></a>"));
+                stringBuilder.Append(TemplateSerialize.Serialize(contextMenu).Replace(replace, replaceTo));
             return stringBuilder.ToString();
+        }
+
+        public static string GenerateContextMenus(this IHtmlHelper htmlHelper)
+        {
+            var headers = SiteTemplate<ContextMenu>.Instance().TemplateSites.Select(x => x.Value);
+            return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span><span>►</span><div class=\"menuContextRoot\"><ul class=\"menuContextElements\"></ul></div>", replaceTo: string.Empty);
         }
     }
 }

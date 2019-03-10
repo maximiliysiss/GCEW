@@ -11,8 +11,9 @@ namespace GCEWWeb.Services
     {
         public static void InitAllModules(CustomConfiguration customConfiguration)
         {
-            SiteTemplate<ContextMenu>.Instance(customConfiguration, customConfiguration.ContextMenuTemplate);
+            SiteTemplate<MenuElements>.Instance(customConfiguration, customConfiguration.MenuTemplate);
             SiteTemplate<TemplateSite>.Instance(customConfiguration, customConfiguration.SiteTemplateFile);
+            SiteTemplate<ContextMenu>.Instance(customConfiguration, customConfiguration.ContextMenuTemplate);
         }
     }
 

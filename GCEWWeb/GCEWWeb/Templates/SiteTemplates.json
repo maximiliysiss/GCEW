@@ -29,5 +29,17 @@
     "Template": "<li class=\"dropdown-submenu\"><a class=\"test\" tabindex=\"-1\" href=\"#\"><span class=\"menu-element\"><span>{caption}<\/span><span class=\"space\"><\/span><span>►<\/span><\/span><\/a><ul class=\"dropdown-menu\">{innermenu}<\/ul><\/li>",
     "Count": 2,
     "Arguments": [ "caption", "innermenu" ]
+  },
+  {
+    "Name": "MenuElementContext",
+    "Template": "<li onclick=\"{function}\"><span class=\"menu-element\">{caption}<\/span><span class=\"space\"><\/span><span>►<\/span><div class=\"menuContextRoot\"><ul class=\"menuContextElements\">{innermenu}<\/ul><\/div><\/li>",
+    "Count": 3,
+    "Arguments": [ "caption", "innermenu", "function" ]
+  },
+  {
+    "Name": "ContextMenuRoot",
+    "Template": "<div class=\"menuContextRoot\" id=\"{name}\"><ul class=\"menuContextElements\">{innermenu}<\/ul><\/div>",
+    "Count": 2,
+    "Arguments": [ "name", "innermenu" ]
   }
 ]

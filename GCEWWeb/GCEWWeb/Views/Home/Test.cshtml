@@ -1,0 +1,207 @@
+﻿<style>
+
+    .space {
+        margin-left: auto;
+    }
+
+    .menu-element {
+        display: flex;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .test {
+        display: block;
+        width: 100%;
+        height: 300px;
+        background-color: grey;
+        margin: 50px;
+    }
+
+    .menuContextRoot {
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        display: none;
+        background-color: white;
+        border: 1px solid black;
+    }
+
+    .menuContextElements {
+        padding: 0;
+        margin: 0;
+    }
+
+        .menuContextElements > li {
+            display: flex;
+            list-style-type: none;
+            width: 200px;
+            padding: 10px 25px 10px 25px;
+        }
+
+            .menuContextElements > li:hover {
+                background-color: #dddddd;
+                cursor: pointer;
+            }
+
+    .open-menu-elem {
+        background-color: #ddd;
+    }
+
+    .open-context-menu {
+        display: block;
+    }
+
+    .open-inner-menu {
+        position: absolute;
+        display: block;
+    }
+</style>
+
+<body>
+
+    <div class="menuContextRoot" id="C1">
+        <ul class="menuContextElements">
+            <li>
+                One →
+                <div class="menuContextRoot" id="C1">
+                    <ul class="menuContextElements">
+                        <li>
+                            One
+                            <div class="menuContextRoot" id="C1">
+                                <ul class="menuContextElements">
+                                    <li onclick="twotwo()">One</li>
+                                    <li>Two</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li onclick="two()">Two</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                Two
+                <div class="menuContextRoot" id="C1">
+                    <ul class="menuContextElements">
+                        <li onclick="one()">One</li>
+                        <li>Two</li>
+                    </ul>
+                </div>
+            </li>
+            <li>Three</li>
+            <li>Four</li>
+        </ul>
+    </div>
+
+    <div class="menuContextRoot" id="C2">
+        <ul class="menuContextElements">
+            <li>
+                One
+            </li>
+            <li>
+                Two
+                <div class="menuContextRoot" id="C1">
+                    <ul class="menuContextElements">
+                        <li onclick="one()">
+                            <span class="menu-element">
+                                One
+                            </span>
+                            <span class="space"></span>
+                            <span>
+                                ►
+                            </span>
+                            <div class="menuContextRoot" id="C1">
+                                <ul class="menuContextElements">
+                                    <li onclick="one()">
+                                        <span class="menu-element">
+                                            One
+                                        </span>
+                                        <span class="space"></span>
+                                        <span>
+                                            ►
+                                        </span>
+                                    </li>
+                                    <li>Two</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>Two</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="test" menu="C1">
+    </div>
+
+    <div class="test" menu="C2">
+    </div>
+
+</body>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+
+
+
+
+    $(function () {
+
+        $("[menu]").contextmenu(function (event) {
+            $(".menuContextRoot").each(function () { $(this).removeClass("open-context-menu"); });
+            var menu = $("#" + $(this).attr("menu"));
+            if (menu !== null) {
+                menu.addClass("open-context-menu");
+                menu.css("top", event.pageY);
+                menu.css("left", event.pageX);
+                event.preventDefault();
+            }
+        });
+
+        $(".menuContextElements > li").click(function (event) {
+            var isVisible = $(this).children("div").first().is(":visible");
+
+            $(this).parent().children().each(function () {
+                $(this).removeClass("open-menu-elem");
+                $(this).children().each(function () {
+                    $(this).removeClass("open-inner-menu");
+                });
+            });
+
+            var pos = $(this).position();
+            var leftPos = $(this).outerWidth() + pos.left;
+
+            $(this).children("div").each(function () {
+                $(this).css("top", pos.top);
+                $(this).css("left", leftPos);
+                if (isVisible)
+                    $(this).removeClass("open-inner-menu");
+                else
+                    $(this).addClass("open-inner-menu");
+            });
+
+
+            if ($(this).children("div").length > 0) {
+                $(this).addClass("open-menu-elem");
+                event.stopPropagation();
+            }
+            else
+                $(document).click();
+        });
+
+
+        $(document).click(function () {
+            $(".menuContextRoot").each(function () { $(this).removeClass("open-context-menu"); });
+            $(".menuContextElements > li").each(function () { $(this).removeClass("open-menu-elem"); });
+            $(".open-inner-menu").each(function () { $(this).removeClass("open-inner-menu"); });
+        });
+    });
+
+
+</script>

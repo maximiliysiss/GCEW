@@ -3,202 +3,32 @@
     var templatesSite = SiteTemplate<TemplateSite>.Instance();
 }
 
+
 <style>
 
-    body {
-        scrollbar-color: grey #dddddd;
+    .context-menu-container {
+        display: block;
     }
 
-    .window {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
+    line {
+        background-image: url("~/images/arrows.png");
+        background-repeat: repeat;
     }
 
-    .solution-view {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        background-color: white;
-        max-width: 300px;
+    .st0 {
     }
 
-    .user-info {
-        display: flex;
-        width: 100%;
-        min-height: 70px;
-        background-color: aqua;
-        flex-direction: column;
-    }
-
-    .solution-context {
-        display: flex;
-        flex: 1;
-        width: 100%;
-        background-color: blue;
-        overflow-y: auto;
-    }
-
-    .tabs-solution {
-        display: flex;
-        flex: 1;
-        min-height: 30px;
-        flex-direction: row;
-        overflow-x: auto;
-        scrollbar-width: thin;
-    }
-
-    .second-column {
-        padding: 4px;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        overflow-x: auto;
-    }
-
-    .text-editor {
-        display: flex;
-        flex: 1;
-        width: 100%;
-        background-color: darkorange;
-    }
-
-    .tab {
-        background-color: white;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 0px 10px 0px 10px;
-        margin-left: 5px;
-        border: 1.8px solid;
-        font-weight: bold;
-    }
-
-    .third-down-border {
-        margin-top: 2px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border-bottom: 0;
-    }
-
-    .third-up-border {
-        margin-bottom: 2px;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        border-top: 0;
-    }
-
-    .tabs {
-        display: flex;
-        min-height: 30px;
-        flex-direction: row;
-    }
-
-    .tab > span {
-        font-weight: bold;
-        padding-left: 5px;
-    }
-
-        .tab > span:hover {
-            cursor: pointer;
-            opacity: 0.5;
-        }
-
-    .tab:hover {
-        background-color: grey;
-        color: white;
+    line:hover {
         cursor: pointer;
-        border-color: black;
-    }
-
-    .window-in {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-    }
-
-    .tabs-header {
-        margin-bottom: 5px;
-        min-height: 20px;
-    }
-
-    .buttons {
-        margin: 2px 5px 2px 5px;
-    }
-
-    .btn-tabs {
-        padding: 1.5px 8px;
-        background-color: white;
-        border: 1.2px solid;
-        border-color: grey;
-    }
-
-        .btn-tabs:hover {
-            background-color: #a4a4a4;
-        }
-
-        .btn-tabs > img {
-            height: 15px;
-        }
-
-    .buttons {
-        display: none;
-    }
-
-    .flipped, .flipped span, .flipped div {
-        transform: rotateX(180deg);
-        -ms-transform: rotateX(180deg); /* IE 9 */
-        -webkit-transform: rotateX(180deg); /* Safari and Chrome */
-    }
-
-    .dropdown-submenu {
-        position: relative;
-        padding: 0px;
-    }
-
-        .dropdown-submenu .dropdown-menu {
-            top: 0;
-            left: 100%;
-            margin-top: -1px;
-        }
-
-    .dropdown-toggle {
-        padding: 4px 6px;
-        border: none;
-        border-radius: 0px;
-        background-color: #eeeeee;
-    }
-
-    .menu {
-        padding-left: 10px;
-        background-color: #eeeeee;
-    }
-
-    .dropdown {
-        background-color: #eeeeee;
-        display: inline-block;
-        float: left;
-    }
-
-    .space {
-        margin-left: auto;
-    }
-
-    .menu-element {
-        display: flex;
     }
 </style>
-
-
 <div class="window">
     <div class="menu">
         @Html.Raw(Html.MenuContainerHtml())
     </div>
+
+
+    @Html.Raw(Html.GenerateContextMenus())
 
     <div class="window-in">
         <div class="solution-view">
@@ -206,21 +36,29 @@
         </div>
         <div class="second-column">
             <partial name="~/Views/SitePartical/Workspace.cshtml" />
+            <span id="test" menu="C1" class="menu-handler btn btn-neutral">right click me</span>
         </div>
     </div>
 </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<div class="context-menu-container">
+
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/lib/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="~/js/context-menu-custom.js"></script>
+<script src="~/js/FlowchartsVisual.js"></script>
 <script>
     var siteTemplates = { @Html.Raw(string.Join(", ",templatesSite.TemplateSites.Select(x=>$"'{x.Key}':'{x.Value.Template}'"))) };
 </script>
 <script>
 
-    function resizeAllTabs() {
-    }
 
     $(function () {
-        resizeAllTabs();
+
+        initFlowChartsOnPage($("#svgOne"));
 
         $('.dropdown-submenu a.test').on("click", function (e) {
             var visible = $(this).next("ul").is(":visible");
@@ -232,5 +70,36 @@
         });
 
     });
+
+    $(function () {
+        $(".dragElement").draggable({
+            containment: "parent",
+            drag: function () { reDrawScheme($(this).attr("id")); }
+        });
+
+        $(".dragElement").click(function (event) {
+            var res = eventForTargets(event);
+            if (res)
+                startDynamic(this);
+        });
+    });
+
+    $(".menu-handler").contextmenu(function (event) {
+        var cursor = [event.pageX, event.pageY];
+        $(".context-menu-container").each(function () { $(this).css("display", "none"); });
+        var contextMenu = $("#" + $(this).attr("menu"));
+        if (contextMenu === null)
+            return;
+        contextMenu.css("display", "block");
+        contextMenu.children(function () { $(this).css("display", "block"); });
+        contextMenu.css("left", cursor[0]);
+        contextMenu.css("top", cursor[1]);
+    });
+
+
+    function deleteElement(event) {
+        removeElementWithChains(contextMenuTarget);
+        $(contextMenuTarget).remove();
+    }
 
 </script>

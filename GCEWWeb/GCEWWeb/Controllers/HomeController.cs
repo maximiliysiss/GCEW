@@ -20,6 +20,16 @@ namespace GCEWWeb.Controllers
             SiteTemplateInit.InitAllModules(Options.Value);
         }
 
+        public IActionResult Test()
+        {
+            return View();
+        }
+
+        public IActionResult TestGraph()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             ViewBag.Configuration = Options.Value;

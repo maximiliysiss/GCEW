@@ -1,100 +1,40 @@
 [
   {
-    "Name": "File",
-    "Caption": "File",
-    "Function": "",
+    "Name": "Workspace",
     "InnerMenu": [
       {
-        "Name": "Test",
-        "Caption": "Test",
-        "Function": ""
-      },
-      {
-        "Name": "New",
-        "Caption": "New",
-        "Function": "",
+        "Caption": "Create",
         "InnerMenu": [
           {
-            "Name": "Project",
-            "Caption": "Project",
-            "Function": "",
-            "InnerMenu": [
-              {
-                "Name": "Test",
-                "Caption": "One",
-                "Functon": ""
-              }
-            ]
+            "Caption": "Variable",
+            "Function": "createVariable(event)"
           },
           {
-            "Name": "File",
-            "Caption": "File",
-            "Function": ""
-          }
-        ]
-      },
-      {
-        "Name": "Open",
-        "Caption": "Open",
-        "Function": "",
-        "InnerMenu": [
-          {
-            "Name": "Project",
-            "Caption": "Project",
-            "Function": ""
+            "Caption": "For",
+            "Function": "createFor(event)"
           },
           {
-            "Name": "File",
-            "Caption": "File",
-            "Function": ""
+            "Caption": "While",
+            "Function": "createWhile(event)"
+          },
+          {
+            "Caption": "ChangeValue",
+            "Function": "createChangeValue(event)"
           }
         ]
       }
     ]
   },
   {
-    "Name": "Open",
-    "Caption": "File",
-    "Function": "",
+    "Name": "Element",
     "InnerMenu": [
       {
-        "Name": "Test",
-        "Caption": "Test",
-        "Function": ""
+        "Caption": "Delete",
+        "Function": "deleteElement(event)"
       },
       {
-        "Name": "New",
-        "Caption": "New",
-        "Function": "",
-        "InnerMenu": [
-          {
-            "Name": "Project",
-            "Caption": "Project",
-            "Function": ""
-          },
-          {
-            "Name": "File",
-            "Caption": "File",
-            "Function": ""
-          }
-        ]
-      },
-      {
-        "Name": "Open",
-        "Caption": "Open",
-        "Function": "",
-        "InnerMenu": [
-          {
-            "Name": "Project",
-            "Caption": "Project",
-            "Function": ""
-          },
-          {
-            "Name": "File",
-            "Caption": "File",
-            "Function": ""
-          }
-        ]
+        "Caption": "Open Property",
+        "Function": "openProperty(event)"
       }
     ]
   }

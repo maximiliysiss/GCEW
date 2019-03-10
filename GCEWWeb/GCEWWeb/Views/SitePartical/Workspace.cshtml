@@ -1,5 +1,56 @@
-﻿<div class="tabs">
-    <div class="tabs-solution flipped">
+﻿<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+
+<style>
+
+    #svgContainer {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .active {
+        display: block;
+    }
+
+    .text-editor > textarea {
+        display: none;
+        width: 100%;
+        height: 100%;
+        resize: none;
+        border: 1px solid grey;
+    }
+
+    #outer {
+        position: absolute;
+        width: 80%;
+        height: 100%;
+    }
+
+    #teal {
+        width: 6em;
+        height: 6em;
+        background-color: teal;
+        margin-left: 10%;
+    }
+
+    #red {
+        width: 6em;
+        height: 4em;
+        margin-left: 30%;
+        padding: 4em 3em;
+        background-color: red;
+    }
+
+    #svg1 {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<div class="tabs">
+    <div class="tabs-solution flipped" name="fileTabs">
         <div class="tab third-down-border">
             sdfsdfsdfsdfjksdfjkshdfjkhsdf <span>x</span>
         </div>
@@ -11,33 +62,23 @@
             One
             <span>x</span>
         </span>
-        <span class="tab third-down-border">
-            sdfsdfsdfsdfjksdfjkshdfjkhsdf
-            <span>x</span>
-        </span>
-        <span class="tab third-down-border">
-            sdfsdfsdfsdfjksdfjkshdfjkhsdf
-            <span>x</span>
-        </span>
-        <span class="tab third-down-border">
-            sdfsdfsdfsdfjksdfjkshdfjkhsdf
-            <span>x</span>
-        </span>
-        <span class="tab third-down-border">
-            sdfsdfsdfsdfjksdfjkshdfjkhsdf
-            <span>x</span>
-        </span>
-        <span class="tab third-down-border">
-            sdfsdfsdfsdfjksdfjkshdfjkhsdf
-            <span>x</span>
-        </span>
-        <span class="tab third-down-border">
-            sdfsdfsdfsdfjksdfjkshdfjkhsdf
-            <span>x</span>
-        </span>
 
     </div>
 </div>
-<div class="text-editor">
 
+
+<div style="flex:1; width: 100%;" menu="Workspace">
+    <div id="svgContainer" >
+        <div class="dragElement" menu="Element" id="div1" style="width: 100px; height: 100px; top:0; left:0; background:#777; position:absolute"></div>
+        <div class="dragElement" menu="Element" id="div2" style="width: 100px; height: 100px; top:300px; left:300px; background:#333; position:absolute"></div>
+        <div class="dragElement" menu="Element" id="div3" style="width: 100px; height: 100px; top:200px; left:300px; background:#333; position:absolute"></div>
+
+        <svg id="svgOne"
+             style="width:100%; height:100%;"
+             baseProfile="full"
+             xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             xmlns:ev="http://www.w3.org/2001/xml-events">
+        </svg>
+    </div>
 </div>
