@@ -12,73 +12,19 @@
     flex-direction: column;
 }
 
-.tabs-solution {
+
+.second-column {
+    padding: 4px;
     display: flex;
     flex: 1;
-    min-height: 30px;
-    flex-direction: row;
+    flex-direction: column;
     overflow-x: auto;
-    scrollbar-width: thin;
-}
-
-.tab {
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 10px 0px 10px;
-    margin-left: 5px;
-    border: 1.8px solid;
-    font-weight: bold;
-}
-
-.third-down-border {
-    margin-top: 2px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom: 0;
-}
-
-.third-up-border {
-    margin-bottom: 2px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-top: 0;
-}
-
-.tabs {
-    display: flex;
-    min-height: 30px;
-    flex-direction: row;
-}
-
-.tab > span {
-    font-weight: bold;
-    padding-left: 5px;
-}
-
-    .tab > span:hover {
-        cursor: pointer;
-        opacity: 0.5;
-    }
-
-.tab:hover {
-    background-color: grey;
-    color: white;
-    cursor: pointer;
-    border-color: black;
 }
 
 .window-in {
     flex: 1;
     display: flex;
     flex-direction: row;
-}
-
-.tabs-header {
-    margin-bottom: 5px;
-    min-height: 20px;
 }
 
 .buttons {
@@ -113,4 +59,3 @@
 .space {
     margin-left: auto;
 }
-

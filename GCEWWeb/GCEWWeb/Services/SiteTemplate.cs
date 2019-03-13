@@ -17,22 +17,30 @@ namespace GCEWWeb.Services
         }
     }
 
-    public class TemplateSite : IName
+    public class TemplateSite : IResource
     {
         public string Name { get; set; }
         public string Template { get; set; }
         public int Count { get; set; }
         public string[] Arguments { get; set; }
+
+        public void ExtensionAction(CustomConfiguration customConfiguration)
+        {
+            this.Template = File.ReadAllText($"{customConfiguration.SiteTemplatePath}{this.Name}.html");
+        }
     }
-    public class SiteTemplate<T> where T : IName
+    public class SiteTemplate<T> where T : IResource
     {
         private string path;
         private static SiteTemplate<T> siteTemplate;
+        private CustomConfiguration customConfiguration;
         private SiteTemplate() { }
         public static SiteTemplate<T> Instance(CustomConfiguration customConfiguration, string path)
         {
             if (siteTemplate == null)
                 siteTemplate = new SiteTemplate<T>(customConfiguration, path);
+            if (siteTemplate.customConfiguration == null)
+                siteTemplate.customConfiguration = customConfiguration;
             return siteTemplate;
         }
 
@@ -60,6 +68,8 @@ namespace GCEWWeb.Services
                     return templateSites;
                 templateSites = JsonConvert.DeserializeObject<T[]>(File.ReadAllText(path))
                     .ToDictionary(x => x.Name, x => x);
+                foreach (var temp in templateSites)
+                    temp.Value.ExtensionAction(customConfiguration);
                 return templateSites;
             }
         }

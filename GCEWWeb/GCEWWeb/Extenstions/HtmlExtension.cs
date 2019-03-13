@@ -1,4 +1,4 @@
-﻿using GCEWWeb.Services;
+using GCEWWeb.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
@@ -28,7 +28,7 @@ namespace GCEWWeb.Extenstions
         public static string GenerateContextMenus(this IHtmlHelper htmlHelper)
         {
             var headers = SiteTemplate<ContextMenu>.Instance().TemplateSites.Select(x => x.Value);
-            return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span><span>►</span><div class=\"menuContextRoot\"><ul class=\"menuContextElements\"></ul></div>", replaceTo: string.Empty);
+            return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span>\r\n    <span>\r\n        ►\r\n    </span>\r\n    <div class=\"menuContextRoot\">\r\n        <ul class=\"menuContextElements\">\r\n            \r\n        </ul>\r\n    </div>", replaceTo: string.Empty);
         }
     }
 }

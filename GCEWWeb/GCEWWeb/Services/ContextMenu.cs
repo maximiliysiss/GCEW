@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace GCEWWeb.Services
 {
     [TemplateSiteClass("ContextMenuRoot,MenuElementContext")]
-    public class ContextMenu : IName
+    public class ContextMenu : IResource
     {
         [TemplateSiteProperty("name")]
         public string Name { get; set; }
@@ -16,5 +16,7 @@ namespace GCEWWeb.Services
         public ContextMenu[] InnerMenu { get; set; }
         [TemplateSiteProperty("function")]
         public string Function { get; set; }
+
+        public void ExtensionAction(CustomConfiguration customConfiguration) { }
     }
 }

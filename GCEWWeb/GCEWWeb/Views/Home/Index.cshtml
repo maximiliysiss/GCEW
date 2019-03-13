@@ -36,13 +36,8 @@
         </div>
         <div class="second-column">
             <partial name="~/Views/SitePartical/Workspace.cshtml" />
-            <span id="test" menu="C1" class="menu-handler btn btn-neutral">right click me</span>
         </div>
     </div>
-</div>
-
-<div class="context-menu-container">
-
 </div>
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -50,9 +45,6 @@
 <script src="~/lib/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 <script src="~/js/context-menu-custom.js"></script>
 <script src="~/js/FlowchartsVisual.js"></script>
-<script>
-    var siteTemplates = { @Html.Raw(string.Join(", ",templatesSite.TemplateSites.Select(x=>$"'{x.Key}':'{x.Value.Template}'"))) };
-</script>
 <script>
 
 

@@ -1,44 +1,36 @@
 ﻿[
   {
     "Name": "TabWithClose",
-    "Template": "<span class=\"tab third-up-border\">{content}<\/span>",
     "Count": 1,
     "Arguments": [ "content" ]
   },
-
   {
     "Name": "Tab",
-    "Template": "<span class=\"tab third-down-border\">{content}<span>{close}<\/span><\/span>",
     "Count": 2,
     "Arguments": [ "content", "close" ]
   },
   {
     "Name": "TabButtons",
-    "Template": "<span class=\"tab third-down-border\">{content}<span>{close}<\/span><\/span>",
     "Count": 2,
     "Arguments": [ "content", "close" ]
   },
   {
     "Name": "MenuElementRoot",
-    "Template": "<div class=\"dropdown\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">{caption}<\/button><ul class=\"dropdown-menu\">{innermenu}<\/ul><\/div>",
     "Count": 2,
     "Arguments": [ "caption", "innermenu" ]
   },
   {
     "Name": "MenuElement",
-    "Template": "<li class=\"dropdown-submenu\"><a class=\"test\" tabindex=\"-1\" href=\"#\"><span class=\"menu-element\"><span>{caption}<\/span><span class=\"space\"><\/span><span>►<\/span><\/span><\/a><ul class=\"dropdown-menu\">{innermenu}<\/ul><\/li>",
     "Count": 2,
     "Arguments": [ "caption", "innermenu" ]
   },
   {
     "Name": "MenuElementContext",
-    "Template": "<li onclick=\"{function}\"><span class=\"menu-element\">{caption}<\/span><span class=\"space\"><\/span><span>►<\/span><div class=\"menuContextRoot\"><ul class=\"menuContextElements\">{innermenu}<\/ul><\/div><\/li>",
     "Count": 3,
     "Arguments": [ "caption", "innermenu", "function" ]
   },
   {
     "Name": "ContextMenuRoot",
-    "Template": "<div class=\"menuContextRoot\" id=\"{name}\"><ul class=\"menuContextElements\">{innermenu}<\/ul><\/div>",
     "Count": 2,
     "Arguments": [ "name", "innermenu" ]
   }

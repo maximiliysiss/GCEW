@@ -7,13 +7,14 @@ using System.Xml.Serialization;
 
 namespace GCEWWeb.Services
 {
-    public interface IName
+    public interface IResource
     {
         string Name { get; set; }
+        void ExtensionAction(CustomConfiguration customConfiguration);
     }
 
     [TemplateSiteClass("MenuElementRoot,MenuElement")]
-    public class MenuElements : IName
+    public class MenuElements : IResource
     {
         public string Name { get; set; }
         [TemplateSiteProperty("caption")]
@@ -21,5 +22,7 @@ namespace GCEWWeb.Services
         public string Function { get; set; }
         [TemplateSiteProperty("innermenu", TemplateType.Array)]
         public MenuElements[] InnerMenu { get; set; }
+
+        public void ExtensionAction(CustomConfiguration customConfiguration) { }
     }
 }

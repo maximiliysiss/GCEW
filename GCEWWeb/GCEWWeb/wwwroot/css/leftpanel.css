@@ -5,27 +5,3 @@
     background-color: white;
     max-width: 300px;
 }
-
-.user-info {
-    display: flex;
-    width: 100%;
-    min-height: 70px;
-    background-color: aqua;
-    flex-direction: column;
-}
-
-.solution-context {
-    display: flex;
-    flex: 1;
-    width: 100%;
-    background-color: blue;
-    overflow-y: auto;
-}
-
-.second-column {
-    padding: 4px;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    overflow-x: auto;
-}

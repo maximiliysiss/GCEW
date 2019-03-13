@@ -10,5 +10,6 @@ namespace GCEWWeb.Services
         public string SiteTemplateFile { get; set; }
         public string ContextMenuTemplate { get; set; }
         public string MenuTemplate { get; set; }
+        public string SiteTemplatePath { get; set; }
     }
 }
