@@ -22,6 +22,14 @@
             "Function": "createChangeValue(event)"
           }
         ]
+      },
+      {
+        "Caption": "Delete All",
+        "Function": "deleteAll(event)"
+      },
+      {
+        "Caption": "Property",
+        "Function": "openProperty(id)"
       }
     ]
   },

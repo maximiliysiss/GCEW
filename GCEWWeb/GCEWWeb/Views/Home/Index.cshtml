@@ -47,10 +47,14 @@
 <script src="~/js/FlowchartsVisual.js"></script>
 <script>
 
+    function onReloadMenus() {
+        reHandlerContextMenus();
+    }
+
 
     $(function () {
 
-        initFlowChartsOnPage($("#svgOne"));
+        initFlowChartsOnPage($("#svgOne"), onReloadMenus);
 
         $('.dropdown-submenu a.test').on("click", function (e) {
             var visible = $(this).next("ul").is(":visible");
@@ -65,7 +69,7 @@
 
     $(function () {
         $(".dragElement").draggable({
-            containment: "parent",
+            //containment: "parent",
             drag: function () { reDrawScheme($(this).attr("id")); }
         });
 

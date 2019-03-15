@@ -9,6 +9,7 @@
     border: 1.5px solid grey;
     padding: 10px;
     background-color: white;
+    z-index: 0;
 }
 
     .dragElement:hover {

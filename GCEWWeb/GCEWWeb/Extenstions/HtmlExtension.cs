@@ -19,6 +19,7 @@ namespace GCEWWeb.Extenstions
 
         private static string GenerateMenuLevel<T>(IEnumerable<T> contextMenus, bool isRoot = false, string replace = "", string replaceTo = "") where T : class
         {
+
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var contextMenu in contextMenus)
                 stringBuilder.Append(TemplateSerialize.Serialize(contextMenu).Replace(replace, replaceTo));

@@ -1,8 +1,7 @@
 ﻿
 var contextMenuTarget = null;
 
-$(function () {
-
+function reHandlerContextMenus() {
     $("[menu]").contextmenu(function (event) {
         $(".menuContextRoot").each(function () { $(this).removeClass("open-context-menu"); });
         var menu = $("#" + $(this).attr("menu"));
@@ -15,6 +14,12 @@ $(function () {
             event.stopPropagation();
         }
     });
+}
+
+
+$(function () {
+
+    reHandlerContextMenus();
 
     $(".menuContextElements > li").click(function (event) {
         var isVisible = $(this).children("div").first().is(":visible");
