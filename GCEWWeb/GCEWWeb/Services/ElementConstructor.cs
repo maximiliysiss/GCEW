@@ -1,4 +1,5 @@
 ﻿using GCEWWeb.Controllers;
+using GCEWWeb.Services.Constructors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ namespace GCEWWeb.Services
 {
     public class ElementConstructor
     {
-        public static Builder GetBuilder(ElementType elementType)
+        public static IElement GetBuilder(ElementType elementType)
         {
-
+            return null;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     var templatesSite = SiteTemplate<TemplateSite>.Instance();
+    IViewRenderService viewRender = ViewBag.RenderEngine;
 }
 
 
@@ -31,12 +32,12 @@
     @Html.Raw(Html.GenerateContextMenus())
 
     <div class="window-in">
-        <div class="solution-view">
-            <partial name="~/Views/SitePartical/Leftpanel.cshtml" />
-        </div>
-        <div class="second-column">
-            <partial name="~/Views/SitePartical/Workspace.cshtml" />
-        </div>
+        @*<div class="solution-view">
+                <partial name="~/Views/SitePartical/Leftpanel.cshtml" />
+            </div>
+            <div class="second-column">
+                <partial name="~/Views/SitePartical/Workspace.cshtml" />
+            </div>*@
     </div>
 </div>
 
@@ -45,57 +46,167 @@
 <script src="~/lib/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 <script src="~/js/context-menu-custom.js"></script>
 <script src="~/js/FlowchartsVisual.js"></script>
+<script src="~/lib/toastr/toastr.js"></script>
+<script type="text/javascript" src="https://golden-layout.com/files/latest/js/goldenlayout.min.js"></script>
 <script>
 
-    function onReloadMenus() {
-        reHandlerContextMenus();
+    function afterInit() {
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+        function onReloadMenus() {
+            reHandlerContextMenus();
+        }
+
+
+        $(function () {
+
+            initFlowChartsOnPage($("#svgOne"), onReloadMenus);
+
+            $('.dropdown-submenu a.test').on("click", function (e) {
+                var visible = $(this).next("ul").is(":visible");
+                $(this).parent().parent().find("li ul").each(function () { $(this).css("display", "none"); });
+                if (!visible)
+                    $(this).next("ul").toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+
+        });
+
+        $(function () {
+            $(".dragElement").draggable({
+                //containment: "parent",
+                drag: function () { reDrawScheme($(this).attr("id")); }
+            });
+
+            $(".dragElement").click(function (event) {
+                var res = eventForTargets(event);
+                if (res)
+                    startDynamic(this);
+            });
+        });
+
+        $(".menu-handler").contextmenu(function (event) {
+            var cursor = [event.pageX, event.pageY];
+            $(".context-menu-container").each(function () { $(this).css("display", "none"); });
+            var contextMenu = $("#" + $(this).attr("menu"));
+            if (contextMenu === null)
+                return;
+            contextMenu.css("display", "block");
+            contextMenu.children(function () { $(this).css("display", "block"); });
+            contextMenu.css("left", cursor[0]);
+            contextMenu.css("top", cursor[1]);
+        });
     }
 
 
     $(function () {
 
-        initFlowChartsOnPage($("#svgOne"), onReloadMenus);
+        var config = {
+            content: [{
+                type: 'row',
+                content: [{
+                    type: 'stack',
+                    width: 20,
+                    content: [{
+                        type: 'component',
+                        isClosable: false,
+                        componentName: 'Solution'
+                    }, {
+                        type: 'component',
+                        isClosable: false,
+                        componentName: 'Properties'
+                    }, {
+                        type: 'component',
+                        isClosable: false,
+                        componentName: 'Build log'
+                    }
+                    ]
+                }, {
+                    type: 'stack',
+                    content: [{
+                        type: 'component',
+                        componentName: 'workDocument'
+                    }]
+                }]
+            }]
+        };
 
-        $('.dropdown-submenu a.test').on("click", function (e) {
-            var visible = $(this).next("ul").is(":visible");
-            $(this).parent().parent().find("li ul").each(function () { $(this).css("display", "none"); });
-            if (!visible)
-                $(this).next("ul").toggle();
-            e.stopPropagation();
-            e.preventDefault();
+        var dockLayouts = new window.GoldenLayout(config, ".window-in");
+
+        dockLayouts.registerComponent('Solution', function (c, s) {
+            c.getElement().append(
+                '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/SolutionPanel"))'
+            );
+        });
+        dockLayouts.registerComponent('Properties', function (c, s) {
+            c.getElement().append(
+                '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/PropertiesPanel"))'
+            );
+        });
+        dockLayouts.registerComponent('workDocument', function (c, s) {
+            c.getElement().append(
+                '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/Workspace"))'
+            );
+        });
+        dockLayouts.registerComponent('Build log', function (c, s) {
+            c.getElement().append(
+                '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/BuildLog"))'
+            );
         });
 
-    });
+        dockLayouts.initialised += afterInit();
+        dockLayouts.init();
 
-    $(function () {
-        $(".dragElement").draggable({
-            //containment: "parent",
-            drag: function () { reDrawScheme($(this).attr("id")); }
-        });
-
-        $(".dragElement").click(function (event) {
-            var res = eventForTargets(event);
-            if (res)
-                startDynamic(this);
-        });
-    });
-
-    $(".menu-handler").contextmenu(function (event) {
-        var cursor = [event.pageX, event.pageY];
-        $(".context-menu-container").each(function () { $(this).css("display", "none"); });
-        var contextMenu = $("#" + $(this).attr("menu"));
-        if (contextMenu === null)
-            return;
-        contextMenu.css("display", "block");
-        contextMenu.children(function () { $(this).css("display", "block"); });
-        contextMenu.css("left", cursor[0]);
-        contextMenu.css("top", cursor[1]);
     });
 
 
     function deleteElement(event) {
         removeElementWithChains(contextMenuTarget);
         $(contextMenuTarget).remove();
+    }
+
+    function deleteAll(event) {
+        $(".dragElement").each(function () {
+            removeElementWithChains(this);
+            $(this).remove();
+        });
+    }
+
+    function ajaxPost(method, data, success) {
+        $.ajax({
+            url: method,
+            method: "POST",
+            data: data,
+            success: function () { success(); },
+            error: function () {
+                toastr["error"]("Error " + method);
+            }
+        });
+    }
+
+    function createVariable(event) {
+        ajaxPost("@Url.Action("CreateNewElement", "Constructor")", { elementType = @ElementType.Variable },
+            function (data) {
+            });
     }
 
 </script>

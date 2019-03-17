@@ -67,3 +67,9 @@
 .tab-contents {
     flex: 1;
 }
+
+.open-tab {
+    background-color: grey;
+    color: white;
+    border-color: black;
+}

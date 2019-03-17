@@ -4,10 +4,12 @@ var dynamicLineStart = null;
 var dynamicLine = null;
 var isDrawDynamicLine = false;
 var scrollChanger = 0.1;
-var moveSpeed = 8;
+var scrollChahgeCoeff = 0;
+var moveSpeed = 5;
 var flowChartPosition = null;
 
 var selectedLine = null;
+var selectedElem = null;
 var isMoveOnField = false;
 var startDragging = null;
 
@@ -50,12 +52,21 @@ function moveCursorDynamic(event) {
 
 function getChangeCenter(dragElementPosition, cursorPosition, coeff) {
 
-    var dDistance = [cursorPosition[1] - dragElementPosition.top, cursorPosition[0] - dragElementPosition.left];
+    var dDistance = [cursorPosition[0] - dragElementPosition.left, cursorPosition[1] - dragElementPosition.top];
     var dDistanceCoef = [coeff * dDistance[0], coeff * dDistance[1]];
     return [(dDistance[0] - dDistanceCoef[0]) / 2, (dDistance[1] - dDistanceCoef[1]) / 2];
 }
 
 function scrollReaction(coeff, event) {
+
+    //var cof = coeff > 1 ? 1 : -1;
+
+    //if (scrollChahgeCoeff + coeff > 20 || scrollChahgeCoeff + coeff < -45)
+    //    return;
+
+    //scrollChahgeCoeff += cof;
+    console.log(scrollChahgeCoeff);
+
     var cursor = [event.pageX - flowChartPosition.left, event.pageY - flowChartPosition.top];
 
     $(".dragElement").each(function () {
@@ -64,13 +75,14 @@ function scrollReaction(coeff, event) {
         $(this).width(w * coeff);
         $(this).height(h * coeff);
 
-        //var oneTwo = getChangeCenter($(this).position(), cursor, coeff);
+        var oneTwo = getChangeCenter($(this).position(), cursor, coeff);
 
-        //var left = $(this).position().left;
-        //var top = $(this).position().top;
 
-        //$(this).css("left", (left + oneTwo[0]) + "px");
-        //$(this).css("top", (top + oneTwo[1]) + "px");
+        var left = $(this).position().left;
+        var top = $(this).position().top;
+
+        $(this).css("left", (left + oneTwo[0]) + "px");
+        $(this).css("top", (top + oneTwo[1]) + "px");
 
         reDrawAll();
     });
@@ -128,6 +140,8 @@ function initFlowChartsOnPage(svgElement, onReloadEvent) {
         scrollReaction(1 + (e.originalEvent.wheelDelta < 0 ? -scrollChanger : scrollChanger), e);
         return false;
     });
+
+    onReload();
 }
 
 function mouseClick(event) {
