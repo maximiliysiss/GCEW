@@ -96,7 +96,7 @@ function initFlowChartsOnPage(svgElement, onReloadEvent) {
     $(document).keydown(function (event) {
         switch (event.keyCode) {
             case 46:
-                if (selectedLine != null)
+                if (selectedLine !== null)
                     $(selectedLine).remove();
                 break;
         }
@@ -168,13 +168,13 @@ function eventForTargets(event) {
 }
 
 function clickLine(elem) {
-    var isActive = $(elem).attr("stroke") == "red";
+    var isActive = $(elem).attr("stroke") === "red";
     if (isActive) {
         $(elem).attr("stroke", "black");
         selectedLine = null;
     }
     else {
-        if (selectedLine != null)
+        if (selectedLine !== null)
             $(selectedLine).attr("stroke", "black");
         $(elem).attr("stroke", "red");
         selectedLine = elem;
@@ -221,8 +221,8 @@ function createConnectionBetweenElements(one, two) {
 
     var lineConnect = getLine();
 
-    if ($("#" + $(one).attr("id") + divideExpression + $(two).attr("id")).length != 0
-        || $("#" + $(two).attr("id") + divideExpression + $(one).attr("id")).length != 0)
+    if ($("#" + $(one).attr("id") + divideExpression + $(two).attr("id")).length !== 0
+        || $("#" + $(two).attr("id") + divideExpression + $(one).attr("id")).length !== 0)
         return;
 
     $(lineConnect).attr("id", $(one).attr("id") + divideExpression + $(two).attr("id"));

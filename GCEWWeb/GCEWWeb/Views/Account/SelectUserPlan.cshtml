@@ -1,4 +1,4 @@
-﻿
+﻿@model RegisterModel
 @{
     Layout = null;
 }
@@ -9,7 +9,77 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>SelectUserPlan</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <style>
+        .form {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+            .form > div {
+                display: flex;
+                width: 100%;
+                height: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+        .plate {
+            display: inline-flex;
+            height: 100%;
+            margin: 10px;
+            border: 1.5px solid grey;
+            border-radius: 12px;
+        }
+
+            .plate:hover {
+                cursor: pointer;
+            }
+
+        .isActive {
+            border-width: 2px;
+            background: #eee;
+        }
+    </style>
 </head>
 <body>
+    @using (Html.BeginForm("SelectUserPlanConfirmed", "Account", FormMethod.Post, new { id = "form" }))
+    {
+        @Html.HiddenFor(x => x.ConfirmedPassword)
+        @Html.HiddenFor(x => x.Login)
+        @Html.HiddenFor(x => x.Nickname)
+        @Html.HiddenFor(x => x.Password)
+        @Html.HiddenFor(x => x.Plan)
+        <div>
+            <div class="plate" val="@((int)Plan.Free)"></div>
+            <div class="plate" val="@((int)Plan.Minimum)"></div>
+            <div class="plate" val="@((int)Plan.Maximum)"></div>
+        </div>
+        <input type="button" onclick="send()" class="btn btn-success" />
+    }
 </body>
 </html>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+
+    function send() {
+        var value = $(".isActive").first().attr("val");
+        $("#Plan").val(value);
+        $("#form").submit();
+    }
+
+
+    $(function () {
+        $(".plate").click(function () {
+            $(".isActive").each(function () { $(this).removeClass("isActive"); });
+            $(this).addClass("isActive");
+        });
+    });
+
+</script>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GCEWWeb.Models.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,11 +7,6 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Models.ControllerModels
 {
-    public enum Plan
-    {
-        Free,
-        /* Какие-то еще планы */
-    }
 
 
     public class RegisterModel
@@ -18,6 +14,8 @@ namespace GCEWWeb.Models.ControllerModels
         [Required(ErrorMessage = "Login is required")]
         [DataType(DataType.EmailAddress, ErrorMessage = "This is not email")]
         public string Login { get; set; }
+        [Required(ErrorMessage = "Nickname is required")]
+        public string Nickname { get; set; }
         [Required(ErrorMessage = "Password is requried")]
         [DataType(DataType.Password)]
         [MinLength(6, ErrorMessage = "Min Length is 6")]

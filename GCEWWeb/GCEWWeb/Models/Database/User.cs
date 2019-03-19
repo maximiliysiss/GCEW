@@ -13,5 +13,6 @@ namespace GCEWWeb.Models.Database
         public string Name { get; set; }
         public string PasswordHash { get; set; }
         public Plan Plan { get; set; }
+        public bool IsPayed { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model Transaction
 @{
     Layout = null;
 }
@@ -9,7 +9,64 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>PayPage</title>
+    <style>
+        .form {
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .plate {
+            display: flex;
+            width: 200px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+            border: 1.5px solid grey;
+            border-radius: 12px;
+        }
+
+            .plate > img {
+                width: 100%;
+            }
+
+            .plate > div {
+                text-align: center;
+                font-weight: bold;
+                font-size: 12pt;
+            }
+    </style>
 </head>
 <body>
+    @using (Html.BeginForm("PayPage", "Account", FormMethod.Post, new { id = "form" }))
+    {
+        @Html.HiddenFor(x => x.DateTime)
+        @Html.HiddenFor(x => x.PaySystem)
+        @Html.HiddenFor(x => x.Plan)
+        @Html.HiddenFor(x => x.TransactionAmount)
+        <div val="@((int)PaySystem.Card)" class="plate">
+        </div>
+        <div val="@((int)PaySystem.PayPal)" class="plate"></div>
+        <div val="@((int)PaySystem.Qiwi)" class="plate"></div>
+    }
 </body>
 </html>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+
+    $(function () {
+        $(".plate").click(function () {
+            var value = $(this).attr("val");
+            $("#PaySystem").val(value);
+            $("#form").submit();
+        });
+    });
+
+</script>
