@@ -8,28 +8,56 @@ using GCEWWeb.Models;
 using Microsoft.Extensions.Options;
 using GCEWWeb.Services;
 using GCEWWeb.Utilities;
+using Microsoft.AspNetCore.Authorization;
+using GCEWWeb.Models.Database;
+using System.IO;
+using GCEWWeb.Extenstions;
 
 namespace GCEWWeb.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class HomeController : BaseController
     {
-        public IOptions<CustomConfiguration> Options { get; set; }
+        public CustomConfiguration Options { get; set; }
         public IViewRenderService ViewRenderService { get; set; }
-        public DatabaseContext DatabaseContext { get; set; }
 
         public HomeController(IOptions<CustomConfiguration> options, IViewRenderService viewRenderService, DatabaseContext databaseContext)
+            : base(databaseContext)
         {
-            Options = options ?? throw new ArgumentNullException(nameof(options));
+            Options = options.Value ?? throw new ArgumentNullException(nameof(options));
             ViewRenderService = viewRenderService ?? throw new ArgumentNullException(nameof(viewRenderService));
-            databaseContext = databaseContext ?? throw new ArgumentException(nameof(databaseContext));
-            SiteTemplateInit.InitAllModules(Options.Value);
+            SiteTemplateInit.InitAllModules(Options);
         }
 
         public IActionResult Index()
         {
-            ViewBag.Configuration = Options.Value;
+            ViewBag.Configuration = Options;
             ViewBag.RenderEngine = ViewRenderService;
             return View();
+        }
+
+        public IActionResult Projects()
+        {
+            var projects = DatabaseContext.Projects.Where(x => x.User.ID == UserID).ToList();
+            foreach (var project in projects)
+                project.Size = new DirectoryInfo(project.Path).GetSize();
+            return View();
+        }
+
+        public IActionResult CreateProject()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateProject(Project project)
+        {
+            project.DateTime = DateTime.Now;
+            project.Path = $"{Options.GlobalProjectPathForUser(UserName)}{project.Name}";
+            project.User = UserDatabase;
+            DatabaseContext.Projects.Add(project);
+            DatabaseContext.SaveChanges();
+            return RedirectToAction("Projects", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

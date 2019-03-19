@@ -24,6 +24,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Size)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateTime)
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -36,6 +39,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTime)
                     </td>
                     <td>
                         @Html.ActionLink("Delete", "Delete", new { id = item.ID })

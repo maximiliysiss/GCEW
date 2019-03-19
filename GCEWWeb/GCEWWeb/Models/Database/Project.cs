@@ -12,6 +12,7 @@ namespace GCEWWeb.Models.Database
         public string Name { get; set; }
         public string Path { get; set; }
         public double Size { get; set; }
+        public DateTime DateTime { get; set; }
         public User User { get; set; }
     }
 }
