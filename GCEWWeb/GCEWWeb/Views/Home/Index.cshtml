@@ -32,12 +32,6 @@
     @Html.Raw(Html.GenerateContextMenus())
 
     <div class="window-in">
-        @*<div class="solution-view">
-                <partial name="~/Views/SitePartical/Leftpanel.cshtml" />
-            </div>
-            <div class="second-column">
-                <partial name="~/Views/SitePartical/Workspace.cshtml" />
-            </div>*@
     </div>
 </div>
 
@@ -73,6 +67,7 @@
 
         function onReloadMenus() {
             reHandlerContextMenus();
+            reloadElements();
         }
 
 
@@ -85,23 +80,12 @@
                 $(this).parent().parent().find("li ul").each(function () { $(this).css("display", "none"); });
                 if (!visible)
                     $(this).next("ul").toggle();
-                e.stopPropagation();
-                e.preventDefault();
+                if ($(this).next("ul").length > 0) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
             });
 
-        });
-
-        $(function () {
-            $(".dragElement").draggable({
-                //containment: "parent",
-                drag: function () { reDrawScheme($(this).attr("id")); }
-            });
-
-            $(".dragElement").click(function (event) {
-                var res = eventForTargets(event);
-                if (res)
-                    startDynamic(this);
-            });
         });
 
         $(".menu-handler").contextmenu(function (event) {
@@ -194,19 +178,45 @@
     function ajaxPost(method, data, success) {
         $.ajax({
             url: method,
+            cache: false,
+            processData: false,
+            contentType: false,
             method: "POST",
             data: data,
-            success: function () { success(); },
+            success: success,
             error: function () {
                 toastr["error"]("Error " + method);
             }
         });
     }
 
-    function createVariable(event) {
-        ajaxPost("@Url.Action("CreateNewElement", "Constructor")", { elementType = @ElementType.Variable },
+    function createElement(type, event) {
+        var cursor = [event.pageX - flowChartPosition.left, event.pageY - flowChartPosition.top];
+        ajaxPost("@Url.Action("CreateNewElement", "Constructor")", { elementType : type },
             function (data) {
-            });
+                addElement(data, cursor);
+            }
+        );
+    }
+
+    function createVariable(event) {
+        createElement(@((int)ElementType.Variable), event);
+    }
+
+    function createAddiction(event) {
+        createElement(@((int)ElementType.Addition), event);
+    }
+
+    function createSubstract(event) {
+        createElement(@((int)ElementType.Substract), event);
+    }
+
+    function createDivide(event) {
+        createElement(@((int)ElementType.Divide), event);
+    }
+
+    function createMultiply(event) {
+        createElement(@((int)ElementType.Multiply), event);
     }
 
 </script>

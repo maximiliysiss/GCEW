@@ -1,1 +1,38 @@
-﻿
+﻿.element-container {
+    display: inline-flex;
+    border: 2px solid grey;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-direction: column;
+    background: #ddd;
+    font-weight: bold;
+    padding: 0;
+    font-size: 12pt;
+}
+
+    .element-container > .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 5px 15px 5px 15px;
+        background: radial-gradient(#42aaf4 0%, white 120%);
+    }
+
+    .element-container > .content {
+        display: inline-flex;
+        flex-direction: row;
+    }
+
+        .element-container > .content > .checkbox {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .element-container > .content > .value {
+            width: 30px;
+        }

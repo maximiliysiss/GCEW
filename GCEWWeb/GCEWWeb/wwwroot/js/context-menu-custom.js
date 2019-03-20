@@ -1,12 +1,13 @@
 ﻿
 var contextMenuTarget = null;
 
+
 function reHandlerContextMenus() {
     $("[menu]").contextmenu(function (event) {
         $(".menuContextRoot").each(function () { $(this).removeClass("open-context-menu"); });
         var menu = $("#" + $(this).attr("menu"));
         if (menu !== null) {
-            contextMenuTarget = $(event.target);
+            contextMenuTarget = $(event.currentTarget);
             menu.addClass("open-context-menu");
             menu.css("top", event.pageY);
             menu.css("left", event.pageX);

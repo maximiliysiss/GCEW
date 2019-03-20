@@ -14,7 +14,7 @@ namespace GCEWWeb.Extenstions
         public static string MenuContainerHtml(this IHtmlHelper htmlHelper)
         {
             var headers = SiteTemplate<MenuElements>.Instance().TemplateSites.Select(x => x.Value);
-            return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span><span>►</span></span></a><ul class=\"dropdown-menu\"></ul>", replaceTo: "</span></a>");
+            return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span>\r\n            <span>\r\n                \u25BA\r\n            </span>\r\n        </span>\r\n    </a><ul class=\"dropdown-menu\"></ul>", replaceTo: "</span></a>");
         }
 
         private static string GenerateMenuLevel<T>(IEnumerable<T> contextMenus, bool isRoot = false, string replace = "", string replaceTo = "") where T : class

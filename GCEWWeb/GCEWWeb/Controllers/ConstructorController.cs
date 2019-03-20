@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GCEWWeb.Controllers
 {
-    public enum ElementType
+    public enum ElementType: int
     {
         Variable,
         For,
@@ -16,7 +16,11 @@ namespace GCEWWeb.Controllers
         Else,
         Function,
         Procedure,
-        ChangeValue
+        ChangeValue,
+        Addition,
+        Substract,
+        Divide,
+        Multiply
     }
 
 
@@ -26,7 +30,7 @@ namespace GCEWWeb.Controllers
         [HttpPost]
         public string CreateNewElement(ElementType elementType)
         {
-            return ElementConstructor.GetBuilder(elementType).Html;
+            return ElementConstructor.GetBuilder(elementType)?.Html;
         }
     }
 }
