@@ -12,6 +12,8 @@ namespace GCEWWeb.Services
         public string MenuTemplate { get; set; }
         public string SiteTemplatePath { get; set; }
         private string GlobalProjectPath { get; set; }
+        public string ScriptTemplatePath { get; set; }
+        public string ScriptTemplateFile { get; set; }
         public string GlobalProjectPathForUser(string name) => GlobalProjectPath.Replace("{name}", name);
     }
 }

@@ -14,6 +14,7 @@ namespace GCEWWeb.Services
             SiteTemplate<MenuElements>.Instance(customConfiguration, customConfiguration.MenuTemplate);
             SiteTemplate<TemplateSite>.Instance(customConfiguration, customConfiguration.SiteTemplateFile);
             SiteTemplate<ContextMenu>.Instance(customConfiguration, customConfiguration.ContextMenuTemplate);
+            SiteTemplate<TemplateScript>.Instance(customConfiguration, customConfiguration.ScriptTemplateFile);
         }
     }
 
@@ -24,12 +25,21 @@ namespace GCEWWeb.Services
         public int Count { get; set; }
         public string[] Arguments { get; set; }
 
-        public void ExtensionAction(CustomConfiguration customConfiguration)
+        public virtual void ExtensionAction(CustomConfiguration customConfiguration)
         {
             this.Template = File.ReadAllText($"{customConfiguration.SiteTemplatePath}{this.Name}.html");
         }
     }
-    public class SiteTemplate<T> where T : IResource
+
+    public class TemplateScript : TemplateSite
+    {
+        public override void ExtensionAction(CustomConfiguration customConfiguration)
+        {
+            this.Template = File.ReadAllText($"{customConfiguration.ScriptTemplatePath}{this.Name}");
+        }
+    }
+
+    public class SiteTemplate<T> where T : class, IResource
     {
         private string path;
         private static SiteTemplate<T> siteTemplate;
@@ -74,15 +84,6 @@ namespace GCEWWeb.Services
             }
         }
 
-        public T this[string name]
-        {
-            get
-            {
-                var res = TemplateSites[name];
-                if (res == null)
-                    return TemplateSites[name];
-                return res;
-            }
-        }
+        public T this[string name] => TemplateSites[name];
     }
 }

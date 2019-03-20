@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Folder Include="Templates\Languages\" />
+    <Folder Include="Templates\ScriptTemplates\" />
     <Folder Include="Views\Practice\" />
   </ItemGroup>
 

@@ -1,0 +1,4 @@
+﻿{
+    "text": "{caption}",
+    "nodes": [{innerElements}]
+}

@@ -56,6 +56,14 @@ public class TemplateSerialize
         return Elem(elem, template, templateSiteClass);
     }
 
+    public static string SerializeScript<T>(T elem) where T : class
+    {
+        if (!(Attribute.GetCustomAttribute(elem.GetType(), typeof(TemplateSiteClass)) is TemplateSiteClass templateSiteClass))
+            throw new NotFoundException("Not found TemplateSiteClass in this element");
+        var template = templateSiteClass.Name.Split(",").Select(x => SiteTemplate<TemplateScript>.Instance()[x]);
+        return Elem(elem, template, templateSiteClass);
+    }
+
     public static string Elem<T>(T elem, IEnumerable<TemplateSite> templateSites, TemplateSiteClass siteClass, int level = 0, string preTemplate = "")
     {
         var props = elem.GetType().GetProperties().Where(x => x.GetCustomAttributes(typeof(TemplateSiteProperty), true).Count() > 0)

@@ -251,8 +251,8 @@ function createConnectionBetweenElements(one, two) {
     var centerTwo = getCenter(two);
 
     var lineConnect = getLine();
-    if ($("#" + $(one).attr("id") + divideExpression + $(two).attr("id")).length != 0
-        || $("#" + $(two).attr("id") + divideExpression + $(one).attr("id")).length != 0
+    if ($("#" + $(one).attr("id") + divideExpression + $(two).attr("id")).length !== 0
+        || $("#" + $(two).attr("id") + divideExpression + $(one).attr("id")).length !== 0
         || !$(one).attr("id") || !$(two).attr("id"))
         return;
 
