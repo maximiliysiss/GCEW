@@ -41,7 +41,7 @@ namespace GCEWWeb.Controllers
             var projects = DatabaseContext.Projects.Where(x => x.User.ID == UserID).ToList();
             foreach (var project in projects)
                 project.Size = new DirectoryInfo(project.Path).GetSize();
-            return View();
+            return View(projects);
         }
 
         public IActionResult CreateProject()
@@ -57,6 +57,7 @@ namespace GCEWWeb.Controllers
             project.User = UserDatabase;
             DatabaseContext.Projects.Add(project);
             DatabaseContext.SaveChanges();
+            Directory.CreateDirectory(project.Path);
             return RedirectToAction("Projects", "Home");
         }
 

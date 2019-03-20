@@ -8,30 +8,35 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>SelectUserPlan</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <title>SelectUserPlan</title>
     <style>
-        .form {
+        form {
             position: absolute;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100%;
+            padding: 20px;
             width: 100%;
+            height: 100%;
         }
 
-            .form > div {
-                display: flex;
-                width: 100%;
-                height: 100%;
-                flex-direction: row;
-                justify-content: space-between;
-            }
+        .div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            flex-direction: row;
+            justify-content: space-around;
+        }
 
         .plate {
+            overflow: hidden;
+            width: 300px;
             display: inline-flex;
-            height: 100%;
+            flex-direction: column;
             margin: 10px;
             border: 1.5px solid grey;
             border-radius: 12px;
@@ -39,6 +44,9 @@
 
             .plate:hover {
                 cursor: pointer;
+            }
+
+            .plate > img {
             }
 
         .isActive {
@@ -55,12 +63,36 @@
         @Html.HiddenFor(x => x.Nickname)
         @Html.HiddenFor(x => x.Password)
         @Html.HiddenFor(x => x.Plan)
-        <div>
-            <div class="plate" val="@((int)Plan.Free)"></div>
-            <div class="plate" val="@((int)Plan.Minimum)"></div>
-            <div class="plate" val="@((int)Plan.Maximum)"></div>
+        <div class="div">
+            <div class="plate" val="@((int)Plan.Free)">
+                <img />
+                <div>
+                    <div style="text-align:center">Free version</div>
+                    <ul>
+                        <li>Hard disk is 50 mb</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="plate" val="@((int)Plan.Minimum)">
+                <img />
+                <div>
+                    <div style="text-align:center">Minimum version</div>
+                    <ul>
+                        <li>Hard disk is 100 mb</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="plate" val="@((int)Plan.Maximum)">
+                <img />
+                <div>
+                    <div style="text-align:center">Maximum version</div>
+                    <ul>
+                        <li>Hard disk is 150 mb</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <input type="button" onclick="send()" class="btn btn-success" />
+        <input style="width:40%" type="button" value="Select" onclick="send()" class="btn btn-success" />
     }
 </body>
 </html>
