@@ -28,5 +28,10 @@ namespace GCEWWeb.Extenstions
             fileSystem.FileSystemElements.Concat(directoryInfo.EnumerateDirectories().Select(x => x.GetTree()));
             return fileSystem;
         }
+
+        public static string ToStringTree(this DirectoryInfo directoryInfo)
+        {
+            return TemplateSerialize.SerializeScript(directoryInfo.GetTree());
+        }
     }
 }

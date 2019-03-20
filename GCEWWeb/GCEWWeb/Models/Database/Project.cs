@@ -1,4 +1,5 @@
-﻿using GCEWWeb.Models.Database;
+﻿using GCEWWeb.Extenstions;
+using GCEWWeb.Models.Database;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,6 @@ namespace GCEWWeb.Models.Database
         public double Size { get; set; }
         public DateTime DateTime { get; set; }
         public User User { get; set; }
-        public string FileSystemTree => new DirectoryInfo(Path)
+        public string FileSystemTree => new DirectoryInfo(Path).ToStringTree();
     }
 }
