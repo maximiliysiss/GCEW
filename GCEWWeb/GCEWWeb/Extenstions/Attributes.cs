@@ -58,7 +58,7 @@ public class TemplateSerialize
 
     public static string Elem<T>(T elem, IEnumerable<TemplateSite> templateSites, TemplateSiteClass siteClass, int level = 0, string preTemplate = "")
     {
-        var props = typeof(T).GetProperties().Where(x => x.GetCustomAttributes(typeof(TemplateSiteProperty), false).Count() > 0)
+        var props = elem.GetType().GetProperties().Where(x => x.GetCustomAttributes(typeof(TemplateSiteProperty), true).Count() > 0)
                 .Select(x => new
                 {
                     Prop = x,

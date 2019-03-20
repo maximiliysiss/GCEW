@@ -6,6 +6,27 @@
         "Caption": "Create",
         "InnerMenu": [
           {
+            "Caption": "Primitive",
+            "InnerMenu": [
+              {
+                "Caption": "Addiction",
+                "Function": "createAddiction(event)"
+              },
+              {
+                "Caption": "Substract",
+                "Function": "createSubstract(event)"
+              },
+              {
+                "Caption": "Divide",
+                "Function": "createDivide(event)"
+              },
+              {
+                "Caption": "Multiply",
+                "Function": "createMultyply(event)"
+              }
+            ]
+          },
+          {
             "Caption": "Variable",
             "Function": "createVariable(event)"
           },

@@ -33,5 +33,10 @@
     "Name": "ContextMenuRoot",
     "Count": 2,
     "Arguments": [ "name", "innermenu" ]
+  },
+  {
+    "Name": "ElementVariable",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
   }
 ]

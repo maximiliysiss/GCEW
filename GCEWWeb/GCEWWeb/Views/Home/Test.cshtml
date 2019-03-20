@@ -1,0 +1,84 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+    <style>
+        .element-container {
+            display: inline-flex;
+            border: 2px solid grey;
+            border-radius: 15px;
+            overflow: hidden;
+            flex-direction: column;
+            background: #ddd;
+            font-weight: bold;
+            font-size: 12pt;
+        }
+
+            .element-container > .header {
+                text-align: center;
+                padding: 5px 15px 5px 15px;
+                background: radial-gradient(#42aaf4 0%, white 120%);
+            }
+
+            .element-container > .content {
+                display: inline-flex;
+                flex-direction: row;
+            }
+
+                .element-container > .content > .checkbox {
+                    padding: 5px;
+                }
+
+                .element-container > .content > .value {
+                    width: 30px;
+                }
+    </style>
+</head>
+<body>
+
+    <div class="element-container">
+        <div class="header">One</div>
+        <div class="content">
+            <div class="checkbox">
+                <div>
+                    <input type="radio" />
+                    <label>Test</label>
+                </div>
+                <div>
+                    <input type="radio" />
+                    <label>Test</label>
+                </div>
+                <div>
+                    <input type="radio" />
+                    <label>Test</label>
+                </div>
+            </div>
+            <div class="value"></div>
+            <div class="checkbox">
+                <div>
+                    <label>Test</label>
+                    <input type="radio" />
+                </div>
+                <div>
+                    <label>Test</label>
+                    <input type="radio" />
+                </div>
+                <div>
+                    <label>Test</label>
+                    <input type="radio" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="element-container">
+        <div class="header">Variable</div>
+    </div>
+
+
+</body>
+</html>
