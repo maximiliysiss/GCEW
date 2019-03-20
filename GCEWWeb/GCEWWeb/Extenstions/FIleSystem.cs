@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GCEWWeb.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,17 @@ namespace GCEWWeb.Extenstions
             totalSize += directoryInfo.EnumerateDirectories()
                          .Sum(dir => dir.GetSize());
             return totalSize;
+        }
+
+        public static FileSystemElement GetTree(this DirectoryInfo directoryInfo)
+        {
+            FileSystemElement fileSystem = new FileSystemElement
+            {
+                Caption = directoryInfo.Name,
+                FileSystemElements = directoryInfo.EnumerateFiles().Select(x => new FileSystemElement { Caption = x.Name }).ToArray()
+            };
+            fileSystem.FileSystemElements.Concat(directoryInfo.EnumerateDirectories().Select(x => x.GetTree()));
+            return fileSystem;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace GCEWWeb.Services.Constructors
 {
     [TemplateSiteClass("ElementVariable")]
-    public class ElementVariable : IElement
+    public class ElementVariable : IElement, INumberExpressionElement
     {
         public ElementVariable()
         {

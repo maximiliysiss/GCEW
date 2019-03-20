@@ -60,6 +60,13 @@ namespace GCEWWeb.Controllers
             return RedirectToAction("Projects", "Home");
         }
 
+        [HttpPost]
+        public IActionResult OpenProject(int idOpenProject)
+        {
+            var project = DatabaseContext.Projects.Find(idOpenProject);
+            return View("Index", project);
+        }
+
         public IActionResult Test()
         {
             return View();

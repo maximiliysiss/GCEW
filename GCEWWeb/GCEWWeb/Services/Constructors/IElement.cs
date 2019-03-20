@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Services.Constructors
 {
+    public interface INumberExpressionElement
+    {
+
+    }
+
     public abstract class IElement
     {
         [TemplateSiteProperty("id")]

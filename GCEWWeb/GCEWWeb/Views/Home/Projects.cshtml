@@ -10,6 +10,11 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Projects</title>
+    <style>
+        tbody > tr:hover {
+            background-color: #eee;
+        }
+    </style>
 </head>
 <body>
     <p>
@@ -33,7 +38,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr id="@item.ID">
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
@@ -50,5 +55,21 @@
             }
         </tbody>
     </table>
+    <form id="form" method="post" action="@Url.Action("OpenProject", "Home")">
+        <input name="idOpenProject" id="idOpenProject" type="hidden" />
+    </form>
 </body>
 </html>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+
+    $(function () {
+        $("tbody > tr").click(function () {
+            $("#idOpenProject").val($(this).attr("id"));
+            $("#form").submit();
+        });
+    });
+
+</script>

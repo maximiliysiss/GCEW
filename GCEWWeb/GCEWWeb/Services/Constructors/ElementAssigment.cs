@@ -8,5 +8,7 @@ namespace GCEWWeb.Services.Constructors
     [TemplateSiteClass("ElementAssigment")]
     public class ElementAssigment : IElement
     {
+        public ElementVariable ElementVariable { get; set; }
+        public IElement Assign { get; set; }
     }
 }
