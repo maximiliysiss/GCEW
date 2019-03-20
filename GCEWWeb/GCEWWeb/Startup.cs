@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GCEWWeb.Models;
 using GCEWWeb.Services;
 using GCEWWeb.Utilities;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -46,6 +47,15 @@ namespace GCEWWeb
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+            {
+                option.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                option.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+            });
+
+            services.AddAuthorization();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +74,7 @@ namespace GCEWWeb
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

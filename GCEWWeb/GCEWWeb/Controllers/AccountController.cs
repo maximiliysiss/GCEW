@@ -49,7 +49,7 @@ namespace GCEWWeb.Controllers
                     return View(loginModel);
                 }
                 LoginAsync(user);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Projects", "Home");
             }
             return View(loginModel);
         }
@@ -63,7 +63,7 @@ namespace GCEWWeb.Controllers
         public IActionResult Register(RegisterModel registerModel)
         {
             if (ModelState.IsValid)
-                return RedirectToAction("SelectPlan", "Account", registerModel);
+                return View("SelectUserPlan", registerModel);
             return View(registerModel);
         }
 
@@ -89,7 +89,7 @@ namespace GCEWWeb.Controllers
             DatabaseContext.Add(transaction);
             DatabaseContext.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Projects", "Home");
         }
 
         [Authorize]
@@ -97,12 +97,6 @@ namespace GCEWWeb.Controllers
         public IActionResult PayPageDecline(Transaction transaction)
         {
             return View();
-        }
-
-
-        public IActionResult SelectUserPlan(RegisterModel registerModel)
-        {
-            return View(registerModel);
         }
 
         [HttpPost]
@@ -119,7 +113,7 @@ namespace GCEWWeb.Controllers
             DatabaseContext.SaveChanges();
             LoginAsync(user);
             if (registerModel.Plan == Plan.Free)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Projects", "Home");
             return RedirectToAction("PayPage", "Account", registerModel.Plan);
         }
 
