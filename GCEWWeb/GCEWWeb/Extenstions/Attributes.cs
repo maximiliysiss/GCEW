@@ -108,7 +108,7 @@ public class TemplateSerialize
             }
             template = template.Replace($"{{{prop.Attr.Name}}}", sb.ToString());
         }
-        return template;
+        return StringWorker.NormalizeWhiteSpace(template);
     }
 }
 

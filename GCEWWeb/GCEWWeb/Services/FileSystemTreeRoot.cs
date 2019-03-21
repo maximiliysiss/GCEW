@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Services
 {
-    [TemplateSiteClass("FileSystemTreeRoot,FileSystemElement")]
+    [TemplateSiteClass("FileSystemTreeRoot.js,FileSystemElement.txt")]
     public class FileSystemElement
     {
         [TemplateSiteProperty("caption")]

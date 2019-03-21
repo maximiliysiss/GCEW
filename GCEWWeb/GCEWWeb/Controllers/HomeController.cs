@@ -64,6 +64,8 @@ namespace GCEWWeb.Controllers
         [HttpPost]
         public IActionResult OpenProject(int idOpenProject)
         {
+            ViewBag.Configuration = Options;
+            ViewBag.RenderEngine = ViewRenderService;
             var project = DatabaseContext.Projects.Find(idOpenProject);
             return View("Index", project);
         }

@@ -6,79 +6,53 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Test</title>
-    <style>
-        .element-container {
-            display: inline-flex;
-            border: 2px solid grey;
-            border-radius: 15px;
-            overflow: hidden;
-            flex-direction: column;
-            background: #ddd;
-            font-weight: bold;
-            font-size: 12pt;
-        }
-
-            .element-container > .header {
-                text-align: center;
-                padding: 5px 15px 5px 15px;
-                background: radial-gradient(#42aaf4 0%, white 120%);
-            }
-
-            .element-container > .content {
-                display: inline-flex;
-                flex-direction: row;
-            }
-
-                .element-container > .content > .checkbox {
-                    padding: 5px;
-                }
-
-                .element-container > .content > .value {
-                    width: 30px;
-                }
-    </style>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-treeview-1.2.0/src/css/bootstrap-treeview.css" />
 </head>
 <body>
-
-    <div class="element-container">
-        <div class="header">One</div>
-        <div class="content">
-            <div class="checkbox">
-                <div>
-                    <input type="radio" />
-                    <label>Test</label>
-                </div>
-                <div>
-                    <input type="radio" />
-                    <label>Test</label>
-                </div>
-                <div>
-                    <input type="radio" />
-                    <label>Test</label>
-                </div>
-            </div>
-            <div class="value"></div>
-            <div class="checkbox">
-                <div>
-                    <label>Test</label>
-                    <input type="radio" />
-                </div>
-                <div>
-                    <label>Test</label>
-                    <input type="radio" />
-                </div>
-                <div>
-                    <label>Test</label>
-                    <input type="radio" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="element-container">
-        <div class="header">Variable</div>
-    </div>
-
-
+    <div id="default-tree"></div>
 </body>
 </html>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/lib/bootstrap-treeview-1.2.0/src/js/bootstrap-treeview.js"></script>
+
+<script>
+
+
+    var myTree = [
+        {
+            text: "Item 1",
+            nodes: [
+                {
+                    text: "Item 1-1",
+                    nodes: [
+                        {
+                            text: "Item 1-1-1"
+                        },
+                        {
+                            text: "Item 1-1-2"
+                        }
+                    ]
+                },
+                {
+                    text: "Item 1-2"
+                }
+            ]
+        },
+        {
+            text: "Item 2"
+        },
+        {
+            text: "Item 3"
+        }
+    ];
+
+    $('#default-tree').treeview({
+        data: myTree
+    });
+
+
+
+</script>

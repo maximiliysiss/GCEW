@@ -1,3 +1,7 @@
 ﻿var fileSystemTree = [
-    {innerElements}
+    {
+        text: "{caption}",
+        selectable: false,
+        nodes: [{innerElements}]
+    }
 ];

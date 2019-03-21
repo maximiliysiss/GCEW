@@ -14,7 +14,7 @@ namespace GCEWWeb.Extenstions
         public static string MenuContainerHtml(this IHtmlHelper htmlHelper)
         {
             var headers = SiteTemplate<MenuElements>.Instance().TemplateSites.Select(x => x.Value);
-            return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span>\r\n            <span>\r\n                \u25BA\r\n            </span>\r\n        </span>\r\n    </a><ul class=\"dropdown-menu\"></ul>", replaceTo: "</span></a>");
+            return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span> <span> ► </span> </span> </a><ul class=\"dropdown-menu\"></ul>", replaceTo: "</span></a>");
         }
 
         private static string GenerateMenuLevel<T>(IEnumerable<T> contextMenus, bool isRoot = false, string replace = "", string replaceTo = "") where T : class
@@ -22,14 +22,14 @@ namespace GCEWWeb.Extenstions
 
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var contextMenu in contextMenus)
-                stringBuilder.Append(TemplateSerialize.Serialize(contextMenu).Replace(replace, replaceTo));
+                stringBuilder.Append(TemplateSerialize.Serialize(contextMenu).Replace("\r\n", string.Empty).Replace(replace, replaceTo));
             return stringBuilder.ToString();
         }
 
         public static string GenerateContextMenus(this IHtmlHelper htmlHelper)
         {
             var headers = SiteTemplate<ContextMenu>.Instance().TemplateSites.Select(x => x.Value);
-            return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span>\r\n    <span>\r\n        ►\r\n    </span>\r\n    <div class=\"menuContextRoot\">\r\n        <ul class=\"menuContextElements\">\r\n            \r\n        </ul>\r\n    </div>", replaceTo: string.Empty);
+            return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span> <span> ► </span> <div class=\"menuContextRoot\"> <ul class=\"menuContextElements\"> </ul> </div>", replaceTo: string.Empty);
         }
     }
 }

@@ -84,6 +84,14 @@ namespace GCEWWeb.Services
             }
         }
 
-        public T this[string name] => TemplateSites[name];
+        public T this[string name]
+        {
+            get
+            {
+                if (TemplateSites.TryGetValue(name, out T val))
+                    return val;
+                return null;
+            }
+        }
     }
 }

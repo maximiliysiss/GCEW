@@ -20,18 +20,22 @@ namespace GCEWWeb.Extenstions
 
         public static FileSystemElement GetTree(this DirectoryInfo directoryInfo)
         {
+            var listData = directoryInfo.EnumerateFiles("*.graphic").Select(x => new FileSystemElement
+            {
+                Caption = Path.GetFileNameWithoutExtension(x.Name)
+            }).ToList();
+            listData.AddRange(directoryInfo.EnumerateDirectories().Select(x => x.GetTree()));
             FileSystemElement fileSystem = new FileSystemElement
             {
                 Caption = directoryInfo.Name,
-                FileSystemElements = directoryInfo.EnumerateFiles().Select(x => new FileSystemElement { Caption = x.Name }).ToArray()
+                FileSystemElements = listData.ToArray()
             };
-            fileSystem.FileSystemElements.Concat(directoryInfo.EnumerateDirectories().Select(x => x.GetTree()));
             return fileSystem;
         }
 
         public static string ToStringTree(this DirectoryInfo directoryInfo)
         {
-            return TemplateSerialize.SerializeScript(directoryInfo.GetTree());
+            return TemplateSerialize.SerializeScript(directoryInfo.GetTree()).Replace("},]", "}]").Replace("\r\n", string.Empty).Replace(", nodes: []", string.Empty);
         }
     }
 }
