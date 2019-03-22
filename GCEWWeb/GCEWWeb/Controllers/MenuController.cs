@@ -30,5 +30,11 @@ namespace GCEWWeb.Controllers
             ViewBag.Config = new DirectoryInfo(project.Path).ToStringTree();
             return PartialView("OpenProjectFile");
         }
+
+        public IActionResult CreateProject()
+        {
+            ViewBag.RedirectToProject = true;
+            return RedirectToAction("CreateProject", "Home");
+        }
     }
 }

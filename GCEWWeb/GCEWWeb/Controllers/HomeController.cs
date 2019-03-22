@@ -27,13 +27,6 @@ namespace GCEWWeb.Controllers
             SiteTemplateInit.InitAllModules(Options);
         }
 
-        public IActionResult Index()
-        {
-            ViewBag.Configuration = Options;
-            ViewBag.RenderEngine = ViewRenderService;
-            return View();
-        }
-
         public IActionResult Projects()
         {
             var projects = DatabaseContext.Projects.Where(x => x.User.ID == UserID).ToList();
@@ -48,7 +41,7 @@ namespace GCEWWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProject(Project project)
+        public IActionResult CreateProject(Project project, [FromBody]bool RedirectToProject)
         {
             project.DateTime = DateTime.Now;
             project.Path = $"{Options.GlobalProjectPathForUser(UserName)}{project.Name}";
@@ -56,6 +49,8 @@ namespace GCEWWeb.Controllers
             DatabaseContext.Projects.Add(project);
             DatabaseContext.SaveChanges();
             Directory.CreateDirectory(project.Path);
+            if (RedirectToProject)
+                return RedirectToAction("OpenProject", "Home", new { idOpenProject = project.ID });
             return RedirectToAction("Projects", "Home");
         }
 
