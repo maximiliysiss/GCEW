@@ -39,7 +39,10 @@ namespace GCEWWeb
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.Configure<CustomConfiguration>(Configuration.GetSection("CustomConfiguration"));
+            services.Configure<CustomConfiguration>(Configuration.GetSection("CustomConfiguration")).PostConfigure(new Action<CustomConfiguration>(x =>
+            {
+                SiteTemplateInit.InitAllModules(x);
+            }));
 
             services.AddScoped<IViewRenderService, ViewRenderService>();
 

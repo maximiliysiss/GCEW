@@ -24,7 +24,6 @@ namespace GCEWWeb.Controllers
             : base(databaseContext, options.Value)
         {
             ViewRenderService = viewRenderService ?? throw new ArgumentNullException(nameof(viewRenderService));
-            SiteTemplateInit.InitAllModules(Options);
         }
 
         public IActionResult Projects()
