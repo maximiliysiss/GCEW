@@ -5,96 +5,47 @@
     "Function": "",
     "InnerMenu": [
       {
-        "Name": "Test",
-        "Caption": "Test",
-        "Function": ""
-      },
-      {
         "Name": "New",
         "Caption": "New",
-        "Function": "",
         "InnerMenu": [
           {
             "Name": "Project",
             "Caption": "Project",
-            "Function": "",
+            "Function": "createNewProject(event)"
+          },
+          {
+            "Name": "File",
+            "Caption": "Graphic File",
+            "Function": "createNewFile(event)"
+          },
+          {
+            "Name": "Open",
+            "Caption": "Open",
             "InnerMenu": [
               {
-                "Name": "Test",
-                "Caption": "One",
-                "Functon": ""
+                "Name": "Project",
+                "Caption": "Project",
+                "Function": "openProject(event)"
+              },
+              {
+                "Name": "File",
+                "Caption": "File",
+                "Function": "openFile(event)"
               }
             ]
-          },
-          {
-            "Name": "File",
-            "Caption": "File",
-            "Function": ""
-          }
-        ]
-      },
-      {
-        "Name": "Open",
-        "Caption": "Open",
-        "Function": "",
-        "InnerMenu": [
-          {
-            "Name": "Project",
-            "Caption": "Project",
-            "Function": ""
-          },
-          {
-            "Name": "File",
-            "Caption": "File",
-            "Function": ""
           }
         ]
       }
     ]
   },
   {
-    "Name": "Open",
-    "Caption": "File",
-    "Function": "",
+    "Name": "About",
+    "Caption": "About Project",
     "InnerMenu": [
       {
-        "Name": "Test",
-        "Caption": "Test",
-        "Function": ""
-      },
-      {
-        "Name": "New",
-        "Caption": "New",
-        "Function": "",
-        "InnerMenu": [
-          {
-            "Name": "Project",
-            "Caption": "Project",
-            "Function": ""
-          },
-          {
-            "Name": "File",
-            "Caption": "File",
-            "Function": ""
-          }
-        ]
-      },
-      {
-        "Name": "Open",
-        "Caption": "Open",
-        "Function": "",
-        "InnerMenu": [
-          {
-            "Name": "Project",
-            "Caption": "Project",
-            "Function": ""
-          },
-          {
-            "Name": "File",
-            "Caption": "File",
-            "Function": ""
-          }
-        ]
+        "Name": "Support",
+        "Caption": "Support",
+        "Function": "openSupport(event)"
       }
     ]
   }

@@ -16,7 +16,7 @@ namespace GCEWWeb.Controllers
 {
     public class AccountController : BaseController
     {
-        public AccountController(DatabaseContext databaseContext) : base(databaseContext)
+        public AccountController(DatabaseContext databaseContext, CustomConfiguration options) : base(databaseContext, options)
         {
         }
 

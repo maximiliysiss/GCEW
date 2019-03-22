@@ -18,13 +18,11 @@ namespace GCEWWeb.Controllers
     [Authorize]
     public class HomeController : BaseController
     {
-        public CustomConfiguration Options { get; set; }
         public IViewRenderService ViewRenderService { get; set; }
 
         public HomeController(IOptions<CustomConfiguration> options, IViewRenderService viewRenderService, DatabaseContext databaseContext)
-            : base(databaseContext)
+            : base(databaseContext, options.Value)
         {
-            Options = options.Value ?? throw new ArgumentNullException(nameof(options));
             ViewRenderService = viewRenderService ?? throw new ArgumentNullException(nameof(viewRenderService));
             SiteTemplateInit.InitAllModules(Options);
         }

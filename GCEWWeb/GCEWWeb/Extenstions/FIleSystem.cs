@@ -33,6 +33,16 @@ namespace GCEWWeb.Extenstions
             return fileSystem;
         }
 
+        public static string GetProject(this DirectoryInfo directoryInfo)
+        {
+            var root = new FileSystemElement
+            {
+                Caption = "Projects",
+                FileSystemElements = directoryInfo.EnumerateDirectories().Select(x => new FileSystemElement { Caption = x.Name }).ToArray()
+            };
+            return TemplateSerialize.SerializeScript(root);
+        }
+
         public static string ToStringTree(this DirectoryInfo directoryInfo)
         {
             return TemplateSerialize.SerializeScript(directoryInfo.GetTree()).Replace("},]", "}]").Replace("\r\n", string.Empty).Replace(", nodes: []", string.Empty);
