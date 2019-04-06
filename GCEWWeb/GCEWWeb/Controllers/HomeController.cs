@@ -40,7 +40,7 @@ namespace GCEWWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProject(Project project, [FromBody]bool RedirectToProject)
+        public IActionResult CreateProject(Project project, [FromForm]bool RedirectToProject)
         {
             project.DateTime = DateTime.Now;
             project.Path = $"{Options.GlobalProjectPathForUser(UserName)}{project.Name}";
