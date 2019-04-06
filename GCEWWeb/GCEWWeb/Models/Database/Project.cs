@@ -16,6 +16,14 @@ namespace GCEWWeb.Models.Database
         public double Size { get; set; }
         public DateTime DateTime { get; set; }
         public User User { get; set; }
-        public string FileSystemTree => new DirectoryInfo(Path).ToStringTree();
+        public string FileSystemTree
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Path))
+                    return string.Empty;
+                return new DirectoryInfo(Path).ToStringTree();
+            }
+        }
     }
 }
