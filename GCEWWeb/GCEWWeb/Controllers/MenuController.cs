@@ -3,6 +3,7 @@ using GCEWWeb.Models;
 using GCEWWeb.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +15,7 @@ namespace GCEWWeb.Controllers
     [Authorize]
     public class MenuController : BaseController
     {
-        public MenuController(DatabaseContext databaseContext, CustomConfiguration options) : base(databaseContext, options)
+        public MenuController(DatabaseContext databaseContext, IOptions<CustomConfiguration> options) : base(databaseContext, options.Value)
         {
         }
 

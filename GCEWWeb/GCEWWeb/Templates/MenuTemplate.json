@@ -17,22 +17,22 @@
             "Name": "File",
             "Caption": "Graphic File",
             "Function": "createNewFile(event)"
+          }
+        ]
+      },
+      {
+        "Name": "Open",
+        "Caption": "Open",
+        "InnerMenu": [
+          {
+            "Name": "Project",
+            "Caption": "Project",
+            "Function": "openProject(event)"
           },
           {
-            "Name": "Open",
-            "Caption": "Open",
-            "InnerMenu": [
-              {
-                "Name": "Project",
-                "Caption": "Project",
-                "Function": "openProject(event)"
-              },
-              {
-                "Name": "File",
-                "Caption": "File",
-                "Function": "openFile(event)"
-              }
-            ]
+            "Name": "File",
+            "Caption": "File",
+            "Function": "openFile(event)"
           }
         ]
       }

@@ -11,12 +11,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace GCEWWeb.Controllers
 {
     public class AccountController : BaseController
     {
-        public AccountController(DatabaseContext databaseContext, CustomConfiguration options) : base(databaseContext, options)
+        public AccountController(DatabaseContext databaseContext, IOptions<CustomConfiguration> options) : base(databaseContext, options.Value)
         {
         }
 

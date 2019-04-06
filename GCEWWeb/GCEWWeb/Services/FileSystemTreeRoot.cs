@@ -12,5 +12,7 @@ namespace GCEWWeb.Services
         public string Caption { get; set; }
         [TemplateSiteProperty("innerElements", Extenstions.TemplateType.Array)]
         public FileSystemElement[] FileSystemElements { get; set; }
+        [TemplateSiteProperty("tag")]
+        public string Tag { get; set; }
     }
 }

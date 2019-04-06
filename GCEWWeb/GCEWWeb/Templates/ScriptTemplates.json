@@ -1,12 +1,12 @@
 [
   {
     "Name": "FileSystemElement.txt",
-    "Count": 2,
-    "Arguments": [ "caption", "innerElements" ]
+    "Count": 3,
+    "Arguments": [ "caption", "innerElements", "tag" ]
   },
   {
     "Name": "FileSystemTreeRoot.js",
-    "Count": 1,
-    "Arguments": [ "innerElements" ]
+    "Count": 2,
+    "Arguments": [ "innerElements", "tag" ]
   }
-]
+] 

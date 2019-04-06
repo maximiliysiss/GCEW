@@ -66,5 +66,27 @@
         "Function": "openProperty(event)"
       }
     ]
+  },
+  {
+    "Name": "MenuFolder",
+    "InnerMenu": [
+      {
+        "Caption": "Delete",
+        "Function": "deleteFolder(event)"
+      },
+      {
+        "Caption": "Add graphic file",
+        "Function": "addFraphicFile(event)"
+      }
+    ]
+  },
+  {
+    "Name": "MenuFile",
+    "InnerMenu": [
+      {
+        "Caption": "Delete",
+        "Function": "deleteFile(event)"
+      }
+    ]
   }
 ]

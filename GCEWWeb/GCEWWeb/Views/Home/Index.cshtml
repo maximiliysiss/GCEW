@@ -23,6 +23,10 @@
     line:hover {
         cursor: pointer;
     }
+
+    .badge {
+        display: none;
+    }
 </style>
 <div class="window">
     <div class="menu">
@@ -42,9 +46,15 @@
 <script src="~/js/context-menu-custom.js"></script>
 <script src="~/js/FlowchartsVisual.js"></script>
 <script src="~/lib/toastr/toastr.js"></script>
-<script src="~/lib/bootstrap-treeview-1.2.0/src/js/bootstrap-treeview.js"></script>
+<script src="~/lib/patternfly-bootstrap-treeview-master/src/js/bootstrap-treeview.js"></script>
 <script type="text/javascript" src="https://golden-layout.com/files/latest/js/goldenlayout.min.js"></script>
 <script>
+
+    function onTreeFolder(func) {
+        $()
+    }
+
+
 
     function afterInit() {
 
@@ -92,10 +102,29 @@
 
             @Html.Raw(Model.FileSystemTree)
 
-            console.log(fileSystemTree);
+            var options = {
+                showTags: true,
+                data: fileSystemTree,
+                nodeCollapsed : function (event, data) { alert("one"); }
+            };
 
-            $('#tree-solution').treeview({
-                data: fileSystemTree
+            var tree = $('#tree-solution').treeview(options);
+            $(tree).on("rendered", function (e, n) {
+                var size = Object.getOwnPropertyNames(n).length;
+                for (var i = 0; i < size; i++) {
+                    n[i].tags.forEach(function (tag) {
+                        switch (tag) {
+                            case "folder":
+                                $("[data-nodeid*='" + n[i].nodeId + "']").attr("menu", "MenuFolder");
+                                break;
+                            case "file":
+                                $("[data-nodeid*='" + n[i].nodeId + "']").attr("menu", "MenuFile");
+                                break;
+                        }
+                    });
+                }
+
+                reHandlerContextMenus();
             });
 
         });

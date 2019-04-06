@@ -1,6 +1,6 @@
 ﻿{
     text: "{caption}",
 	selectable: false,
-	href: "#node-1",
+	tags: ["{tag}"],
     nodes: [{innerElements}]
 },

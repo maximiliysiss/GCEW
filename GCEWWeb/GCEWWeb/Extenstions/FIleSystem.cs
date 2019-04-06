@@ -22,13 +22,15 @@ namespace GCEWWeb.Extenstions
         {
             var listData = directoryInfo.EnumerateFiles("*.graphic").Select(x => new FileSystemElement
             {
-                Caption = Path.GetFileNameWithoutExtension(x.Name)
+                Caption = Path.GetFileNameWithoutExtension(x.Name),
+                Tag = "file"
             }).ToList();
             listData.AddRange(directoryInfo.EnumerateDirectories().Select(x => x.GetTree()));
             FileSystemElement fileSystem = new FileSystemElement
             {
                 Caption = directoryInfo.Name,
-                FileSystemElements = listData.ToArray()
+                FileSystemElements = listData.ToArray(),
+                Tag = "folder"
             };
             return fileSystem;
         }
@@ -38,7 +40,11 @@ namespace GCEWWeb.Extenstions
             var root = new FileSystemElement
             {
                 Caption = "Projects",
-                FileSystemElements = directoryInfo.EnumerateDirectories().Select(x => new FileSystemElement { Caption = x.Name }).ToArray()
+                FileSystemElements = directoryInfo.EnumerateDirectories().Select(x => new FileSystemElement
+                {
+                    Caption = x.Name,
+                    Tag = "folder"
+                }).ToArray()
             };
             return TemplateSerialize.SerializeScript(root);
         }
