@@ -3,66 +3,120 @@
     Layout = null;
 }
 
+
+
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
     <title>PayPage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/css/main.css">
     <style>
-        .form {
-            position: absolute;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
+        .plate{
+            width:66px;
+            height:44px;
+            padding:0;
         }
-
-        .plate {
-            display: flex;
-            width: 200px;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 10px;
-            border: 1.5px solid grey;
-            border-radius: 12px;
+        #form{
+            width:558px;
         }
-
-            .plate > img {
-                width: 100%;
-            }
-
-            .plate > div {
-                text-align: center;
-                font-weight: bold;
-                font-size: 12pt;
-            }
     </style>
 </head>
 <body>
-    @using (Html.BeginForm("PayPage", "Account", FormMethod.Post, new { id = "form" }))
-    {
-        @Html.HiddenFor(x => x.DateTime)
-        @Html.HiddenFor(x => x.PaySystem)
-        @Html.HiddenFor(x => x.Plan)
-        @Html.HiddenFor(x => x.TransactionAmount)
-        <div val="@((int)PaySystem.Card)" class="plate">
+
+    <div class="limiter">
+        <div class="container-login100">
+            @using (Html.BeginForm("PayPage", "Account", FormMethod.Post, new { id = "form" }))
+            {
+                @Html.HiddenFor(x => x.DateTime)
+                @Html.HiddenFor(x => x.PaySystem)
+                @Html.HiddenFor(x => x.Plan)
+                @Html.HiddenFor(x => x.TransactionAmount)
+                <label class="login100-form-title p-b-32">
+                    Выберите способ оплаты
+                </label>
+                <p>Поступление платежа на счёт может занимать от нескольких минут до нескольких часов. Пожалуйста, учитывайте, что различные платёжные терминалы и системы берут различную комиссию. Механизмы оплаты предоставлены сервисами "Робокасса" и "PayOnline".</p><br>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Alipay)" style="background:url('../images/payment 60x38/Alipay.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Amazon)" style="background:url('../images/payment 60x38/Amazon.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.American_Express)" style="background:url('../images/payment 60x38/American-Express.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Bancontact)" style="background:url('../images/payment 60x38/Bancontact.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.BCC)" style="background:url('../images/payment 60x38/BCC.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Bitcoin)" style="background:url('../images/payment 60x38/Bitcoin.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Boleto)" style="background:url('../images/payment 60x38/Boleto.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Carte_Bleue)" style="background:url('../images/payment 60x38/Carte-Bleue.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Cirrus)" style="background:url('../images/payment 60x38/Cirrus.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Citi_Bank)" style="background:url('../images/payment 60x38/Citi-Bank.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Click_and_Buy)" style="background:url('../images/payment 60x38/Click-and-Buy.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Delta)" style="background:url('../images/payment 60x38/Delta.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.DineroMail)" style="background:url('../images/payment 60x38/DineroMail.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.DinersClub)" style="background:url('../images/payment 60x38/DinersClub.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.DirectDebit)" style="background:url('../images/payment 60x38/DirectDebit.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Discover)" style="background:url('../images/payment 60x38/Discover.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.DotPay)" style="background:url('../images/payment 60x38/DotPay.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.EBAY)" style="background:url('../images/payment 60x38/EBAY.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.ECO)" style="background:url('../images/payment 60x38/ECO.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Epay)" style="background:url('../images/payment 60x38/Epay.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.EPS)" style="background:url('../images/payment 60x38/EPS.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Eway)" style="background:url('../images/payment 60x38/Eway.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.GiroPay)" style="background:url('../images/payment 60x38/GiroPay.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.HSBC)" style="background:url('../images/payment 60x38/HSBC.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.iDeal)" style="background:url('../images/payment 60x38/iDeal.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.JCB)" style="background:url('../images/payment 60x38/JCB.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Maestro_1)" style="background:url('../images/payment 60x38/Maestro-1.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Maestro_2)" style="background:url('../images/payment 60x38/Maestro-2.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.OK_Pay)" style="background:url('../images/payment 60x38/OK-Pay.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Payoneer)" style="background:url('../images/payment 60x38/Payoneer.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.PayPal)" style="background:url('../images/payment 60x38/PayPal.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.PayPoint)" style="background:url('../images/payment 60x38/PayPoint.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Payza)" style="background:url('../images/payment 60x38/Payza.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Pick_n_Pay)" style="background:url('../images/payment 60x38/Pick-n-Pay.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.PostePay)" style="background:url('../images/payment 60x38/PostePay.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Przelewy24)" style="background:url('../images/payment 60x38/Przelewy24.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Sage)" style="background:url('../images/payment 60x38/Sage.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Skrill)" style="background:url('../images/payment 60x38/Skrill.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Switch1)" style="background:url('../images/payment 60x38/Switch1.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Switch2)" style="background:url('../images/payment 60x38/Switch2.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.todoCash)" style="background:url('../images/payment 60x38/todoCash.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Ukash)" style="background:url('../images/payment 60x38/Ukash.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.UnionPay)" style="background:url('../images/payment 60x38/UnionPay.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Verified_by_VISA)" style="background:url('../images/payment 60x38/Verified-by-VISA.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Visa)" style="background:url('../images/payment 60x38/Visa.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.WebMoney)" style="background:url('../images/payment 60x38/WebMoney.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Western_Union)" style="background:url('../images/payment 60x38/Western-Union.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Wirecard)" style="background:url('../images/payment 60x38/Wirecard.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.WorldPay)" style="background:url('../images/payment 60x38/WorldPay.jpg')"></div>
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)PaySystem.Yandex_Money)" style="background:url('../images/payment 60x38/Yandex-Money.jpg')"></div>
+
+
+            }
         </div>
-        <div val="@((int)PaySystem.PayPal)" class="plate"></div>
-        <div val="@((int)PaySystem.Qiwi)" class="plate"></div>
-    }
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/Login_v14/js/main.js"></script>
+
 </body>
 </html>
-
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
 
+    function send() {
+        var value = $(".isActive").first().attr("val");
+        $("#Plan").val(value);
+        $("#form").submit();
+    }
+
+
     $(function () {
         $(".plate").click(function () {
+            $(".isActive").each(function () { $(this).removeClass("isActive"); });
+            $(this).addClass("isActive");
             var value = $(this).attr("val");
             $("#PaySystem").val(value);
             $("#form").submit();
