@@ -4,99 +4,74 @@
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <title>SelectUserPlan</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/css/main.css">
     <style>
-        form {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            width: 100%;
-            height: 100%;
-        }
-
-        .div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            flex-direction: row;
-            justify-content: space-around;
-        }
-
-        .plate {
-            overflow: hidden;
-            width: 300px;
-            display: inline-flex;
-            flex-direction: column;
-            margin: 10px;
-            border: 1.5px solid grey;
-            border-radius: 12px;
-        }
-
-            .plate:hover {
-                cursor: pointer;
-            }
-
-            .plate > img {
-            }
-
-        .isActive {
-            border-width: 2px;
-            background: #eee;
+        li {
+            list-style-type: circle;
+            list-style-position: inside;
         }
     </style>
 </head>
 <body>
-    @using (Html.BeginForm("SelectUserPlanConfirmed", "Account", FormMethod.Post, new { id = "form" }))
-    {
-        @Html.HiddenFor(x => x.ConfirmedPassword)
-        @Html.HiddenFor(x => x.Login)
-        @Html.HiddenFor(x => x.Nickname)
-        @Html.HiddenFor(x => x.Password)
-        @Html.HiddenFor(x => x.Plan)
-        <div class="div">
-            <div class="plate" val="@((int)Plan.Free)">
-                <img />
-                <div>
-                    <div style="text-align:center">Free version</div>
-                    <ul>
-                        <li>Hard disk is 50 mb</li>
-                    </ul>
+
+    <div class="limiter">
+        <div class="container-login100">
+            @using (Html.BeginForm("SelectUserPlanConfirmed", "Account", FormMethod.Post, new { id = "form" }))
+            {
+                @Html.HiddenFor(x => x.ConfirmedPassword)
+                @Html.HiddenFor(x => x.Login)
+                @Html.HiddenFor(x => x.Nickname)
+                @Html.HiddenFor(x => x.Password)
+                @Html.HiddenFor(x => x.Plan)
+                <div class="plate wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45" val="@((int)Plan.Free)">
+                    <img />
+                    <div>
+                        <label style="text-align:center" class="login100-form-title p-b-32">Free version</label>
+                        <ul>
+                            <li>Hard disk is 50 mb</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="plate" val="@((int)Plan.Minimum)">
-                <img />
-                <div>
-                    <div style="text-align:center">Minimum version</div>
-                    <ul>
-                        <li>Hard disk is 100 mb</li>
-                    </ul>
+                <div class="plate wrap-login100 p-l-56 p-r-56 p-t-45 p-b-45" val="@((int)Plan.Minimum)">
+                    <img />
+                    <div>
+                        <label style="text-align:center" class="login100-form-title p-b-32">Minimum version</label>
+                        <ul>
+                            <li>Hard disk is 100 mb</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="plate" val="@((int)Plan.Maximum)">
-                <img />
-                <div>
-                    <div style="text-align:center">Maximum version</div>
-                    <ul>
-                        <li>Hard disk is 150 mb</li>
-                    </ul>
+                <div class="plate wrap-login100 p-l-56 p-r-56 p-t-45 p-b-45" val="@((int)Plan.Maximum)">
+                    <img />
+                    <div>
+                        <label style="text-align:center" class="login100-form-title p-b-32">Maximum version</label>
+                        <ul>
+                            <li>Hard disk is 150 mb</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+                <div class="container-login100-form-btn">
+                    <input type="submit" value="Select" class="login100-form-btn" style="width: 294px; margin: 120px auto;"/>
+                </div>
+            }
         </div>
-        <input style="width:40%" type="button" value="Select" onclick="send()" class="btn btn-success" />
-    }
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/Login_v14/js/main.js"></script>
+
 </body>
 </html>
-
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
 
