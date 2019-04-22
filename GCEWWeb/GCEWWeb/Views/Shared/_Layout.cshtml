@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="~/css/element-styles.css" />
         <link rel="stylesheet" href="~/lib/toastr/build/toastr.css" />
         <link rel="stylesheet" href="~/lib/patternfly-bootstrap-treeview-master/src/css/bootstrap-treeview.css" />
+        <link rel="stylesheet" href="~/css/custom-modal-window.css" />
         <link type="text/css" rel="stylesheet" href="https://golden-layout.com/files/latest/css/goldenlayout-base.css" />
         <link type="text/css" rel="stylesheet" href="https://golden-layout.com/files/latest/css/goldenlayout-light-theme.css" />
     </environment>
@@ -30,6 +31,15 @@
     </environment>
 </head>
 <body>
+
+    <div id="myModal" class="custom-modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close-modal" modal="myModal">&times;</span>
+            <p>Some text in the Modal..</p>
+        </div>
+    </div>
 
     <partial name="_CookieConsentPartial" />
 
