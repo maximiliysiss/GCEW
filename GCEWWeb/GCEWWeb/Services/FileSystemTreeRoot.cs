@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Services
 {
+    /// <summary>
+    /// Node for treeView
+    /// </summary>
     [TemplateSiteClass("FileSystemTreeRoot.js,FileSystemElement.txt")]
     public class FileSystemElement
     {

@@ -88,5 +88,14 @@
         "Function": "deleteFile(event)"
       }
     ]
+  },
+  {
+    "Name": "SolutionMenu",
+    "InnerMenu": [
+      {
+        "Caption": "Add new file",
+        "Function": "addNewFile(event)"
+      }
+    ]
   }
 ]

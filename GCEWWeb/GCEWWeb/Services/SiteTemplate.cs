@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Services
 {
+    /// <summary>
+    /// Site's templates
+    /// </summary>
     public class SiteTemplateInit
     {
         public static void InitAllModules(CustomConfiguration customConfiguration)
@@ -18,6 +21,9 @@ namespace GCEWWeb.Services
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class TemplateSite : IResource
     {
         public string Name { get; set; }
@@ -31,6 +37,9 @@ namespace GCEWWeb.Services
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class TemplateScript : TemplateSite
     {
         public override void ExtensionAction(CustomConfiguration customConfiguration)
@@ -39,12 +48,31 @@ namespace GCEWWeb.Services
         }
     }
 
+    /// <summary>
+    /// Common class for Templates
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class SiteTemplate<T> where T : class, IResource
     {
+        /// <summary>
+        /// Path for file
+        /// </summary>
         private string path;
+        /// <summary>
+        /// Cashe
+        /// </summary>
         private static SiteTemplate<T> siteTemplate;
+        /// <summary>
+        /// Configuration
+        /// </summary>
         private CustomConfiguration customConfiguration;
         private SiteTemplate() { }
+        /// <summary>
+        /// Singleton
+        /// </summary>
+        /// <param name="customConfiguration"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static SiteTemplate<T> Instance(CustomConfiguration customConfiguration, string path)
         {
             if (siteTemplate == null)
@@ -53,7 +81,10 @@ namespace GCEWWeb.Services
                 siteTemplate.customConfiguration = customConfiguration;
             return siteTemplate;
         }
-
+        /// <summary>
+        /// Singleton
+        /// </summary>
+        /// <returns></returns>
         public static SiteTemplate<T> Instance()
         {
             if (siteTemplate == null)
@@ -63,12 +94,16 @@ namespace GCEWWeb.Services
 
         public CustomConfiguration CustomConfiguration { get; set; }
 
+
         private SiteTemplate(CustomConfiguration customConfiguration, string path)
         {
             this.path = path;
             CustomConfiguration = customConfiguration ?? throw new ArgumentNullException(nameof(customConfiguration));
         }
 
+        /// <summary>
+        /// All templates
+        /// </summary>
         private Dictionary<string, T> templateSites;
         public Dictionary<string, T> TemplateSites
         {

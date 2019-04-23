@@ -37,7 +37,6 @@
     @Html.Raw(Html.GenerateContextMenus())
 
     <div class="window-in">
-        <button modal="myModal" class="custom-modal-holder">Hell</button>
     </div>
 </div>
 
@@ -55,6 +54,15 @@
 
     function onTreeFolder(func) {
         $()
+    }
+
+
+    // List of modals
+    // modal-enter-data
+    function createTextBoxForEnterData(text, onClick, modal) {
+        $("#modal-text-enter").html(text);
+        $("#modal-text-btn").click(onClick);
+        $("#" + modal).css("display", "none");
     }
 
 

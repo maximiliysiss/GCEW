@@ -8,6 +8,11 @@ namespace GCEWWeb.Services
 {
     public class CryptService
     {
+        /// <summary>
+        /// MD5 Hash
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string CreateMD5(string input)
         {
             using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())

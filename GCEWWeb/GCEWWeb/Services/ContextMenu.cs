@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Services
 {
+    /// <summary>
+    /// Context menu
+    /// </summary>
     [TemplateSiteClass("ContextMenuRoot,MenuElementContext")]
     public class ContextMenu : IResource
     {

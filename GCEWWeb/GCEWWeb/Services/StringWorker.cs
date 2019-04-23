@@ -5,8 +5,16 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Services
 {
+    /// <summary>
+    /// String extensions
+    /// </summary>
     public class StringWorker
     {
+        /// <summary>
+        /// Remove all big whiteSpaces
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string NormalizeWhiteSpace(string input)
         {
             if (string.IsNullOrEmpty(input))

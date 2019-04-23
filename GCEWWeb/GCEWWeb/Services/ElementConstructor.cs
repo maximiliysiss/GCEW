@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Services
 {
+    /// <summary>
+    /// Factory for elements
+    /// </summary>
     public class ElementConstructor
     {
         public static IElement GetBuilder(ElementType elementType)
