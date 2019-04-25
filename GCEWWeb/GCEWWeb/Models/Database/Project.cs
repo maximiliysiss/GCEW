@@ -25,5 +25,15 @@ namespace GCEWWeb.Models.Database
                 return new DirectoryInfo(Path).ToStringTree();
             }
         }
+
+        public string FileSystemTreeJSON
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Path))
+                    return string.Empty;
+                return new DirectoryInfo(Path).ToJSONStringTree();
+            }
+        }
     }
 }

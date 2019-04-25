@@ -79,7 +79,7 @@ public class TemplateSerialize
         {
             StringBuilder sb = new StringBuilder();
             bool isTemplateSiteClass;
-            var value = prop.Prop.GetValue(elem);
+            var value = FastReflection<T>.GetValue(elem, prop.Prop.Name);
             if (value == null)
             {
                 template = template.Replace($"{{{prop.Attr.Name}}}", string.Empty);

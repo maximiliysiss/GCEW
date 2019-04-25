@@ -55,7 +55,6 @@ $(function () {
 
 
     $(document).click(function () {
-        contextMenuTarget = null;
         $(".menuContextRoot").each(function () { $(this).removeClass("open-context-menu"); });
         $(".menuContextElements > li").each(function () { $(this).removeClass("open-menu-elem"); });
         $(".open-inner-menu").each(function () { $(this).removeClass("open-inner-menu"); });

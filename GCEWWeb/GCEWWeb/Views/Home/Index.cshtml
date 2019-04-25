@@ -56,16 +56,115 @@
         $()
     }
 
+    function updateProjectTree() {
+        ajaxPost("@Url.Action("ProjectTree", "Project")", { id: @Model.ID}, function (data) {
+            var options = {
+                showTags: true,
+                data: JSON.parse(data),
+            };
 
-    // List of modals
-    // modal-enter-data
-    function createTextBoxForEnterData(text, onClick, modal) {
-        $("#modal-text-enter").html(text);
-        $("#modal-text-btn").click(onClick);
-        $("#" + modal).css("display", "none");
+            var tree = $('#tree-solution').treeview(options);
+            treeCreator(tree);
+        });
+    }
+
+    function treeCreator(tree) {
+        $(tree).on("rendered", function (e, n) {
+            var size = Object.getOwnPropertyNames(n).length;
+            for (var i = 0; i < size; i++) {
+                n[i].tags.forEach(function (tag) {
+                    switch (tag) {
+                        case "folder":
+                            $("[data-nodeid*='" + n[i].nodeId + "']").attr("menu", "MenuFolder");
+                            break;
+                        case "file":
+                            $("[data-nodeid*='" + n[i].nodeId + "']").attr("menu", "MenuFile");
+                            break;
+                    }
+                });
+                if (!$("[data-nodeid*='" + n[i].nodeId + "']").attr("menu"))
+                    $("[data-nodeid*='" + n[i].nodeId + "']").attr("menu", "MenuFileRoot");
+                $("[data-nodeid*='" + n[i].nodeId + "']").attr("path", n[i].tags[1]);
+            }
+
+            reHandlerContextMenus();
+        });
     }
 
 
+    // List of modals
+    // modal-enter-data
+    function createTextBoxForEnterData(text, onClick, modal = "modal-enter-data") {
+        $("#modal-text-enter").html(text);
+        $("#modal-text-btn").unbind('click').click(function () {
+            $("#" + modal).css("display", "none");
+        });
+        $("#modal-text-btn").click(onClick);
+        $("#" + modal).css("display", "block");
+    }
+
+    function deleteFile(event) {
+        ajaxPost("@Url.Action("DeleteFile", "Project")", { name: contextMenuTarget.attr("path") }, function (data) {
+            if (data)
+                updateProjectTree();
+            toastr["success"](data ? "Success" : "Failed");
+        });
+    }
+
+    function deleteFolder(event) {
+        ajaxPost("@Url.Action("DeleteFolder", "Project")", { name: contextMenuTarget.attr("path") }, function (data) {
+            if (data)
+                updateProjectTree();
+            toastr["success"](data ? "Success" : "Failed");
+        });
+    }
+
+    function onAddNewFileInFolder(ev) {
+        fileSystemOperationWithInput("@Url.Action("CreateFileInFolder", "Project")");
+    }
+
+    function onAddFolder(ev) {
+        fileSystemOperationWithInput("@Url.Action("AddNewFolder", "Project")");
+    }
+
+    function addFolder(event) {
+        createTextBoxForEnterData("Enter folder name", onAddFolder);
+    }
+
+    function addFraphicFile(event) {
+        createTextBoxForEnterData("Enter filename", onAddNewFileInFolder);
+    }
+
+    function fileSystemOperationWithInput(path) {
+        var input = $("#modal-text-text").val().trim();
+        if (input.length === 0)
+            return;
+        ajaxPost(path, { path: contextMenuTarget.attr("path"), fileName: input, id: @Model.ID },
+            function (data) {
+                if (data)
+                    updateProjectTree();
+                toastr["success"](data ? "Success" : "Failed");
+            });
+        $("#modal-text-text").val('');
+    }
+
+    function onAddNewFile(ev) {
+         var input = $("#modal-text-text").val().trim();
+         if (input.length === 0)
+             return;
+         ajaxPost("@Url.Action("CreateFile", "Project")", { name: input, projectID: @Model.ID },
+             function (data) {
+                 toastr["success"](data ? "Success" : "Failed");
+                 if (data)
+                     updateProjectTree();
+            });
+        $("#modal-text-text").val('');
+    }
+
+
+    function addNewFile(event) {
+        createTextBoxForEnterData("Enter name", onAddNewFile);
+    }
 
     function afterInit() {
 
@@ -116,27 +215,10 @@
             var options = {
                 showTags: true,
                 data: fileSystemTree,
-                nodeCollapsed : function (event, data) { alert("one"); }
             };
 
             var tree = $('#tree-solution').treeview(options);
-            $(tree).on("rendered", function (e, n) {
-                var size = Object.getOwnPropertyNames(n).length;
-                for (var i = 0; i < size; i++) {
-                    n[i].tags.forEach(function (tag) {
-                        switch (tag) {
-                            case "folder":
-                                $("[data-nodeid*='" + n[i].nodeId + "']").attr("menu", "MenuFolder");
-                                break;
-                            case "file":
-                                $("[data-nodeid*='" + n[i].nodeId + "']").attr("menu", "MenuFile");
-                                break;
-                        }
-                    });
-                }
-
-                reHandlerContextMenus();
-            });
+            treeCreator(tree);
 
         });
 
@@ -230,9 +312,6 @@
     function ajaxPost(method, data, success) {
         $.ajax({
             url: method,
-            cache: false,
-            processData: false,
-            contentType: false,
             method: "POST",
             data: data,
             success: success,

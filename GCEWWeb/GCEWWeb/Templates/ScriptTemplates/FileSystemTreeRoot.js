@@ -1,7 +1,7 @@
 ﻿var fileSystemTree = [
     {
         text: "{caption}",
-        tags: ["{tag}"],
+        tags: ["{tag}", "{path}"],
         selectable: false,
         nodes: [{innerElements}]
     }

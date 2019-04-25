@@ -8,7 +8,7 @@ namespace GCEWWeb.Services
     /// <summary>
     /// String extensions
     /// </summary>
-    public class StringWorker
+    public static class StringWorker
     {
         /// <summary>
         /// Remove all big whiteSpaces
@@ -44,6 +44,12 @@ namespace GCEWWeb.Services
             }
 
             return new string(output, 0, current);
+        }
+
+
+        public static bool IsNullOrEmpty(params string[] strs)
+        {
+            return strs.All(x => string.IsNullOrEmpty(x.Trim()));
         }
     }
 }

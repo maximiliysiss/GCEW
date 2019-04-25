@@ -18,19 +18,40 @@ namespace GCEWWeb.Extenstions
             return totalSize;
         }
 
-        public static FileSystemElement GetTree(this DirectoryInfo directoryInfo)
+        public static FileSystemElement GetTree(this DirectoryInfo directoryInfo, int level = 0)
         {
             var listData = directoryInfo.EnumerateFiles("*.graphic").Select(x => new FileSystemElement
             {
                 Caption = Path.GetFileNameWithoutExtension(x.Name),
-                Tag = "file"
+                Tag = "file",
+                Path = x.FullName
             }).ToList();
-            listData.AddRange(directoryInfo.EnumerateDirectories().Select(x => x.GetTree()));
+            listData.AddRange(directoryInfo.EnumerateDirectories().Select(x => x.GetTree(level + 1)));
             FileSystemElement fileSystem = new FileSystemElement
             {
                 Caption = directoryInfo.Name,
                 FileSystemElements = listData.ToArray(),
-                Tag = "folder"
+                Tag = level == 0 ? "" : "folder",
+                Path = directoryInfo.FullName
+            };
+            return fileSystem;
+        }
+
+        public static FileSystemElementJSON GetTreeJSON(this DirectoryInfo directoryInfo, int level = 0)
+        {
+            var listData = directoryInfo.EnumerateFiles("*.graphic").Select(x => new FileSystemElementJSON
+            {
+                Caption = Path.GetFileNameWithoutExtension(x.Name),
+                Tag = "file",
+                Path = x.FullName
+            }).ToList();
+            listData.AddRange(directoryInfo.EnumerateDirectories().Select(x => x.GetTreeJSON(level + 1)));
+            FileSystemElementJSON fileSystem = new FileSystemElementJSON
+            {
+                Caption = directoryInfo.Name,
+                FileSystemElements = listData.ToArray(),
+                Tag = level == 0 ? "" : "folder",
+                Path = directoryInfo.FullName
             };
             return fileSystem;
         }
@@ -43,7 +64,8 @@ namespace GCEWWeb.Extenstions
                 FileSystemElements = directoryInfo.EnumerateDirectories().Select(x => new FileSystemElement
                 {
                     Caption = x.Name,
-                    Tag = "folder"
+                    Tag = "folder",
+                    Path = directoryInfo.FullName
                 }).ToArray()
             };
             return TemplateSerialize.SerializeScript(root);
@@ -51,7 +73,14 @@ namespace GCEWWeb.Extenstions
 
         public static string ToStringTree(this DirectoryInfo directoryInfo)
         {
-            return TemplateSerialize.SerializeScript(directoryInfo.GetTree()).Replace("},]", "}]").Replace("\r\n", string.Empty).Replace(", nodes: []", string.Empty);
+            return TemplateSerialize.SerializeScript(directoryInfo.GetTree()).Replace("},]", "}]").Replace("\r\n", string.Empty)
+                .Replace(", nodes: []", string.Empty).Replace("\\", "\\\\");
+        }
+
+        public static string ToJSONStringTree(this DirectoryInfo directoryInfo)
+        {
+            return TemplateSerialize.SerializeScript(directoryInfo.GetTreeJSON()).Replace("},]", "}]").Replace("\r\n", string.Empty)
+                .Replace(", nodes: []", string.Empty).Replace("\\", "\\\\");
         }
     }
 }

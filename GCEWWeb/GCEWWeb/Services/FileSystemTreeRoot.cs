@@ -17,5 +17,10 @@ namespace GCEWWeb.Services
         public FileSystemElement[] FileSystemElements { get; set; }
         [TemplateSiteProperty("tag")]
         public string Tag { get; set; }
+        [TemplateSiteProperty("path")]
+        public string Path { get; set; }
     }
+
+    [TemplateSiteClass("FileSystemTreeRootJSON.txt,FileSystemElementJSON.txt")]
+    public class FileSystemElementJSON : FileSystemElement { }
 }

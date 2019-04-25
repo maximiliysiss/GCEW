@@ -58,12 +58,12 @@
     "Name": "Element",
     "InnerMenu": [
       {
-        "Caption": "Delete",
-        "Function": "deleteElement(event)"
-      },
-      {
         "Caption": "Open Property",
         "Function": "openProperty(event)"
+      },
+      {
+        "Caption": "Delete",
+        "Function": "deleteElement(event)"
       }
     ]
   },
@@ -71,12 +71,16 @@
     "Name": "MenuFolder",
     "InnerMenu": [
       {
-        "Caption": "Delete",
-        "Function": "deleteFolder(event)"
+        "Caption": "Add new folder",
+        "Function": "addFolder(event)"
       },
       {
         "Caption": "Add graphic file",
         "Function": "addFraphicFile(event)"
+      },
+      {
+        "Caption": "Delete",
+        "Function": "deleteFolder(event)"
       }
     ]
   },
@@ -95,6 +99,19 @@
       {
         "Caption": "Add new file",
         "Function": "addNewFile(event)"
+      }
+    ]
+  },
+  {
+    "Name": "MenuFileRoot",
+    "InnerMenu": [
+      {
+        "Caption": "Add new folder",
+        "Function": "addFolder(event)"
+      },
+      {
+        "Caption": "Add graphic file",
+        "Function": "addFraphicFile(event)"
       }
     ]
   }
