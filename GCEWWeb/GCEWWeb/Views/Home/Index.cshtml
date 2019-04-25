@@ -49,11 +49,11 @@
 <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 <script src="~/lib/patternfly-bootstrap-treeview-master/src/js/bootstrap-treeview.js"></script>
 <script src="~/js/custom-modal-window.js"></script>
-<script type="text/javascript" src="https://golden-layout.com/files/latest/js/goldenlayout.min.js"></script>
+<script type="text/javascript" src="~/lib/goldenLayout/dist/goldenlayout.min.js"></script>
 <script>
 
-    function onTreeFolder(func) {
-        $()
+    function createNewProject(event) {
+        $("#new-project-form").submit();
     }
 
     function updateProjectTree() {
@@ -259,8 +259,16 @@
                     }
                     ]
                 }, {
-                    type: 'stack',
-                    content: [{
+                    type: 'column',
+                        content: [{
+                            type: 'component',
+                            componentName: 'Panel',
+                            height: 5,
+                            isClosable: false,
+                            header: {
+                                show: false
+                            }
+                        }, {
                         type: 'component',
                         componentName: 'workDocument'
                     }]
@@ -288,6 +296,11 @@
         dockLayouts.registerComponent('Build log', function (c, s) {
             c.getElement().append(
                 '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/BuildLog"))'
+            );
+        });
+
+        dockLayouts.registerComponent('Panel', function (c, s) {
+            c.getElement().append('Testing'
             );
         });
 

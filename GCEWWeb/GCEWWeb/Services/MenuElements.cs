@@ -29,6 +29,7 @@ namespace GCEWWeb.Services
         public string Name { get; set; }
         [TemplateSiteProperty("caption")]
         public string Caption { get; set; }
+        [TemplateSiteProperty("function")]
         public string Function { get; set; }
         [TemplateSiteProperty("innermenu", TemplateType.Array)]
         public MenuElements[] InnerMenu { get; set; }

@@ -40,6 +40,13 @@ namespace GCEWWeb.Controllers
         }
 
         [HttpPost]
+        public IActionResult CreateProjectBy([FromForm]bool RedirectToProject)
+        {
+            ViewBag.RedirectToProject = RedirectToProject;
+            return View("CreateProject");
+        }
+
+        [HttpPost]
         public IActionResult CreateProject(Project project, [FromForm]bool RedirectToProject)
         {
             project.DateTime = DateTime.Now;

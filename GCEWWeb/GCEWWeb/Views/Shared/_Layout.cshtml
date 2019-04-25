@@ -20,8 +20,8 @@
         <link rel="stylesheet" href="~/lib/toastr/build/toastr.css" />
         <link rel="stylesheet" href="~/lib/patternfly-bootstrap-treeview-master/src/css/bootstrap-treeview.css" />
         <link rel="stylesheet" href="~/css/custom-modal-window.css" />
-        <link type="text/css" rel="stylesheet" href="https://golden-layout.com/files/latest/css/goldenlayout-base.css" />
-        <link type="text/css" rel="stylesheet" href="https://golden-layout.com/files/latest/css/goldenlayout-light-theme.css" />
+        <link type="text/css" rel="stylesheet" href="~/lib/goldenLayout/src/css/goldenlayout-base.css" />
+        <link type="text/css" rel="stylesheet" href="~/lib/goldenLayout/src/css/goldenlayout-light-theme.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -31,6 +31,10 @@
     </environment>
 </head>
 <body>
+
+    <form method="post" id="new-project-form" style="display: none" action="@Url.Action("CreateProjectBy", "Home")">
+        <input name="RedirectToProject" id="RedirectToProject" type="hidden" value="true" />
+    </form>
 
     <div id="modal-enter-data" class="custom-modal">
         <div class="modal-content">

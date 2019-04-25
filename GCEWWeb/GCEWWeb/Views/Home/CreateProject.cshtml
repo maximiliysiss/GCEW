@@ -66,6 +66,7 @@
             <div class="wrap-login100 p-l-62 p-r-62 p-t-45 p-b-45">
                 @using (Html.BeginForm("CreateProject", "Home", FormMethod.Post, new { @class = "login100-form validate-form flex-sb flex-w" }))
                 {
+                    <input name="RedirectToProject" id="RedirectToProject" type="hidden" value="@(ViewBag.RedirectToProject??false)" />
                     <label class="login100-form-title p-b-32">
                         Create project
                     </label>
