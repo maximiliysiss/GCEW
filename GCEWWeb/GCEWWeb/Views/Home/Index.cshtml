@@ -27,10 +27,27 @@
     .badge {
         display: none;
     }
+
+    .panel-compiler {
+        height: 34px;
+        padding-right: 20px;
+        margin: 5px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+        .panel-compiler > button {
+            margin-left: 10px;
+            font-weight: bold;
+        }
 </style>
 <div class="window">
     <div class="menu">
         @Html.Raw(Html.MenuContainerHtml())
+    </div>
+    <div class="panel-compiler">
+        <button class="btn btn-success">Compile</button>
+        <button class="btn btn-warning">Build</button>
     </div>
 
 
@@ -239,6 +256,9 @@
     $(function () {
 
         var config = {
+            settings: {
+                showPopoutIcon: false
+            },
             content: [{
                 type: 'row',
                 content: [{
@@ -261,14 +281,6 @@
                 }, {
                     type: 'column',
                         content: [{
-                            type: 'component',
-                            componentName: 'Panel',
-                            height: 5,
-                            isClosable: false,
-                            header: {
-                                show: false
-                            }
-                        }, {
                         type: 'component',
                         componentName: 'workDocument'
                     }]
@@ -296,11 +308,6 @@
         dockLayouts.registerComponent('Build log', function (c, s) {
             c.getElement().append(
                 '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/BuildLog"))'
-            );
-        });
-
-        dockLayouts.registerComponent('Panel', function (c, s) {
-            c.getElement().append('Testing'
             );
         });
 
