@@ -28,12 +28,8 @@ namespace GCEWWeb.Controllers
     {
 
         [HttpPost]
-        public string CreateNewElement([FromBody]ElementType elementType)
+        public string CreateNewElement(ElementType elementType)
         {
-            using (var stream = new System.IO.StreamReader(Request.Body))
-            {
-                var text = stream.ReadToEnd();
-            }
             return ElementConstructor.GetBuilder(elementType)?.Html;
         }
     }

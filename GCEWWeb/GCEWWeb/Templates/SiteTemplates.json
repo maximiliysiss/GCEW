@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "Name": "TabWithClose",
     "Count": 1,
@@ -36,6 +36,11 @@
   },
   {
     "Name": "ElementVariable",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementPrimitive",
     "Count": 3,
     "Arguments": [ "caption", "value", "type" ]
   }

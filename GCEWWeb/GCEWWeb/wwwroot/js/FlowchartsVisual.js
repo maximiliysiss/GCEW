@@ -31,7 +31,10 @@ function getAngle(vec1, vec2) {
 }
 
 function getCenter(element) {
-    var pos = $(element).position();
+    var pos = $(element).offset();
+    var plotOffset = $(flowChartSVG).offset();
+    pos.left -= plotOffset.left;
+    pos.top -= plotOffset.top;
     var wX = pos.left + $(element).width() / 2;
     var hY = pos.top + $(element).height() / 2;
     return [wX, hY];
@@ -104,9 +107,16 @@ function reloadElements() {
     });
 
     $(".flowChartHandler").click(function (event) {
-        var res = eventForTargets(event);
+        var res = eventForStart(event);
         if (res)
             startDynamic(this);
+        event.stopPropagation();
+    });
+
+    $(".flowChartHandlerInput").click(function (event) {
+        if (isDrawDynamicLine)
+            eventForTargets(event);
+        event.stopPropagation();
     });
 }
 
@@ -146,7 +156,6 @@ function initFlowChartsOnPage(svgElement, onReloadEvent) {
         startDragging = [startDragging[0], startDragging[1]];
         var vectorMove = [(currentPos[0] - startDragging[0]), (currentPos[1] - startDragging[1])];
         vectorMove = normVector2D(vectorMove);
-
         $(".dragElement").each(function () {
             var pos = $(this).position();
             $(this).css("top", pos.top + vectorMove[1] * moveSpeed);
@@ -183,6 +192,13 @@ function mouseClick(event) {
 
 function removeElementWithChains(element) {
     $("line[id*='" + $(element).attr("id") + "']").each(function () { $(this).remove(); });
+}
+
+function eventForStart(event) {
+    if (!isDrawDynamicLine)
+        return true;
+    isDrawDynamicLine = false;
+    $("#connector").remove();
 }
 
 function eventForTargets(event) {
@@ -227,10 +243,15 @@ function reDrawAll() {
     });
 }
 
-function reDrawScheme(id) {
+function reDrawScheme(id, withInner = true) {
     $("#svgOne line[id*='" + id + "']").each(function () {
         var elements = $(this).attr("id").split(divideExpression);
         setCoordForLine(this, getCenter($("#" + elements[0])), getCenter($("#" + elements[1])));
+
+        if (withInner)
+            $("#" + id).find("[class^='flowChartHandler']").each(function () {
+                reDrawAll($(this).attr("id"), false);
+            });
     });
 }
 
@@ -247,14 +268,16 @@ function startDynamic(elem) {
 }
 
 function createConnectionBetweenElements(one, two) {
-    var centerOne = getCenter(one);
-    var centerTwo = getCenter(two);
 
-    var lineConnect = getLine();
     if ($("#" + $(one).attr("id") + divideExpression + $(two).attr("id")).length !== 0
         || $("#" + $(two).attr("id") + divideExpression + $(one).attr("id")).length !== 0
         || !$(one).attr("id") || !$(two).attr("id"))
         return;
+
+    var centerOne = getCenter(one);
+    var centerTwo = getCenter(two);
+
+    var lineConnect = getLine();
 
     $(lineConnect).attr("id", $(one).attr("id") + divideExpression + $(two).attr("id"));
     $(lineConnect).click(function () { clickLine(this); });

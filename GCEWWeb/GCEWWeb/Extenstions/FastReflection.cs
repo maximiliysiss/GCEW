@@ -82,7 +82,7 @@ namespace GCEWWeb.Extenstions
                 prop.Set(instance, value.Value);
             else
             {
-                var newProp = new FastReflection<T>(typeof(T).GetProperty(value.Name));
+                var newProp = new FastReflection<T>(instance.GetType().GetProperty(value.Name));
                 newProp.Set(instance, value.Value);
                 properties.TryAdd(value.Name, newProp);
             }
@@ -94,7 +94,7 @@ namespace GCEWWeb.Extenstions
                 return prop.Get(instance);
             else
             {
-                var newProp = new FastReflection<T>(typeof(T).GetProperty(value));
+                var newProp = new FastReflection<T>(instance.GetType().GetProperty(value));
                 properties.TryAdd(value, newProp);
                 return newProp.Get(instance);
             }
