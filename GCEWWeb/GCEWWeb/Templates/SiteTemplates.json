@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "Name": "TabWithClose",
     "Count": 1,
@@ -43,5 +43,8 @@
     "Name": "ElementPrimitive",
     "Count": 3,
     "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementProcedure"
   }
 ]

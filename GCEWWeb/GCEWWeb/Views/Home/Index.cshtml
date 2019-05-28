@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
     var templatesSite = SiteTemplate<TemplateSite>.Instance();
     IViewRenderService viewRender = ViewBag.RenderEngine;
@@ -67,7 +67,11 @@
 <script src="~/lib/patternfly-bootstrap-treeview-master/src/js/bootstrap-treeview.js"></script>
 <script src="~/js/custom-modal-window.js"></script>
 <script type="text/javascript" src="~/lib/goldenLayout/dist/goldenlayout.min.js"></script>
+<script src="~/lib/leader-line-master/leader-line.min.js"></script>
 <script>
+
+    var tree;
+    var dockLayouts;
 
     function createNewProject(event) {
         $("#new-project-form").submit();
@@ -76,7 +80,6 @@
     function updateProjectTree() {
         ajaxPost("@Url.Action("ProjectTree", "Project")", { id: @Model.ID}, function (data) {
             var options = {
-                showTags: true,
                 data: JSON.parse(data),
             };
 
@@ -85,29 +88,43 @@
         });
     }
 
+    $(document).on('keydown', function (e) {
+        if (e.ctrlKey && e.which === 83) { // Check for the Ctrl key being pressed, and if the key = [S] (83)
+
+            e.preventDefault();
+            return false;
+        }
+    });
+
     function treeCreator(tree) {
         $(tree).on("rendered", function (e, n) {
             var size = Object.getOwnPropertyNames(n).length;
             for (var i = 0; i < size; i++) {
+                var tagNumber = "[data-nodeid*='" + n[i].nodeId + "']";
                 n[i].tags.forEach(function (tag) {
                     switch (tag) {
                         case "folder":
-                            $("[data-nodeid*='" + n[i].nodeId + "']").attr("menu", "MenuFolder");
+                            $(tagNumber).attr("menu", "MenuFolder");
                             break;
                         case "file":
-                            $("[data-nodeid*='" + n[i].nodeId + "']").attr("menu", "MenuFile");
+                            $(tagNumber).attr("menu", "MenuFile");
                             break;
                     }
                 });
-                if (!$("[data-nodeid*='" + n[i].nodeId + "']").attr("menu"))
-                    $("[data-nodeid*='" + n[i].nodeId + "']").attr("menu", "MenuFileRoot");
-                $("[data-nodeid*='" + n[i].nodeId + "']").attr("path", n[i].tags[1]);
+                if (!$(tagNumber).attr("menu"))
+                    $(tagNumber).attr("menu", "MenuFileRoot");
+                $(tagNumber).attr("path", n[i].tags[1]);
             }
 
             reHandlerContextMenus();
         });
     }
 
+    function openProperty(event) {
+        ajaxPost("@Url.Action("LoadPropertyElement", "Project")", { type: 1 }, function (data) {
+            $("#property-panel").html(data);
+        });
+    }
 
     // List of modals
     // modal-enter-data
@@ -230,11 +247,10 @@
             @Html.Raw(Model.FileSystemTree)
 
             var options = {
-                showTags: true,
                 data: fileSystemTree,
             };
 
-            var tree = $('#tree-solution').treeview(options);
+            tree = $('#tree-solution').treeview(options);
             treeCreator(tree);
 
         });
@@ -288,7 +304,7 @@
             }]
         };
 
-        var dockLayouts = new window.GoldenLayout(config, ".window-in");
+        dockLayouts = new window.GoldenLayout(config, ".window-in");
 
         dockLayouts.registerComponent('Solution', function (c, s) {
             c.getElement().append(
@@ -318,6 +334,7 @@
 
 
     function deleteElement(event) {
+        flowsElements = flowsElements.filter(item => item !== contextMenuTarget)
         removeElementWithChains(contextMenuTarget);
         $(contextMenuTarget).remove();
     }
@@ -368,6 +385,10 @@
 
     function createMultyply(event) {
         createElement(@((int)ElementType.Multiply), event);
+    }
+
+    function createProcedure(event){
+        createElement(@((int)ElementType.Procedure), event);
     }
 
 </script>

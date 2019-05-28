@@ -13,21 +13,15 @@ var selectedElem = null;
 var isMoveOnField = false;
 var startDragging = null;
 
+var lines = [];
 var onReload = null;
+var flowsElements = [];
 
 var divideExpression = "3ckew971n9gmjcoc";
 
 function normVector2D(vec) {
     var len = Math.sqrt(vec[0] * vec[0] + vec[1] * vec[1]);
     return [vec[0] / len, vec[1] / len];
-}
-
-function getAngle(vec1, vec2) {
-    let len = function (x, y) { return Math.sqrt(x * x + y * y); };
-    let scalar2d = function (vec1, vec2) { return vec1[0] * vec2[0] + vec1[1] * vec2[1]; };
-    let l1 = len(vec1[0], vec1[1]);
-    let l2 = len(vec2[0], vec2[1]);
-    return Math.acos(scalar2d(vec1, vec2) / (l1 * l2)) * 180 / Math.PI;
 }
 
 function getCenter(element) {
@@ -48,9 +42,10 @@ function setCoordForLine(line, coord1, coord2) {
 }
 
 function moveCursorDynamic(event) {
-    var center = getCenter(dynamicLineStart);
-    var cursor = [event.pageX - flowChartPosition.left, event.pageY - flowChartPosition.top];
-    setCoordForLine(dynamicLine, cursor, center);
+    if (!isDrawDynamicLine)
+        return;
+    $(dynamicLine.end).remove();
+    dynamicLine.end = createEmptyForMouse(event);
 }
 
 function getChangeCenter(dragElementPosition, cursorPosition, coeff) {
@@ -61,13 +56,6 @@ function getChangeCenter(dragElementPosition, cursorPosition, coeff) {
 }
 
 function scrollReaction(coeff, event) {
-
-    //var cof = coeff > 1 ? 1 : -1;
-
-    //if (scrollChahgeCoeff + coeff > 20 || scrollChahgeCoeff + coeff < -45)
-    //    return;
-
-    //scrollChahgeCoeff += cof;
 
     var cursor = [event.pageX - flowChartPosition.left, event.pageY - flowChartPosition.top];
 
@@ -109,7 +97,7 @@ function reloadElements() {
     $(".flowChartHandler").click(function (event) {
         var res = eventForStart(event);
         if (res)
-            startDynamic(this);
+            startDynamic(this, event);
         event.stopPropagation();
     });
 
@@ -181,13 +169,13 @@ function addElement(data, pos) {
     elem.css("top", pos[1] + "px");
     elem.css("left", pos[0] + "px");
     $(flowChartSVG).parent().append(elem);
+    flowsElements.push($(flowChartSVG).parent().children().last());
     onReload();
 }
 
 function mouseClick(event) {
-    isDrawDynamicLine = false;
     if (dynamicLine !== null)
-        $(dynamicLine).remove();
+        destroyDynamicLine();
 }
 
 function removeElementWithChains(element) {
@@ -197,15 +185,20 @@ function removeElementWithChains(element) {
 function eventForStart(event) {
     if (!isDrawDynamicLine)
         return true;
+    destroyDynamicLine();
+}
+
+function destroyDynamicLine() {
     isDrawDynamicLine = false;
-    $("#connector").remove();
+    $(dynamicLine.end).remove();
+    dynamicLine.remove();
+    dynamicLine = null;
 }
 
 function eventForTargets(event) {
     if (!isDrawDynamicLine)
         return true;
-    isDrawDynamicLine = false;
-    $("#connector").remove();
+    destroyDynamicLine();
     var target = event.currentTarget;
     if ($(target).attr("id") === $(dynamicLineStart).attr("id"))
         return false;
@@ -228,62 +221,37 @@ function clickLine(elem) {
     }
 }
 
-function getLine() {
-    var newLine = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-    $(newLine).attr("stroke", "black");
-    $(newLine).attr("stroke-width", "5px");
-    $(newLine).attr("menu", "Element");
-    return newLine;
-}
-
 function reDrawAll() {
-    $("line").each(function () {
-        var elements = $(this).attr("id").split(divideExpression);
-        setCoordForLine(this, getCenter($("#" + elements[0])), getCenter($("#" + elements[1])));
-    });
+    $(lines).each(function () { this.position(); });
 }
 
 function reDrawScheme(id, withInner = true) {
-    $("#svgOne line[id*='" + id + "']").each(function () {
-        var elements = $(this).attr("id").split(divideExpression);
-        setCoordForLine(this, getCenter($("#" + elements[0])), getCenter($("#" + elements[1])));
-
-        if (withInner)
-            $("#" + id).find("[class^='flowChartHandler']").each(function () {
-                reDrawAll($(this).attr("id"), false);
-            });
-    });
+    reDrawAll();
 }
 
-function startDynamic(elem) {
+function createEmptyForMouse(event) {
+    var empty = document.createElement("p");
+    $(empty).css("position", "absolute");
+    $(empty).css("top", event.pageY);
+    $(empty).css("left", event.pageX);
+    $(document.body).append(empty);
+    return empty;
+}
+
+function startDynamic(elem, event) {
     if (dynamicLine !== null)
-        $(dynamicLine).remove();
+        destroyDynamicLine();
     isDrawDynamicLine = true;
-    dynamicLine = getLine();
-    $(dynamicLine).attr("id", "connector");
-    $(flowChartSVG).append(dynamicLine);
-    dynamicLineStart = elem;
+    dynamicLineStart = $(elem);
+    dynamicLine = new LeaderLine(elem, createEmptyForMouse(event));
     $(flowChartSVG).mousemove(function (event) { moveCursorDynamic(event); });
     $(flowChartSVG).mousedown(function (event) { mouseClick(event); });
 }
 
 function createConnectionBetweenElements(one, two) {
-
-    if ($("#" + $(one).attr("id") + divideExpression + $(two).attr("id")).length !== 0
-        || $("#" + $(two).attr("id") + divideExpression + $(one).attr("id")).length !== 0
-        || !$(one).attr("id") || !$(two).attr("id"))
-        return;
-
-    var centerOne = getCenter(one);
-    var centerTwo = getCenter(two);
-
-    var lineConnect = getLine();
-
-    $(lineConnect).attr("id", $(one).attr("id") + divideExpression + $(two).attr("id"));
-    $(lineConnect).click(function () { clickLine(this); });
-    $(flowChartSVG).append(lineConnect);
-    setCoordForLine(lineConnect, centerOne, centerTwo);
-
+    var line = new LeaderLine($(one).get(0), $(two).get(0));
+    $("[id^='leader-line-" + line._id + "-line-shape']").attr("onClick", "alert123(event)");
+    lines.push(line);
     onReload();
 }
 

@@ -78,5 +78,11 @@ namespace GCEWWeb.Controllers
             System.IO.File.Delete(name);
             return true;
         }
+
+        [HttpPost]
+        public bool Save(string name, string text, string link)
+        {
+            return true;
+        }
     }
 }

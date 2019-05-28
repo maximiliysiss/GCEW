@@ -1,58 +1,50 @@
-﻿
-
-<!DOCTYPE html>
-
-<html>
+﻿<!doctype html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Test</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap-treeview-1.2.0/src/css/bootstrap-treeview.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Draggable - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <style>
+        #draggable {
+            width: 150px;
+            height: 150px;
+            padding: 0.5em;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/lib/leader-line-master/leader-line.min.js"></script>
 </head>
 <body>
-    <div id="default-tree"></div>
+
+    <div id="draggable" class="ui-widget-content">
+        <p>Drag me around</p>
+    </div>
+
+    <div id="draggable1" style="top: 100px" class="ui-widget-content">
+        <p>Drag me around</p>
+    </div>
 </body>
 </html>
 
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-<script src="~/lib/bootstrap-treeview-1.2.0/src/js/bootstrap-treeview.js"></script>
-
 <script>
 
+    var myLine;
 
-    var myTree = [
-        {
-            text: "Item 1",
-            nodes: [
-                {
-                    text: "Item 1-1",
-                    nodes: [
-                        {
-                            text: "Item 1-1-1"
-                        },
-                        {
-                            text: "Item 1-1-2"
-                        }
-                    ]
-                },
-                {
-                    text: "Item 1-2"
-                }
-            ]
-        },
-        {
-            text: "Item 2"
-        },
-        {
-            text: "Item 3"
-        }
-    ];
-
-    $('#default-tree').treeview({
-        data: myTree
+    $(function () {
+        myLine = new LeaderLine(
+            document.getElementById('draggable'),
+            document.getElementById('draggable1')
+        );
     });
 
-
+    $(".ui-widget-content").draggable({
+        drag: function () {
+            console.log("pos");
+            myLine.position();
+        }
+    });
 
 </script>

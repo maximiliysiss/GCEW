@@ -30,6 +30,16 @@
             "Function": "openProject(event)"
           }
         ]
+      },
+      {
+        "Name": "ImportProject",
+        "Caption": "Import Project",
+        "Function": "importProject(event)"
+      },
+      {
+        "Name": "ExportProject",
+        "Caption": "Export Project",
+        "Function": "exportProject(event)"
       }
     ]
   },
