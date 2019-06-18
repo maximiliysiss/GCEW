@@ -1,3 +1,12 @@
 .vs/
 *.cache
 obj/
+bin/
+GlobalProjects/
+Migrations/
+*.cd
+*.asm
+*.txt
+*.exe
+*.obj
+x64/

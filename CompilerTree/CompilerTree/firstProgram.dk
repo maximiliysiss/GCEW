@@ -1,0 +1,27 @@
+/*
+	Global
+*/
+
+int first = 21;
+double globalDouble = 21.0 / first;
+
+
+/*
+	Main
+*/
+
+proc main()
+{
+	int i = 0;
+	int j = 0;
+	while(i<10)
+	{
+		i= i + 1;
+		for(j=0;j<5;j=j+1)
+		{
+			i=i+1;
+		}
+		break;
+	}
+	printf("i = %f\n",i);
+}
