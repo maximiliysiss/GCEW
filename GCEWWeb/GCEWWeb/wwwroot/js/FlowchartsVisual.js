@@ -151,15 +151,15 @@ function initFlowChartsOnPage(svgElement, onReloadEvent) {
             reDrawAll();
         });
     });
-    $(flowChartSVG).bind('DOMMouseScroll', function (e) {
-        scrollReaction(1 + (e.originalEvent.detail > 0 ? -scrollChanger : scrollChanger), e);
-        return false;
-    });
+    //$(flowChartSVG).bind('DOMMouseScroll', function (e) {
+    //    scrollReaction(1 + (e.originalEvent.detail > 0 ? -scrollChanger : scrollChanger), e);
+    //    return false;
+    //});
 
-    $(flowChartSVG).bind('mousewheel', function (e) {
-        scrollReaction(1 + (e.originalEvent.wheelDelta < 0 ? -scrollChanger : scrollChanger), e);
-        return false;
-    });
+    //$(flowChartSVG).bind('mousewheel', function (e) {
+    //    scrollReaction(1 + (e.originalEvent.wheelDelta < 0 ? -scrollChanger : scrollChanger), e);
+    //    return false;
+    //});
 
     onReload();
 }
@@ -179,7 +179,16 @@ function mouseClick(event) {
 }
 
 function removeElementWithChains(element) {
-    $("line[id*='" + $(element).attr("id") + "']").each(function () { $(this).remove(); });
+    lines.forEach(function (elem, i) {
+        if ($(elem.start).attr("id") === $(element).attr("id")
+            || $(elem.end).attr("id") === $(element).attr("id")) {
+            elem.remove();
+            lines = lines.filter(function (val, i, arr) {
+                return val._id !== elem._id;
+            });
+        }
+    });
+    reDrawAll();
 }
 
 function eventForStart(event) {
@@ -223,6 +232,7 @@ function clickLine(elem) {
 
 function reDrawAll() {
     $(lines).each(function () { this.position(); });
+    console.log(lines.length);
 }
 
 function reDrawScheme(id, withInner = true) {

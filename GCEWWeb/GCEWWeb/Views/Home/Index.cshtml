@@ -46,7 +46,7 @@
         @Html.Raw(Html.MenuContainerHtml())
     </div>
     <div class="panel-compiler">
-        <button class="btn btn-success">Compile</button>
+        <button onclick="compileProject(event)" class="btn btn-success">Compile</button>
         <button class="btn btn-warning">Build</button>
     </div>
 
@@ -117,12 +117,6 @@
             }
 
             reHandlerContextMenus();
-        });
-    }
-
-    function openProperty(event) {
-        ajaxPost("@Url.Action("LoadPropertyElement", "Project")", { type: 1 }, function (data) {
-            $("#property-panel").html(data);
         });
     }
 
@@ -287,10 +281,6 @@
                     }, {
                         type: 'component',
                         isClosable: false,
-                        componentName: 'Properties'
-                    }, {
-                        type: 'component',
-                        isClosable: false,
                         componentName: 'Build log'
                     }
                     ]
@@ -309,11 +299,6 @@
         dockLayouts.registerComponent('Solution', function (c, s) {
             c.getElement().append(
                 '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/SolutionPanel"))'
-            );
-        });
-        dockLayouts.registerComponent('Properties', function (c, s) {
-            c.getElement().append(
-                '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/PropertiesPanel"))'
             );
         });
         dockLayouts.registerComponent('workDocument', function (c, s) {
@@ -365,6 +350,12 @@
                 addElement(data, cursor);
             }
         );
+    }
+
+    function compileProject(ev) {
+        lines.forEach(function (elem, i) {
+            console.log($(elem.start).html() + " " + $(elem.end).html());
+        });
     }
 
     function createVariable(event) {

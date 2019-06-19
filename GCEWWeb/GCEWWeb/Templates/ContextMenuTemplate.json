@@ -31,14 +31,6 @@
             "Function": "createVariable(event)"
           },
           {
-            "Caption": "For",
-            "Function": "createFor(event)"
-          },
-          {
-            "Caption": "While",
-            "Function": "createWhile(event)"
-          },
-          {
             "Caption": "ChangeValue",
             "Function": "createChangeValue(event)"
           }
@@ -47,20 +39,12 @@
       {
         "Caption": "Delete All",
         "Function": "deleteAll(event)"
-      },
-      {
-        "Caption": "Property",
-        "Function": "openProperty(id)"
       }
     ]
   },
   {
     "Name": "Element",
     "InnerMenu": [
-      {
-        "Caption": "Open Property",
-        "Function": "openProperty(event)"
-      },
       {
         "Caption": "Delete",
         "Function": "deleteElement(event)"
