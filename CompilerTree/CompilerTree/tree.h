@@ -165,6 +165,7 @@ public:
 
 class ifTree : public tree {
 	tree * elseTree{ nullptr };
+	Exp * condition;
 public:
 	ifTree(int i, int order, std::string line);
 	void createCodeInner(std::string& code);

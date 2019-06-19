@@ -76,14 +76,8 @@ tree* treeBuilder(std::ifstream stream) {
 		tmp = trim(tmp);
 		if (tmp.length() == 0 || commentState)
 			continue;
-
 		auto reg = TreeBuilderRegex::regex(tmp);
-
 		switch (reg) {
-		case RegexResult::Procedure:
-			root = root->addChildren(new functionTree(-1, order, tmp));
-			std::getline(stream, tmp);
-			break;
 		case RegexResult::FigureOpen:
 			root = root->addChildren(new tree(order));
 			break;
@@ -92,9 +86,6 @@ tree* treeBuilder(std::ifstream stream) {
 			break;
 		case RegexResult::Type:
 			root->addVariable(new variable(tmp));
-			break;
-		case RegexResult::Assigment:
-			root->addOperation(tmp, order, reg);
 			break;
 		case RegexResult::For:
 			root = root->addChildren(new forTree(-1, order, tmp));
@@ -108,6 +99,7 @@ tree* treeBuilder(std::ifstream stream) {
 		case RegexResult::Print:
 		case RegexResult::Break:
 		case RegexResult::Continue:
+		case RegexResult::Assigment:
 			root->addOperation(tmp, order, reg);
 			break;
 		case RegexResult::If:

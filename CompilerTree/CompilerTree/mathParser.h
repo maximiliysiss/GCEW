@@ -13,23 +13,6 @@
 #include "Enums.h"
 #include "instruments.h"
 
-/*есть ли элемент в списке*/
-template<typename T>
-bool inFind(T elem, std::initializer_list<T>  cont);
-/*установить в начало*/
-template<typename T>
-void push_top(std::stringstream & oss, T elem);
-
-/*основные мат операции (не нужны)*/
-enum mathOperations {
-	PLUS = '+',
-	MINUS = '-',
-	DIVIDE = '/',
-	MULTIPLY = '*',
-	OPENBRK = '(',
-	CLOSEBRK = ')'
-};
-
 /*абстрактный узел дерева*/
 class Exp {
 public:

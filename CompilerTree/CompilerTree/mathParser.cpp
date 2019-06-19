@@ -1,19 +1,5 @@
 #include "mathParser.h"
 
-
-template<typename T>
-bool inFind(T elem, std::initializer_list<T> cont)
-{
-	auto res = std::find(cont.begin(), cont.end(), elem);
-	return res != cont.end();
-}
-
-template<typename T>
-void push_top(std::stringstream & oss, T elem)
-{
-	oss.seekg(-1, oss.cur);
-}
-
 Exp * mathParser::MathPars(std::string math)
 {
 	int level = 0;

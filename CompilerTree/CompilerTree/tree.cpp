@@ -431,6 +431,10 @@ void functionTree::createData(std::string & data)
 ifTree::ifTree(int i, int order, std::string line)
 	: tree(i, order, line, RegexResult::If)
 {
+	int start = line.find_first_of('(') + 1;
+	int end = line.find_last_of(')');
+	mathParser parser;
+	condition = parser.BoolPars(line.substr(start, end - start));
 }
 
 void ifTree::createCodeInner(std::string & code)
