@@ -1,14 +1,10 @@
 ﻿.element-container {
     display: inline-flex;
-    border: 2px solid grey;
     border-radius: 15px;
     overflow: hidden;
     flex-direction: column;
-    background: white;
-    font-weight: bold;
-    padding: 0;
-    font-size: 12pt;
 }
+
 
     .element-container > .header {
         display: flex;
@@ -17,12 +13,12 @@
         justify-content: center;
         text-align: center;
         padding: 5px 15px 5px 15px;
-        background: radial-gradient(#42aaf4 0%, white 120%);
     }
 
     .element-container > .content {
         display: inline-flex;
         flex-direction: row;
+        text-align: center;
     }
 
         .element-container > .content > .checkbox {
@@ -35,4 +31,63 @@
 
         .element-container > .content > .value {
             width: 30px;
+        }
+.var {
+    border: 7px solid #039D6E;
+    width: 160px;
+    padding:2px;
+}
+    .var::after {
+        content: "";
+        position:absolute;
+        right: -22px;
+        border: 26px solid transparent;
+        border-left: 26px solid #039d6e;
+    }
+    .var > .header {
+        width: 80%;
+        border: none;
+        font-size: 10pt;
+    }
+    .var > .content {
+        width: 80%;
+        border: none;
+        font-size: 12pt;
+        font-weight: bold;
+    }
+.primitive {
+    background-color: #039d6e;
+    border: none;
+    padding: 0px;
+    width: 100px;
+    height: 100px;
+}
+    .primitive > .header {
+        color: #ffffff;
+        font-size: 72px;
+        padding: 0px;
+    }
+
+    .primitive > .content {
+        position: absolute;
+        width: 100%;
+    }
+        .primitive > .content > input[type="radio"] {
+            /*visibility: hidden;*/
+            display:none;
+        }
+        .primitive > .content > .left {
+            left: 6px;
+            top: 40px;
+            position: absolute;
+        }
+        .primitive > .content > .right {
+            right: 18px;
+            top: 40px;
+            position: absolute;
+        }
+        .primitive > .content > label::before {
+            content: "О";
+            position: absolute;
+            color:#fff;
         }

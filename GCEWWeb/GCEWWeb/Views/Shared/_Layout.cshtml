@@ -22,6 +22,9 @@
         <link rel="stylesheet" href="~/css/custom-modal-window.css" />
         <link type="text/css" rel="stylesheet" href="~/lib/goldenLayout/src/css/goldenlayout-base.css" />
         <link type="text/css" rel="stylesheet" href="~/lib/goldenLayout/src/css/goldenlayout-light-theme.css" />
+        <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/css/util.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/css/main.css">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -36,20 +39,23 @@
         <input name="RedirectToProject" id="RedirectToProject" type="hidden" value="true" />
     </form>
 
-    <div id="modal-enter-data" class="custom-modal">
-        <div class="modal-content">
-            <span class="close-modal" modal="modal-enter-data">&times;</span>
-            <p id="modal-text-enter"></p>
-            <input type="text" id="modal-text-text" />
-            <input modal="modal-enter-data" class="close-modal" id="modal-text-btn" type="button" value="Enter" />
-        </div>
-    </div>
+    <div class="limiter custom-modal"  id="modal-enter-data">
+            <div class="wrap-login100 p-l-42 p-r-42 p-t-25 p-b-25  modal-content">
+                        <p id="modal-text-enter" class="txt1 p-b-11"></p>
+                        <div class="wrap-input100 validate-input m-b-12 alert-validate">
+                            <input type="text" id="modal-text-text" class="input100" />
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="container-login100-form-btn">
+                            <input modal="modal-enter-data" class="close-modal login100-form-btn" id="modal-text-btn" type="button" value="Enter" style="margin: 0 auto;"/>
+                        </div>
+                    </div></div>
 
-    <partial name="_CookieConsentPartial" />
+                <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+                <div class="container body-content">
+                    @RenderBody()
+                </div>
 
 
 </body>
