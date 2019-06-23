@@ -395,39 +395,6 @@ void whileTree::createData(std::string & data)
 		condition->getData(data);
 }
 
-functionTree::functionTree(int i, int order, std::string line) :tree(i, order, line, RegexResult::Function)
-{
-	funcName = createUniqueGUID();
-}
-
-void functionTree::createCodeInner(std::string & code)
-{
-	std::string tmp;
-	tmp += funcName + ":\n";
-	for (auto arg : asses) {
-		arg->toCode(tmp);
-	}
-	tree::createCodeInner(tmp);
-	if (returner.length() != 0) {
-		tmp += "\njmp " + returner + "\n";
-		int index = code.find(".code");
-		code.insert(index + std::string(".code").length(), "\n" + tmp + "\n");
-	}
-	else
-		code += tmp;
-}
-
-void functionTree::createData(std::string & data)
-{
-	tree::createData(data);
-	for (auto v : arguments) {
-		assigment * ass = new assigment(v);
-		asses.push_back(ass);
-		ass->calculate();
-		ass->getData(data);
-	}
-}
-
 ifTree::ifTree(int i, int order, std::string line)
 	: tree(i, order, line, RegexResult::If)
 {
@@ -439,8 +406,48 @@ ifTree::ifTree(int i, int order, std::string line)
 
 void ifTree::createCodeInner(std::string & code)
 {
+	auto guid = createUniqueGUID();
+	code += "\nif" + guid + ":\n";
+	code += "condition" + guid + ":\nfinit\n";
+	auto condRes = condition->boolCode(code, "", "", "");
+	int index = code.find(condRes[1]);
+	code.insert(index + condRes[1].length(), "\njmp after" + guid + "\n");
+	index = code.find(condRes[2]);
+	if (elseTreeInner)
+		code.insert(index + condRes[2].length(), "\njmp ifelse" + guid + "\n");
+	else
+		code.insert(index + condRes[2].length(), "\njmp endif" + guid + "\n");
+	code += "after" + guid + ":\n";
+
+	tree::createCodeInner(code);
+
+	code += "jmp endif" + guid + "\n";
+
+	if (elseTreeInner) {
+		code += "\nifelse" + guid + ":\n";
+		elseTreeInner->createCodeInner(code, true);
+	}
+
+	code += "\nendif" + guid + ":\n";
 }
 
 void ifTree::createData(std::string & data)
 {
+	tree::createData(data);
+	if (condition)
+		condition->getData(data);
+}
+
+elseTree::elseTree(int i, int order, std::string line)
+	:tree(i, order, line, RegexResult::Else)
+{
+}
+
+void elseTree::createCodeInner(std::string & code)
+{
+}
+
+void elseTree::createCodeInner(std::string & code, bool f)
+{
+	tree::createCodeInner(code);
 }

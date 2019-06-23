@@ -21,5 +21,7 @@ namespace GCEWWeb.Services.Constructors
         public string Value { get; set; }
         [TemplateSiteProperty("caption")]
         public string Caption { get; set; }
+
+        public override ElementType ElementType => ElementType.Variable;
     }
 }

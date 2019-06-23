@@ -26,5 +26,6 @@ namespace GCEWWeb.Services.Constructors
                 prop.SetValue(this, prop.GetValue(element));
         }
         public string Html => TemplateSerialize.Serialize(this);
+        public abstract ElementType ElementType { get; }
     }
 }

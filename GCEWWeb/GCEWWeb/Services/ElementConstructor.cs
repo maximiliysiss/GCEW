@@ -7,6 +7,20 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Services
 {
+    public enum ElementType : int
+    {
+        Variable,
+        Addition,
+        Substract,
+        Divide,
+        Multiply,
+        Equal,
+        Greater,
+        Lower,
+        Print
+    }
+
+
     /// <summary>
     /// Factory for elements
     /// </summary>
@@ -20,20 +34,6 @@ namespace GCEWWeb.Services
                 case ElementType.Variable:
                     elem = new ElementVariable();
                     break;
-                case ElementType.For:
-                    break;
-                case ElementType.While:
-                    break;
-                case ElementType.If:
-                    break;
-                case ElementType.Else:
-                    break;
-                case ElementType.Function:
-                    break;
-                case ElementType.Procedure:
-                    break;
-                case ElementType.ChangeValue:
-                    break;
                 case ElementType.Addition:
                     elem = new ElementAddiction();
                     break;
@@ -45,6 +45,18 @@ namespace GCEWWeb.Services
                     break;
                 case ElementType.Multiply:
                     elem = new ElementMultiply();
+                    break;
+                case ElementType.Equal:
+                    elem = new ElementEqual();
+                    break;
+                case ElementType.Greater:
+                    elem = new ElementGreater();
+                    break;
+                case ElementType.Lower:
+                    elem = new ElementLower();
+                    break;
+                case ElementType.Print:
+                    elem = new ElementPrint();
                     break;
             }
             return elem;

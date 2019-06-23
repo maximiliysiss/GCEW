@@ -28,6 +28,7 @@ private:
 	static RegexResult isFunction(std::string input);
 	static RegexResult isProcedure(std::string input);
 	static RegexResult isIf(std::string input);
+	static RegexResult isElse(std::string input);
 	static RegexResult isWhile(std::string input);
 	static RegexResult isFor(std::string input);
 	static RegexResult isOpenFigure(std::string input);

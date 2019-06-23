@@ -45,6 +45,23 @@
     "Arguments": [ "caption", "value", "type" ]
   },
   {
-    "Name": "ElementProcedure"
+    "Name": "ElementSubstract",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementDivide",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementPrimitiveBool",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementPrint",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
   }
 ]

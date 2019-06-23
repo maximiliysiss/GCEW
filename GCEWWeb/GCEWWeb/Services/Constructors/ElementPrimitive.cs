@@ -12,61 +12,36 @@ namespace GCEWWeb.Services.Constructors
         public string OuterID { get; set; } = Guid.NewGuid().ToString();
         public abstract string Operation { get; }
         public string Comment { get; set; }
-        public virtual List<int> InputCount => new List<int> { -1 };
-        public List<ElementVariable> ElementVariables { get; set; } = new List<ElementVariable>();
+        public List<IElement> InputElements { get; set; } = new List<IElement>();
     }
 
     public class ElementAddiction : ElementPrimitive
     {
         [TemplateSiteProperty("caption")]
         public override string Operation => "+";
+        public override ElementType ElementType => ElementType.Addition;
     }
 
+    [TemplateSiteClass("ElementSubstract")]
     public class ElementSubstract : ElementPrimitive
     {
         [TemplateSiteProperty("caption")]
         public override string Operation => "-";
-        public override List<int> InputCount => new List<int> { 1, -1 };
+        public override ElementType ElementType => ElementType.Substract;
     }
 
+    [TemplateSiteClass("ElementDivide")]
     public class ElementDivide : ElementPrimitive
     {
         [TemplateSiteProperty("caption")]
         public override string Operation => "/";
-        public override List<int> InputCount => new List<int> { 1, 1 };
+        public override ElementType ElementType => ElementType.Divide;
     }
 
     public class ElementMultiply : ElementPrimitive
     {
         [TemplateSiteProperty("caption")]
         public override string Operation => "*";
-    }
-
-    public class ElementMod : ElementPrimitive
-    {
-        [TemplateSiteProperty("caption")]
-        public override string Operation => "%";
-        public override List<int> InputCount => new List<int> { 1, 1 };
-    }
-
-    public class ElementPower : ElementPrimitive
-    {
-        [TemplateSiteProperty("caption")]
-        public override string Operation => "Power";
-        public override List<int> InputCount => new List<int> { 1, 1 };
-    }
-
-    public class ElementSin : ElementPrimitive
-    {
-        [TemplateSiteProperty("caption")]
-        public override string Operation => "sin";
-        public override List<int> InputCount => new List<int> { 1, 1 };
-    }
-
-    public class ElementCos : ElementPrimitive
-    {
-        [TemplateSiteProperty("caption")]
-        public override string Operation => "cos";
-        public override List<int> InputCount => new List<int> { 1, 1 };
+        public override ElementType ElementType => ElementType.Multiply;
     }
 }

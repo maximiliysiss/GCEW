@@ -15,9 +15,6 @@ operation * operation::getOperation(RegexResult result, int order, std::string l
 	case RegexResult::Assigment:
 		oper = new assigment(line);
 		break;
-	case RegexResult::Call:
-		oper = new callFunc(line, tr->tryGetRoot());
-		break;
 	case RegexResult::Print:
 		oper = new printCall(line);
 		break;
@@ -74,25 +71,4 @@ std::string continueCall::toCode(std::string & code)
 {
 	code += "\njmp " + treeCycle->start + "\n";
 	return "";
-}
-
-std::string callFunc::toCode(std::string & code)
-{
-	auto node = (functionTree*)root->getByName(name);
-	node->returner = "ret" + createUniqueGUID();
-	code += "\njmp " + node->funcName + "\n";
-	code += node->returner + ":\n";
-	return "";
-}
-
-void callFunc::getData(std::string & code)
-{
-	for (int i = 0; i < arguments.size(); i++) {
-		auto guid = createUniqueGUID();
-		code += guid + " real8 ?\n";
-		arguments[i] = guid + "=" + arguments[i];
-	}
-
-	auto node = (functionTree*)root->getByName(name);
-	node->arguments = arguments;
 }
