@@ -1,14 +1,9 @@
-﻿<div id="{id}" class="element-container dragElement flowChartHandlerInput" style="position:absolute" menu="Element">
+﻿<div id="{id}" class="element-container dragElement flowChartHandlerInput primitive" style="position:absolute" menu="Element">
     <div class="header">{caption}</div>
     <div class="content">
-        <div class="checkbox input">
-        </div>
-        <div class="value"></div>
-        <div class="checkbox output">
-            <div>
-                <label>Result</label>
-                <input id="{outputID}" class="flowChartHandler" type="radio" />
-            </div>
-        </div>
+        <input id="{inputID}" class="flowChartHandler left" type="radio" />
+        <label for="{inputID}" class="flowChartHandler left"></label>
+        <input id="{outputID}" class="flowChartHandler right" type="radio" />
+        <label for="{outputID}" class="flowChartHandler right"></label>
     </div>
 </div>
