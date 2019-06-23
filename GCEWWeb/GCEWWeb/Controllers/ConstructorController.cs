@@ -3,34 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GCEWWeb.Services;
+using GCEWWeb.Services.Constructors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GCEWWeb.Controllers
 {
-    public enum ElementType : int
-    {
-        Variable,
-        For,
-        While,
-        If,
-        Else,
-        Function,
-        Procedure,
-        ChangeValue,
-        Addition,
-        Substract,
-        Divide,
-        Multiply
-    }
-
-
-    public class ConstructorController : Controller
+    public class ConstructorController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
 
         [HttpPost]
-        public string CreateNewElement(ElementType elementType)
+        public IElement CreateNewElement(ElementType elementType)
         {
-            return ElementConstructor.GetBuilder(elementType)?.Html;
+            return ElementConstructor.GetBuilder(elementType);
         }
     }
 }

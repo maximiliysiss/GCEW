@@ -5,24 +5,35 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Services.Constructors
 {
-    public class ElementEqual : ElementPrimitive
+    [TemplateSiteClass("ElementPrimitiveBool")]
+    public abstract class ElementBool : ElementPrimitive
+    {
+        public ElementPrimitive True { get; set; }
+        public ElementPrimitive False { get; set; }
+    }
+
+
+    public class ElementEqual : ElementBool
     {
         [TemplateSiteProperty("caption")]
         public override string Operation => "==";
-        public override List<int> InputCount => new List<int> { -1 };
+
+        public override ElementType ElementType => ElementType.Equal;
     }
 
-    public class ElementGreater : ElementPrimitive
+    public class ElementGreater : ElementBool
     {
         [TemplateSiteProperty("caption")]
         public override string Operation => ">";
-        public override List<int> InputCount => new List<int> { 1, 1 };
+
+        public override ElementType ElementType => ElementType.Greater;
     }
 
-    public class ElementLower : ElementPrimitive
+    public class ElementLower : ElementBool
     {
         [TemplateSiteProperty("caption")]
         public override string Operation => "<";
-        public override List<int> InputCount => new List<int> { 1, 1 };
+
+        public override ElementType ElementType => ElementType.Lower;
     }
 }

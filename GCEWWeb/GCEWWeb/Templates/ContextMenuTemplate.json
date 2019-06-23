@@ -27,8 +27,29 @@
             ]
           },
           {
+            "Caption": "Bool primitive",
+            "InnerMenu": [
+              {
+                "Caption": "Equal",
+                "Function": "createEqual(event)"
+              },
+              {
+                "Caption": "Greater",
+                "Function": "createGreater(event)"
+              },
+              {
+                "Caption": "Lower",
+                "Function": "createLower(event)"
+              }
+            ]
+          },
+          {
             "Caption": "Variable",
             "Function": "createVariable(event)"
+          },
+          {
+            "Caption": "Print",
+            "Function":  "createPrint(event)"
           },
           {
             "Caption": "ChangeValue",

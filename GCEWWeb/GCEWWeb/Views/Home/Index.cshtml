@@ -319,7 +319,7 @@
 
 
     function deleteElement(event) {
-        flowsElements = flowsElements.filter(item => item !== contextMenuTarget)
+        console.log(contextMenuTarget.attr("id"));
         removeElementWithChains(contextMenuTarget);
         $(contextMenuTarget).remove();
     }
@@ -378,8 +378,20 @@
         createElement(@((int)ElementType.Multiply), event);
     }
 
-    function createProcedure(event){
-        createElement(@((int)ElementType.Procedure), event);
+    function createEqual(event) {
+        createElement(@((int)ElementType.Equal), event);
+    }
+
+    function createLower(event) {
+        createElement(@((int)ElementType.Lower), event);
+    }
+
+    function createGreater(event) {
+        createElement(@((int)ElementType.Greater), event);
+    }
+
+     function createPrint(event) {
+        createElement(@((int)ElementType.Print), event);
     }
 
 </script>
