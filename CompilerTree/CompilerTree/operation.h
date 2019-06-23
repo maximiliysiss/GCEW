@@ -68,27 +68,6 @@ public:
 	}
 };
 
-/*вызов функции*/
-class callFunc : public call {
-	/*дерево для поиска*/
-	tree * root;
-	/*название*/
-	std::string name;
-	/*аргументы*/
-	std::vector<std::string> arguments;
-public:
-	callFunc(std::string line, tree * tr) : call(line) {
-		root = tr;
-		int index = line.find("(");
-		int lastIndex = line.find(")");
-		name = line.substr(0, index);
-		arguments = splitter(line.substr(index + 1, lastIndex - index - 1), ',');
-	}
-	std::string toCode(std::string & code);
-
-	void getData(std::string& code);
-};
-
 /*вызов вывода*/
 class printCall : public call {
 public:

@@ -95,7 +95,6 @@ tree* treeBuilder(std::ifstream stream) {
 			root = root->addChildren(new whileTree(-1, order, tmp));
 			std::getline(stream, tmp);
 			break;
-		case RegexResult::Call:
 		case RegexResult::Print:
 		case RegexResult::Break:
 		case RegexResult::Continue:
