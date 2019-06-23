@@ -107,11 +107,11 @@ tree* treeBuilder(std::ifstream stream) {
 			std::getline(stream, tmp);
 			break;
 		case RegexResult::Else:
-			tree * elseTree = new tree(-1, order, tmp, RegexResult::Else);
+			elseTree * elseTreeInner = new elseTree(-1, order, tmp);
 			std::getline(stream, tmp);
 			if (typeid(*(root->getLastTree())) == typeid(ifTree)) {
-				((ifTree*)root->getLastTree())->setElse(elseTree);
-				root = root->addChildren(elseTree);
+				((ifTree*)root->getLastTree())->setElse(elseTreeInner);
+				root = root->addChildren(elseTreeInner);
 			}
 			break;
 		}

@@ -163,30 +163,21 @@ public:
 	void createData(std::string & data);
 };
 
+class elseTree : public tree {
+public:
+	elseTree(int i, int order, std::string line);
+	void createCodeInner(std::string& code);
+	void createCodeInner(std::string& code, bool f);
+};
+
 class ifTree : public tree {
-	tree * elseTree{ nullptr };
+	elseTree * elseTreeInner{ nullptr };
 	Exp * condition;
 public:
 	ifTree(int i, int order, std::string line);
 	void createCodeInner(std::string& code);
 	void createData(std::string & data);
-	void setElse(tree * tr) { elseTree = tr; }
-};
-
-/*функция*/
-class functionTree : public tree {
-public:
-	/*аргументы*/
-	std::vector<std::string> arguments;
-	/*приравнивания*/
-	std::vector<assigment*> asses;
-	/*название*/
-	std::string funcName;
-	/*возврат*/
-	std::string returner;
-	functionTree(int i, int order, std::string line);
-	void createCodeInner(std::string& code);
-	void createData(std::string & data);
+	void setElse(elseTree * tr) { elseTreeInner = tr; }
 };
 
 #endif // !TREE_H

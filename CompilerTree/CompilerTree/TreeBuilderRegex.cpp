@@ -14,6 +14,7 @@ std::list<TreeBuilderRegex::RegexValidate> TreeBuilderRegex::regexes = {
 	TreeBuilderRegex::isBreak,
 	TreeBuilderRegex::isContinue,
 	TreeBuilderRegex::isCall,
+	TreeBuilderRegex::isElse,
 };
 
 tree ** TreeBuilderRegex::currentTree = nullptr;
@@ -50,9 +51,17 @@ RegexResult TreeBuilderRegex::isProcedure(std::string input)
 
 RegexResult TreeBuilderRegex::isIf(std::string input)
 {
-	std::regex rg("^" + compilerInnerData::reserverdWord["if"] + " *\\([a-zA-Z0-9&| ]+\\)$");
+	std::regex rg("^" + compilerInnerData::reserverdWord["if"] + "(.*)");
 	if (std::regex_match(input, rg))
 		return RegexResult::If;
+	return RegexResult::NotClassic;
+}
+
+RegexResult TreeBuilderRegex::isElse(std::string input)
+{
+	std::regex rg("^else");
+	if (std::regex_match(input, rg))
+		return RegexResult::Else;
 	return RegexResult::NotClassic;
 }
 
