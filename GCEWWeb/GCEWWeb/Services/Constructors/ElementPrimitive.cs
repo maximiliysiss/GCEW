@@ -12,6 +12,8 @@ namespace GCEWWeb.Services.Constructors
         public string OuterID { get; set; } = Guid.NewGuid().ToString();
         public abstract string Operation { get; }
         public string Comment { get; set; }
+        public IElement Prev { get; set; }
+        public IElement Next { get; set; }
         public List<IElement> InputElements { get; set; } = new List<IElement>();
     }
 

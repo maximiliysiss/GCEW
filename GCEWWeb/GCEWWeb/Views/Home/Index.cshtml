@@ -66,7 +66,7 @@
 <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 <script src="~/lib/patternfly-bootstrap-treeview-master/src/js/bootstrap-treeview.js"></script>
 <script src="~/js/custom-modal-window.js"></script>
-<script type="text/javascript" src="~/lib/goldenLayout/dist/goldenlayout.min.js"></script>
+<script type="text/javascript" src="//golden-layout.com/files/latest/js/goldenlayout.min.js"></script>
 <script src="~/lib/leader-line-master/leader-line.min.js"></script>
 <script>
 
@@ -113,10 +113,29 @@
                 });
                 if (!$(tagNumber).attr("menu"))
                     $(tagNumber).attr("menu", "MenuFileRoot");
-                $(tagNumber).attr("path", n[i].tags[1]);
+                var path = n[i].tags[1];
+                $(tagNumber).attr("path", path);
+                if ($(tagNumber).attr("menu") === "MenuFile") {
+                    $(tagNumber).click(function () {
+                        openFile($(this).attr("path"));
+                    });
+                }
             }
 
             reHandlerContextMenus();
+        });
+    }
+
+    function openFile(path) {
+        var fileName = path.replace(/^.*[\\\/]/, '').split('.')[0];
+        ajaxPost("@Url.Action("OpenFile", "Project")", { path: path }, function (data) {
+            var newItemConfig = {
+                title: fileName,
+                type: 'component',
+                componentName: 'Solution',
+                componentState: { text: "Fuck it" },
+            };
+            dockLayouts.root.contentItems[0].contentItems[1].addChild(newItemConfig);
         });
     }
 
@@ -285,11 +304,11 @@
                     }
                     ]
                 }, {
-                    type: 'column',
+                        type: 'stack',
                         content: [{
-                        type: 'component',
-                        componentName: 'workDocument'
-                    }]
+                            componentName: 'workspace',
+                            type: 'component'
+                        }]
                 }]
             }]
         };
@@ -301,20 +320,19 @@
                 '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/SolutionPanel"))'
             );
         });
-        dockLayouts.registerComponent('workDocument', function (c, s) {
-            c.getElement().append(
-                '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/Workspace"))'
-            );
-        });
         dockLayouts.registerComponent('Build log', function (c, s) {
             c.getElement().append(
                 '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/BuildLog"))'
             );
         });
+         dockLayouts.registerComponent('workspace', function (c, s) {
+            c.getElement().append(
+                '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/Workspace"))'
+            );
+        });
 
         dockLayouts.initialised += afterInit();
         dockLayouts.init();
-
     });
 
 
@@ -390,8 +408,17 @@
         createElement(@((int)ElementType.Greater), event);
     }
 
-     function createPrint(event) {
+    function createPrint(event) {
         createElement(@((int)ElementType.Print), event);
+    }
+
+    function createStart(event) {
+        var cursor = [50,50];
+        ajaxPost("@Url.Action("CreateNewElement", "Constructor")", { elementType : @((int)ElementType.Start) },
+            function (data) {
+                addElement(data, cursor);
+            }
+        );
     }
 
 </script>

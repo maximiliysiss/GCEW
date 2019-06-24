@@ -38,6 +38,13 @@ function reloadElements() {
         event.stopPropagation();
     });
 
+    $(".flowHandler").click(function (event) {
+        var res = eventForStart(event);
+        if (res)
+            startDynamic(this, event);
+        event.stopPropagation();
+    });
+
     $(".flowChartHandlerBool").click(function (event) {
         var res = eventForStart(event);
         if (res)
@@ -47,6 +54,12 @@ function reloadElements() {
 
     $(".flowChartHandlerInputBool").click(function (event) {
         if (isDrawDynamicLine && $(dynamicLineStart).hasClass("flowChartHandlerBool"))
+            eventForTargets(event);
+        event.stopPropagation();
+    });
+
+    $(".flowHandlerInput").click(function (event) {
+        if (isDrawDynamicLine && $(dynamicLineStart).hasClass("flowHandler"))
             eventForTargets(event);
         event.stopPropagation();
     });
@@ -145,7 +158,7 @@ function startDynamic(elem, event) {
         destroyDynamicLine();
     isDrawDynamicLine = true;
     dynamicLineStart = $(elem);
-    dynamicLine = new LeaderLine(elem, createEmptyForMouse(event));
+    dynamicLine = new LeaderLine(elem, createEmptyForMouse(event), { color: '#0099CC' });
     $(flowChartSVG).mousemove(function (event) { moveCursorDynamic(event); });
     $(flowChartSVG).mousedown(function (event) { mouseClick(event); });
 }
@@ -154,9 +167,6 @@ function createConnectionBetweenElements(one, two) {
 
     var oneID = $(one).attr("id");
     var twoID = $(two).attr("id");
-
-    var line = new LeaderLine($(one).get(0), $(two).get(0));
-    lines.push(line);
 
     var realIdFrom = oneID.lastIndexOf('-') == oneID.length - 2 ? oneID.substr(0, oneID.lastIndexOf('-')) : oneID;
     var realIdTo = twoID.lastIndexOf('-') == twoID.length - 2 ? twoID.substr(0, twoID.lastIndexOf('-')) : twoID;
@@ -167,17 +177,38 @@ function createConnectionBetweenElements(one, two) {
     var toObj = flowsElements.find(obj => { return obj["guid"] === realIdTo; });
 
     switch (toObj["elementType"]) {
-        case 0:
+        case 1:
+        case 4:
+            toObj["inputElements"].push(realIdFrom);
             break;
-        case 0:
+        case 2:
+            if (($(two).hasClass("subtrahend") && toObj["inputElements"].length > 1)
+                || ($(two).hasClass("minuend") && toObj["inputElements"].length > 0))
+                return;
+            toObj["inputElements"].push(realIdFrom);
             break;
-        case 0:
+        case 3:
+            if (($(two).hasClass("dividerr") && toObj["inputElements"].length > 1)
+                || ($(two).hasClass("dividend") && toObj["inputElements"].length > 0))
+                return;
+            toObj["inputElements"].push(realIdFrom);
             break;
-        case 0:
+        case 5: case 6: case 7:
+            if (($(two).hasClass("s-bool") && toObj["inputElements"].length > 1)
+                || ($(two).hasClass("f-bool") && toObj["inputElements"].length > 0))
+                return;
+            toObj["inputElements"].push(realIdFrom);
             break;
-        case 0:
+        case 8:
+            if (toObj["variable"])
+                return;
+            toObj["variable"] = realIdFrom;
             break;
     }
+
+
+    var line = new LeaderLine($(one).get(0), $(two).get(0), { color: '#0099CC' });
+    lines.push(line);
 
     onReload();
 }

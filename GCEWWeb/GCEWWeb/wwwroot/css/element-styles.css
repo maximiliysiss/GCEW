@@ -32,36 +32,43 @@
         .element-container > .content > .value {
             width: 30px;
         }
+
 .var {
     border: 7px solid #039D6E;
     width: 160px;
-    padding:2px;
+    padding: 2px;
 }
+
     .var::after {
         content: "";
-        position:absolute;
+        position: absolute;
         right: -22px;
         border: 26px solid transparent;
         border-left: 26px solid #039d6e;
     }
+
     .var > .header {
         width: 80%;
         border: none;
         font-size: 10pt;
     }
+
     .var > .content {
         width: 80%;
         border: none;
         font-size: 12pt;
         font-weight: bold;
     }
+
 .primitive {
     background-color: #039d6e;
     border: none;
     padding: 0px;
+    position: relative;
     width: 100px;
     height: 100px;
 }
+
     .primitive > .header {
         color: #ffffff;
         font-size: 72px;
@@ -72,22 +79,38 @@
         position: absolute;
         width: 100%;
     }
+
         .primitive > .content > input[type="radio"] {
             /*visibility: hidden;*/
-            display:none;
+            display: none;
         }
+
+        .primitive > .content > .lefttop {
+            left: 6px;
+            top: 6px;
+            position: absolute;
+        }
+
         .primitive > .content > .left {
             left: 6px;
             top: 40px;
             position: absolute;
         }
+
         .primitive > .content > .right {
             right: 18px;
             top: 40px;
             position: absolute;
         }
+
+        .primitive > .content > .righttop {
+            right: 18px;
+            top: 6px;
+            position: absolute;
+        }
+
         .primitive > .content > label::before {
             content: "О";
             position: absolute;
-            color:#fff;
+            color: #fff;
         }

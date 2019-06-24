@@ -17,7 +17,8 @@ namespace GCEWWeb.Services
         Equal,
         Greater,
         Lower,
-        Print
+        Print,
+        Start
     }
 
 
@@ -57,6 +58,9 @@ namespace GCEWWeb.Services
                     break;
                 case ElementType.Print:
                     elem = new ElementPrint();
+                    break;
+                case ElementType.Start:
+                    elem = new ElementStart();
                     break;
             }
             return elem;

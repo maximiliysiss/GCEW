@@ -80,6 +80,12 @@ namespace GCEWWeb.Controllers
         }
 
         [HttpPost]
+        public IActionResult OpenFile(string path)
+        {
+            return PartialView("../SitePartical/Workspace", path);
+        }
+
+        [HttpPost]
         public bool Save(string name, string text, string link)
         {
             return true;

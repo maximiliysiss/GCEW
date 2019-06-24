@@ -8,7 +8,16 @@ namespace GCEWWeb.Services.Constructors
     [TemplateSiteClass("ElementPrint")]
     public class ElementPrint : IElement
     {
-        public IElement Print { get; set; }
+        public IElement Prev { get; set; }
+        public IElement Next { get; set; }
+        public IElement Variable { get; set; }
         public override ElementType ElementType => ElementType.Print;
+    }
+
+    public class ElementStart : IElement
+    {
+        public IElement Prev { get; set; }
+        public IElement Next { get; set; }
+        public override ElementType ElementType => ElementType.Start;
     }
 }
