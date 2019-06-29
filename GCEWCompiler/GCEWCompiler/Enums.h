@@ -19,9 +19,11 @@ namespace gcew::commons
 		Mathematic,
 		Assigment,
 		Call,
-		Print,
 		Break,
-		Continue
+		Continue,
+		PureAsm,
+		Class,
+		Struct
 	};
 }
 

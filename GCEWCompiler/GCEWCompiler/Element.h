@@ -20,6 +20,7 @@ namespace  gcew::trees::elements
 		Element(int index, std::string line);
 		Element(int index, std::string line, RegexResult reg);
 		virtual ~Element();
+		virtual void toCode(std::string & code) = 0;
 	};
 }
 

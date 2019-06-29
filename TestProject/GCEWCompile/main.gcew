@@ -1,0 +1,8 @@
+#include <addings.gcew>
+void main()
+{
+printf("First print");
+int i = 0;
+int j = 5;
+int n = i + j;
+}

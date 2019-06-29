@@ -12,6 +12,7 @@ namespace  gcew::trees::elements
 	{
 	public:
 		Variable(int index, std::string line);
+		void toCode(std::string & code);
 		~Variable();
 	};
 }

@@ -4,7 +4,7 @@
 
 #define OPERATION_H
 
-namespace gcew::elements
+namespace  gcew::trees::elements
 {
 
 	class Operation
@@ -13,6 +13,7 @@ namespace gcew::elements
 	public:
 		Operation(int index, std::string line, RegexResult reg);
 		virtual ~Operation();
+		void toCode(std::string& code) = 0;
 	};
 }
 

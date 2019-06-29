@@ -4,12 +4,12 @@
 
 #include "BaseNode.h"
 
-namespace gcew::parser
+namespace gcew::trees::parser
 {
 	class Term :
 		public BaseNode
 	{
-	private:
+	protected:
 		std::string value;
 	public:
 		Term(std::string value);

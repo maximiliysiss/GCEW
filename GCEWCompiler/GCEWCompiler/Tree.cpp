@@ -2,7 +2,13 @@
 
 namespace gcew::trees::structural
 {
-
+	bool Tree::isBlockList()
+	{
+		return false;
+	}
+	void Tree::createInnerCode(std::string & code)
+	{
+	}
 	Tree::Tree(int index, std::string line, RegexResult reg)
 		: Element(index, line, reg)
 	{
@@ -19,7 +25,7 @@ namespace gcew::trees::structural
 	{
 		auto name = this->line.length() == 0 ? "root" : this->line;
 		out << level << ": " << name << std::endl;
-		for (auto child : children) {
+		for (Tree* child : this->getChildren()) {
 			child->treeChildrenPrinter(out, level + 1);
 		}
 	}
@@ -28,9 +34,27 @@ namespace gcew::trees::structural
 	{
 	}
 
+	void Tree::optimize()
+	{
+	}
+
+	std::string Tree::createCode()
+	{
+		return std::string();
+	}
+
+	std::list<Tree*> Tree::getChildren()
+	{
+		std::list<Tree*> children;
+		for (elements::Element* tr : this->operations)
+			if (typeid(*tr) == typeid(Tree))
+				children.push_back((Tree*)tr);
+		return children;
+	}
+
 	Tree * Tree::addChild(Tree * child)
 	{
-		this->children.push_back(child);
+		this->operations.push_back(child);
 		return child;
 	}
 

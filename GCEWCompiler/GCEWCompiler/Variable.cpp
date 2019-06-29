@@ -7,6 +7,10 @@ namespace gcew::trees::elements
 	{
 	}
 
+	void Variable::toCode(std::string & code)
+	{
+	}
+
 	Variable::~Variable()
 	{
 	}

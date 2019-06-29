@@ -9,6 +9,7 @@ namespace gcew::trees::parser
 	class Node :
 		public BaseNode
 	{
+	protected:
 		std::string operation;
 		BaseNode * left;
 		BaseNode * right;

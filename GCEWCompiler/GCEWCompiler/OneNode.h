@@ -4,12 +4,12 @@
 
 #include "BaseNode.h"
 
-namespace gcew::parser
+namespace gcew::trees::parser
 {
 	class OneNode :
 		public BaseNode
 	{
-	private:
+	protected:
 		std::string operation;
 		BaseNode * node;
 	public:

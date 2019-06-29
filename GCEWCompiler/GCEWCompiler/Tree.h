@@ -16,14 +16,12 @@ namespace gcew::trees::structural
 	{
 	protected:
 		std::list<Element*> operations;
-		std::list<Tree*> children;
 		std::list<CustomTypes*> customTypes;
 		Tree* parent{ nullptr };
 		bool isBlockList();
 		virtual void createInnerCode(std::string & code);
 	public:
 		inline std::list<Element*> getElements() const { return operations; }
-		inline std::list<Tree*> getChildren() const { return children; }
 		Tree() = delete;
 		Tree(int index, std::string line, RegexResult reg);
 		virtual ~Tree();
@@ -31,6 +29,7 @@ namespace gcew::trees::structural
 		void variableInfoPrinter(std::ostream & out, int level = 0);
 		void optimize();
 		std::string createCode();
+		std::list<Tree*> getChildren();
 		inline Tree* getParent() const { return parent; }
 		Tree * addChild(Tree * child);
 		Tree * getRoot();
