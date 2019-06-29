@@ -5,6 +5,7 @@ namespace gcew::commons
 {
 	CompileConfiguration * CompileConfiguration::compileConfiguration = nullptr;
 	std::string CompileConfiguration::path = "";
+	std::string CompileConfiguration::workPath = "";
 
 	CompileConfiguration & CompileConfiguration::instance()
 	{

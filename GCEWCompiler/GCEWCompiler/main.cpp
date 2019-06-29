@@ -5,14 +5,16 @@
 #include "TreeRegularBuilder.h"
 #include "IncludeOperation.h"
 #include "CompileConfiguration.h"
+#include "PreProcessor.h"
 #include <filesystem>
 
 using std::cout;
 using namespace std::filesystem;
 
-void correctFiles(std::string path, std::string pathTo) {
+std::string correctFiles(std::string path, std::string pathTo) {
 	std::ifstream inFile(path);
-	std::ofstream outFile(pathTo + std::filesystem::path(path).filename().string());
+	std::string resultPath = pathTo + std::filesystem::path(path).filename().string();
+	std::ofstream outFile(resultPath);
 
 	std::string tmp;
 	bool isComment = false;
@@ -25,11 +27,8 @@ void correctFiles(std::string path, std::string pathTo) {
 		while (std::getline(ss, includeFinder)) {
 			if (gcew::regulars::TreeRegularBuilder::regex(includeFinder) == gcew::commons::RegexResult::Include) {
 				gcew::trees::elements::operations::IncludeOperation include(0, includeFinder);
-				if (include.isLocalFile()) {
-					std::filesystem::path p = std::filesystem::path(path).parent_path();
-					p += std::filesystem::path::preferred_separator;
-					correctFiles(p.string() + include.getFileName(), pathTo);
-				}
+				if (include.isLocalFile())
+					correctFiles(include.getFileName(), pathTo);
 			}
 		}
 
@@ -39,6 +38,7 @@ void correctFiles(std::string path, std::string pathTo) {
 
 	inFile.close();
 	outFile.close();
+	return resultPath;
 }
 
 int main(int argc, char ** argv)
@@ -56,12 +56,16 @@ int main(int argc, char ** argv)
 	path p = absolute(path(fileExecute));
 	path fileFolder = p.parent_path();
 	fileFolder += path::preferred_separator;
+	conf.workPath = fileFolder.string();
 	fileFolder += conf.getCompilePath();
 	fileFolder += path::preferred_separator;
+
 	if (exists(fileFolder))
 		remove_all(fileFolder);
 	create_directory(fileFolder);
-	correctFiles(p.string(), fileFolder.string());
+	p = correctFiles(p.string(), fileFolder.string());
+	gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(p.string(), nullptr);
+
 
 	return 0;
 }

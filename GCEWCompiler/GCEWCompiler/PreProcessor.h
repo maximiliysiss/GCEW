@@ -1,8 +1,23 @@
 #pragma once
-class PreProcessor
+#ifndef PREPROCESSOR_H
+#define PREPROCESSOR_H
+
+#include <string>
+#include <filesystem>
+#include <fstream>
+#include "TreeRegularBuilder.h"
+#include "IncludeOperation.h"
+#include "CompileConfiguration.h"
+
+namespace gcew::trees::preprocessor
 {
-public:
-	PreProcessor();
-	~PreProcessor();
-};
+	struct PreProcessor
+	{
+		static void preProcessorIncluder(std::string path, std::ofstream * file, bool isLocal = true);
+	};
+}
+
+
+#endif // !PREPROCESSOR_H
+
 

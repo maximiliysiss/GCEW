@@ -17,6 +17,7 @@ namespace gcew::commons
 		std::string libsPath;
 	public:
 		static std::string path;
+		static std::string workPath;
 		static CompileConfiguration & instance();
 		inline std::string getCompilePath() const { return pathForCompile; }
 		inline std::string getLibsPath() const { return libsPath; }

@@ -4,6 +4,7 @@
 
 
 #include "Operation.h"
+#include "CompileConfiguration.h"
 
 namespace gcew::trees::elements::operations
 {
