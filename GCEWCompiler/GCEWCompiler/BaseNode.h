@@ -11,6 +11,7 @@ namespace gcew::trees::parser
 	protected:
 		std::string name;
 	public:
+		virtual void toCode(std::string& code) = 0;
 		BaseNode();
 		virtual ~BaseNode();
 	};

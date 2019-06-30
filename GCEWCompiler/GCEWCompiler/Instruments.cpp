@@ -166,3 +166,11 @@ std::list<size_t> gcew::commons::findAllIndexesWithOffset(std::string input, cha
 {
 	return incAll(findAllIndexes(input, substr));
 }
+
+bool gcew::commons::isNumber(std::string str)
+{
+	for (char c : str)
+		if (!std::isdigit(c))
+			return false;
+	return true;
+}

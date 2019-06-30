@@ -25,7 +25,7 @@ namespace gcew::commons
 	std::list<size_t> findAllIndexes(std::string input, char substr);
 	std::list<size_t> findAllIndexesWithOffset(std::string input, std::string substr);
 	std::list<size_t> findAllIndexesWithOffset(std::string input, char substr);
-
+	bool isNumber(std::string str);
 }
 
 #endif // !INSTRUMENTS_H

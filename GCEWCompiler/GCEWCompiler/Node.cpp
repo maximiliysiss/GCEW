@@ -16,4 +16,21 @@ namespace gcew::trees::parser
 			delete right;
 	}
 
+	OperatorGreater::OperatorGreater(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
+	void OperatorGreater::toCode(std::string & code)
+	{
+	}
+
+	void OperatorLower::toCode(std::string & code)
+	{
+	}
+
+	void OperatorEqual::toCode(std::string & code)
+	{
+	}
+
 }

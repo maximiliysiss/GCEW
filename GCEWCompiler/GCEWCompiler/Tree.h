@@ -3,6 +3,7 @@
 #include "Enums.h"
 #include "Element.h"
 #include "CustomTypes.h"
+#include "Variable.h"
 
 #ifndef TREE_H
 #define TREE_H
@@ -33,7 +34,11 @@ namespace gcew::trees::structural
 		inline Tree* getParent() const { return parent; }
 		Tree * addChild(Tree * child);
 		Tree * getRoot();
+		Variable * findVariableByName(std::string name);
 		void addOperation(Element * elem);
+
+		// Inherited via Element
+		virtual void toCode(std::string & code) override;
 	};
 }
 

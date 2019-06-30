@@ -23,7 +23,8 @@ namespace gcew::commons
 		Continue,
 		PureAsm,
 		Class,
-		Struct
+		Struct,
+		Return
 	};
 }
 

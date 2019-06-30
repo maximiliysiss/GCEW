@@ -11,14 +11,15 @@ namespace gcew::regulars
 		TreeRegularBuilder::isContinue,
 		TreeRegularBuilder::isElse,
 		TreeRegularBuilder::isFor,
+		TreeRegularBuilder::isProcedure,
 		TreeRegularBuilder::isFunction,
 		TreeRegularBuilder::isIf,
 		TreeRegularBuilder::isInclude,
 		TreeRegularBuilder::isOpenFigure,
-		TreeRegularBuilder::isProcedure,
 		TreeRegularBuilder::isPureAsm,
 		TreeRegularBuilder::isType,
-		TreeRegularBuilder::isWhile
+		TreeRegularBuilder::isWhile,
+		TreeRegularBuilder::isReturn
 	};
 
 	RegexResult TreeRegularBuilder::regex(std::string input)
@@ -107,7 +108,7 @@ namespace gcew::regulars
 	{
 		std::regex reg("^\\{$");
 		if (std::regex_match(input, reg))
-			return RegexResult::For;
+			return RegexResult::FigureOpen;
 		return RegexResult::NotClassic;
 	}
 
@@ -115,7 +116,7 @@ namespace gcew::regulars
 	{
 		std::regex reg("^\\}$");
 		if (std::regex_match(input, reg))
-			return RegexResult::For;
+			return RegexResult::FigureClose;
 		return RegexResult::NotClassic;
 	}
 
@@ -139,7 +140,7 @@ namespace gcew::regulars
 	{
 		std::regex reg("^break;$");
 		if (std::regex_match(input, reg))
-			return RegexResult::Assigment;
+			return RegexResult::Break;
 		return RegexResult::NotClassic;
 	}
 
@@ -147,7 +148,15 @@ namespace gcew::regulars
 	{
 		std::regex reg("^continue;$");
 		if (std::regex_match(input, reg))
-			return RegexResult::Assigment;
+			return RegexResult::Continue;
+		return RegexResult::NotClassic;
+	}
+
+	RegexResult TreeRegularBuilder::isReturn(std::string input)
+	{
+		std::regex reg("^return .*;$");
+		if (std::regex_match(input, reg))
+			return RegexResult::Return;
 		return RegexResult::NotClassic;
 	}
 }

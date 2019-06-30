@@ -65,9 +65,22 @@ namespace gcew::trees::structural
 		return this;
 	}
 
+	Variable * Tree::findVariableByName(std::string name)
+	{
+		for (auto elem : this->operations)
+			if (typeid(*elem) == typeid(Variable)
+				&& ((Variable*)elem)->getName() == name)
+				return (Variable*)elem;
+		return nullptr;
+	}
+
 	void Tree::addOperation(Element * elem)
 	{
 		this->operations.push_back(elem);
+	}
+
+	void Tree::toCode(std::string & code)
+	{
 	}
 
 }

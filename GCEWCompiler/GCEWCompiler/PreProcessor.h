@@ -13,7 +13,7 @@ namespace gcew::trees::preprocessor
 {
 	struct PreProcessor
 	{
-		static void preProcessorIncluder(std::string path, std::ofstream * file, bool isLocal = true);
+		static std::string preProcessorIncluder(std::string path, std::ofstream * file, bool isLocal = true);
 	};
 }
 

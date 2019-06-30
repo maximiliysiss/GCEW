@@ -1,6 +1,6 @@
 #include "PreProcessor.h"
 
-void gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(std::string path, std::ofstream * fileOutput, bool isLocal)
+std::string gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(std::string path, std::ofstream * fileOutput, bool isLocal)
 {
 	gcew::commons::CompileConfiguration & conf = gcew::commons::CompileConfiguration::instance();
 
@@ -34,10 +34,14 @@ void gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(std::string p
 	}
 
 
-	if (!outputFile)
+	if (!fileOutput)
 		outputFile->close();
 
 	file.close();
 	if (isLocal)
 		std::filesystem::remove(std::filesystem::path(path));
+
+	if (fileOutput)
+		return "";
+	return path.substr(0, path.find_last_of('.')) + "_gen.gcew";
 }

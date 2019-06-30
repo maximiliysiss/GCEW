@@ -6,10 +6,12 @@
 #include "IncludeOperation.h"
 #include "CompileConfiguration.h"
 #include "PreProcessor.h"
+#include "Tree.h"
 #include <filesystem>
 
 using std::cout;
 using namespace std::filesystem;
+using namespace gcew::trees::structural;
 
 std::string correctFiles(std::string path, std::string pathTo) {
 	std::ifstream inFile(path);
@@ -41,6 +43,21 @@ std::string correctFiles(std::string path, std::string pathTo) {
 	return resultPath;
 }
 
+Tree * generateTree(std::string path) {
+	std::ifstream fileRead(path);
+	std::string line;
+	Tree * root = new Tree(0, "", RegexResult::NotClassic);
+	while (std::getline(fileRead, line)) {
+		RegexResult reg = gcew::regulars::TreeRegularBuilder::regex(line);
+		switch (reg) {
+		case RegexResult::Type:
+			break;
+		}
+	}
+	return nullptr;
+}
+
+
 int main(int argc, char ** argv)
 {
 	if (argc < 2) {
@@ -64,8 +81,8 @@ int main(int argc, char ** argv)
 		remove_all(fileFolder);
 	create_directory(fileFolder);
 	p = correctFiles(p.string(), fileFolder.string());
-	gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(p.string(), nullptr);
-
+	p = gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(p.string(), nullptr);
+	generateTree(p.string());
 
 	return 0;
 }

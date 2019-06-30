@@ -13,8 +13,13 @@ namespace gcew::trees::parser
 		std::string operation;
 		BaseNode * node;
 	public:
+		virtual void toCode(std::string & code) = 0;
 		OneNode(BaseNode * node, std::string operation);
 		~OneNode();
+	};
+
+	class OperatorNot : public OneNode {
+		virtual void toCode(std::string & code) override;
 	};
 }
 
