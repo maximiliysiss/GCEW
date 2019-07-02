@@ -44,6 +44,8 @@ namespace gcew::regulars
 		static RegexResult isBreak(std::string input);
 		static RegexResult isContinue(std::string input);
 		static RegexResult isReturn(std::string input);
+	public:
+		static RegexResult isFunctionInExpression(std::string input);
 	};
 }
 

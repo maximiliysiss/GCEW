@@ -132,6 +132,9 @@
     <ClInclude Include="PreProcessor.h">
       <Filter>Header Files\trees\preprocessor</Filter>
     </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Header Files\commons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tree.cpp">
@@ -202,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="PreProcessor.cpp">
       <Filter>Source Files\trees\preprocessor</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Source Files\commons</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

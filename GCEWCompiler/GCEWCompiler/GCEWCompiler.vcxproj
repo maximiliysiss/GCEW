@@ -132,6 +132,7 @@
     <ClInclude Include="Instruments.h" />
     <ClInclude Include="OneNode.h" />
     <ClInclude Include="Operation.h" />
+    <ClInclude Include="Parser.h" />
     <ClInclude Include="PreProcessor.h" />
     <ClInclude Include="Term.h" />
     <ClInclude Include="tinystr.h" />
@@ -155,6 +156,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OneNode.cpp" />
     <ClCompile Include="Operation.cpp" />
+    <ClCompile Include="Parser.cpp" />
     <ClCompile Include="PreProcessor.cpp" />
     <ClCompile Include="Term.cpp" />
     <ClCompile Include="tinystr.cpp" />

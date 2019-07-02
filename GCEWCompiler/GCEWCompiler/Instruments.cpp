@@ -89,37 +89,88 @@ std::vector<std::string> gcew::commons::leftSplitter(std::string line, char sep)
 	return tokens;
 }
 
+void aroundNewLine(std::string& code, char c) {
+	int post = 0;
+	for (auto i : gcew::commons::findAllIndexes(code, c)) {
+		code.insert(code.begin() + i + post, '\n');
+		post++;
+		code.insert(code.begin() + i + 1 + post, '\n');
+		post++;
+	}
+}
+
+void aroundNewLine(std::string& code, std::string c) {
+	int post = 0;
+	for (auto i : gcew::commons::findAllIndexes(code, c)) {
+		code.insert(code.begin() + i + post, '\n');
+		post++;
+		code.insert(code.begin() + i + 1 + post, '\n');
+		post++;
+	}
+}
+
+void rightNewLine(std::string& code, std::string c) {
+	int post = 0;
+	for (auto i : gcew::commons::findAllIndexes(code, c)) {
+		code.insert(code.begin() + i + 1 + post, '\n');
+		post++;
+	}
+}
+
+void rightNewLine(std::string& code, char c) {
+	int post = 0;
+	for (auto i : gcew::commons::findAllIndexes(code, c)) {
+		code.insert(code.begin() + i + 1 + post, '\n');
+		post++;
+	}
+}
+
+void leftNewLine(std::string& code, std::string c) {
+	int post = 0;
+	for (auto i : gcew::commons::findAllIndexes(code, c)) {
+		code.insert(code.begin() + i + post, '\n');
+		post++;
+	}
+}
+
+void leftNewLine(std::string& code, char c) {
+	int post = 0;
+	for (auto i : gcew::commons::findAllIndexes(code, c)) {
+		code.insert(code.begin() + i + post, '\n');
+		post++;
+	}
+}
+
+void aroundSpace(std::string& code, std::string c) {
+	int post = 0;
+	for (auto i : gcew::commons::findAllIndexes(code, c)) {
+		code.insert(code.begin() + i + post, ' ');
+		post++;
+		code.insert(code.begin() + i + 1 + post, ' ');
+		post++;
+	}
+}
+
+void aroundSpace(std::string& code, char c) {
+	int post = 0;
+	for (auto i : gcew::commons::findAllIndexes(code, c)) {
+		code.insert(code.begin() + i + post, ' ');
+		post++;
+		code.insert(code.begin() + i + 1 + post, ' ');
+		post++;
+	}
+}
+
 std::string gcew::commons::codeCorrector(std::string code)
 {
-	int post = 0;
-	for (auto i : findAllIndexes(code, "{")) {
-		code.insert(code.begin() + i + post, '\n');
-		post++;
-		code.insert(code.begin() + i + 1 + post, '\n');
-		post++;
-	}
-	post = 0;
-	for (auto i : findAllIndexes(code, "}")) {
-		code.insert(code.begin() + i + post, '\n');
-		post++;
-		code.insert(code.begin() + i + 1 + post, '\n');
-		post++;
-	}
-	post = 0;
-	for (auto i : findAllIndexes(code, ";")) {
-		code.insert(code.begin() + i + 1 + post, '\n');
-		post++;
-	}
-	post = 0;
-	for (auto i : findAllIndexes(code, ">")) {
-		code.insert(code.begin() + i + 1 + post, '\n');
-		post++;
-	}
-	post = 0;
-	for (auto i : findAllIndexes(code, "#")) {
-		code.insert(code.begin() + i + post, '\n');
-		post++;
-	}
+	aroundNewLine(code, '{');
+	aroundNewLine(code, '}');
+	rightNewLine(code, ';');
+	leftNewLine(code, '#');
+	aroundSpace(code, '<');
+	aroundSpace(code, '>');
+	aroundSpace(code, "&&");
+	aroundSpace(code, "||");
 
 	code = eraseSpaces(code);
 	return trim(code);

@@ -6,10 +6,9 @@ namespace gcew::trees::elements::operations
 	IncludeOperation::IncludeOperation(int index, std::string line)
 		: Operation(index, line, RegexResult::Include)
 	{
-		auto openBreak = line.find("<");
-		auto closeBreak = line.find(">");
+		auto parts = splitter(line, ' ');
 
-		fileName = line.substr(openBreak + 1, closeBreak - openBreak - 1);
+		fileName = parts[1];
 		if (fileName.find(".") != std::string::npos) {
 			isLocal = true;
 			fileName = CompileConfiguration::instance().workPath + fileName;

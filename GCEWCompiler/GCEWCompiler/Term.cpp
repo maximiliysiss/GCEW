@@ -12,4 +12,8 @@ namespace gcew::trees::parser
 	{
 	}
 
+	void Term::toCode(std::string & code)
+	{
+	}
+
 }

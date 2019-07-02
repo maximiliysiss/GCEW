@@ -19,6 +19,14 @@ namespace gcew::trees::parser
 	};
 
 	class OperatorNot : public OneNode {
+	public:
+		OperatorNot(std::string operation, BaseNode * node);
+		virtual void toCode(std::string & code) override;
+	};
+
+	class CallNode : public OneNode {
+	public:
+		CallNode(std::string operation, BaseNode * node);
 		virtual void toCode(std::string & code) override;
 	};
 }

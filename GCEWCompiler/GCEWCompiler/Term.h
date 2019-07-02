@@ -14,6 +14,9 @@ namespace gcew::trees::parser
 	public:
 		Term(std::string value);
 		~Term();
+
+		// Inherited via BaseNode
+		virtual void toCode(std::string & code) override;
 	};
 }
 

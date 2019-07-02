@@ -27,7 +27,8 @@ std::string correctFiles(std::string path, std::string pathTo) {
 		std::stringstream ss(tmp);
 		std::string includeFinder;
 		while (std::getline(ss, includeFinder)) {
-			if (gcew::regulars::TreeRegularBuilder::regex(includeFinder) == gcew::commons::RegexResult::Include) {
+			gcew::commons::RegexResult reg = gcew::regulars::TreeRegularBuilder::regex(includeFinder);
+			if (reg == gcew::commons::RegexResult::Include) {
 				gcew::trees::elements::operations::IncludeOperation include(0, includeFinder);
 				if (include.isLocalFile())
 					correctFiles(include.getFileName(), pathTo);
@@ -46,13 +47,16 @@ std::string correctFiles(std::string path, std::string pathTo) {
 Tree * generateTree(std::string path) {
 	std::ifstream fileRead(path);
 	std::string line;
+	int index = 0;
 	Tree * root = new Tree(0, "", RegexResult::NotClassic);
 	while (std::getline(fileRead, line)) {
 		RegexResult reg = gcew::regulars::TreeRegularBuilder::regex(line);
 		switch (reg) {
 		case RegexResult::Type:
+			root->addOperation(new Variable(index, line));
 			break;
 		}
+		index++;
 	}
 	return nullptr;
 }

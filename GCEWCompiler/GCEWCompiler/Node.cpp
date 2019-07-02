@@ -25,11 +25,93 @@ namespace gcew::trees::parser
 	{
 	}
 
+	OperatorLower::OperatorLower(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
 	void OperatorLower::toCode(std::string & code)
 	{
 	}
 
+	OperatorEqual::OperatorEqual(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
 	void OperatorEqual::toCode(std::string & code)
+	{
+	}
+
+	OperatorNotEqual::OperatorNotEqual(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
+	void OperatorNotEqual::toCode(std::string & code)
+	{
+	}
+
+	OperatorAnd::OperatorAnd(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
+	void OperatorAnd::toCode(std::string & code)
+	{
+	}
+
+	OperatorOr::OperatorOr(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
+	void OperatorOr::toCode(std::string & code)
+	{
+	}
+
+	OperatorPlus::OperatorPlus(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
+	void OperatorPlus::toCode(std::string & code)
+	{
+	}
+
+	OperatorMinus::OperatorMinus(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
+	void OperatorMinus::toCode(std::string & code)
+	{
+	}
+
+	OperatorMultiply::OperatorMultiply(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
+	void OperatorMultiply::toCode(std::string & code)
+	{
+	}
+
+	OperatorDivide::OperatorDivide(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
+	void OperatorDivide::toCode(std::string & code)
+	{
+	}
+
+	OperatorMod::OperatorMod(std::string operation, BaseNode * left, BaseNode * right)
+		:Node(operation, left, right)
+	{
+	}
+
+	void OperatorMod::toCode(std::string & code)
 	{
 	}
 

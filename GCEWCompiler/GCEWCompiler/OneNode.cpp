@@ -14,4 +14,22 @@ namespace gcew::trees::parser
 			delete node;
 	}
 
+	OperatorNot::OperatorNot(std::string operation, BaseNode * node)
+		:OneNode(node, operation)
+	{
+	}
+
+	void OperatorNot::toCode(std::string & code)
+	{
+	}
+
+	CallNode::CallNode(std::string operation, BaseNode * node)
+		:OneNode(node, operation)
+	{
+	}
+
+	void CallNode::toCode(std::string & code)
+	{
+	}
+
 }
