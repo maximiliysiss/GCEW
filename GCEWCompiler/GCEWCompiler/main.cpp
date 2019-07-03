@@ -7,6 +7,7 @@
 #include "CompileConfiguration.h"
 #include "PreProcessor.h"
 #include "Tree.h"
+#include "AssigmentOperation.h"
 #include <filesystem>
 
 using std::cout;
@@ -54,6 +55,9 @@ Tree * generateTree(std::string path) {
 		switch (reg) {
 		case RegexResult::Type:
 			root->addOperation(new Variable(index, line));
+			break;
+		case RegexResult::Assigment:
+			root->addOperation(new gcew::trees::elements::operations::AssigmentOperation(index, line));
 			break;
 		}
 		index++;

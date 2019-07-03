@@ -135,6 +135,18 @@
     <ClInclude Include="Parser.h">
       <Filter>Header Files\commons</Filter>
     </ClInclude>
+    <ClInclude Include="AssigmentOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
+    <ClInclude Include="CallOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
+    <ClInclude Include="ContinueOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tree.cpp">
@@ -208,6 +220,18 @@
     </ClCompile>
     <ClCompile Include="Parser.cpp">
       <Filter>Source Files\commons</Filter>
+    </ClCompile>
+    <ClCompile Include="AssigmentOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="CallOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinueOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

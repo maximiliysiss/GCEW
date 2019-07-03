@@ -119,7 +119,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AssigmentOperation.h" />
+    <ClInclude Include="BreakOperation.h" />
+    <ClInclude Include="CallOperation.h" />
     <ClInclude Include="CompileConfiguration.h" />
+    <ClInclude Include="ContinueOperation.h" />
     <ClInclude Include="CustomTypes.h" />
     <ClInclude Include="CycleTree.h" />
     <ClInclude Include="Element.h" />
@@ -143,7 +147,11 @@
     <ClInclude Include="Variable.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssigmentOperation.cpp" />
+    <ClCompile Include="BreakOperation.cpp" />
+    <ClCompile Include="CallOperation.cpp" />
     <ClCompile Include="CompileConfiguration.cpp" />
+    <ClCompile Include="ContinueOperation.cpp" />
     <ClCompile Include="CustomTypes.cpp" />
     <ClCompile Include="CycleTree.cpp" />
     <ClCompile Include="Element.cpp" />
