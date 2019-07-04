@@ -34,6 +34,22 @@ namespace gcew::trees::structural
 	{
 	}
 
+	CycleTree * Tree::findCycleTreeUp()
+	{
+		if (this->nodeType == RegexResult::For || this->nodeType == RegexResult::While)
+			return (CycleTree*)this;
+		if (!this->parent)
+			return nullptr;
+		return this->parent->findCycleTreeUp();
+	}
+
+	IfTree * Tree::findIfTreePrev()
+	{
+		if (typeid(*(this->getChildren().end() - 1)) == typeid(IfTree*))
+			return (IfTree*)*(this->getChildren().end() - 1);
+		return nullptr;
+	}
+
 	void Tree::optimize()
 	{
 	}
@@ -43,9 +59,9 @@ namespace gcew::trees::structural
 		return std::string();
 	}
 
-	std::list<Tree*> Tree::getChildren()
+	std::vector<Tree*> Tree::getChildren()
 	{
-		std::list<Tree*> children;
+		std::vector<Tree*> children;
 		for (elements::Element* tr : this->operations)
 			if (typeid(*tr) == typeid(Tree))
 				children.push_back((Tree*)tr);

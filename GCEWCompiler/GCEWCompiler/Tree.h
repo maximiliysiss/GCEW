@@ -4,6 +4,8 @@
 #include "Element.h"
 #include "CustomTypes.h"
 #include "Variable.h"
+#include "IfTree.h"
+#include "CycleTree.h"
 
 #ifndef TREE_H
 #define TREE_H
@@ -28,9 +30,11 @@ namespace gcew::trees::structural
 		virtual ~Tree();
 		void treeChildrenPrinter(std::ostream & out, int level = 0);
 		void variableInfoPrinter(std::ostream & out, int level = 0);
+		CycleTree * findCycleTreeUp();
+		IfTree * findIfTreePrev();
 		void optimize();
 		std::string createCode();
-		std::list<Tree*> getChildren();
+		std::vector<Tree*> getChildren();
 		inline Tree* getParent() const { return parent; }
 		Tree * addChild(Tree * child);
 		Tree * getRoot();

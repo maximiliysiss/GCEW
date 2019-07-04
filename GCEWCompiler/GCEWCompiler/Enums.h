@@ -24,7 +24,8 @@ namespace gcew::commons
 		PureAsm,
 		Class,
 		Struct,
-		Return
+		Return,
+		Block
 	};
 }
 

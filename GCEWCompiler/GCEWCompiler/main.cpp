@@ -8,11 +8,16 @@
 #include "PreProcessor.h"
 #include "Tree.h"
 #include "AssigmentOperation.h"
+#include "BreakOperation.h"
+#include "ContinueOperation.h"
+#include "CallOperation.h"
+#include "ForTree.h"
 #include <filesystem>
 
 using std::cout;
 using namespace std::filesystem;
 using namespace gcew::trees::structural;
+using namespace gcew::trees::elements::operations;
 
 std::string correctFiles(std::string path, std::string pathTo) {
 	std::ifstream inFile(path);
@@ -58,6 +63,33 @@ Tree * generateTree(std::string path) {
 			break;
 		case RegexResult::Assigment:
 			root->addOperation(new gcew::trees::elements::operations::AssigmentOperation(index, line));
+			break;
+		case RegexResult::Break:
+			root->addOperation(new BreakOperation(index, line, root->findCycleTreeUp()));
+			break;
+		case RegexResult::Call:
+			root->addOperation(new CallOperation(index, line));
+			break;
+		case RegexResult::Continue:
+			root->addOperation(new ContinueOperation(index, line, root->findCycleTreeUp()));
+			break;
+		case RegexResult::Else:
+		{
+			ElseTree * elseTree = new ElseTree(index, line);
+			std::getline(fileRead, line);
+			root->findIfTreePrev()->setElse(elseTree);
+			root = root->addChild(elseTree);
+			break;
+		}
+		case RegexResult::FigureClose:
+			root = root->getParent();
+			break;
+		case RegexResult::FigureOpen:
+			root = root->addChild(new Tree(index, "", RegexResult::Block));
+			break;
+		case RegexResult::For:
+			root = root->addChild(new ForTree(index, line));
+			std::getline(fileRead, line);
 			break;
 		}
 		index++;
