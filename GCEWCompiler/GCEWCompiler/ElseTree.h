@@ -1,7 +1,4 @@
 #pragma once
-#ifndef ELSETREE_H
-#define ELSETREE_H
-
 #include "Tree.h"
 
 namespace gcew::trees::structural
@@ -14,7 +11,4 @@ namespace gcew::trees::structural
 		~ElseTree();
 	};
 }
-
-
-#endif // !ELSETREE_H
 

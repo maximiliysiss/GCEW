@@ -7,10 +7,17 @@
 #include <list>
 #include <vector>
 #include <cctype>
+#include <stack>
 #include <algorithm>
+#include "TreeRegularBuilder.h"
 
 namespace gcew::commons
 {
+
+	enum CorrectorState {
+		Default
+	};
+
 
 	std::string ltrim(std::string str);
 	std::string rtrim(std::string str);
@@ -31,6 +38,8 @@ namespace gcew::commons
 	bool inContainer(T elem, std::initializer_list<T> list) {
 		return std::find(list.begin(), list.end(), elem) != list.end();
 	}
+
+	bool isBracketCorrect(const std::string & str);
 }
 
 #endif // !INSTRUMENTS_H

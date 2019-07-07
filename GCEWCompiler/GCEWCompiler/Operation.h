@@ -7,7 +7,6 @@
 
 namespace  gcew::trees::elements
 {
-
 	class Operation
 		: public Element
 	{

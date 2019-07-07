@@ -1,13 +1,9 @@
 #pragma once
-#ifndef CYCLETREE_H
-#define CYCLETREE_H
-
 #include "Tree.h"
 #include "BaseNode.h"
 
 namespace gcew::trees::structural
 {
-
 	using namespace gcew::trees::parser;
 
 	class CycleTree :
@@ -20,7 +16,5 @@ namespace gcew::trees::structural
 		~CycleTree();
 	};
 }
-
-#endif // !CYCLETREE_H
 
 

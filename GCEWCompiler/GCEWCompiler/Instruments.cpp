@@ -161,18 +161,14 @@ void aroundSpace(std::string& code, char c) {
 	}
 }
 
+static gcew::commons::CorrectorState correctorState = gcew::commons::CorrectorState::Default;
+
 std::string gcew::commons::codeCorrector(std::string code)
 {
-	aroundNewLine(code, '{');
-	aroundNewLine(code, '}');
-	rightNewLine(code, ';');
-	leftNewLine(code, '#');
-	aroundSpace(code, '<');
-	aroundSpace(code, '>');
-	aroundSpace(code, "&&");
-	aroundSpace(code, "||");
+	auto regexes = gcew::regulars::TreeRegularBuilder::regexMatching(code);
+	for (int i = 0; i < code.length(); i++) {
 
-	code = eraseSpaces(code);
+	}
 	return trim(code);
 }
 
@@ -224,4 +220,18 @@ bool gcew::commons::isNumber(std::string str)
 		if (!std::isdigit(c))
 			return false;
 	return true;
+}
+
+bool gcew::commons::isBracketCorrect(const std::string & str)
+{
+	std::stack<char> s;
+	for (char c : str) {
+		if (c == ')' && !s.empty() && s.top() == '(') {
+			s.pop();
+			continue;
+		}
+		if (c == ')' || c == '(')
+			s.push(c);
+	}
+	return s.empty();
 }

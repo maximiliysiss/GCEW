@@ -1,6 +1,4 @@
 #pragma once
-#ifndef IFTREE_H
-#define IFTREE_H
 #include "Tree.h"
 #include "ElseTree.h"
 
@@ -16,7 +14,5 @@ namespace gcew::trees::structural
 		~IfTree();
 	};
 }
-
-#endif // !IFTREE_H
 
 

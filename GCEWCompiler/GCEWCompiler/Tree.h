@@ -1,18 +1,18 @@
 #pragma once
+#include <vector>
 #include <list>
 #include "Enums.h"
 #include "Element.h"
+#include "Instruments.h"
 #include "CustomTypes.h"
 #include "Variable.h"
-#include "IfTree.h"
-#include "CycleTree.h"
-
-#ifndef TREE_H
-#define TREE_H
 
 namespace gcew::trees::structural
 {
 	using namespace gcew::trees::elements;
+
+	class CycleTree;
+	class IfTree;
 
 	class Tree :
 		public Element
@@ -45,5 +45,3 @@ namespace gcew::trees::structural
 		virtual void toCode(std::string & code) override;
 	};
 }
-
-#endif

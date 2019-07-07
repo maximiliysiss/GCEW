@@ -1,11 +1,6 @@
 #pragma once
-#ifndef VARIABLE_H
 #include "Element.h"
-#include "BaseNode.h"
 #include "Parser.h"
-#include "Instruments.h"
-
-#define VARIABLE_H
 
 namespace  gcew::trees::elements
 {
@@ -23,7 +18,5 @@ namespace  gcew::trees::elements
 		~Variable();
 	};
 }
-
-#endif // !VARIABLE_H
 
 

@@ -1,17 +1,19 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Tree.h"
 #include "Instruments.h"
 #include "TreeRegularBuilder.h"
 #include "IncludeOperation.h"
 #include "CompileConfiguration.h"
 #include "PreProcessor.h"
-#include "Tree.h"
 #include "AssigmentOperation.h"
 #include "BreakOperation.h"
 #include "ContinueOperation.h"
 #include "CallOperation.h"
 #include "ForTree.h"
+#include "ElseTree.h"
+#include "IfTree.h"
 #include <filesystem>
 
 using std::cout;
@@ -28,6 +30,7 @@ std::string correctFiles(std::string path, std::string pathTo) {
 	bool isComment = false;
 	while (std::getline(inFile, tmp)) {
 		gcew::commons::commentEraser(tmp, isComment);
+		tmp = trim(tmp);
 		tmp = gcew::commons::codeCorrector(tmp);
 
 		std::stringstream ss(tmp);
@@ -42,7 +45,7 @@ std::string correctFiles(std::string path, std::string pathTo) {
 		}
 
 		if (tmp.length() > 0 && !isComment)
-			outFile << tmp << std::endl;
+			outFile << tmp << (isBracketCorrect(tmp) ? "\n" : "");
 	}
 
 	inFile.close();
@@ -59,7 +62,7 @@ Tree * generateTree(std::string path) {
 		RegexResult reg = gcew::regulars::TreeRegularBuilder::regex(line);
 		switch (reg) {
 		case RegexResult::Type:
-			root->addOperation(new Variable(index, line));
+			root->addOperation(new gcew::trees::elements::Variable(index, line));
 			break;
 		case RegexResult::Assigment:
 			root->addOperation(new gcew::trees::elements::operations::AssigmentOperation(index, line));
@@ -75,7 +78,7 @@ Tree * generateTree(std::string path) {
 			break;
 		case RegexResult::Else:
 		{
-			ElseTree * elseTree = new ElseTree(index, line);
+			gcew::trees::structural::ElseTree * elseTree = new ElseTree(index, line);
 			std::getline(fileRead, line);
 			root->findIfTreePrev()->setElse(elseTree);
 			root = root->addChild(elseTree);
