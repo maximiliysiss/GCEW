@@ -70,6 +70,7 @@ namespace gcew::trees::structural
 
 	Tree * Tree::addChild(Tree * child)
 	{
+		child->parent = this;
 		this->operations.push_back(child);
 		return child;
 	}

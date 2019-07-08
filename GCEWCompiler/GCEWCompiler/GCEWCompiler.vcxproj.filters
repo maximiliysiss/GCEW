@@ -147,6 +147,12 @@
     <ClInclude Include="ContinueOperation.h">
       <Filter>Header Files\trees\elements\operations</Filter>
     </ClInclude>
+    <ClInclude Include="ElementsContrustor.h">
+      <Filter>Header Files\trees</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionTree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tree.cpp">
@@ -232,6 +238,12 @@
     </ClCompile>
     <ClCompile Include="ContinueOperation.cpp">
       <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="ElementsContrustor.cpp">
+      <Filter>Source Files\trees</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionTree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

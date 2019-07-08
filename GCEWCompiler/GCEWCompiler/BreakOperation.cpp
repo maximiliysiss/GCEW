@@ -1,7 +1,7 @@
 #include "BreakOperation.h"
 
-gcew::trees::elements::operations::BreakOperation::BreakOperation(int index, std::string line, gcew::trees::structural::CycleTree * cycleTree)
-	:Operation(index, line, RegexResult::Break), cycleTree(cycleTree)
+gcew::trees::elements::operations::BreakOperation::BreakOperation(int index, std::string line)
+	:Operation(index, line, RegexResult::Break)
 {
 }
 

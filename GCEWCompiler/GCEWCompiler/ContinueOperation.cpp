@@ -1,8 +1,7 @@
 #include "ContinueOperation.h"
 
-
-gcew::trees::elements::operations::ContinueOperation::ContinueOperation(int index, std::string line, gcew::trees::structural::CycleTree * cycleTree)
-	:Operation(index, line, RegexResult::Continue), cycleTree(cycleTree)
+gcew::trees::elements::operations::ContinueOperation::ContinueOperation(int index, std::string line)
+	: Operation(index, line, RegexResult::Continue)
 {
 }
 

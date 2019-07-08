@@ -19,6 +19,8 @@ std::string gcew::commons::trim(std::string str)
 	return ltrim(rtrim(str));
 }
 
+
+
 void gcew::commons::commentEraser(std::string &line, bool & currentState)
 {
 	auto indexOpen = line.find("/*");
@@ -104,7 +106,7 @@ void aroundNewLine(std::string& code, std::string c) {
 	for (auto i : gcew::commons::findAllIndexes(code, c)) {
 		code.insert(code.begin() + i + post, '\n');
 		post++;
-		code.insert(code.begin() + i + 1 + post, '\n');
+		code.insert(code.begin() + i + c.length() + post, '\n');
 		post++;
 	}
 }
@@ -112,7 +114,7 @@ void aroundNewLine(std::string& code, std::string c) {
 void rightNewLine(std::string& code, std::string c) {
 	int post = 0;
 	for (auto i : gcew::commons::findAllIndexes(code, c)) {
-		code.insert(code.begin() + i + 1 + post, '\n');
+		code.insert(code.begin() + c.length() + i + post, '\n');
 		post++;
 	}
 }
@@ -166,9 +168,30 @@ static gcew::commons::CorrectorState correctorState = gcew::commons::CorrectorSt
 std::string gcew::commons::codeCorrector(std::string code)
 {
 	auto regexes = gcew::regulars::TreeRegularBuilder::regexMatching(code);
-	for (int i = 0; i < code.length(); i++) {
+	aroundNewLine(code, '{');
+	aroundNewLine(code, '}');
+	leftNewLine(code, '#');
+	aroundSpace(code, '<');
+	aroundSpace(code, '>');
+	aroundSpace(code, "&&");
+	aroundSpace(code, "||");
+	aroundSpace(code, '=');
 
+	if (std::find(regexes.begin(), regexes.end(), gcew::regulars::RegexResult::For) != regexes.end()) {
+		std::regex rg(gcew::regulars::TreeRegularBuilder::getForRegex());
+		std::smatch sm;
+		auto cpy = code;
+		while (std::regex_search(cpy, sm, rg)) {
+			for (auto m : sm) {
+				rightNewLine(code, m);
+				removeFromString(cpy, m);
+			}
+		}
 	}
+	else
+		rightNewLine(code, ';');
+
+	code = eraseSpaces(code);
 	return trim(code);
 }
 
@@ -234,4 +257,12 @@ bool gcew::commons::isBracketCorrect(const std::string & str)
 			s.push(c);
 	}
 	return s.empty();
+}
+
+void gcew::commons::removeFromString(std::string & input, std::string remove)
+{
+	size_t iter;
+	while ((iter = input.find(remove)) != std::string::npos) {
+		input.erase(input.begin() + iter, input.begin() + iter + remove.length());
+	}
 }

@@ -127,10 +127,12 @@
     <ClInclude Include="CustomTypes.h" />
     <ClInclude Include="CycleTree.h" />
     <ClInclude Include="Element.h" />
+    <ClInclude Include="ElementsContrustor.h" />
     <ClInclude Include="ElseTree.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="BaseNode.h" />
     <ClInclude Include="ForTree.h" />
+    <ClInclude Include="FunctionTree.h" />
     <ClInclude Include="IfTree.h" />
     <ClInclude Include="IncludeOperation.h" />
     <ClInclude Include="Instruments.h" />
@@ -156,8 +158,10 @@
     <ClCompile Include="CycleTree.cpp" />
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="BaseNode.cpp" />
+    <ClCompile Include="ElementsContrustor.cpp" />
     <ClCompile Include="ElseTree.cpp" />
     <ClCompile Include="ForTree.cpp" />
+    <ClCompile Include="FunctionTree.cpp" />
     <ClCompile Include="IfTree.cpp" />
     <ClCompile Include="IncludeOperation.cpp" />
     <ClCompile Include="Instruments.cpp" />

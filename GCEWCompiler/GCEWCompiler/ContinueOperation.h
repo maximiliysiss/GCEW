@@ -12,8 +12,12 @@ namespace gcew::trees::elements::operations
 	{
 		gcew::trees::structural::CycleTree * cycleTree;
 	public:
-		ContinueOperation(int index, std::string line, gcew::trees::structural::CycleTree * cycleTree);
+		ContinueOperation(int index, std::string line);
 		~ContinueOperation();
+
+		inline void setCycleTree(gcew::trees::structural::CycleTree * cycleTree) {
+			this->cycleTree = cycleTree;
+		}
 
 		// Inherited via Operation
 		virtual void toCode(std::string & code) override;

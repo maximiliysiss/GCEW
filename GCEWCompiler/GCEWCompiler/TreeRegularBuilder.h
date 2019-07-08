@@ -50,6 +50,8 @@ namespace gcew::regulars
 		static RegexResult isReturn(std::string input, bool);
 	public:
 		static RegexResult isFunctionInExpression(std::string input);
+
+		static std::string getForRegex();
 	};
 }
 

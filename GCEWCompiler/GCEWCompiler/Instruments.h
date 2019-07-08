@@ -33,13 +33,8 @@ namespace gcew::commons
 	std::list<size_t> findAllIndexesWithOffset(std::string input, std::string substr);
 	std::list<size_t> findAllIndexesWithOffset(std::string input, char substr);
 	bool isNumber(std::string str);
-
-	template<typename T>
-	bool inContainer(T elem, std::initializer_list<T> list) {
-		return std::find(list.begin(), list.end(), elem) != list.end();
-	}
-
 	bool isBracketCorrect(const std::string & str);
+	void removeFromString(std::string & input, std::string remove);
 }
 
 #endif // !INSTRUMENTS_H

@@ -7,13 +7,7 @@
 #include "IncludeOperation.h"
 #include "CompileConfiguration.h"
 #include "PreProcessor.h"
-#include "AssigmentOperation.h"
-#include "BreakOperation.h"
-#include "ContinueOperation.h"
-#include "CallOperation.h"
-#include "ForTree.h"
-#include "ElseTree.h"
-#include "IfTree.h"
+#include "ElementsContrustor.h"
 #include <filesystem>
 
 using std::cout;
@@ -62,23 +56,15 @@ Tree * generateTree(std::string path) {
 		RegexResult reg = gcew::regulars::TreeRegularBuilder::regex(line);
 		switch (reg) {
 		case RegexResult::Type:
-			root->addOperation(new gcew::trees::elements::Variable(index, line));
-			break;
 		case RegexResult::Assigment:
-			root->addOperation(new gcew::trees::elements::operations::AssigmentOperation(index, line));
-			break;
 		case RegexResult::Break:
-			root->addOperation(new BreakOperation(index, line, root->findCycleTreeUp()));
-			break;
 		case RegexResult::Call:
-			root->addOperation(new CallOperation(index, line));
-			break;
 		case RegexResult::Continue:
-			root->addOperation(new ContinueOperation(index, line, root->findCycleTreeUp()));
+			root->addOperation(gcew::trees::construct_elements(reg, index, line));
 			break;
 		case RegexResult::Else:
 		{
-			gcew::trees::structural::ElseTree * elseTree = new ElseTree(index, line);
+			ElseTree * elseTree = (ElseTree*)gcew::trees::construct_elements(reg, index, line);
 			std::getline(fileRead, line);
 			root->findIfTreePrev()->setElse(elseTree);
 			root = root->addChild(elseTree);
@@ -90,10 +76,21 @@ Tree * generateTree(std::string path) {
 		case RegexResult::FigureOpen:
 			root = root->addChild(new Tree(index, "", RegexResult::Block));
 			break;
+		case RegexResult::While:
+		case RegexResult::Function:
 		case RegexResult::For:
-			root = root->addChild(new ForTree(index, line));
+		case RegexResult::If:
+		case RegexResult::PureAsm:
+			root = root->addChild((Tree*)gcew::trees::construct_elements(reg, index, line));
 			std::getline(fileRead, line);
 			break;
+		case RegexResult::Return:
+		{
+			gcew::trees::elements::operations::ReturnOperation * ret = (ReturnOperation*)gcew::trees::construct_elements(reg, index, line);
+			ret->setFunctionTree((FunctionTree*)root);
+			root->addOperation(ret);
+			break;
+		}
 		}
 		index++;
 	}

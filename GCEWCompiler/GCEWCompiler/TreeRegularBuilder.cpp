@@ -93,7 +93,7 @@ namespace gcew::regulars
 
 	RegexResult TreeRegularBuilder::isFor(std::string input, bool type)
 	{
-		return regex_matcher("^for\\(.*;.*;.*\\)$", input, type) ? RegexResult::For : RegexResult::NotClassic;
+		return regex_matcher(getForRegex(), input, type) ? RegexResult::For : RegexResult::NotClassic;
 	}
 
 	RegexResult TreeRegularBuilder::isOpenFigure(std::string input, bool type)
@@ -137,5 +137,10 @@ namespace gcew::regulars
 		if (std::regex_match(input, reg))
 			return RegexResult::Call;
 		return RegexResult::NotClassic;
+	}
+
+	std::string TreeRegularBuilder::getForRegex()
+	{
+		return "^for\\(.*;.*;.*\\)$";
 	}
 }
