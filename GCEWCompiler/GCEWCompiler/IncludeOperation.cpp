@@ -26,8 +26,4 @@ namespace gcew::trees::elements::operations
 	{
 	}
 
-	void IncludeOperation::postTreeWork(gcew::trees::structural::Tree * tree)
-	{
-	}
-
 }

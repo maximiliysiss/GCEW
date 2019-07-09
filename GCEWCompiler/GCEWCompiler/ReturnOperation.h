@@ -15,7 +15,6 @@ namespace gcew::trees::elements::operations
 
 		// Inherited via Operation
 		virtual void toCode(std::string & code) override;
-		virtual void postTreeWork(gcew::trees::structural::Tree * tree) override;
 	};
 }
 

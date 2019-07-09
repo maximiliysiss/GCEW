@@ -140,6 +140,8 @@
     <ClInclude Include="Operation.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="PreProcessor.h" />
+    <ClInclude Include="PureAsmTree.h" />
+    <ClInclude Include="ReturnOperation.h" />
     <ClInclude Include="Term.h" />
     <ClInclude Include="tinystr.h" />
     <ClInclude Include="tinyxml.h" />
@@ -170,6 +172,8 @@
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="PreProcessor.cpp" />
+    <ClCompile Include="PureAsmTree.cpp" />
+    <ClCompile Include="ReturnOperation.cpp" />
     <ClCompile Include="Term.cpp" />
     <ClCompile Include="tinystr.cpp" />
     <ClCompile Include="tinyxml.cpp" />

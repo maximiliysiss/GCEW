@@ -153,6 +153,12 @@
     <ClInclude Include="FunctionTree.h">
       <Filter>Header Files\trees\structural</Filter>
     </ClInclude>
+    <ClInclude Include="PureAsmTree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tree.cpp">
@@ -244,6 +250,12 @@
     </ClCompile>
     <ClCompile Include="FunctionTree.cpp">
       <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="PureAsmTree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

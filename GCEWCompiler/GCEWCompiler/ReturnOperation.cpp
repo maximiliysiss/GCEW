@@ -12,3 +12,7 @@ gcew::trees::elements::operations::ReturnOperation::~ReturnOperation()
 	if (functionTree)
 		delete functionTree;
 }
+
+void gcew::trees::elements::operations::ReturnOperation::toCode(std::string & code)
+{
+}

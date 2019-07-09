@@ -13,6 +13,7 @@ namespace gcew::trees::elements::operations
 	{
 		Variable * var;
 		BaseNode * exp;
+		std::string name;
 	public:
 		AssigmentOperation(int index, std::string line);
 		~AssigmentOperation();

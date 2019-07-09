@@ -29,4 +29,5 @@ gcew::trees::elements::Element * gcew::trees::construct_elements(gcew::regulars:
 	case RegexResult::While:
 		return new CycleTree(index, line, RegexResult::While);
 	}
+	return nullptr;
 }
