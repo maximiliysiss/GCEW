@@ -5,6 +5,10 @@
 #include <string>
 #include <map>
 #include "tinyxml.h"
+#include "Parser.h"
+#include "Tree.h"
+
+constexpr auto COMMONS = "commons";
 
 namespace gcew::commons
 {
@@ -19,6 +23,9 @@ namespace gcew::commons
 		static std::string path;
 		static std::string workPath;
 		static CompileConfiguration & instance();
+		static std::map < std::string, std::map<Operations, std::string>> typeOperation;
+		static std::string getTypeInitializeByValue(std::string value);
+		static gcew::trees::structural::Tree * currentTree;
 		inline std::string getCompilePath() const { return pathForCompile; }
 		inline std::string getLibsPath() const { return libsPath; }
 	private:

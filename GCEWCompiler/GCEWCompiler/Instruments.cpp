@@ -163,8 +163,6 @@ void aroundSpace(std::string& code, char c) {
 	}
 }
 
-static gcew::commons::CorrectorState correctorState = gcew::commons::CorrectorState::Default;
-
 std::string gcew::commons::codeCorrector(std::string code)
 {
 	auto regexes = gcew::regulars::TreeRegularBuilder::regexMatching(code);
@@ -240,7 +238,7 @@ std::list<size_t> gcew::commons::findAllIndexesWithOffset(std::string input, cha
 bool gcew::commons::isNumber(std::string str)
 {
 	for (char c : str)
-		if (!std::isdigit(c))
+		if (!std::isdigit(c) && c != '.')
 			return false;
 	return true;
 }
@@ -265,4 +263,21 @@ void gcew::commons::removeFromString(std::string & input, std::string remove)
 	while ((iter = input.find(remove)) != std::string::npos) {
 		input.erase(input.begin() + iter, input.begin() + iter + remove.length());
 	}
+}
+
+std::string gcew::commons::createUniqueGUID()
+{
+	UUID uuid = { 0 };
+	std::string guid;
+	UuidCreate(&uuid);
+	RPC_CSTR szUuid = NULL;
+	if (UuidToStringA(&uuid, &szUuid) == RPC_S_OK)
+	{
+		guid = (char*)szUuid;
+		RpcStringFreeA(&szUuid);
+	}
+	guid.erase(std::remove(guid.begin(), guid.end(), '-'), guid.end());
+	if (std::isdigit(guid[0]))
+		guid = 'a' + guid;
+	return guid;
 }

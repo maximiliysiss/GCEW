@@ -6,6 +6,7 @@ namespace gcew::commons
 	CompileConfiguration * CompileConfiguration::compileConfiguration = nullptr;
 	std::string CompileConfiguration::path = "";
 	std::string CompileConfiguration::workPath = "";
+	gcew::trees::structural::Tree * CompileConfiguration::currentTree = nullptr;
 
 	CompileConfiguration & CompileConfiguration::instance()
 	{
@@ -16,9 +17,59 @@ namespace gcew::commons
 		return *compileConfiguration;
 	}
 
+	std::string CompileConfiguration::getTypeInitializeByValue(std::string value)
+	{
+		if (value.find('.') && gcew::commons::isNumber(value))
+			return "double";
+		if (gcew::commons::isNumber(value))
+			return "int";
+		if (std::count(value.begin(), value.end(), '\'') >= 2)
+			return "string";
+		return  "";
+	}
+
 	CompileConfiguration::CompileConfiguration()
 	{
 	}
+
+	std::map < std::string, std::map<Operations, std::string>> CompileConfiguration::typeOperation = {
+		{COMMONS,{
+			{Operations::Plus, "fadd"},
+			{Operations::Minus, "fsub"},
+			{Operations::Multiply, "fmul"},
+			{Operations::Divide, "fdiv"}
+		}},
+		{"int",{
+			{Operations::Plus, "fiadd"},
+			{Operations::Minus, "fisub"},
+			{Operations::Divide, "fimul"},
+			{Operations::Multiply, "fidiv"},
+			{Operations::FieldSet, "fild"},
+			{Operations::Convert, "dword"}
+		}},
+		{"double",{
+			{Operations::Plus, "fadd"},
+			{Operations::Minus, "fsub"},
+			{Operations::Divide, "fmul"},
+			{Operations::Multiply, "fdiv"},
+			{Operations::FieldSet, "fld"},
+			{Operations::Convert, "real8"}
+		}},
+		{"float",{
+			{Operations::Plus, "fadd"},
+			{Operations::Minus, "fsub"},
+			{Operations::Divide, "fmul"},
+			{Operations::Multiply, "fdiv"},
+			{Operations::FieldSet, "fld"},
+			{Operations::Convert, "real4"}
+		}},
+		{"bool",{
+			{Operations::Convert, "byte"}
+		}},
+		{"string",{
+			{Operations::Convert, ""}
+		}}
+	};
 
 	void CompileConfiguration::load()
 	{

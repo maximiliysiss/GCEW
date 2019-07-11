@@ -16,11 +16,13 @@ namespace  gcew::trees::elements
 		std::string line;
 		RegexResult nodeType;
 	public:
+		inline int getIndex() const { return index; }
 		Element() = delete;
 		Element(int index, std::string line);
 		Element(int index, std::string line, RegexResult reg);
 		virtual ~Element();
 		virtual void toCode(std::string & code) = 0;
+		virtual void createData(std::string & code) {}
 	};
 }
 

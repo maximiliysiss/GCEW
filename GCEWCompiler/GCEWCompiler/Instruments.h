@@ -9,16 +9,12 @@
 #include <cctype>
 #include <stack>
 #include <algorithm>
+#include <Windows.h>
 #include "TreeRegularBuilder.h"
+#pragma comment(lib, "Rpcrt4.lib")
 
 namespace gcew::commons
 {
-
-	enum CorrectorState {
-		Default
-	};
-
-
 	std::string ltrim(std::string str);
 	std::string rtrim(std::string str);
 	std::string trim(std::string str);
@@ -35,6 +31,7 @@ namespace gcew::commons
 	bool isNumber(std::string str);
 	bool isBracketCorrect(const std::string & str);
 	void removeFromString(std::string & input, std::string remove);
+	std::string createUniqueGUID();
 }
 
 #endif // !INSTRUMENTS_H

@@ -12,6 +12,21 @@
 
 namespace gcew::commons
 {
+	enum Operations {
+		FieldSet = 0,
+		Convert = 1,
+		Plus = '+',
+		Minus = '-',
+		Multiply = '*',
+		Divide = '/',
+		And = '&',
+		Or = '|',
+		Greater = '>',
+		Lower = '<',
+		Equal = '=',
+		Not = '!',
+		Mod = '%'
+	};
 
 	using namespace gcew::trees::parser;
 

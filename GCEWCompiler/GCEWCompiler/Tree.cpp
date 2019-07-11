@@ -6,9 +6,30 @@ namespace gcew::trees::structural
 	{
 		return false;
 	}
+
 	void Tree::createInnerCode(std::string & code)
 	{
+		createInitializeData(code);
+		std::sort(operations.begin(), operations.end(), [](Element*el1, Element*el2) {return el1->getIndex() < el2->getIndex(); });
+		for (auto oper : operations) {
+
+		}
 	}
+
+	void Tree::createInitializeData(std::string & code)
+	{
+		for (auto var : getVariables())
+			var->createInitializeData(code);
+		for (auto child : this->getChildren())
+			child->createInitializeData(code);
+	}
+
+	void Tree::createData(std::string & code)
+	{
+		for (auto elem : this->operations)
+			elem->createData(code);
+	}
+
 	Tree::Tree(int index, std::string line, RegexResult reg)
 		: Element(index, line, reg)
 	{
@@ -56,7 +77,10 @@ namespace gcew::trees::structural
 
 	std::string Tree::createCode()
 	{
-		return std::string();
+		std::string code;
+		createData(code);
+		createInnerCode(code);
+		return code;
 	}
 
 	std::vector<Tree*> Tree::getChildren()
@@ -89,6 +113,16 @@ namespace gcew::trees::structural
 				&& ((Variable*)elem)->getName() == name)
 				return (Variable*)elem;
 		return nullptr;
+	}
+
+	std::vector<Variable*> Tree::getVariables()
+	{
+		std::vector<Variable*> vars;
+		for (auto op : this->operations) {
+			if (typeid(*op) == typeid(Variable))
+				vars.push_back((Variable*)op);
+		}
+		return vars;
 	}
 
 	void Tree::addOperation(Element * elem)

@@ -23,6 +23,8 @@ namespace gcew::trees::structural
 		Tree* parent{ nullptr };
 		bool isBlockList();
 		virtual void createInnerCode(std::string & code);
+		virtual void createInitializeData(std::string & code);
+		virtual void createData(std::string & code);
 	public:
 		inline std::list<Element*> getElements() const { return operations; }
 		Tree() = delete;
@@ -39,6 +41,7 @@ namespace gcew::trees::structural
 		Tree * addChild(Tree * child);
 		Tree * getRoot();
 		Variable * findVariableByName(std::string name);
+		std::vector<Variable*> getVariables();
 		void addOperation(Element * elem);
 
 		// Inherited via Element

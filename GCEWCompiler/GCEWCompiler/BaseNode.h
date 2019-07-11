@@ -3,6 +3,8 @@
 #define BASENODE_H
 
 #include <string>
+#include "Instruments.h"
+#include "CompileConfiguration.h"
 
 namespace gcew::trees::parser
 {
@@ -13,6 +15,7 @@ namespace gcew::trees::parser
 	public:
 		virtual void toCode(std::string& code) = 0;
 		BaseNode();
+		virtual void createData(std::string & code) {}
 		virtual ~BaseNode();
 	};
 }

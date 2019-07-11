@@ -2,20 +2,6 @@
 
 namespace gcew::commons
 {
-	enum Operations {
-		Plus = '+',
-		Minus = '-',
-		Multiply = '*',
-		Divide = '/',
-		And = '&',
-		Or = '|',
-		Greater = '>',
-		Lower = '<',
-		Equal = '=',
-		Not = '!'
-	};
-
-
 	static const std::vector<std::vector<OperationParser>> operationsOrder{
 		{OperationParser(Operations::Plus),
 		OperationParser(Operations::Minus),
@@ -25,7 +11,8 @@ namespace gcew::commons
 		OperationParser(Operations::Divide),
 		OperationParser(Operations::Greater),
 		OperationParser(Operations::Lower),
-		OperationParser(Operations::Equal, OperationParser::Two)}
+		OperationParser(Operations::Equal, OperationParser::Two)},
+		{OperationParser(Operations::Mod)}
 	};
 
 	Node * getOperation(std::string oper, BaseNode * l, BaseNode * r) {
@@ -48,6 +35,8 @@ namespace gcew::commons
 			return new OperatorMultiply(oper, l, r);
 		case Operations::Or:
 			return new OperatorOr(oper, l, r);
+		case Operations::Mod:
+			return new OperatorMod(oper, l, r);
 		}
 		return nullptr;
 	}

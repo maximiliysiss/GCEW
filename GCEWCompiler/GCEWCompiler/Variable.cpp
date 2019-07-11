@@ -18,6 +18,20 @@ namespace gcew::trees::elements
 	{
 	}
 
+	void Variable::createInitializeData(std::string & code)
+	{
+		if (this->exp)
+			exp->toCode(code);
+	}
+
+	void Variable::createData(std::string & code)
+	{
+		std::string value = "?";
+		if (typeid(*this->exp) == typeid(Term))
+			value = ((Term*)exp)->getValue();
+		code += name + " " + gcew::commons::CompileConfiguration::typeOperation[type][Operations::Convert] + " " + value + "\n";
+	}
+
 	Variable::~Variable()
 	{
 		if (exp)
