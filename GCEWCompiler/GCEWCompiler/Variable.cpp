@@ -12,6 +12,8 @@ namespace gcew::trees::elements
 			parts = splitter(line, '=');
 			this->exp = Parser::preParser(trim(parts[1]).substr(0, parts[1].length() - 1));
 		}
+		else
+			name = name.substr(0, name.length() - 1);
 	}
 
 	void Variable::toCode(std::string & code)
@@ -20,15 +22,17 @@ namespace gcew::trees::elements
 
 	void Variable::createInitializeData(std::string & code)
 	{
-		if (this->exp)
+		if (this->exp && typeid(*this->exp) != typeid(gcew::trees::parser::Term))
 			exp->toCode(code);
 	}
 
 	void Variable::createData(std::string & code)
 	{
 		std::string value = "?";
-		if (typeid(*this->exp) == typeid(Term))
-			value = ((Term*)exp)->getValue();
+		if (exp && typeid(*this->exp) == typeid(gcew::trees::parser::Term))
+			value = ((gcew::trees::parser::Term*)exp)->getValue();
+		else if (exp)
+			exp->createData(code);
 		code += name + " " + gcew::commons::CompileConfiguration::typeOperation[type][Operations::Convert] + " " + value + "\n";
 	}
 

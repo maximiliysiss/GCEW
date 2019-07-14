@@ -1,33 +1,14 @@
 #pragma once
-#ifndef PARSER_H
-#define PARSER_H
 
+#include <algorithm>
 #include "BaseNode.h"
 #include "Instruments.h"
 #include "Node.h"
 #include "Term.h"
-#include "TreeRegularBuilder.h"
 #include "OneNode.h"
-#include <algorithm>
 
 namespace gcew::commons
 {
-	enum Operations {
-		FieldSet = 0,
-		Convert = 1,
-		Plus = '+',
-		Minus = '-',
-		Multiply = '*',
-		Divide = '/',
-		And = '&',
-		Or = '|',
-		Greater = '>',
-		Lower = '<',
-		Equal = '=',
-		Not = '!',
-		Mod = '%'
-	};
-
 	using namespace gcew::trees::parser;
 
 	struct OperationParser {
@@ -62,7 +43,5 @@ namespace gcew::commons
 
 	OperationParser getOperation(char c, int type);
 }
-
-#endif // !PARSER_H
 
 

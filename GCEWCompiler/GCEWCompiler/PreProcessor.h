@@ -7,7 +7,6 @@
 #include <fstream>
 #include "TreeRegularBuilder.h"
 #include "IncludeOperation.h"
-#include "CompileConfiguration.h"
 
 namespace gcew::trees::preprocessor
 {

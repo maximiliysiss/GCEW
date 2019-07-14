@@ -1,6 +1,8 @@
 #pragma once
 #include "Element.h"
-#include "Parser.h"
+#include "BaseNode.h"
+#include "Term.h"
+#include "Instruments.h"
 
 namespace  gcew::trees::elements
 {
@@ -16,7 +18,7 @@ namespace  gcew::trees::elements
 		inline std::string getType() const { return type; }
 		Variable(int index, std::string line);
 		void toCode(std::string & code);
-		void createInitializeData(std::string & code);
+		virtual void createInitializeData(std::string & code) override;
 		virtual void createData(std::string & code) override;
 		~Variable();
 	};

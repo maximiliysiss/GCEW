@@ -2,7 +2,9 @@
 #ifndef TERM_H
 #define TERM_H
 
+#include "CompileConfiguration.h"
 #include "BaseNode.h"
+#include "Instruments.h"
 
 namespace gcew::trees::parser
 {
@@ -15,7 +17,7 @@ namespace gcew::trees::parser
 		std::string type;
 	public:
 		inline std::string getValue() const { return value; }
-		Term(std::string value);
+		Term(std::string value, std::string type);
 		~Term();
 		virtual void createData(std::string & code) override;
 		// Inherited via BaseNode

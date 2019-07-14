@@ -3,7 +3,7 @@
 
 namespace gcew::trees::parser
 {
-	Term::Term(std::string value)
+	Term::Term(std::string value, std::string type)
 		:value(value)
 	{
 		if (gcew::commons::isNumber(this->value)) {
@@ -12,8 +12,8 @@ namespace gcew::trees::parser
 			this->name = gcew::commons::createUniqueGUID();
 		}
 		else {
-			auto var = gcew::commons::CompileConfiguration::currentTree->findVariableByName(value);
-			this->type = var->getType();
+			/*auto var = gcew::commons::CompileConfiguration::currentTree->findVariableByName(value);
+			this->type = var->getType();*/
 			this->name = value;
 		}
 	}
@@ -25,12 +25,12 @@ namespace gcew::trees::parser
 	void Term::createData(std::string & code)
 	{
 		if (isTemp)
-			code += name + " " + gcew::commons::CompileConfiguration::typeOperation[type][Operations::Convert] + " " + value + "\n";
+			code += name + " " + gcew::commons::CompileConfiguration::typeOperation[type][gcew::commons::Operations::Convert] + " " + value + "\n";
 	}
 
 	void Term::toCode(std::string & code)
 	{
-		code += gcew::commons::CompileConfiguration::typeOperation[type][Operations::FieldSet] + " " + name + "\n";
+		code += gcew::commons::CompileConfiguration::typeOperation[type][gcew::commons::Operations::FieldSet] + " " + name + "\n";
 	}
 
 }

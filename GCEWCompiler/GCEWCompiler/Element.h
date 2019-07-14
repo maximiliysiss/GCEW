@@ -21,6 +21,7 @@ namespace  gcew::trees::elements
 		Element(int index, std::string line);
 		Element(int index, std::string line, RegexResult reg);
 		virtual ~Element();
+		virtual void createInitializeData(std::string & code) {}
 		virtual void toCode(std::string & code) = 0;
 		virtual void createData(std::string & code) {}
 	};

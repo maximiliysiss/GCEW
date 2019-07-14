@@ -2,9 +2,8 @@
 #ifndef INCLUDE_OPERATION_H
 #define INCLUDE_OPERATION_H
 
-
-#include "Operation.h"
 #include "CompileConfiguration.h"
+#include "Operation.h"
 #include "Instruments.h"
 
 namespace gcew::trees::elements::operations

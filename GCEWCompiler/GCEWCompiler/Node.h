@@ -3,11 +3,10 @@
 #define NODE_H
 
 #include "BaseNode.h"
-#include "Element.h"
+#include "CompileConfiguration.h"
 
 namespace gcew::trees::parser
 {
-	using namespace gcew::trees::elements;
 
 	class Node :
 		public BaseNode

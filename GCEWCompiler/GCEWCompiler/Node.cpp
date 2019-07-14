@@ -79,7 +79,7 @@ namespace gcew::trees::parser
 	{
 		left->toCode(code);
 		right->toCode(code);
-		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][Operations::Plus] + "\n";
+		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][gcew::commons::Operations::Plus] + "\n";
 	}
 
 	OperatorMinus::OperatorMinus(std::string operation, BaseNode * left, BaseNode * right)
@@ -91,7 +91,7 @@ namespace gcew::trees::parser
 	{
 		left->toCode(code);
 		right->toCode(code);
-		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][Operations::Minus] + "\n";
+		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][gcew::commons::Operations::Minus] + "\n";
 	}
 
 	OperatorMultiply::OperatorMultiply(std::string operation, BaseNode * left, BaseNode * right)
@@ -103,7 +103,7 @@ namespace gcew::trees::parser
 	{
 		left->toCode(code);
 		right->toCode(code);
-		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][Operations::Multiply] + "\n";
+		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][gcew::commons::Operations::Multiply] + "\n";
 	}
 
 	OperatorDivide::OperatorDivide(std::string operation, BaseNode * left, BaseNode * right)
@@ -115,7 +115,7 @@ namespace gcew::trees::parser
 	{
 		left->toCode(code);
 		right->toCode(code);
-		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][Operations::Divide] + "\n";
+		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][gcew::commons::Operations::Divide] + "\n";
 	}
 
 	OperatorMod::OperatorMod(std::string operation, BaseNode * left, BaseNode * right)

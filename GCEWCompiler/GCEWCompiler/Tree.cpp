@@ -2,26 +2,18 @@
 
 namespace gcew::trees::structural
 {
+
+	Tree * Tree::currentTree = nullptr;
+
 	bool Tree::isBlockList()
 	{
 		return false;
 	}
 
-	void Tree::createInnerCode(std::string & code)
-	{
-		createInitializeData(code);
-		std::sort(operations.begin(), operations.end(), [](Element*el1, Element*el2) {return el1->getIndex() < el2->getIndex(); });
-		for (auto oper : operations) {
-
-		}
-	}
-
 	void Tree::createInitializeData(std::string & code)
 	{
-		for (auto var : getVariables())
+		for (auto var : operations)
 			var->createInitializeData(code);
-		for (auto child : this->getChildren())
-			child->createInitializeData(code);
 	}
 
 	void Tree::createData(std::string & code)
@@ -79,7 +71,7 @@ namespace gcew::trees::structural
 	{
 		std::string code;
 		createData(code);
-		createInnerCode(code);
+		toCode(code);
 		return code;
 	}
 
@@ -87,7 +79,7 @@ namespace gcew::trees::structural
 	{
 		std::vector<Tree*> children;
 		for (elements::Element* tr : this->operations)
-			if (typeid(*tr) == typeid(Tree))
+			if (dynamic_cast<Tree*>(tr))
 				children.push_back((Tree*)tr);
 		return children;
 	}
@@ -130,8 +122,22 @@ namespace gcew::trees::structural
 		this->operations.push_back(elem);
 	}
 
+	std::vector<Element*> Tree::getElementsForInit()
+	{
+		std::vector<Element*> results;
+		for (Element * elem : operations)
+			if (!dynamic_cast<Tree*>(elem))
+				results.push_back(elem);
+		return results;
+	}
+
 	void Tree::toCode(std::string & code)
 	{
+		createInitializeData(code);
+		//std::sort(operations.begin(), operations.end(), [](const Element*el1, const Element*el2) {return el1->getIndex() < el2->getIndex(); });
+		for (auto oper : operations) {
+			oper->toCode(code);
+		}
 	}
 
 }

@@ -3,8 +3,6 @@
 #define BASENODE_H
 
 #include <string>
-#include "Instruments.h"
-#include "CompileConfiguration.h"
 
 namespace gcew::trees::parser
 {

@@ -1,9 +1,23 @@
 #pragma once
-#ifndef ENUMS_H
-#define ENUMS_H
 
 namespace gcew::commons
 {
+	enum Operations {
+		FieldSet = 0,
+		Convert = 1,
+		Plus = '+',
+		Minus = '-',
+		Multiply = '*',
+		Divide = '/',
+		And = '&',
+		Or = '|',
+		Greater = '>',
+		Lower = '<',
+		Equal = '=',
+		Not = '!',
+		Mod = '%'
+	};
+
 	enum RegexResult {
 		Include,
 		Type,
@@ -28,5 +42,3 @@ namespace gcew::commons
 		Block
 	};
 }
-
-#endif // !ENUMS_H

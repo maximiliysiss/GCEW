@@ -1,14 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Tree.h"
-#include "Instruments.h"
-#include "TreeRegularBuilder.h"
-#include "IncludeOperation.h"
-#include "CompileConfiguration.h"
+#include <filesystem>
 #include "PreProcessor.h"
 #include "ElementsContrustor.h"
-#include <filesystem>
 
 using std::cout;
 using namespace std::filesystem;
@@ -94,7 +89,7 @@ Tree * generateTree(std::string path) {
 		}
 		index++;
 	}
-	return nullptr;
+	return root;
 }
 
 
@@ -122,7 +117,7 @@ int main(int argc, char ** argv)
 	create_directory(fileFolder);
 	p = correctFiles(p.string(), fileFolder.string());
 	p = gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(p.string(), nullptr);
-	generateTree(p.string());
-
+	auto rootTree = generateTree(p.string());
+	std::string code = rootTree->createCode();
 	return 0;
 }

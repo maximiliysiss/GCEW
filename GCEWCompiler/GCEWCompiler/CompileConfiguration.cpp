@@ -6,7 +6,6 @@ namespace gcew::commons
 	CompileConfiguration * CompileConfiguration::compileConfiguration = nullptr;
 	std::string CompileConfiguration::path = "";
 	std::string CompileConfiguration::workPath = "";
-	gcew::trees::structural::Tree * CompileConfiguration::currentTree = nullptr;
 
 	CompileConfiguration & CompileConfiguration::instance()
 	{

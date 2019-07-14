@@ -53,7 +53,7 @@ namespace gcew::commons
 	}
 
 	BaseNode * step(int type, std::string str, int & level) {
-		for (int i = str.length() - 1; i >= 0; i--) {
+		for (int i = static_cast<int>(str.length()) - 1; i >= 0; i--) {
 			char c = str[i];
 			if (c == '(') {
 				level--;
@@ -114,7 +114,7 @@ namespace gcew::commons
 		else if (str[0] == Operations::Not)
 			return new OperatorNot(std::string(1, Operations::Not), parser(str.substr(1)));
 		else
-			return new Term(str);
+			return new Term(str, "");
 		return result;
 	}
 }
