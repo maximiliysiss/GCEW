@@ -2,9 +2,13 @@
 
 namespace gcew::trees::parser
 {
+	void OneNode::createData(std::string & code)
+	{
+		node->createData(code);
+	}
 
 	OneNode::OneNode(BaseNode * node, std::string operation)
-		:node(node), operation(operation)
+		: node(node), operation(operation)
 	{
 	}
 

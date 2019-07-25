@@ -3,7 +3,7 @@
 namespace gcew::trees::structural
 {
 
-	Tree * Tree::currentTree = nullptr;
+	Tree ** Tree::currentTree = nullptr;
 
 	bool Tree::isBlockList()
 	{
@@ -12,7 +12,7 @@ namespace gcew::trees::structural
 
 	void Tree::createInitializeData(std::string & code)
 	{
-		for (auto var : operations)
+		for (auto var : this->getElementsForInit())
 			var->createInitializeData(code);
 	}
 
@@ -22,8 +22,8 @@ namespace gcew::trees::structural
 			elem->createData(code);
 	}
 
-	Tree::Tree(int index, std::string line, RegexResult reg)
-		: Element(index, line, reg)
+	Tree::Tree(int index, std::string line, gcew::commons::RegexResult reg)
+		: gcew::trees::elements::Element(index, line, reg)
 	{
 	}
 
@@ -49,7 +49,7 @@ namespace gcew::trees::structural
 
 	CycleTree * Tree::findCycleTreeUp()
 	{
-		if (this->nodeType == RegexResult::For || this->nodeType == RegexResult::While)
+		if (this->nodeType == gcew::commons::RegexResult::For || this->nodeType == gcew::commons::RegexResult::While)
 			return (CycleTree*)this;
 		if (!this->parent)
 			return nullptr;
@@ -69,8 +69,10 @@ namespace gcew::trees::structural
 
 	std::string Tree::createCode()
 	{
-		std::string code;
+		std::string code = ".386\n.model flat, stdcall\noption casemap : none\ninclude /masm32/include/kernel32.inc\ninclude /masm32/macros/macros.asm\ninclude /masm32/include/msvcrt.inc\ninclude /masm32/include/masm32.inc\nincludelib /masm32/lib/kernel32\nincludelib /masm32/lib/msvcrt\nincludelib /masm32/lib/masm32";
+		code += ".data\n";
 		createData(code);
+		code += ".code";
 		toCode(code);
 		return code;
 	}
@@ -98,21 +100,23 @@ namespace gcew::trees::structural
 		return this;
 	}
 
-	Variable * Tree::findVariableByName(std::string name)
+	gcew::trees::elements::Variable * Tree::findVariableByName(std::string name)
 	{
 		for (auto elem : this->operations)
-			if (typeid(*elem) == typeid(Variable)
-				&& ((Variable*)elem)->getName() == name)
-				return (Variable*)elem;
-		return nullptr;
+			if (typeid(*elem) == typeid(gcew::trees::elements::Variable)
+				&& ((gcew::trees::elements::Variable*)elem)->getName() == name)
+				return (gcew::trees::elements::Variable*)elem;
+		if (!parent)
+			return nullptr;
+		return this->parent->findVariableByName(name);
 	}
 
-	std::vector<Variable*> Tree::getVariables()
+	std::vector<gcew::trees::elements::Variable*> Tree::getVariables()
 	{
-		std::vector<Variable*> vars;
+		std::vector<gcew::trees::elements::Variable*> vars;
 		for (auto op : this->operations) {
-			if (typeid(*op) == typeid(Variable))
-				vars.push_back((Variable*)op);
+			if (typeid(*op) == typeid(gcew::trees::elements::Variable))
+				vars.push_back((gcew::trees::elements::Variable*)op);
 		}
 		return vars;
 	}
@@ -122,7 +126,7 @@ namespace gcew::trees::structural
 		this->operations.push_back(elem);
 	}
 
-	std::vector<Element*> Tree::getElementsForInit()
+	std::vector<gcew::trees::elements::Element*> Tree::getElementsForInit()
 	{
 		std::vector<Element*> results;
 		for (Element * elem : operations)
@@ -134,8 +138,19 @@ namespace gcew::trees::structural
 	void Tree::toCode(std::string & code)
 	{
 		createInitializeData(code);
-		//std::sort(operations.begin(), operations.end(), [](const Element*el1, const Element*el2) {return el1->getIndex() < el2->getIndex(); });
+		Element * tmpMain = nullptr;
+		std::vector<Element*> opers;
 		for (auto oper : operations) {
+			if (dynamic_cast<FunctionTree*>(oper) && ((FunctionTree*)oper)->isMain())
+				tmpMain = oper;
+			else
+				opers.push_back(oper);
+		}
+
+		if (tmpMain)
+			opers.push_back(tmpMain);
+
+		for (auto oper : opers) {
 			oper->toCode(code);
 		}
 	}

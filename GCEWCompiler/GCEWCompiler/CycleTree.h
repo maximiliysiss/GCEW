@@ -12,7 +12,7 @@ namespace gcew::trees::structural
 	protected:
 		BaseNode * condition{ nullptr };
 	public:
-		CycleTree(int index, std::string line, RegexResult reg);
+		CycleTree(int index, std::string line, gcew::commons::RegexResult reg);
 		~CycleTree();
 	};
 }

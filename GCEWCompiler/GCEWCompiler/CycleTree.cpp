@@ -3,7 +3,7 @@
 
 namespace gcew::trees::structural
 {
-	CycleTree::CycleTree(int index, std::string line, RegexResult reg)
+	CycleTree::CycleTree(int index, std::string line, gcew::commons::RegexResult reg)
 		:Tree(index, line, reg)
 	{
 	}

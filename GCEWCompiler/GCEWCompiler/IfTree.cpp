@@ -4,7 +4,7 @@ namespace gcew::trees::structural
 {
 
 	IfTree::IfTree(int index, std::string line)
-		:Tree(index, line, RegexResult::If)
+		:Tree(index, line, gcew::commons::RegexResult::If)
 	{
 		auto bracketOpen = line.find('(');
 		auto bracketClose = line.find(')');

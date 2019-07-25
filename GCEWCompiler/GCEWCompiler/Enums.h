@@ -5,6 +5,7 @@ namespace gcew::commons
 	enum Operations {
 		FieldSet = 0,
 		Convert = 1,
+		FieldGet = 2,
 		Plus = '+',
 		Minus = '-',
 		Multiply = '*',

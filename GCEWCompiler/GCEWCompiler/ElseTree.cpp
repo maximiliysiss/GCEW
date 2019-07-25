@@ -4,7 +4,7 @@ namespace gcew::trees::structural
 {
 
 	ElseTree::ElseTree(int index, std::string line)
-		:Tree(index, line, RegexResult::Else)
+		:Tree(index, line, gcew::commons::RegexResult::Else)
 	{
 	}
 

@@ -1,9 +1,5 @@
 #pragma once
-#ifndef OPERATION_H
-#include "Element.h"
 #include "Tree.h"
-
-#define OPERATION_H
 
 namespace  gcew::trees::elements
 {
@@ -17,7 +13,4 @@ namespace  gcew::trees::elements
 		virtual void postTreeWork(gcew::trees::structural::Tree* tree) {}
 	};
 }
-
-
-#endif // !OPERATION_H
 

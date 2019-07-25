@@ -1,7 +1,6 @@
 #pragma once
 
 #include <algorithm>
-#include "BaseNode.h"
 #include "Instruments.h"
 #include "Node.h"
 #include "Term.h"

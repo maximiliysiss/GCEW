@@ -18,7 +18,7 @@ namespace gcew::commons
 
 	std::string CompileConfiguration::getTypeInitializeByValue(std::string value)
 	{
-		if (value.find('.') && gcew::commons::isNumber(value))
+		if (value.find('.') != std::string::npos && gcew::commons::isNumber(value))
 			return "double";
 		if (gcew::commons::isNumber(value))
 			return "int";
@@ -36,7 +36,7 @@ namespace gcew::commons
 			{Operations::Plus, "fadd"},
 			{Operations::Minus, "fsub"},
 			{Operations::Multiply, "fmul"},
-			{Operations::Divide, "fdiv"}
+			{Operations::Divide, "fdiv"},
 		}},
 		{"int",{
 			{Operations::Plus, "fiadd"},
@@ -44,7 +44,8 @@ namespace gcew::commons
 			{Operations::Divide, "fimul"},
 			{Operations::Multiply, "fidiv"},
 			{Operations::FieldSet, "fild"},
-			{Operations::Convert, "dword"}
+			{Operations::Convert, "dword"},
+			{Operations::FieldGet, "fistp"}
 		}},
 		{"double",{
 			{Operations::Plus, "fadd"},
@@ -52,7 +53,8 @@ namespace gcew::commons
 			{Operations::Divide, "fmul"},
 			{Operations::Multiply, "fdiv"},
 			{Operations::FieldSet, "fld"},
-			{Operations::Convert, "real8"}
+			{Operations::Convert, "real8"},
+			{Operations::FieldGet, "fstp"}
 		}},
 		{"float",{
 			{Operations::Plus, "fadd"},
@@ -60,7 +62,8 @@ namespace gcew::commons
 			{Operations::Divide, "fmul"},
 			{Operations::Multiply, "fdiv"},
 			{Operations::FieldSet, "fld"},
-			{Operations::Convert, "real4"}
+			{Operations::Convert, "real4"},
+			{Operations::FieldGet, "fstp"}
 		}},
 		{"bool",{
 			{Operations::Convert, "byte"}

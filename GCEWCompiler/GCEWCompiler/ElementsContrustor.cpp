@@ -4,7 +4,7 @@ gcew::trees::elements::Element * gcew::trees::construct_elements(gcew::regulars:
 {
 	switch (reg) {
 	case RegexResult::Type:
-		return new gcew::trees::elements::Variable(index, line);
+		return new Variable(index, line);
 	case RegexResult::Assigment:
 		return new gcew::trees::elements::operations::AssigmentOperation(index, line);
 	case RegexResult::Break:

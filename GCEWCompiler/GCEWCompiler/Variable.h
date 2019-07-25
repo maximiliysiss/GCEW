@@ -1,11 +1,12 @@
 #pragma once
 #include "Element.h"
-#include "BaseNode.h"
-#include "Term.h"
 #include "Instruments.h"
+#include "BaseNode.h"
+#include "Parser.h"
 
 namespace  gcew::trees::elements
 {
+
 	class Variable
 		:public Element
 	{

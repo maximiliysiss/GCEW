@@ -8,7 +8,7 @@ namespace gcew::trees::structural
 	class IfTree :
 		public Tree
 	{
-		BaseNode * expression;
+		gcew::trees::parser::BaseNode * expression;
 		ElseTree * elseTree;
 	public:
 		IfTree(int index, std::string line);

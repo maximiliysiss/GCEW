@@ -9,6 +9,7 @@ using std::cout;
 using namespace std::filesystem;
 using namespace gcew::trees::structural;
 using namespace gcew::trees::elements::operations;
+using namespace gcew::trees::elements;
 
 std::string correctFiles(std::string path, std::string pathTo) {
 	std::ifstream inFile(path);
@@ -47,8 +48,13 @@ Tree * generateTree(std::string path) {
 	std::string line;
 	int index = 0;
 	Tree * root = new Tree(0, "", RegexResult::NotClassic);
+	Tree::currentTree = &root;
 	while (std::getline(fileRead, line)) {
 		RegexResult reg = gcew::regulars::TreeRegularBuilder::regex(line);
+		if (dynamic_cast<PureAsmTree*>(root) && reg != gcew::regulars::RegexResult::FigureClose) {
+			((PureAsmTree*)root)->addLine(line);
+			continue;
+		}
 		switch (reg) {
 		case RegexResult::Type:
 		case RegexResult::Assigment:

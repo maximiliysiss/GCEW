@@ -4,7 +4,6 @@
 
 #include "Parser.h"
 #include "Operation.h"
-#include "Variable.h"
 
 namespace gcew::trees::elements::operations
 {

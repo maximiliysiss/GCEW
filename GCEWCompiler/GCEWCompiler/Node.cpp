@@ -8,6 +8,12 @@ namespace gcew::trees::parser
 	{
 	}
 
+	void Node::createData(std::string & code)
+	{
+		left->createData(code);
+		right->createData(code);
+	}
+
 	Node::~Node()
 	{
 		if (left)

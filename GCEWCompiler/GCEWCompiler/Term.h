@@ -1,10 +1,9 @@
 #pragma once
-#ifndef TERM_H
-#define TERM_H
 
 #include "CompileConfiguration.h"
 #include "BaseNode.h"
 #include "Instruments.h"
+#include "Tree.h"
 
 namespace gcew::trees::parser
 {
@@ -24,7 +23,5 @@ namespace gcew::trees::parser
 		virtual void toCode(std::string & code) override;
 	};
 }
-
-#endif // !TERM_H
 
 

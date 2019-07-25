@@ -1,11 +1,10 @@
 #pragma once
-#ifndef BASENODE_H
-#define BASENODE_H
 
 #include <string>
 
 namespace gcew::trees::parser
 {
+
 	class BaseNode
 	{
 	protected:
@@ -17,7 +16,5 @@ namespace gcew::trees::parser
 		virtual ~BaseNode();
 	};
 }
-
-#endif // !BASENODE_H
 
 

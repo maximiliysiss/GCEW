@@ -14,6 +14,7 @@ namespace gcew::trees::parser
 		BaseNode * node;
 	public:
 		virtual void toCode(std::string & code) = 0;
+		virtual void createData(std::string & code);
 		OneNode(BaseNode * node, std::string operation);
 		~OneNode();
 	};

@@ -17,6 +17,7 @@ namespace gcew::trees::parser
 		BaseNode * right;
 	public:
 		Node(std::string operation, BaseNode * left, BaseNode * right);
+		virtual void createData(std::string & code) override;
 		~Node();
 	};
 

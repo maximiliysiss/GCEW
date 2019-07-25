@@ -12,8 +12,8 @@ namespace gcew::trees::parser
 			this->name = gcew::commons::createUniqueGUID();
 		}
 		else {
-			/*auto var = gcew::commons::CompileConfiguration::currentTree->findVariableByName(value);
-			this->type = var->getType();*/
+			auto var = (*gcew::trees::structural::Tree::currentTree)->findVariableByName(value);
+			this->type = var->getType();
 			this->name = value;
 		}
 	}
