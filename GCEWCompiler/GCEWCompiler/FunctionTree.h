@@ -1,6 +1,5 @@
 #pragma once
 #include "CompileConfiguration.h"
-#include "Variable.h"
 #include "Tree.h"
 
 namespace  gcew::trees::elements

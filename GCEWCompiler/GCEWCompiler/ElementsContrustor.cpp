@@ -18,8 +18,8 @@ gcew::trees::elements::Element * gcew::trees::construct_elements(gcew::regulars:
 	case RegexResult::For:
 		return new ForTree(index, line);
 	case RegexResult::Function:
-	case RegexResult::Procedure:
-		return new FunctionTree(index, line, reg);
+	/*case RegexResult::Procedure:
+		return new FunctionTree(index, line, reg);*/
 	case RegexResult::If:
 		return new IfTree(index, line);
 	case RegexResult::PureAsm:

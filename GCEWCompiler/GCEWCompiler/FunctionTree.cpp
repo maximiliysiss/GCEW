@@ -17,7 +17,7 @@ void gcew::trees::structural::FunctionTree::createInitializeData(std::string & c
 
 void gcew::trees::structural::FunctionTree::toCode(std::string & code)
 {
-	if (isMain) {
+	if (isMainFunction) {
 		generateCodeForMain(code);
 		return;
 	}

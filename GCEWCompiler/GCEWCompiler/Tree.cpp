@@ -1,4 +1,5 @@
 #include "Tree.h"
+#include "FunctionTree.h"
 
 namespace gcew::trees::structural
 {
@@ -141,7 +142,8 @@ namespace gcew::trees::structural
 		Element * tmpMain = nullptr;
 		std::vector<Element*> opers;
 		for (auto oper : operations) {
-			if (dynamic_cast<FunctionTree*>(oper) && ((FunctionTree*)oper)->isMain())
+			auto * tree = dynamic_cast<FunctionTree*>(oper);
+			if (tree && tree->isMain())
 				tmpMain = oper;
 			else
 				opers.push_back(oper);

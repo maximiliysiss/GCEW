@@ -16,6 +16,7 @@ namespace  gcew::trees::elements
 		std::string line;
 		RegexResult nodeType;
 	public:
+		inline RegexResult getRegexType() const { return nodeType; }
 		inline int getIndex() const { return index; }
 		Element() = delete;
 		Element(int index, std::string line);

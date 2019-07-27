@@ -12,6 +12,13 @@
 #include "PureAsmTree.h"
 #include "ReturnOperation.h"
 
+namespace gcew::trees::structural
+{
+	class CycleTree;
+	class IfTree;
+	class FunctionTree;
+}
+
 namespace gcew::trees
 {
 	using namespace gcew::trees::elements;

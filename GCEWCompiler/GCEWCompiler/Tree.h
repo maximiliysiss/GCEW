@@ -2,10 +2,16 @@
 #include <vector>
 #include <list>
 #include "Element.h"
-#include "FunctionTree.h"
 #include "Instruments.h"
 #include "CustomTypes.h"
 #include "Variable.h"
+
+namespace gcew::trees::structural
+{
+	class CycleTree;
+	class IfTree;
+	class FunctionTree;
+}
 
 namespace  gcew::trees::elements
 {
@@ -15,9 +21,6 @@ namespace  gcew::trees::elements
 
 namespace gcew::trees::structural
 {
-	class CycleTree;
-	class IfTree;
-
 	class Tree :
 		public gcew::trees::elements::Element
 	{
