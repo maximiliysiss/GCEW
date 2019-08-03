@@ -66,7 +66,10 @@ namespace gcew::commons
 			{Operations::FieldGet, "fstp"}
 		}},
 		{"bool",{
-			{Operations::Convert, "byte"}
+			{Operations::Convert, "byte"},
+			{Operations::BoolStart, "startbool"},
+			{Operations::BoolTrue, "outtrue"},
+			{Operations::BoolFalse, "outfalse"},
 		}},
 		{"string",{
 			{Operations::Convert, ""}

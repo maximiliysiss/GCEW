@@ -4,7 +4,7 @@
 namespace gcew::trees::parser
 {
 	Term::Term(std::string value, std::string type)
-		:value(value)
+		:value(value), BoolNode("")
 	{
 		if (gcew::commons::isNumber(this->value)) {
 			this->type = gcew::commons::CompileConfiguration::getTypeInitializeByValue(this->value);
@@ -31,6 +31,12 @@ namespace gcew::trees::parser
 	void Term::toCode(std::string & code)
 	{
 		code += gcew::commons::CompileConfiguration::typeOperation[type][gcew::commons::Operations::FieldSet] + " " + name + "\n";
+	}
+
+	std::vector<std::string> Term::toBoolCode(std::string & code)
+	{
+		toCode(code);
+		return { name };
 	}
 
 }

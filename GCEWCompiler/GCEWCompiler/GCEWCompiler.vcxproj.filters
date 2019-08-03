@@ -159,6 +159,9 @@
     <ClInclude Include="ReturnOperation.h">
       <Filter>Header Files\trees\elements\operations</Filter>
     </ClInclude>
+    <ClInclude Include="BoolNode.h">
+      <Filter>Header Files\trees\parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tree.cpp">
@@ -256,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="ReturnOperation.cpp">
       <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="BoolNode.cpp">
+      <Filter>Source Files\trees\parser</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

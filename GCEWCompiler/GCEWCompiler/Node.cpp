@@ -14,6 +14,12 @@ namespace gcew::trees::parser
 		right->createData(code);
 	}
 
+	void Node::toCode(std::string & code)
+	{
+		this->left->toCode(code);
+		this->right->toCode(code);
+	}
+
 	Node::~Node()
 	{
 		if (left)
@@ -23,7 +29,7 @@ namespace gcew::trees::parser
 	}
 
 	OperatorGreater::OperatorGreater(std::string operation, BaseNode * left, BaseNode * right)
-		:Node(operation, left, right)
+		:Node(operation, left, right), BoolNode("greater")
 	{
 	}
 
@@ -31,8 +37,20 @@ namespace gcew::trees::parser
 	{
 	}
 
+	std::vector<std::string> OperatorGreater::toBoolCode(std::string & code)
+	{
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolStart] + boolOperationName + ":\n";
+		auto leftCode = dynamic_cast<BoolNode*>(left)->toBoolCode(code);
+		code += "fcom " + right->getName() + "\nfstsw ax\nfwait\nsahf\n";
+		code += "ja " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue] + boolOperationName + "\n";
+		code += "jmp " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse] + boolOperationName + "\n";
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue] + boolOperationName + ":\n";
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse] + boolOperationName + ":\n";
+		return getReturn();
+	}
+
 	OperatorLower::OperatorLower(std::string operation, BaseNode * left, BaseNode * right)
-		:Node(operation, left, right)
+		:Node(operation, left, right), BoolNode("lower")
 	{
 	}
 
@@ -40,8 +58,20 @@ namespace gcew::trees::parser
 	{
 	}
 
+	std::vector<std::string> OperatorLower::toBoolCode(std::string & code)
+	{
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolStart] + boolOperationName + ":\n";
+		auto leftCode = dynamic_cast<BoolNode*>(left)->toBoolCode(code);
+		code += "fcom " + right->getName() + "\nfstsw ax\nfwait\nsahf\n";
+		code += "jb " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue] + boolOperationName + "\n";
+		code += "jmp " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse] + boolOperationName + "\n";
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue] + boolOperationName + ":\n";
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse] + boolOperationName + ":\n";
+		return getReturn();
+	}
+
 	OperatorEqual::OperatorEqual(std::string operation, BaseNode * left, BaseNode * right)
-		:Node(operation, left, right)
+		:Node(operation, left, right), BoolNode("equal")
 	{
 	}
 
@@ -49,8 +79,20 @@ namespace gcew::trees::parser
 	{
 	}
 
+	std::vector<std::string> OperatorEqual::toBoolCode(std::string & code)
+	{
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolStart] + boolOperationName + ":\n";
+		auto leftCode = dynamic_cast<BoolNode*>(left)->toBoolCode(code);
+		code += "fcom " + right->getName() + "\nfstsw ax\nfwait\nsahf\n";
+		code += "je " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue] + boolOperationName + "\n";
+		code += "jmp " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse] + boolOperationName + "\n";
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue] + boolOperationName + ":\n";
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse] + boolOperationName + ":\n";
+		return getReturn();
+	}
+
 	OperatorNotEqual::OperatorNotEqual(std::string operation, BaseNode * left, BaseNode * right)
-		:Node(operation, left, right)
+		:Node(operation, left, right), BoolNode("notequal")
 	{
 	}
 
@@ -58,8 +100,20 @@ namespace gcew::trees::parser
 	{
 	}
 
+	std::vector<std::string> OperatorNotEqual::toBoolCode(std::string & code)
+	{
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolStart] + boolOperationName + ":\n";
+		auto leftCode = dynamic_cast<BoolNode*>(left)->toBoolCode(code);
+		code += "fcom " + right->getName() + "\nfstsw ax\nfwait\nsahf\n";
+		code += "je " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse] + boolOperationName + "\n";
+		code += "jmp " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue] + boolOperationName + "\n";
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue] + boolOperationName + ":\n";
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse] + boolOperationName + ":\n";
+		return getReturn();
+	}
+
 	OperatorAnd::OperatorAnd(std::string operation, BaseNode * left, BaseNode * right)
-		:Node(operation, left, right)
+		:Node(operation, left, right), BoolNode("and")
 	{
 	}
 
@@ -67,13 +121,55 @@ namespace gcew::trees::parser
 	{
 	}
 
+	std::vector<std::string> OperatorAnd::toBoolCode(std::string & code)
+	{
+		auto leftCode = dynamic_cast<BoolNode*>(left)->toBoolCode(code);
+		auto rightCode = dynamic_cast<BoolNode*>(right)->toBoolCode(code);
+
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolStart] + boolOperationName + ":\n";
+		code += "jmp " + leftCode[0] + "\n";
+		auto index = code.find(leftCode[1]);
+		code.insert(index + leftCode[1].length(), "\njmp " + rightCode[0] + "\n");
+		index = code.find(leftCode[2]);
+		code.insert(index + leftCode[2].length(), "\njmp " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse]
+			+ boolOperationName + "\n");
+		index = code.find(rightCode[1]);
+		code.insert(index + rightCode[1].length(), "\jmp " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue]
+			+ boolOperationName + "\n");
+		index = code.find(rightCode[2]);
+		code.insert(index + rightCode[2].length(), "\njmp " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse]
+			+ boolOperationName + "\n");
+		return getReturn();
+	}
+
 	OperatorOr::OperatorOr(std::string operation, BaseNode * left, BaseNode * right)
-		:Node(operation, left, right)
+		:Node(operation, left, right), BoolNode("or")
 	{
 	}
 
 	void OperatorOr::toCode(std::string & code)
 	{
+	}
+
+	std::vector<std::string> OperatorOr::toBoolCode(std::string & code)
+	{
+		auto leftCode = dynamic_cast<BoolNode*>(left)->toBoolCode(code);
+		auto rightCode = dynamic_cast<BoolNode*>(right)->toBoolCode(code);
+
+		code += gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolStart] + boolOperationName + ":\n";
+		code += "jmp " + leftCode[0] + "\n";
+		auto index = code.find(leftCode[1]);
+		code.insert(index + leftCode[1].length(), "\njmp " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue]
+			+ boolOperationName + "\n");
+		index = code.find(leftCode[2]);
+		code.insert(index + leftCode[2].length(), "\njmp " + rightCode[0] + "\n");
+		index = code.find(rightCode[1]);
+		code.insert(index + rightCode[1].length(), "\jmp " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue]
+			+ boolOperationName + "\n");
+		index = code.find(rightCode[2]);
+		code.insert(index + rightCode[2].length(), "\njmp " + gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse]
+			+ boolOperationName + "\n");
+		return getReturn();
 	}
 
 	OperatorPlus::OperatorPlus(std::string operation, BaseNode * left, BaseNode * right)
@@ -83,8 +179,7 @@ namespace gcew::trees::parser
 
 	void OperatorPlus::toCode(std::string & code)
 	{
-		left->toCode(code);
-		right->toCode(code);
+		Node::toCode(code);
 		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][gcew::commons::Operations::Plus] + "\n";
 	}
 
@@ -95,8 +190,7 @@ namespace gcew::trees::parser
 
 	void OperatorMinus::toCode(std::string & code)
 	{
-		left->toCode(code);
-		right->toCode(code);
+		Node::toCode(code);
 		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][gcew::commons::Operations::Minus] + "\n";
 	}
 
@@ -107,8 +201,7 @@ namespace gcew::trees::parser
 
 	void OperatorMultiply::toCode(std::string & code)
 	{
-		left->toCode(code);
-		right->toCode(code);
+		Node::toCode(code);
 		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][gcew::commons::Operations::Multiply] + "\n";
 	}
 
@@ -119,8 +212,7 @@ namespace gcew::trees::parser
 
 	void OperatorDivide::toCode(std::string & code)
 	{
-		left->toCode(code);
-		right->toCode(code);
+		Node::toCode(code);
 		code += gcew::commons::CompileConfiguration::typeOperation[COMMONS][gcew::commons::Operations::Divide] + "\n";
 	}
 

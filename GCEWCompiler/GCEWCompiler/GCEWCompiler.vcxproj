@@ -120,6 +120,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AssigmentOperation.h" />
+    <ClInclude Include="BoolNode.h" />
     <ClInclude Include="BreakOperation.h" />
     <ClInclude Include="CallOperation.h" />
     <ClInclude Include="CompileConfiguration.h" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssigmentOperation.cpp" />
+    <ClCompile Include="BoolNode.cpp" />
     <ClCompile Include="BreakOperation.cpp" />
     <ClCompile Include="CallOperation.cpp" />
     <ClCompile Include="CompileConfiguration.cpp" />

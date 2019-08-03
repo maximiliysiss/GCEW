@@ -8,7 +8,7 @@
 namespace gcew::trees::parser
 {
 	class Term :
-		public BaseNode
+		public BaseNode, public BoolNode
 	{
 	protected:
 		bool isTemp{ false };
@@ -22,6 +22,9 @@ namespace gcew::trees::parser
 		virtual void createData(std::string & code) override;
 		// Inherited via BaseNode
 		virtual void toCode(std::string & code) override;
+
+		// Inherited via BoolNode
+		virtual std::vector<std::string> toBoolCode(std::string & code) override;
 	};
 }
 
