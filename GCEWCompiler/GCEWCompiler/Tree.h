@@ -18,7 +18,6 @@ namespace  gcew::trees::elements
 	class Variable;
 }
 
-
 namespace gcew::trees::structural
 {
 	class Tree :
@@ -32,6 +31,7 @@ namespace gcew::trees::structural
 		virtual void createInitializeData(std::string & code);
 		virtual void createData(std::string & code);
 	public:
+		virtual void postWork(void * tree) override;
 		static Tree ** currentTree;
 		inline std::list<Element*> getElements() const { return operations; }
 		Tree() = delete;
@@ -47,7 +47,7 @@ namespace gcew::trees::structural
 		inline Tree* getParent() const { return parent; }
 		Tree * addChild(Tree * child);
 		Tree * getRoot();
-		gcew::trees::elements::Variable * findVariableByName(std::string name);
+		virtual gcew::trees::elements::Variable * findVariableByName(std::string name);
 		std::vector<gcew::trees::elements::Variable*> getVariables();
 		void addOperation(Element * elem);
 		std::vector<Element*> getElementsForInit();

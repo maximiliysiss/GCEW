@@ -1,9 +1,6 @@
 #pragma once
-#ifndef ELEMENT_H
 #include <string>
 #include "Enums.h"
-
-#define ELEMENT_H
 
 namespace  gcew::trees::elements
 {
@@ -25,9 +22,8 @@ namespace  gcew::trees::elements
 		virtual void createInitializeData(std::string & code) {}
 		virtual void toCode(std::string & code) = 0;
 		virtual void createData(std::string & code) {}
+		virtual void postWork(void* tree) {}
 	};
 }
-
-#endif // !ELEMENT_H
 
 

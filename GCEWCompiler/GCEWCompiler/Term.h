@@ -15,6 +15,7 @@ namespace gcew::trees::parser
 		std::string value;
 		std::string type;
 	public:
+		inline bool isTempValue() const { return isTemp; }
 		inline std::string getValue() const { return value; }
 		Term(std::string value, std::string type);
 		~Term();

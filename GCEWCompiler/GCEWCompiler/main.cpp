@@ -79,6 +79,7 @@ Tree * generateTree(std::string path) {
 			break;
 		case RegexResult::While:
 		case RegexResult::Function:
+		case RegexResult::Procedure:
 		case RegexResult::For:
 		case RegexResult::If:
 		case RegexResult::PureAsm:
@@ -124,6 +125,7 @@ int main(int argc, char ** argv)
 	p = correctFiles(p.string(), fileFolder.string());
 	p = gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(p.string(), nullptr);
 	auto rootTree = generateTree(p.string());
+	rootTree->postWork(rootTree);
 	std::string code = rootTree->createCode();
 	return 0;
 }

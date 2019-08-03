@@ -23,7 +23,6 @@ namespace gcew::trees::structural
 	public:
 		inline bool isMain() const { return isMainFunction; }
 		virtual void toCode(std::string& code) override;
-		virtual void createData(std::string& code);
 		FunctionTree(int index, std::string line, gcew::regulars::RegexResult reg);
 	};
 }

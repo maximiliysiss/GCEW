@@ -10,11 +10,16 @@ namespace gcew::trees::structural
 	class ForTree :
 		public CycleTree
 	{
+		std::vector<std::string> parts;
 		Element * iteration{ nullptr };
 		Element * startAction{ nullptr };
+		virtual void createData(std::string & code);
 	public:
+		virtual gcew::trees::elements::Variable * findVariableByName(std::string name) override;
+		virtual void postWork(void * tree) override;
 		ForTree(int index, std::string & line);
 		~ForTree();
+		virtual void toCode(std::string & code) override;
 	};
 }
 

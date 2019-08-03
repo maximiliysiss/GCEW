@@ -12,14 +12,15 @@ namespace  gcew::trees::elements
 	{
 	protected:
 		std::string name;
+		std::string codeName;
 		std::string type;
 		gcew::trees::parser::BaseNode * exp;
 	public:
+		inline std::string getCodeName() const { return codeName; }
 		inline std::string getName() const { return name; }
 		inline std::string getType() const { return type; }
 		Variable(int index, std::string line);
 		void toCode(std::string & code);
-		virtual void createInitializeData(std::string & code) override;
 		virtual void createData(std::string & code) override;
 		~Variable();
 	};

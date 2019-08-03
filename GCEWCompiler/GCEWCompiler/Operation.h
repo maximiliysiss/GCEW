@@ -10,7 +10,6 @@ namespace  gcew::trees::elements
 		Operation(int index, std::string line, RegexResult reg);
 		virtual ~Operation();
 		void toCode(std::string& code) = 0;
-		virtual void postTreeWork(gcew::trees::structural::Tree* tree) {}
 	};
 }
 

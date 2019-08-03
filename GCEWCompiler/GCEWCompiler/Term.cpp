@@ -14,7 +14,7 @@ namespace gcew::trees::parser
 		else {
 			auto var = (*gcew::trees::structural::Tree::currentTree)->findVariableByName(value);
 			this->type = var->getType();
-			this->name = value;
+			this->name = var->getCodeName();
 		}
 	}
 

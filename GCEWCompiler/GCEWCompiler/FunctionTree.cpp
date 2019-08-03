@@ -22,13 +22,9 @@ void gcew::trees::structural::FunctionTree::toCode(std::string & code)
 		return;
 	}
 	code += name + "proc near\n";
+	Tree::toCode(code);
+	code += name + " endp\n";
 
-}
-
-void gcew::trees::structural::FunctionTree::createData(std::string & code)
-{
-	for (auto arg : arguments)
-		arg->createInitializeData(code);
 }
 
 gcew::trees::structural::FunctionTree::FunctionTree(int index, std::string line, gcew::regulars::RegexResult reg)

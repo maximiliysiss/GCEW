@@ -62,7 +62,7 @@ namespace gcew::commons
 			{Operations::Divide, "fmul"},
 			{Operations::Multiply, "fdiv"},
 			{Operations::FieldSet, "fld"},
-			{Operations::Convert, "real4"},
+			{Operations::Convert, "real8"},
 			{Operations::FieldGet, "fstp"}
 		}},
 		{"bool",{

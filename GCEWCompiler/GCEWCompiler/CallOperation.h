@@ -1,7 +1,4 @@
 #pragma once
-#ifndef CALLOPERATION_H
-#define CALLOPERATION_H
-
 #include "Operation.h"
 
 namespace gcew::trees::elements::operations
@@ -18,7 +15,5 @@ namespace gcew::trees::elements::operations
 		virtual void toCode(std::string & code) override;
 	};
 }
-
-#endif // !CALLOPERATION_H
 
 

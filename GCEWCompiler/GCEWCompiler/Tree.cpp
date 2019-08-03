@@ -23,6 +23,12 @@ namespace gcew::trees::structural
 			elem->createData(code);
 	}
 
+	void Tree::postWork(void * tree)
+	{
+		for (auto elem : this->operations)
+			elem->postWork(this);
+	}
+
 	Tree::Tree(int index, std::string line, gcew::commons::RegexResult reg)
 		: gcew::trees::elements::Element(index, line, reg)
 	{
@@ -70,10 +76,10 @@ namespace gcew::trees::structural
 
 	std::string Tree::createCode()
 	{
-		std::string code = ".386\n.model flat, stdcall\noption casemap : none\ninclude /masm32/include/kernel32.inc\ninclude /masm32/macros/macros.asm\ninclude /masm32/include/msvcrt.inc\ninclude /masm32/include/masm32.inc\nincludelib /masm32/lib/kernel32\nincludelib /masm32/lib/msvcrt\nincludelib /masm32/lib/masm32";
+		std::string code = ".386\n.model flat, stdcall\noption casemap : none\ninclude /masm32/include/kernel32.inc\ninclude /masm32/macros/macros.asm\ninclude /masm32/include/msvcrt.inc\ninclude /masm32/include/masm32.inc\nincludelib /masm32/lib/kernel32\nincludelib /masm32/lib/msvcrt\nincludelib /masm32/lib/masm32\n";
 		code += ".data\n";
 		createData(code);
-		code += ".code";
+		code += ".code\n";
 		toCode(code);
 		return code;
 	}
