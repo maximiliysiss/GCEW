@@ -15,7 +15,6 @@ namespace gcew::commons
 	class CompileConfiguration
 	{
 		static CompileConfiguration  * compileConfiguration;
-		std::map<std::string, std::string> compilerPairs;
 		std::string pathForCompile;
 		std::string libsPath;
 	public:

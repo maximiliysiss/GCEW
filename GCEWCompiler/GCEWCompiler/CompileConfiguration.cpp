@@ -31,73 +31,7 @@ namespace gcew::commons
 	{
 	}
 
-	std::map < std::string, std::map<Operations, std::string>> CompileConfiguration::typeOperation = {
-		{COMMONS,{
-			{Operations::Plus, "fadd"},
-			{Operations::Minus, "fsub"},
-			{Operations::Multiply, "fmul"},
-			{Operations::Divide, "fdiv"},
-		}},
-		{"int",{
-			{Operations::Plus, "fiadd"},
-			{Operations::Minus, "fisub"},
-			{Operations::Divide, "fimul"},
-			{Operations::Multiply, "fidiv"},
-			{Operations::FieldSet, "fild"},
-			{Operations::Convert, "dword"},
-			{Operations::FieldGet, "fistp"},
-			{Operations::Compare, "ficom"},
-		}},
-		{"double",{
-			{Operations::Plus, "fadd"},
-			{Operations::Minus, "fsub"},
-			{Operations::Divide, "fmul"},
-			{Operations::Multiply, "fdiv"},
-			{Operations::FieldSet, "fld"},
-			{Operations::Convert, "real8"},
-			{Operations::FieldGet, "fstp"},
-			{Operations::Compare, "fcom"},
-		}},
-		{"float",{
-			{Operations::Plus, "fadd"},
-			{Operations::Minus, "fsub"},
-			{Operations::Divide, "fmul"},
-			{Operations::Multiply, "fdiv"},
-			{Operations::FieldSet, "fld"},
-			{Operations::Convert, "real8"},
-			{Operations::FieldGet, "fstp"},
-			{Operations::Compare, "fcom"},
-		}},
-		{"bool",{
-			{Operations::Convert, "byte"},
-			{Operations::Start, "startbool"},
-			{Operations::BoolTrue, "outtrue"},
-			{Operations::BoolFalse, "outfalse"},
-		}},
-		{"string",{
-			{Operations::Convert, ""}
-		}},
-		{"for", {
-			{Operations::Start, "forstart"},
-			{Operations::Body, "for"},
-			{Operations::Iter, "iter"},
-			{Operations::End, "endfor"}
-		}},
-		{"while", {
-			{Operations::Start, "whilestart"},
-			{Operations::Body, "while"},
-			{Operations::End, "endwhile"}
-		}},
-		{"if", {
-			{Operations::Start, "ifstart"},
-			{Operations::Body, "ifbody"},
-			{Operations::End, "endif"}
-		}},
-		{"else", {
-			{Operations::Start, "elsebody"},
-			{Operations::End, "endelse"}
-		}}
-	};
+	std::map<std::string, std::map<Operations, std::string>> CompileConfiguration::typeOperation;
 
 	void CompileConfiguration::load()
 	{
@@ -115,10 +49,17 @@ namespace gcew::commons
 		libsPath = global->Attribute("Libs");
 		pathForCompile = global->Attribute("Compile");
 
-		for (auto tag = global->FirstChildElement(); tag != nullptr; tag = tag->NextSiblingElement()) {
-			std::string name = tag->Attribute("Name");
-			std::string value = tag->Attribute("Value");
-			compilerPairs[name] = value;
+		auto typeOpers = global->FirstChild("typeOperations");
+
+		for (auto tag = typeOpers->FirstChildElement(); tag != nullptr; tag = tag->NextSiblingElement()) {
+			std::string name = tag->Attribute("name");
+			std::map<Operations, std::string> operations;
+			for (auto tagInner = tag->FirstChildElement(); tagInner != nullptr; tagInner = tagInner->NextSiblingElement()) {
+				std::string value = tagInner->Attribute("value");
+				Operations oper = (Operations)std::stoi(tagInner->Attribute("type"));
+				operations[oper] = value;
+			}
+			typeOperation[name] = operations;
 		}
 	}
 
