@@ -32,6 +32,7 @@ namespace gcew::trees::structural
 	Tree::Tree(int index, std::string line, gcew::commons::RegexResult reg)
 		: gcew::trees::elements::Element(index, line, reg)
 	{
+		name = gcew::commons::createUniqueGUID();
 	}
 
 
@@ -61,13 +62,6 @@ namespace gcew::trees::structural
 		if (!this->parent)
 			return nullptr;
 		return this->parent->findCycleTreeUp();
-	}
-
-	IfTree * Tree::findIfTreePrev()
-	{
-		if (typeid(*(this->getChildren().end() - 1)) == typeid(IfTree*))
-			return (IfTree*)*(this->getChildren().end() - 1);
-		return nullptr;
 	}
 
 	void Tree::optimize()

@@ -45,7 +45,8 @@ namespace gcew::commons
 			{Operations::Multiply, "fidiv"},
 			{Operations::FieldSet, "fild"},
 			{Operations::Convert, "dword"},
-			{Operations::FieldGet, "fistp"}
+			{Operations::FieldGet, "fistp"},
+			{Operations::Compare, "ficom"},
 		}},
 		{"double",{
 			{Operations::Plus, "fadd"},
@@ -54,7 +55,8 @@ namespace gcew::commons
 			{Operations::Multiply, "fdiv"},
 			{Operations::FieldSet, "fld"},
 			{Operations::Convert, "real8"},
-			{Operations::FieldGet, "fstp"}
+			{Operations::FieldGet, "fstp"},
+			{Operations::Compare, "fcom"},
 		}},
 		{"float",{
 			{Operations::Plus, "fadd"},
@@ -63,16 +65,37 @@ namespace gcew::commons
 			{Operations::Multiply, "fdiv"},
 			{Operations::FieldSet, "fld"},
 			{Operations::Convert, "real8"},
-			{Operations::FieldGet, "fstp"}
+			{Operations::FieldGet, "fstp"},
+			{Operations::Compare, "fcom"},
 		}},
 		{"bool",{
 			{Operations::Convert, "byte"},
-			{Operations::BoolStart, "startbool"},
+			{Operations::Start, "startbool"},
 			{Operations::BoolTrue, "outtrue"},
 			{Operations::BoolFalse, "outfalse"},
 		}},
 		{"string",{
 			{Operations::Convert, ""}
+		}},
+		{"for", {
+			{Operations::Start, "forstart"},
+			{Operations::Body, "for"},
+			{Operations::Iter, "iter"},
+			{Operations::End, "endfor"}
+		}},
+		{"while", {
+			{Operations::Start, "whilestart"},
+			{Operations::Body, "while"},
+			{Operations::End, "endwhile"}
+		}},
+		{"if", {
+			{Operations::Start, "ifstart"},
+			{Operations::Body, "ifbody"},
+			{Operations::End, "endif"}
+		}},
+		{"else", {
+			{Operations::Start, "elsebody"},
+			{Operations::End, "endelse"}
 		}}
 	};
 

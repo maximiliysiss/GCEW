@@ -67,8 +67,11 @@ Tree * generateTree(std::string path) {
 		{
 			ElseTree * elseTree = (ElseTree*)gcew::trees::construct_elements(reg, index, line);
 			std::getline(fileRead, line);
-			root->findIfTreePrev()->setElse(elseTree);
-			root = root->addChild(elseTree);
+			auto prevIf = dynamic_cast<IfTree*>(*(root->getChildren().end() - 1));
+			if (prevIf) {
+				prevIf->setElse(elseTree);
+				root = root->addChild(elseTree);
+			}
 			break;
 		}
 		case RegexResult::FigureClose:

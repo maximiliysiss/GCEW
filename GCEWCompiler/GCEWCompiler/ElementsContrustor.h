@@ -11,6 +11,7 @@
 #include "FunctionTree.h"
 #include "PureAsmTree.h"
 #include "ReturnOperation.h"
+#include "WhileTree.h"
 
 namespace gcew::trees::structural
 {

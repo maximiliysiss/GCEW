@@ -11,6 +11,7 @@ namespace gcew::trees::structural
 	{
 	protected:
 		BaseNode * condition{ nullptr };
+		virtual void createData(std::string & code);
 	public:
 		CycleTree(int index, std::string line, gcew::commons::RegexResult reg);
 		~CycleTree();

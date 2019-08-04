@@ -162,6 +162,9 @@
     <ClInclude Include="BoolNode.h">
       <Filter>Header Files\trees\parser</Filter>
     </ClInclude>
+    <ClInclude Include="WhileTree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tree.cpp">
@@ -262,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="BoolNode.cpp">
       <Filter>Source Files\trees\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="WhileTree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

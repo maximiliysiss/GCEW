@@ -13,7 +13,6 @@ namespace gcew::trees::structural
 	class FunctionTree :
 		public Tree
 	{
-		std::string name;
 		std::string outputType;
 		std::vector<gcew::trees::elements::Variable*> arguments;
 		bool isMainFunction;

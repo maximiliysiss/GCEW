@@ -14,9 +14,9 @@ namespace gcew::trees::parser {
 		virtual std::vector<std::string> toBoolCode(std::string& code) = 0;
 		inline std::vector<std::string> getReturn() {
 			return {
-				gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolStart] + boolOperationName,
-				gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue] + boolOperationName,
-				gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse] + boolOperationName
+				gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::Start] + boolOperationName + ":",
+				gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolTrue] + boolOperationName + ":",
+				gcew::commons::CompileConfiguration::typeOperation["bool"][gcew::commons::Operations::BoolFalse] + boolOperationName + ":"
 			};
 		}
 		virtual ~BoolNode();

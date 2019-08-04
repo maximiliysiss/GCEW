@@ -5,6 +5,7 @@
 #include "BaseNode.h"
 #include "BoolNode.h"
 #include "CompileConfiguration.h"
+#include "Term.h"
 
 namespace gcew::trees::parser
 {

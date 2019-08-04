@@ -17,6 +17,7 @@ namespace gcew::trees::parser
 	public:
 		inline bool isTempValue() const { return isTemp; }
 		inline std::string getValue() const { return value; }
+		inline std::string getType() const { return type; }
 		Term(std::string value, std::string type);
 		~Term();
 		virtual void createData(std::string & code) override;

@@ -9,8 +9,8 @@
 namespace gcew::trees::structural
 {
 	class CycleTree;
-	class IfTree;
 	class FunctionTree;
+	class IfTree;
 }
 
 namespace  gcew::trees::elements
@@ -24,6 +24,7 @@ namespace gcew::trees::structural
 		public gcew::trees::elements::Element
 	{
 	protected:
+		std::string name;
 		std::list<gcew::trees::elements::Element*> operations;
 		std::list<gcew::trees::elements::CustomTypes*> customTypes;
 		Tree* parent{ nullptr };
@@ -40,7 +41,6 @@ namespace gcew::trees::structural
 		void treeChildrenPrinter(std::ostream & out, int level = 0);
 		void variableInfoPrinter(std::ostream & out, int level = 0);
 		CycleTree * findCycleTreeUp();
-		IfTree * findIfTreePrev();
 		void optimize();
 		std::string createCode();
 		std::vector<Tree*> getChildren();
@@ -53,5 +53,6 @@ namespace gcew::trees::structural
 		std::vector<Element*> getElementsForInit();
 		// Inherited via Element
 		virtual void toCode(std::string & code) override;
+		inline std::string getName() const { return name; }
 	};
 }

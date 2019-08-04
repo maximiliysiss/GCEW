@@ -150,6 +150,7 @@
     <ClInclude Include="TreeRegularBuilder.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Variable.h" />
+    <ClInclude Include="WhileTree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssigmentOperation.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="TreeRegularBuilder.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Variable.cpp" />
+    <ClCompile Include="WhileTree.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
