@@ -16,6 +16,7 @@ namespace  gcew::trees::elements
 		std::string type;
 		gcew::trees::parser::BaseNode * exp;
 	public:
+		virtual void postWork(void * tree) override;
 		inline std::string getCodeName() const { return codeName; }
 		inline std::string getName() const { return name; }
 		inline std::string getType() const { return type; }

@@ -77,8 +77,15 @@ namespace gcew::commons
 
 	BaseNode * Parser::preParser(std::string str)
 	{
-		str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-		return parser(str);
+		try {
+			str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+			if (str.length() == 0)
+				return nullptr;
+			return parser(str);
+		}
+		catch (std::exception ex) {
+			return nullptr;
+		}
 	}
 
 	BaseNode * gcew::commons::Parser::parser(std::string str)
@@ -107,9 +114,7 @@ namespace gcew::commons
 			}
 		}
 		else if (gcew::regulars::TreeRegularBuilder::isFunctionInExpression(str) == gcew::regulars::RegexResult::Call) {
-			auto fBreak = str.find_first_of('(');
-			auto lBreak = str.find_last_of(')');
-			return new CallNode(str.substr(0, fBreak), parser(str.substr(fBreak + 1, lBreak - fBreak - 1)));
+			return new CallNode(str);
 		}
 		else if (str[0] == Operations::Not)
 			return new OperatorNot(std::string(1, Operations::Not), parser(str.substr(1)));

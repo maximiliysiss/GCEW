@@ -10,6 +10,7 @@ namespace gcew::trees::structural
 		if (iteration)
 			this->iteration->createData(code);
 	}
+
 	gcew::trees::elements::Variable * ForTree::findVariableByName(std::string name)
 	{
 		auto * var = dynamic_cast<Variable*>(startAction);
@@ -36,6 +37,8 @@ namespace gcew::trees::structural
 	ForTree::ForTree(int index, std::string & line)
 		:CycleTree(index, line, RegexResult::For)
 	{
+		this->breakOperation = gcew::commons::CompileConfiguration::typeOperation["for"][gcew::commons::Operations::End] + name;
+		this->continueOperation = gcew::commons::CompileConfiguration::typeOperation["for"][gcew::commons::Operations::Iter] + name;
 		auto startBreak = line.find('(');
 		auto endBreak = line.find(')');
 		parts = gcew::commons::leftSplitter(line.substr(startBreak + 1, endBreak - startBreak - 1), ';');
@@ -57,8 +60,8 @@ namespace gcew::trees::structural
 	{
 		std::string start = gcew::commons::CompileConfiguration::typeOperation["for"][gcew::commons::Operations::Start] + name;
 		std::string body = gcew::commons::CompileConfiguration::typeOperation["for"][gcew::commons::Operations::Body] + name;
-		std::string iter = gcew::commons::CompileConfiguration::typeOperation["for"][gcew::commons::Operations::Iter] + name;
-		std::string end = gcew::commons::CompileConfiguration::typeOperation["for"][gcew::commons::Operations::End] + name;
+		std::string iter = continueOperation;
+		std::string end = breakOperation;
 		if (startAction)
 			startAction->toCode(code);
 		code += start + ":\n";

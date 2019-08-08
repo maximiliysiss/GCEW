@@ -66,5 +66,8 @@
 			<operation type="3" value="elsebody"/>
 			<operation type="9" value="endelse"/>
 		</typeOperation>
+		<typeOperation name="function">
+			<operation type="9" value="endfunction"/>
+		</typeOperation>
 	</typeOperations>
 </configuration>

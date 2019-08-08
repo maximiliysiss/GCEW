@@ -1422,21 +1422,21 @@ const char* TiXmlAttribute::Parse( const char* p, TiXmlParsingData* data, TiXmlE
 		return 0;
 	}
 	
-	const char* end;
+	const char* breakOperation;
 	const char SINGLE_QUOTE = '\'';
 	const char DOUBLE_QUOTE = '\"';
 
 	if ( *p == SINGLE_QUOTE )
 	{
 		++p;
-		end = "\'";		// single quote in string
-		p = ReadText( p, &value, false, end, false, encoding );
+		breakOperation = "\'";		// single quote in string
+		p = ReadText( p, &value, false, breakOperation, false, encoding );
 	}
 	else if ( *p == DOUBLE_QUOTE )
 	{
 		++p;
-		end = "\"";		// double quote in string
-		p = ReadText( p, &value, false, end, false, encoding );
+		breakOperation = "\"";		// double quote in string
+		p = ReadText( p, &value, false, breakOperation, false, encoding );
 	}
 	else
 	{
@@ -1537,8 +1537,8 @@ const char* TiXmlText::Parse( const char* p, TiXmlParsingData* data, TiXmlEncodi
 	{
 		bool ignoreWhite = true;
 
-		const char* end = "<";
-		p = ReadText( p, &value, ignoreWhite, end, false, encoding );
+		const char* breakOperation = "<";
+		p = ReadText( p, &value, ignoreWhite, breakOperation, false, encoding );
 		if ( p && *p )
 			return p-1;	// don't truncate the '<'
 		return 0;

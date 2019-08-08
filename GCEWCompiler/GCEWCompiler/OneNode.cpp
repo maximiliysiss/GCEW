@@ -1,4 +1,5 @@
 #include "OneNode.h"
+#include "CallOperation.h"
 
 namespace gcew::trees::parser
 {
@@ -27,13 +28,25 @@ namespace gcew::trees::parser
 	{
 	}
 
-	CallNode::CallNode(std::string operation, BaseNode * node)
-		:OneNode(node, operation)
+	void CallNode::createData(std::string & code)
 	{
+		call->createData(code);
+	}
+
+	void CallNode::postWork(void * tree)
+	{
+		call->postWork(tree);
+	}
+
+	CallNode::CallNode(std::string operation)
+		:OneNode(nullptr, operation)
+	{
+		this->call = new gcew::trees::elements::operations::CallOperation(0, operation + ";");
 	}
 
 	void CallNode::toCode(std::string & code)
 	{
+		call->toCode(code);
 	}
 
 }

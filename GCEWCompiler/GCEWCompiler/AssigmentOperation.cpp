@@ -26,6 +26,7 @@ void gcew::trees::elements::operations::AssigmentOperation::toCode(std::string &
 void gcew::trees::elements::operations::AssigmentOperation::postWork(void * tree)
 {
 	this->var = ((gcew::trees::structural::Tree*)tree)->findVariableByName(name);
+	this->exp->postWork(tree);
 }
 
 void gcew::trees::elements::operations::AssigmentOperation::createData(std::string & code)

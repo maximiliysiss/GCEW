@@ -10,6 +10,7 @@ namespace gcew::trees::parser
 	protected:
 		std::string name;
 	public:
+		virtual void postWork(void * tree) {}
 		virtual void toCode(std::string& code) = 0;
 		inline std::string getName() const { return name; }
 		BaseNode();

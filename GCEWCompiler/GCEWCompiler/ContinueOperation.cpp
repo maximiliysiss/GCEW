@@ -11,4 +11,5 @@ gcew::trees::elements::operations::ContinueOperation::~ContinueOperation()
 
 void gcew::trees::elements::operations::ContinueOperation::toCode(std::string & code)
 {
+	code += "jmp " + this->cycleTree->getContinue() + "\n";
 }

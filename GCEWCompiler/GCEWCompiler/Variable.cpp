@@ -2,20 +2,26 @@
 
 namespace gcew::trees::elements
 {
+	void Variable::postWork(void * tree)
+	{
+		if (exp)
+			exp->postWork(tree);
+	}
+
 	Variable::Variable(int index, std::string line)
 		:Element(index, line, RegexResult::Type)
 	{
 		auto parts = splitter(line, ' ');
-		bool end = line[line.length() - 1] == ';';
+		bool breakOperation = line[line.length() - 1] == ';';
 		type = parts[0];
 		name = parts[1];
 		codeName = name + gcew::commons::createUniqueGUID();
 		if (line.find('=') != std::string::npos) {
 			parts = splitter(line, '=');
-			this->exp = Parser::preParser(trim(parts[1]).substr(0, parts[1].length() - end));
+			this->exp = Parser::preParser(trim(parts[1]).substr(0, parts[1].length() - breakOperation));
 		}
 		else
-			name = name.substr(0, name.length() - end);
+			name = name.substr(0, name.length() - breakOperation);
 	}
 
 	void Variable::toCode(std::string & code)

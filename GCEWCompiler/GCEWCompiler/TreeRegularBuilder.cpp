@@ -17,9 +17,9 @@ namespace gcew::regulars
 		TreeRegularBuilder::isInclude,
 		TreeRegularBuilder::isOpenFigure,
 		TreeRegularBuilder::isPureAsm,
+		TreeRegularBuilder::isReturn,
 		TreeRegularBuilder::isType,
 		TreeRegularBuilder::isWhile,
-		TreeRegularBuilder::isReturn
 	};
 
 	RegexResult TreeRegularBuilder::regex(std::string input)
@@ -128,12 +128,12 @@ namespace gcew::regulars
 
 	RegexResult TreeRegularBuilder::isReturn(std::string input, bool type)
 	{
-		return regex_matcher("^return .*;$", input, type) ? RegexResult::Return : RegexResult::NotClassic;
+		return regex_matcher("^return *.*;$", input, type) ? RegexResult::Return : RegexResult::NotClassic;
 	}
 
 	RegexResult TreeRegularBuilder::isFunctionInExpression(std::string input)
 	{
-		std::regex reg("^[a-zA-Z]+[a-zA-Z0-9]*[^*+-\\/]*\\(.+\\)$");
+		std::regex reg("^[a-zA-Z]+[a-zA-Z0-9]*[^*+-\\/]*\\(.*\\)$");
 		if (std::regex_match(input, reg))
 			return RegexResult::Call;
 		return RegexResult::NotClassic;

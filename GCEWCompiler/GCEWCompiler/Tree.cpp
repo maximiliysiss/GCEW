@@ -64,6 +64,27 @@ namespace gcew::trees::structural
 		return this->parent->findCycleTreeUp();
 	}
 
+	FunctionTree * Tree::findFunctionTreeUp()
+	{
+		if (this->nodeType == gcew::commons::RegexResult::Function || this->nodeType == gcew::commons::RegexResult::Procedure)
+			return dynamic_cast<FunctionTree*>(this);
+		if (this->parent)
+			return parent->findFunctionTreeUp();
+		return nullptr;
+	}
+
+	FunctionTree * Tree::findFunctionTree(std::string name)
+	{
+		for (auto elem : this->operations) {
+			auto f = dynamic_cast<FunctionTree*>(elem);
+			if (f && f->getFuncName() == name)
+				return f;
+		}
+		if (parent)
+			return parent->findFunctionTree(name);
+		return nullptr;
+	}
+
 	void Tree::optimize()
 	{
 	}

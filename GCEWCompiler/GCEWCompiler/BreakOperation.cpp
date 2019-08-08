@@ -7,4 +7,5 @@ gcew::trees::elements::operations::BreakOperation::BreakOperation(int index, std
 
 void gcew::trees::elements::operations::BreakOperation::toCode(std::string & code)
 {
+	code += "jmp " + this->cycleTree->getBreak() + "\n";
 }

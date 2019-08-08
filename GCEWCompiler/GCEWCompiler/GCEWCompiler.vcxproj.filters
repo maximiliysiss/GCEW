@@ -270,4 +270,9 @@
       <Filter>Source Files\trees\structural</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="masmCompile.bat">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

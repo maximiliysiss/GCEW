@@ -10,6 +10,11 @@ namespace gcew::trees::structural
 			condition->createData(code);
 	}
 
+	void CycleTree::postWork(void * tree)
+	{
+		condition->postWork(tree);
+	}
+
 	CycleTree::CycleTree(int index, std::string line, gcew::commons::RegexResult reg)
 		:Tree(index, line, reg)
 	{

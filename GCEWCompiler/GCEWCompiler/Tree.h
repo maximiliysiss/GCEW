@@ -41,6 +41,8 @@ namespace gcew::trees::structural
 		void treeChildrenPrinter(std::ostream & out, int level = 0);
 		void variableInfoPrinter(std::ostream & out, int level = 0);
 		CycleTree * findCycleTreeUp();
+		FunctionTree * findFunctionTreeUp();
+		FunctionTree * findFunctionTree(std::string name);
 		void optimize();
 		std::string createCode();
 		std::vector<Tree*> getChildren();

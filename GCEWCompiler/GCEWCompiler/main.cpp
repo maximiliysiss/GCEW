@@ -130,5 +130,20 @@ int main(int argc, char ** argv)
 	auto rootTree = generateTree(p.string());
 	rootTree->postWork(rootTree);
 	std::string code = rootTree->createCode();
+	fileFolder += "build\\";
+	if (exists(fileFolder))
+		remove_all(fileFolder);
+	create_directory(fileFolder);
+	std::string fileName = path(fileExecute).filename().string();
+	auto fileResult = fileFolder.string() + fileName.substr(0, fileName.find('.')) + "_build.asm";
+
+	std::ofstream outFileCode(fileResult);
+	outFileCode << code;
+	outFileCode.close();
+
+	std::string cmd = "masmCompile.bat " + fileResult;
+	system(cmd.c_str());
+	std::cout << "Press any key to close...\n";
+	std::getchar();
 	return 0;
 }

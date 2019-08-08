@@ -1,8 +1,11 @@
 #pragma once
-#ifndef ONENODE_H
-#define ONENODE_H
 
 #include "BaseNode.h"
+
+namespace gcew::trees::elements
+{
+	class Element;
+}
 
 namespace gcew::trees::parser
 {
@@ -26,12 +29,12 @@ namespace gcew::trees::parser
 	};
 
 	class CallNode : public OneNode {
+		gcew::trees::elements::Element * call;
 	public:
-		CallNode(std::string operation, BaseNode * node);
+		virtual void createData(std::string & code) override;
+		virtual void postWork(void * tree) override;
+		CallNode(std::string operation);
 		virtual void toCode(std::string & code) override;
 	};
 }
-
-#endif // !ONENODE_H
-
 

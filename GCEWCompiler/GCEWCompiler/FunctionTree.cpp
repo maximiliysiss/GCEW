@@ -8,6 +8,13 @@ void gcew::trees::structural::FunctionTree::generateCodeForMain(std::string & co
 	code += "exit\nend start\n";
 }
 
+void gcew::trees::structural::FunctionTree::createData(std::string & code)
+{
+	for (auto var : arguments)
+		var->createData(code);
+	Tree::createData(code);
+}
+
 void gcew::trees::structural::FunctionTree::createInitializeData(std::string & code)
 {
 	for (auto arg : arguments)
@@ -21,10 +28,12 @@ void gcew::trees::structural::FunctionTree::toCode(std::string & code)
 		generateCodeForMain(code);
 		return;
 	}
-	code += name + "proc near\n";
+	code += name + " proc near\n";
+	for (auto i = arguments.rbegin(); i != arguments.rend(); i++)
+		code += gcew::commons::CompileConfiguration::typeOperation[(*i)->getType()][gcew::commons::Operations::FieldGet] + " " + (*i)->getName() + "\n";
 	Tree::toCode(code);
+	code += gcew::commons::CompileConfiguration::typeOperation["function"][gcew::commons::Operations::End] + name + ":\nret\n";
 	code += name + " endp\n";
-
 }
 
 gcew::trees::structural::FunctionTree::FunctionTree(int index, std::string line, gcew::regulars::RegexResult reg)
@@ -32,7 +41,7 @@ gcew::trees::structural::FunctionTree::FunctionTree(int index, std::string line,
 {
 	auto parts = gcew::commons::splitter(line, ' ');
 	outputType = parts[0];
-	name = gcew::commons::splitter(parts[1], '(')[0];
+	functionName = gcew::commons::splitter(parts[1], '(')[0];
 	auto indexOpen = line.find('(');
 	auto indexClose = line.find(')');
 	parts = gcew::commons::splitter(line.substr(indexOpen + 1, indexClose - indexOpen - 1), ',');
@@ -40,6 +49,6 @@ gcew::trees::structural::FunctionTree::FunctionTree(int index, std::string line,
 	std::transform(parts.begin(), parts.end(), std::back_inserter(arguments), [](std::string arg) {
 		return new gcew::trees::elements::Variable(0, arg);
 	});
-	isMainFunction = this->name == "main";
+	isMainFunction = this->functionName == "main";
 }
 

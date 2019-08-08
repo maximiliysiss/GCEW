@@ -8,10 +8,16 @@ namespace gcew::trees::structural
 		this->expression->createData(code);
 	}
 
+	void IfTree::postWork(void * tree)
+	{
+		expression->postWork(tree);
+	}
+
+
 	void IfTree::toCode(std::string & code)
 	{
 		std::string start = gcew::commons::CompileConfiguration::typeOperation["if"][gcew::commons::Operations::Start] + name;
-		std::string end = gcew::commons::CompileConfiguration::typeOperation["if"][gcew::commons::Operations::End] + name;
+		std::string breakOperation = gcew::commons::CompileConfiguration::typeOperation["if"][gcew::commons::Operations::End] + name;
 		code += "finit\n";
 		auto cond = dynamic_cast<gcew::trees::parser::BoolNode*>(expression)->toBoolCode(code);
 		auto index = code.find(cond[1]);
@@ -20,13 +26,13 @@ namespace gcew::trees::structural
 		if (elseTree)
 			code.insert(index + cond[2].length(), "\njmp " + gcew::commons::CompileConfiguration::typeOperation["else"][gcew::commons::Operations::Start] + elseTree->getName() + "\n");
 		else
-			code.insert(index + cond[2].length(), "\njmp " + end + "\n");
+			code.insert(index + cond[2].length(), "\njmp " + breakOperation + "\n");
 		code += start + ":\n";
 		Tree::toCode(code);
-		code += "jmp " + end + "\n";
+		code += "jmp " + breakOperation + "\n";
 		if (elseTree)
 			elseTree->toElseCode(code);
-		code += end + ":\n";
+		code += breakOperation + ":\n";
 	}
 
 	IfTree::IfTree(int index, std::string line)

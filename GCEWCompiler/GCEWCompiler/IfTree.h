@@ -11,6 +11,7 @@ namespace gcew::trees::structural
 		gcew::trees::parser::BaseNode * expression;
 		ElseTree * elseTree;
 		virtual void createData(std::string & code);
+		virtual void postWork(void * tree);
 	public:
 		virtual void toCode(std::string & code) override;
 		IfTree(int index, std::string line);

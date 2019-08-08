@@ -3,6 +3,8 @@
 gcew::trees::structural::WhileTree::WhileTree(int index, std::string line)
 	:CycleTree(index, line, gcew::commons::RegexResult::While)
 {
+	this->breakOperation = gcew::commons::CompileConfiguration::typeOperation["while"][gcew::commons::Operations::End] + name;
+	this->continueOperation = gcew::commons::CompileConfiguration::typeOperation["while"][gcew::commons::Operations::Start] + name;
 	auto startBrk = line.find('(');
 	auto endBrk = line.find(')');
 	this->condition = gcew::commons::Parser::preParser(line.substr(startBrk + 1, endBrk - startBrk - 1));
@@ -10,9 +12,9 @@ gcew::trees::structural::WhileTree::WhileTree(int index, std::string line)
 
 void gcew::trees::structural::WhileTree::toCode(std::string & code)
 {
-	std::string start = gcew::commons::CompileConfiguration::typeOperation["while"][gcew::commons::Operations::Start] + name;
+	std::string start = continueOperation;
 	std::string body = gcew::commons::CompileConfiguration::typeOperation["while"][gcew::commons::Operations::Body] + name;
-	std::string end = gcew::commons::CompileConfiguration::typeOperation["while"][gcew::commons::Operations::End] + name;
+	std::string end = breakOperation;
 	code += start + ":\n";
 	code += "finit\n";
 	auto cond = dynamic_cast<BoolNode*>(condition)->toBoolCode(code);
