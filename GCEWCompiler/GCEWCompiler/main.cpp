@@ -50,6 +50,7 @@ Tree * generateTree(std::string path) {
 	Tree * root = new Tree(0, "", RegexResult::NotClassic);
 	Tree::currentTree = &root;
 	while (std::getline(fileRead, line)) {
+		line = trim(line);
 		RegexResult reg = gcew::regulars::TreeRegularBuilder::regex(line);
 		if (dynamic_cast<PureAsmTree*>(root) && reg != gcew::regulars::RegexResult::FigureClose) {
 			((PureAsmTree*)root)->addLine(line);

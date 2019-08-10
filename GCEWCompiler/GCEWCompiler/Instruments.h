@@ -32,6 +32,7 @@ namespace gcew::commons
 	bool isBracketCorrect(const std::string & str);
 	void removeFromString(std::string & input, std::string remove);
 	std::string createUniqueGUID();
+	std::vector<std::string> getArguments(std::string line);
 }
 
 #endif // !INSTRUMENTS_H

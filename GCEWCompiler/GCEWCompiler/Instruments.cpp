@@ -281,3 +281,30 @@ std::string gcew::commons::createUniqueGUID()
 		guid = 'a' + guid;
 	return guid;
 }
+
+std::vector<std::string> gcew::commons::getArguments(std::string line)
+{
+	std::vector<std::string> arguments;
+	std::stack<bool> isInArgument;
+	int prev = 0;
+	for (int i = 0; i < line.length(); i++) {
+		char c = line[i];
+		if (c == '(') {
+			isInArgument.push(true);
+			continue;
+		}
+		if (c == ')') {
+			if (isInArgument.top())
+				isInArgument.pop();
+			else
+				isInArgument.push(false);
+			continue;
+		}
+		if (c == ',' && isInArgument.empty()) {
+			arguments.push_back(line.substr(prev, i - prev));
+			prev = i + 1;
+		}
+	}
+	arguments.push_back(line.substr(prev, line.length() - prev));
+	return arguments;
+}

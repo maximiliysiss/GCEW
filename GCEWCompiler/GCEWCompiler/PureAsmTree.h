@@ -9,8 +9,9 @@ namespace gcew::trees::structural
 		std::list<std::string> datas;
 	public:
 		PureAsmTree(int index, std::string line);
-		inline void addLine(std::string str) { datas.push_back(str); }
+		void addLine(std::string str);
 		virtual void toCode(std::string & code);
+		virtual void postWork(void * tree) override;
 	};
 
 }

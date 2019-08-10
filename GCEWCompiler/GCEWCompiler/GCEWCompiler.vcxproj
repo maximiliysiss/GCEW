@@ -123,6 +123,7 @@
     <ClInclude Include="BoolNode.h" />
     <ClInclude Include="BreakOperation.h" />
     <ClInclude Include="CallOperation.h" />
+    <ClInclude Include="CommonLogger.h" />
     <ClInclude Include="CompileConfiguration.h" />
     <ClInclude Include="ContinueOperation.h" />
     <ClInclude Include="CustomTypes.h" />
@@ -157,6 +158,7 @@
     <ClCompile Include="BoolNode.cpp" />
     <ClCompile Include="BreakOperation.cpp" />
     <ClCompile Include="CallOperation.cpp" />
+    <ClCompile Include="CommonLogger.cpp" />
     <ClCompile Include="CompileConfiguration.cpp" />
     <ClCompile Include="ContinueOperation.cpp" />
     <ClCompile Include="CustomTypes.cpp" />

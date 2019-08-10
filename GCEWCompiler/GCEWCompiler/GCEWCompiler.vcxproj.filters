@@ -165,6 +165,9 @@
     <ClInclude Include="WhileTree.h">
       <Filter>Header Files\trees\structural</Filter>
     </ClInclude>
+    <ClInclude Include="CommonLogger.h">
+      <Filter>Header Files\commons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tree.cpp">
@@ -268,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="WhileTree.cpp">
       <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonLogger.cpp">
+      <Filter>Source Files\commons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

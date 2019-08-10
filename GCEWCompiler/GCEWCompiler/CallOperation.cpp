@@ -18,8 +18,8 @@ gcew::trees::elements::operations::CallOperation::CallOperation(int index, std::
 {
 	name = splitter(line, '(')[0];
 	auto startBracket = line.find('(');
-	auto endBracket = line.find(')');
-	auto arg = splitter(line.substr(startBracket + 1, endBracket - startBracket - 1), ',');
+	auto endBracket = line.find_last_of(')');
+	auto arg = getArguments(line.substr(startBracket + 1, endBracket - startBracket - 1));
 	std::for_each(arg.begin(), arg.end(), [this](std::string& str) {
 		str = trim(str);
 		arguments.push_back(gcew::commons::Parser::preParser(str));

@@ -17,9 +17,14 @@ void gcew::trees::structural::FunctionTree::createData(std::string & code)
 
 void gcew::trees::structural::FunctionTree::createInitializeData(std::string & code)
 {
+}
+
+gcew::trees::elements::Variable * gcew::trees::structural::FunctionTree::findVariableByName(std::string name)
+{
 	for (auto arg : arguments)
-		code += gcew::commons::CompileConfiguration::typeOperation[arg->getType()][gcew::commons::Operations::FieldSet]
-		+ " " + arg->getName() + "\n";
+		if (arg->getName() == name)
+			return arg;
+	return Tree::findVariableByName(name);
 }
 
 void gcew::trees::structural::FunctionTree::toCode(std::string & code)
@@ -30,7 +35,7 @@ void gcew::trees::structural::FunctionTree::toCode(std::string & code)
 	}
 	code += name + " proc near\n";
 	for (auto i = arguments.rbegin(); i != arguments.rend(); i++)
-		code += gcew::commons::CompileConfiguration::typeOperation[(*i)->getType()][gcew::commons::Operations::FieldGet] + " " + (*i)->getName() + "\n";
+		code += gcew::commons::CompileConfiguration::typeOperation[(*i)->getType()][gcew::commons::Operations::FieldGet] + " " + (*i)->getCodeName() + "\n";
 	Tree::toCode(code);
 	code += gcew::commons::CompileConfiguration::typeOperation["function"][gcew::commons::Operations::End] + name + ":\nret\n";
 	code += name + " endp\n";

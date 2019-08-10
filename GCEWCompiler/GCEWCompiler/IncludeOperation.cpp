@@ -6,7 +6,7 @@ namespace gcew::trees::elements::operations
 	IncludeOperation::IncludeOperation(int index, std::string line)
 		: Operation(index, line, RegexResult::Include)
 	{
-		auto parts = splitter(line, ' ');
+		auto parts = splitter(line.substr(0, line.length() - 1), ' ');
 
 		fileName = parts[1];
 		if (fileName.find(".") != std::string::npos) {
