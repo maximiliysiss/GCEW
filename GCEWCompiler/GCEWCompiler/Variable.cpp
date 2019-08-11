@@ -2,6 +2,12 @@
 
 namespace gcew::trees::elements
 {
+	bool Variable::isCallFunction(std::string name)
+	{
+		if (this->exp)
+			return this->exp->isCallFunction(name);
+		return false;
+	}
 	void Variable::postWork(void * tree)
 	{
 		if (exp)

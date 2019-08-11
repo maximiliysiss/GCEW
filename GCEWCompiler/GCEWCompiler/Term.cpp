@@ -39,4 +39,9 @@ namespace gcew::trees::parser
 		return { name };
 	}
 
+	bool Term::isCallFunction(std::string name)
+	{
+		return false;
+	}
+
 }

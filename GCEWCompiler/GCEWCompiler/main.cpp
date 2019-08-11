@@ -130,6 +130,7 @@ int main(int argc, char ** argv)
 	p = gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(p.string(), nullptr);
 	auto rootTree = generateTree(p.string());
 	rootTree->postWork(rootTree);
+	rootTree->optimize();
 	std::string code = rootTree->createCode();
 	fileFolder += "build\\";
 	if (exists(fileFolder))

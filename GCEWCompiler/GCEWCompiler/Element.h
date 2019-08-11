@@ -23,6 +23,7 @@ namespace  gcew::trees::elements
 		virtual void toCode(std::string & code) = 0;
 		virtual void createData(std::string & code) {}
 		virtual void postWork(void* tree) {}
+		virtual bool isCallFunction(std::string name) { return false; }
 	};
 }
 

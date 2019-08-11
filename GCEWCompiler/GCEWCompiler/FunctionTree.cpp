@@ -27,6 +27,14 @@ gcew::trees::elements::Variable * gcew::trees::structural::FunctionTree::findVar
 	return Tree::findVariableByName(name);
 }
 
+bool gcew::trees::structural::FunctionTree::isBlockForOptimize()
+{
+	if (this->isMainFunction)
+		return false;
+	auto res = Tree::isBlockForOptimize();
+	return !this->getRoot()->isCallFunction(this->functionName) || res;
+}
+
 void gcew::trees::structural::FunctionTree::toCode(std::string & code)
 {
 	if (isMainFunction) {

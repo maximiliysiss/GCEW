@@ -11,6 +11,16 @@ namespace gcew::trees::structural
 			this->iteration->createData(code);
 	}
 
+	bool ForTree::isCallFunction(std::string name)
+	{
+		bool result = CycleTree::isCallFunction(name);
+		if (startAction)
+			result = result || startAction->isCallFunction(name);
+		if (iteration)
+			result = result || iteration->isCallFunction(name);
+		return result;
+	}
+
 	gcew::trees::elements::Variable * ForTree::findVariableByName(std::string name)
 	{
 		auto * var = dynamic_cast<Variable*>(startAction);

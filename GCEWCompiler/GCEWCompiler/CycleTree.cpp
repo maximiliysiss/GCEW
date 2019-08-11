@@ -10,6 +10,11 @@ namespace gcew::trees::structural
 			condition->createData(code);
 	}
 
+	bool CycleTree::isCallFunction(std::string name)
+	{
+		return condition->isCallFunction(name);
+	}
+
 	void CycleTree::postWork(void * tree)
 	{
 		condition->postWork(tree);

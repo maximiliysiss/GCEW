@@ -8,6 +8,11 @@ void gcew::trees::elements::operations::ReturnOperation::createData(std::string 
 		this->ret->createData(code);
 }
 
+bool gcew::trees::elements::operations::ReturnOperation::isCallFunction(std::string name)
+{
+	return this->ret->isCallFunction(name);
+}
+
 gcew::trees::elements::operations::ReturnOperation::ReturnOperation(int index, std::string line)
 	:Operation(index, line, RegexResult::Return)
 {

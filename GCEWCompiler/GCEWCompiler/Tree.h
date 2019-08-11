@@ -25,16 +25,18 @@ namespace gcew::trees::structural
 	{
 	protected:
 		std::string name;
-		std::list<gcew::trees::elements::Element*> operations;
+		std::vector<gcew::trees::elements::Element*> operations;
 		std::list<gcew::trees::elements::CustomTypes*> customTypes;
 		Tree* parent{ nullptr };
 		bool isBlockList();
 		virtual void createInitializeData(std::string & code);
 		virtual void createData(std::string & code);
+		virtual bool isBlockForOptimize();
 	public:
+		virtual bool isCallFunction(std::string name) override;
 		virtual void postWork(void * tree) override;
 		static Tree ** currentTree;
-		inline std::list<Element*> getElements() const { return operations; }
+		inline std::vector<Element*> getElements() const { return operations; }
 		Tree() = delete;
 		Tree(int index, std::string line, gcew::commons::RegexResult reg);
 		virtual ~Tree();

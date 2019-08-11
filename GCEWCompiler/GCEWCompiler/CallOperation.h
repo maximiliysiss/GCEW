@@ -12,6 +12,8 @@ namespace gcew::trees::elements::operations
 		std::vector<gcew::trees::parser::BaseNode*> arguments;
 		virtual void createData(std::string & code);
 	public:
+		virtual bool isCallFunction(std::string name) override;
+		inline std::string getFunctionName() { return function->getFuncName(); }
 		virtual void postWork(void* tree);
 		CallOperation(int index, std::string line);
 		~CallOperation();

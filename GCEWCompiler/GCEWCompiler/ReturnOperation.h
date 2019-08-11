@@ -11,6 +11,7 @@ namespace gcew::trees::elements::operations
 		gcew::trees::elements::BaseNode * ret;
 		virtual void createData(std::string & code);
 	public:
+		virtual bool isCallFunction(std::string name) override;
 		ReturnOperation(int index, std::string line);
 		inline void setFunctionTree(gcew::trees::structural::FunctionTree * functionTree) { this->functionTree = functionTree; }
 		~ReturnOperation();

@@ -28,6 +28,11 @@ namespace gcew::trees::parser
 			delete right;
 	}
 
+	bool Node::isCallFunction(std::string name)
+	{
+		return this->left->isCallFunction(name) || this->right->isCallFunction(name);
+	}
+
 	OperatorGreater::OperatorGreater(std::string operation, BaseNode * left, BaseNode * right)
 		:Node(operation, left, right), BoolNode("greater")
 	{

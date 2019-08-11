@@ -19,6 +19,11 @@ namespace gcew::trees::parser
 			delete node;
 	}
 
+	bool OneNode::isCallFunction(std::string name)
+	{
+		return this->node->isCallFunction(name);
+	}
+
 	OperatorNot::OperatorNot(std::string operation, BaseNode * node)
 		:OneNode(node, operation)
 	{
@@ -26,6 +31,11 @@ namespace gcew::trees::parser
 
 	void OperatorNot::toCode(std::string & code)
 	{
+	}
+
+	bool CallNode::isCallFunction(std::string name)
+	{
+		return call->isCallFunction(name);
 	}
 
 	void CallNode::createData(std::string & code)

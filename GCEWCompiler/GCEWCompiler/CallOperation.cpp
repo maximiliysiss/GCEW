@@ -6,6 +6,11 @@ void gcew::trees::elements::operations::CallOperation::createData(std::string & 
 		arg->createData(code);
 }
 
+bool gcew::trees::elements::operations::CallOperation::isCallFunction(std::string name)
+{
+	return name == function->getFuncName();
+}
+
 void gcew::trees::elements::operations::CallOperation::postWork(void * tree)
 {
 	function = ((gcew::trees::structural::Tree*)tree)->findFunctionTree(name);

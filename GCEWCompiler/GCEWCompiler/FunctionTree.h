@@ -22,6 +22,7 @@ namespace gcew::trees::structural
 	protected:
 		virtual void createInitializeData(std::string & code);
 		virtual gcew::trees::elements::Variable * findVariableByName(std::string name) override;
+		virtual bool isBlockForOptimize() override;
 	public:
 		inline std::string getFuncName() const { return functionName; }
 		inline bool isMain() const { return isMainFunction; }

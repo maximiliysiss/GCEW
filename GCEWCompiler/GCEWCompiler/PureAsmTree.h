@@ -7,6 +7,7 @@ namespace gcew::trees::structural
 		public Tree
 	{
 		std::list<std::string> datas;
+		virtual bool isBlockForOptimize() override;
 	public:
 		PureAsmTree(int index, std::string line);
 		void addLine(std::string str);

@@ -14,6 +14,7 @@ namespace gcew::trees::elements::operations
 		BaseNode * exp;
 		std::string name;
 	public:
+		virtual bool isCallFunction(std::string name) override;
 		AssigmentOperation(int index, std::string line);
 		~AssigmentOperation();
 

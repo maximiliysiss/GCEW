@@ -22,6 +22,9 @@ namespace gcew::trees::parser
 		virtual void createData(std::string & code) override;
 		virtual void toCode(std::string & code) override;
 		~Node();
+
+		// Inherited via BaseNode
+		virtual bool isCallFunction(std::string name) override;
 	};
 
 	class OperatorGreater : public Node, public BoolNode {

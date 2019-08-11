@@ -14,6 +14,11 @@ namespace gcew::trees::structural
 	}
 
 
+	bool IfTree::isCallFunction(std::string name)
+	{
+		return expression->isCallFunction(name);
+	}
+
 	void IfTree::toCode(std::string & code)
 	{
 		std::string start = gcew::commons::CompileConfiguration::typeOperation["if"][gcew::commons::Operations::Start] + name;

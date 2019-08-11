@@ -15,6 +15,7 @@ namespace gcew::trees::structural
 		std::string breakOperation;
 		std::string continueOperation;
 	public:
+		virtual bool isCallFunction(std::string name) override;
 		virtual void postWork(void * tree) override;
 		inline std::string getContinue()const { return continueOperation; }
 		inline std::string getBreak()const { return breakOperation; }

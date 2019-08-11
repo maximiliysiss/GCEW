@@ -1,5 +1,10 @@
 #include "AssigmentOperation.h"
 
+bool gcew::trees::elements::operations::AssigmentOperation::isCallFunction(std::string name)
+{
+	return this->exp->isCallFunction(name);
+}
+
 gcew::trees::elements::operations::AssigmentOperation::AssigmentOperation(int index, std::string line)
 	:Operation(index, line, gcew::commons::RegexResult::Assigment)
 {

@@ -26,6 +26,9 @@ namespace gcew::trees::parser
 
 		// Inherited via BoolNode
 		virtual std::vector<std::string> toBoolCode(std::string & code) override;
+
+		// Inherited via BaseNode
+		virtual bool isCallFunction(std::string name) override;
 	};
 }
 

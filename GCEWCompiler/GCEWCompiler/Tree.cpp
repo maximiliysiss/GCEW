@@ -23,6 +23,24 @@ namespace gcew::trees::structural
 			elem->createData(code);
 	}
 
+	bool Tree::isBlockForOptimize()
+	{
+		bool result = this->operations.size() == 0;
+		auto trees = this->getChildren();
+		std::for_each(trees.begin(), trees.end(), [&result](Tree * tr) {
+			result = result && tr->isBlockForOptimize();
+		});
+		return result;
+	}
+
+	bool Tree::isCallFunction(std::string name)
+	{
+		bool res = false;
+		for (auto oper : operations)
+			res = res || oper->isCallFunction(name);
+		return res;
+	}
+
 	void Tree::postWork(void * tree)
 	{
 		for (auto elem : this->operations)
@@ -87,6 +105,17 @@ namespace gcew::trees::structural
 
 	void Tree::optimize()
 	{
+		for (int i = 0; i < operations.size(); i++) {
+			auto tree = dynamic_cast<Tree*>(operations[i]);
+			if (!tree)
+				continue;
+			if (tree && tree->isBlockForOptimize()) {
+				operations.erase(operations.begin() + i);
+				i--;
+				continue;
+			}
+			tree->optimize();
+		}
 	}
 
 	std::string Tree::createCode()

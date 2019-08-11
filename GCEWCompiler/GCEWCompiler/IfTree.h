@@ -13,6 +13,7 @@ namespace gcew::trees::structural
 		virtual void createData(std::string & code);
 		virtual void postWork(void * tree);
 	public:
+		virtual bool isCallFunction(std::string name) override;
 		virtual void toCode(std::string & code) override;
 		IfTree(int index, std::string line);
 		inline void setElse(ElseTree* elseTree) { this->elseTree = elseTree; }

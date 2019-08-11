@@ -15,6 +15,7 @@ namespace gcew::trees::structural
 		Element * startAction{ nullptr };
 		virtual void createData(std::string & code);
 	public:
+		virtual bool isCallFunction(std::string name) override;
 		virtual gcew::trees::elements::Variable * findVariableByName(std::string name) override;
 		virtual void postWork(void * tree) override;
 		ForTree(int index, std::string & line);
