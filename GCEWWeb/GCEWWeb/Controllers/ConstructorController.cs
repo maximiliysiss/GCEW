@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GCEWWeb.Controllers
 {
-    public class ConstructorController : Microsoft.AspNetCore.Mvc.ControllerBase
+    public class ConstructorController : Controller
     {
 
         [HttpPost]

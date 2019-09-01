@@ -10,19 +10,23 @@
             "InnerMenu": [
               {
                 "Caption": "Addiction",
-                "Function": "createAddiction(event)"
+                "Addition": "Addiction",
+                "Class": "create-element-class"
               },
               {
                 "Caption": "Substract",
-                "Function": "createSubstract(event)"
+                "Addition": "Substract",
+                "Class": "create-element-class"
               },
               {
                 "Caption": "Divide",
-                "Function": "createDivide(event)"
+                "Addition": "Divide",
+                "Class": "create-element-class"
               },
               {
                 "Caption": "Multiply",
-                "Function": "createMultyply(event)"
+                "Addition": "Multiply",
+                "Class": "create-element-class"
               }
             ]
           },
@@ -31,29 +35,35 @@
             "InnerMenu": [
               {
                 "Caption": "Equal",
-                "Function": "createEqual(event)"
+                "Addition": "Equal",
+                "Class": "create-element-class"
               },
               {
                 "Caption": "Greater",
-                "Function": "createGreater(event)"
+                "Addition": "Greater",
+                "Class": "create-element-class"
               },
               {
                 "Caption": "Lower",
-                "Function": "createLower(event)"
+                "Addition": "Lower",
+                "Class": "create-element-class"
               }
             ]
           },
           {
             "Caption": "Variable",
-            "Function": "createVariable(event)"
+            "Addition": "Variable",
+            "Class": "create-element-class"
           },
           {
             "Caption": "Print",
-            "Function":  "createPrint(event)"
+            "Addition": "Print",
+            "Class": "create-element-class"
           },
           {
             "Caption": "ChangeValue",
-            "Function": "createChangeValue(event)"
+            "Addition": "ChangeValue",
+            "Class": "create-element-class"
           }
         ]
       },

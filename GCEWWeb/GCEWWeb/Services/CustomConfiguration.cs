@@ -10,6 +10,7 @@ namespace GCEWWeb.Services
     /// </summary>
     public class CustomConfiguration
     {
+        public CompilerConfiguration CompilerConfiguration { get; set; }
         /// <summary>
         /// File with site's templates
         /// </summary>

@@ -14,6 +14,7 @@ namespace GCEWWeb.Services.Constructors
         public override ElementType ElementType => ElementType.Print;
     }
 
+    [TemplateSiteClass("ElementStart")]
     public class ElementStart : IElement
     {
         public IElement Prev { get; set; }

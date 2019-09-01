@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GCEWWeb", "GCEWWeb\GCEWWeb.csproj", "{E5962CDF-0B89-4C76-B2D8-E287572757A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageTranslation", "LanguageTranslation\LanguageTranslation.csproj", "{8D6DE43B-7E30-42BE-9E8A-A21CB33AB548}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageTranslation", "LanguageTranslation\LanguageTranslation.csproj", "{8D6DE43B-7E30-42BE-9E8A-A21CB33AB548}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLibrary", "CommonLibrary\CommonLibrary.csproj", "{2A54C3AF-CDCC-4A7D-AD7B-3CD02F910E10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8D6DE43B-7E30-42BE-9E8A-A21CB33AB548}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D6DE43B-7E30-42BE-9E8A-A21CB33AB548}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D6DE43B-7E30-42BE-9E8A-A21CB33AB548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A54C3AF-CDCC-4A7D-AD7B-3CD02F910E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A54C3AF-CDCC-4A7D-AD7B-3CD02F910E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A54C3AF-CDCC-4A7D-AD7B-3CD02F910E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A54C3AF-CDCC-4A7D-AD7B-3CD02F910E10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

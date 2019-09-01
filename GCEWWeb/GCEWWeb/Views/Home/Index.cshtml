@@ -2,6 +2,7 @@
     ViewData["Title"] = "Home Page";
     var templatesSite = SiteTemplate<TemplateSite>.Instance();
     IViewRenderService viewRender = ViewBag.RenderEngine;
+    ProjectConfiguration projectConfiguration = ViewBag.ProjectConfiguration;
 }
 @model Project
 
@@ -61,21 +62,41 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="~/lib/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 <script src="~/js/context-menu-custom.js"></script>
-<script src="~/js/FlowchartsVisual.js"></script>
 <script src="~/lib/toastr/toastr.js"></script>
 <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 <script src="~/lib/patternfly-bootstrap-treeview-master/src/js/bootstrap-treeview.js"></script>
 <script src="~/js/custom-modal-window.js"></script>
 <script type="text/javascript" src="//golden-layout.com/files/latest/js/goldenlayout.min.js"></script>
 <script src="~/lib/leader-line-master/leader-line.min.js"></script>
+<script src="~/js/net-connection.js"></script>
+<script src="~/js/utilities-engine.js"></script>
+<script src="~/js/model-engine.js"></script>
+<script src="~/js/flowchart-engine.js"></script>
+<script src="~/js/filesystem-engine.js"></script>
 <script>
 
     var tree;
     var dockLayouts;
+    var enginesFlowChart = [];
+    var actualEngine;
 
-    function createNewProject(event) {
-        $("#new-project-form").submit();
-    }
+    urlFileSystems = {
+        "OpenFile":"@Url.Action("OpenFile", "Project")",
+        "DeleteFile":"@Url.Action("DeleteFile", "Project")",
+        "CreateFileInFolder":"@Url.Action("CreateFileInFolder", "Project")",
+        "AddNewFolder":"@Url.Action("AddNewFolder", "Project")",
+        "DeleteFolder":"@Url.Action("DeleteFolder", "Project")"
+    };
+
+    var types = {
+        @Html.Raw(string.Join(",", projectConfiguration.CarouselTypes["Common"].Select(x => $@"""{x.Value}"":{((int)(x.Key)).ToString()}")))
+    };
+
+    url = '@Url.Action("Constructor", "CreateNewElement")';
+
+    $('.create-element-class').click(function (event) {
+        alert('r');
+    });
 
     function updateProjectTree() {
         ajaxPost("@Url.Action("ProjectTree", "Project")", { id: @Model.ID}, function (data) {
@@ -126,19 +147,6 @@
         });
     }
 
-    function openFile(path) {
-        var fileName = path.replace(/^.*[\\\/]/, '').split('.')[0];
-        ajaxPost("@Url.Action("OpenFile", "Project")", { path: path }, function (data) {
-            var newItemConfig = {
-                title: fileName,
-                type: 'component',
-                componentName: 'Solution',
-                componentState: { text: "Fuck it" },
-            };
-            dockLayouts.root.contentItems[0].contentItems[1].addChild(newItemConfig);
-        });
-    }
-
     // List of modals
     // modal-enter-data
     function createTextBoxForEnterData(text, onClick, modal = "modal-enter-data") {
@@ -148,38 +156,6 @@
         });
         $("#modal-text-btn").click(onClick);
         $("#" + modal).css("display", "block");
-    }
-
-    function deleteFile(event) {
-        ajaxPost("@Url.Action("DeleteFile", "Project")", { name: contextMenuTarget.attr("path") }, function (data) {
-            if (data)
-                updateProjectTree();
-            toastr["success"](data ? "Success" : "Failed");
-        });
-    }
-
-    function deleteFolder(event) {
-        ajaxPost("@Url.Action("DeleteFolder", "Project")", { name: contextMenuTarget.attr("path") }, function (data) {
-            if (data)
-                updateProjectTree();
-            toastr["success"](data ? "Success" : "Failed");
-        });
-    }
-
-    function onAddNewFileInFolder(ev) {
-        fileSystemOperationWithInput("@Url.Action("CreateFileInFolder", "Project")");
-    }
-
-    function onAddFolder(ev) {
-        fileSystemOperationWithInput("@Url.Action("AddNewFolder", "Project")");
-    }
-
-    function addFolder(event) {
-        createTextBoxForEnterData("Enter folder name", onAddFolder);
-    }
-
-    function addFraphicFile(event) {
-        createTextBoxForEnterData("Enter filename", onAddNewFileInFolder);
     }
 
     function fileSystemOperationWithInput(path) {
@@ -208,12 +184,9 @@
         $("#modal-text-text").val('');
     }
 
-
-    function addNewFile(event) {
-        createTextBoxForEnterData("Enter name", onAddNewFile);
-    }
-
     function afterInit() {
+
+        emptyWorkspace = '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/Workspace"))';
 
         toastr.options = {
             "closeButton": false,
@@ -236,14 +209,10 @@
 
         function onReloadMenus() {
             reHandlerContextMenus();
-            reloadElements();
         }
 
 
         $(function () {
-
-
-            initFlowChartsOnPage($("#svgOne"), onReloadMenus);
 
             $('.dropdown-submenu a.test').on("click", function (e) {
                 var visible = $(this).next("ul").is(":visible");
@@ -283,10 +252,9 @@
 
 
     $(function () {
-
         var config = {
             settings: {
-                showPopoutIcon: false
+                showPopoutIcon: false,
             },
             content: [{
                 type: 'row',
@@ -295,18 +263,32 @@
                     width: 20,
                     content: [{
                         type: 'component',
+                        title: 'Solution',
                         isClosable: false,
-                        componentName: 'Solution'
+                        componentState: { text: '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/SolutionPanel"))' },
+                        componentName: 'window-component'
                     }, {
-                        type: 'component',
-                        isClosable: false,
-                        componentName: 'Build log'
-                    }
+                            type: 'component',
+                            isClosable: false,
+                            componentState: { text: '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/BuildLog"))' },
+                            componentName: 'window-component',
+                            title: 'Build log'
+                        }, {
+                            type: 'component',
+                            isClosable: false,
+                            componentState: { text: '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/Carousel",
+                                new RazorContextModel { Model = projectConfiguration.CarouselTypes, ViewRenderService = viewRender }))' },
+                            title: 'Carousel',
+                            componentName: 'window-component'
+                        }
                     ]
                 }, {
                         type: 'stack',
                         content: [{
-                            componentName: 'workspace',
+                            title: 'Start',
+                            componentState: { text: '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/Start"))' },
+                            componentName: 'window-component',
+                            isClosable: false,
                             type: 'component'
                         }]
                 }]
@@ -315,108 +297,36 @@
 
         dockLayouts = new window.GoldenLayout(config, ".window-in");
 
-        dockLayouts.registerComponent('Solution', function (c, s) {
-            c.getElement().append(
-                '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/SolutionPanel"))'
-            );
-        });
-        dockLayouts.registerComponent('Build log', function (c, s) {
-            c.getElement().append(
-                '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/BuildLog"))'
-            );
-        });
-         dockLayouts.registerComponent('workspace', function (c, s) {
-            c.getElement().append(
-                '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/Workspace"))'
-            );
+        dockLayouts.registerComponent('window-component', function (c, s) {
+            c.getElement().append(s.text);
         });
 
         dockLayouts.initialised += afterInit();
         dockLayouts.init();
     });
 
+    function compileProject(ev) {
+    }
 
-    function deleteElement(event) {
-        console.log(contextMenuTarget.attr("id"));
-        removeElementWithChains(contextMenuTarget);
-        $(contextMenuTarget).remove();
+    function createElement(event) {
+        alert('123');
+    }
+
+    function createElement(event, name) {
+        var tg = contextMenuTarget;
+
+        //actualEngine.addElement(event, types[name]);
     }
 
     function deleteAll(event) {
-        $(".dragElement").each(function () {
-            removeElementWithChains(this);
-            $(this).remove();
-        });
-    }
 
-    function ajaxPost(method, data, success) {
-        $.ajax({
-            url: method,
-            method: "POST",
-            data: data,
-            success: success,
-            error: function () {
-                toastr["error"]("Error " + method);
-            }
-        });
-    }
-
-    function createElement(type, event) {
-        var cursor = [event.pageX - flowChartPosition.left, event.pageY - flowChartPosition.top];
-        ajaxPost("@Url.Action("CreateNewElement", "Constructor")", { elementType : type },
-            function (data) {
-                addElement(data, cursor);
-            }
-        );
-    }
-
-    function compileProject(ev) {
-        lines.forEach(function (elem, i) {
-            console.log($(elem.start).html() + " " + $(elem.end).html());
-        });
-    }
-
-    function createVariable(event) {
-        createElement(@((int)ElementType.Variable), event);
-    }
-
-    function createAddiction(event) {
-        createElement(@((int)ElementType.Addition), event);
-    }
-
-    function createSubstract(event) {
-        createElement(@((int)ElementType.Substract), event);
-    }
-
-    function createDivide(event) {
-        createElement(@((int)ElementType.Divide), event);
-    }
-
-    function createMultyply(event) {
-        createElement(@((int)ElementType.Multiply), event);
-    }
-
-    function createEqual(event) {
-        createElement(@((int)ElementType.Equal), event);
-    }
-
-    function createLower(event) {
-        createElement(@((int)ElementType.Lower), event);
-    }
-
-    function createGreater(event) {
-        createElement(@((int)ElementType.Greater), event);
-    }
-
-    function createPrint(event) {
-        createElement(@((int)ElementType.Print), event);
     }
 
     function createStart(event) {
         var cursor = [50,50];
         ajaxPost("@Url.Action("CreateNewElement", "Constructor")", { elementType : @((int)ElementType.Start) },
             function (data) {
-                addElement(data, cursor);
+                //addElement(data, cursor);
             }
         );
     }

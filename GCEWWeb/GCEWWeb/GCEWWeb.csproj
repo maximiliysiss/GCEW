@@ -25,6 +25,10 @@
     <Folder Include="Views\Practice\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CommonLibrary\CommonLibrary.csproj" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

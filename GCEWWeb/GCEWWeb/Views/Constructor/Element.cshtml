@@ -1,0 +1,7 @@
+﻿@model ElementType
+
+@{
+    var element = ElementConstructor.GetBuilder(Model);
+}
+
+@Html.Raw(element.Html)

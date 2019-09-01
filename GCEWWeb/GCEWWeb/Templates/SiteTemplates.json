@@ -65,6 +65,8 @@
     "Arguments": [ "caption", "value", "type" ]
   },
   {
-    "Name": "ElementStart"
+    "Name": "ElementStart",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
   }
 ]

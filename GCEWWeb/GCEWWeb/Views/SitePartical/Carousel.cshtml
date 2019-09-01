@@ -1,0 +1,12 @@
+﻿@model RazorContextModel
+@{
+    var contextModel = (Dictionary<string, Dictionary<ElementType, string>>)Model.Model;
+    IViewRenderService viewRender = Model.ViewRenderService;
+}
+
+<div>
+    @foreach (var elem in contextModel["Common"])
+    {
+        <text>@Html.Raw(await viewRender.RenderToStringAsync("Constructor/Element", elem.Key))</text>
+    }
+</div>

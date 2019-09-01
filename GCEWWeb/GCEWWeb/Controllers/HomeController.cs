@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using GCEWWeb.Models.Database;
 using System.IO;
 using GCEWWeb.Extenstions;
+using GCEWWeb.Models.ControllerModels;
 
 namespace GCEWWeb.Controllers
 {
@@ -65,6 +66,7 @@ namespace GCEWWeb.Controllers
         {
             ViewBag.Configuration = Options;
             ViewBag.RenderEngine = ViewRenderService;
+            ViewBag.ProjectConfiguration = new ProjectConfiguration();
             var project = DatabaseContext.Projects.Find(idOpenProject);
             return View("Index", project);
         }

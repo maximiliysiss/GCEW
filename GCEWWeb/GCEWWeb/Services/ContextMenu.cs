@@ -19,6 +19,10 @@ namespace GCEWWeb.Services
         public ContextMenu[] InnerMenu { get; set; }
         [TemplateSiteProperty("function")]
         public string Function { get; set; }
+        [TemplateSiteProperty("class")]
+        public string Class { get; set; } = string.Empty;
+        [TemplateSiteProperty("addition")]
+        public string Addition { get; set; } = string.Empty;
 
         public void ExtensionAction(CustomConfiguration customConfiguration) { }
     }
