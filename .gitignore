@@ -10,3 +10,5 @@ GlobalProjects/
 *.exe
 *.obj
 x64/
+Debug/
+*.gcew
