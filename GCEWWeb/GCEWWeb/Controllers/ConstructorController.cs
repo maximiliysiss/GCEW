@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GCEWWeb.Models.ControllerModels;
 using GCEWWeb.Services;
 using GCEWWeb.Services.Constructors;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,9 @@ namespace GCEWWeb.Controllers
     {
 
         [HttpPost]
-        public IElement CreateNewElement(ElementType elementType)
+        public IElement CreateNewElement(ValueModel<int> valueModel)
         {
-            return ElementConstructor.GetBuilder(elementType);
+            return ElementConstructor.GetBuilder((ElementType)valueModel.Value);
         }
     }
 }

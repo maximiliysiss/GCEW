@@ -21,7 +21,7 @@ namespace GCEWWeb.Services.Constructors
     {
         [TemplateSiteProperty("caption")]
         public override string Operation => "+";
-        public override ElementType ElementType => ElementType.Addition;
+        public override ElementType ElementType => ElementType.Addiction;
     }
 
     [TemplateSiteClass("ElementSubstract")]

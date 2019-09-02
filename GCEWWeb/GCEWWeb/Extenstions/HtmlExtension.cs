@@ -1,5 +1,7 @@
 using GCEWWeb.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,19 @@ namespace GCEWWeb.Extenstions
         {
             var headers = SiteTemplate<ContextMenu>.Instance().TemplateSites.Select(x => x.Value);
             return GenerateMenuLevel(headers, replace: "<span class=\"space\"></span> <span> ► </span> <div class=\"menuContextRoot\"> <ul class=\"menuContextElements\"> </ul> </div>", replaceTo: string.Empty);
+        }
+
+        public static string AbsoluteAction(this IUrlHelper url, string actionName, string controllerName, object routeValues = null)
+        {
+            var httpContext = url.ActionContext.HttpContext;
+            string scheme = httpContext.Request.Scheme;
+
+            return url.Action(
+                actionName,
+                controllerName,
+                routeValues,
+                scheme
+            );
         }
     }
 }

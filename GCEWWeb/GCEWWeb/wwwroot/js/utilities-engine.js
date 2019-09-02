@@ -12,4 +12,14 @@ var elementFromString = function (htmlString) {
     return div.firstChild;
 }
 
+var getSize = function (elemJQuery) {
+    var clone = elemJQuery.clone(false);
+    clone.css('visibility', 'hidden');
+    clone.css('position', 'absolute');
+    var size = [clone.width(), clone.height()];
+    $('body').append(clone);
+    clone.remove();
+    return size;
+}
+
 var emptyWorkspace = '';

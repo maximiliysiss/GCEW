@@ -1,47 +1,56 @@
 ﻿
-var Chain = function (from, to) {
-    this.from = from;
-    this.to = to;
-    this.id = generateUUID();
-    this.line = new LeaderLine($("#" + from), "#" + to, { color: '#0099CC' });
+class Chain {
+    constructor(from, to) {
+        this.from = from;
+        this.to = to;
+        this.id = generateUUID();
+        this.line = new LeaderLine($("#" + from), "#" + to, { color: '#0099CC' });
+    }
+
+    paint() {
+        this.line.position();
+    }
 }
 
-Chain.prototype.paint = function () {
-    this.line.position();
-}
+class EngineElement {
+    constructor(pureElement, position) {
+        var el = this;
+        this.pureElement = pureElement;
+        this.elementId = pureElement["id"];
+        this.isShow = false;
+        this.htmlElement = $(elementFromString(pureElement["html"]));
+        this.htmlElement.css({ position: "", visibility: "", display: "" });
+        //this.engineClickable = $(this.htmlElment).children(".engine-interaction-element").each(x => {
+        //    $(x).click(function (event) {
+        //        if (el.frame.dynamicLine && x.hasClass("inputElement"))
+        //            el.frame.addChain(x.id, $(event.target).attr("id"));
+        //        else if (x.hasClass("outputElement"))
+        //            el.frame.startDynamicLine(event, x);
+        //    });
+        //});
+        this.frame = null;
+        this.position = position;
+        this.elementsType = [];
 
-var EngineElement = function (pureElement, position) {
-    var el = this;
-    this.pureElement = pureElement;
-    this.pureElement["id"] = pureElement["Id"];
-    this.isShow = false;
-    this.htmlElement = $(createElementFromHTML(pureElement["Html"]));
-    this.engineClickable = $(this.htmlElment).children(".engine-interaction-element").forEach(x => {
-        $(x).click(function (event) {
-            if (el.frame.dynamicLine && x.hasClass("inputElement"))
-                el.frame.addChain(x.id, $(event.target).attr("id"));
-            else if (x.hasClass("outputElement"))
-                el.frame.startDynamicLine(event, x);
+        $(this.htmlElement).draggable({
+            drag: function () {
+                //el.frame.paintFor(el);
+            }
         });
-    });
-    this.position = position;
-    this.frame = null;
-    this.elementsType = [];
+    }
 
-    $(this.htmlElement).draggable({
-        drag: function () {
-            el.frame.paintFor(el);
-        }
-    });
-}
+    getProperty(name) {
+        return this.pureElement[name];
+    }
 
-EngineElement.prototype.getProperty = function (name) {
-    return pureElement[name];
-}
+    get actualFrame() {
+        return $('#' + this.frame.svgId);
+    }
 
-EngineElement.prototype.paint = function () {
-    $(this.htmlElement).css("left", this.position[0]);
-    $(this.htmlElement).css("top", this.position[1]);
-    if (!isShow)
-        $(frame).append(this.htmlElement);
+    paint() {
+        $('#' + this.elementId).css("left", this.position[0]);
+        $('#' + this.elementId).css("top", this.position[1]);
+        if (!this.isShow)
+            this.actualFrame.append(this.htmlElement);
+    }
 }

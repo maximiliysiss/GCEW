@@ -92,10 +92,12 @@
         @Html.Raw(string.Join(",", projectConfiguration.CarouselTypes["Common"].Select(x => $@"""{x.Value}"":{((int)(x.Key)).ToString()}")))
     };
 
-    url = '@Url.Action("Constructor", "CreateNewElement")';
+    url = '@Url.AbsoluteAction("CreateNewElement","Constructor")';
 
     $('.create-element-class').click(function (event) {
-        alert('r');
+        var add = $(this).attr('addition');
+        var workSpace = getActualWorkspace();
+        workSpace.addElement(event, types[add]);
     });
 
     function updateProjectTree() {
@@ -116,6 +118,18 @@
             return false;
         }
     });
+
+    function getActualWorkspace() {
+        if (!contextMenuTarget)
+            return null;
+
+        var svgs = contextMenuTarget.children('svg');
+        if (!svgs.length)
+            return null;
+
+        var actual = enginesFlowChart.filter(x => x.svgId === $(svgs[0]).attr('id'));
+        return actual.length ? actual[0]: null;
+    }
 
     function treeCreator(tree) {
         $(tree).on("rendered", function (e, n) {
@@ -306,16 +320,6 @@
     });
 
     function compileProject(ev) {
-    }
-
-    function createElement(event) {
-        alert('123');
-    }
-
-    function createElement(event, name) {
-        var tg = contextMenuTarget;
-
-        //actualEngine.addElement(event, types[name]);
     }
 
     function deleteAll(event) {
