@@ -32,7 +32,7 @@ bool gcew::trees::structural::FunctionTree::isBlockForOptimize()
 	if (this->isMainFunction)
 		return false;
 	auto res = Tree::isBlockForOptimize();
-	return !this->getRoot()->isCallFunction(this->functionName) || res;
+	return this->isInTree(this->functionName) || res;
 }
 
 void gcew::trees::structural::FunctionTree::toCode(std::string & code)

@@ -2,6 +2,11 @@
 
 namespace gcew::trees::parser
 {
+	void Node::postWork(void * tree)
+	{
+		this->left->postWork(tree);
+		this->right->postWork(tree);
+	}
 
 	Node::Node(std::string operation, BaseNode * left, BaseNode * right)
 		:operation(operation), left(left), right(right)

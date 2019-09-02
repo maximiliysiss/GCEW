@@ -24,6 +24,7 @@ namespace  gcew::trees::elements
 		virtual void createData(std::string & code) {}
 		virtual void postWork(void* tree) {}
 		virtual bool isCallFunction(std::string name) { return false; }
+		virtual bool isInActiveTree(std::string name) { return false; }
 	};
 }
 

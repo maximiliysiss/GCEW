@@ -48,10 +48,17 @@ namespace gcew::trees::parser
 		call->postWork(tree);
 	}
 
+	bool CallNode::isInActiveTree(std::string name)
+	{
+		return ((gcew::trees::elements::operations::CallOperation*)this->call)->getFunctionName() == name;
+	}
+
 	CallNode::CallNode(std::string operation)
 		:OneNode(nullptr, operation)
 	{
 		this->call = new gcew::trees::elements::operations::CallOperation(0, operation + ";");
+		dynamic_cast<gcew::trees::elements::operations::CallOperation*>(this->call)
+			->setTree(*gcew::trees::structural::Tree::currentTree);
 	}
 
 	void CallNode::toCode(std::string & code)

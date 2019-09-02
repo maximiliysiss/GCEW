@@ -34,6 +34,11 @@ void gcew::trees::elements::operations::AssigmentOperation::postWork(void * tree
 	this->exp->postWork(tree);
 }
 
+bool gcew::trees::elements::operations::AssigmentOperation::isInActiveTree(std::string name)
+{
+	return this->exp->isInActiveTree(name);
+}
+
 void gcew::trees::elements::operations::AssigmentOperation::createData(std::string & code)
 {
 	this->exp->createData(code);
