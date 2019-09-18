@@ -277,8 +277,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="masmCompile.bat">
-      <Filter>Resource Files</Filter>
-    </None>
+    <Text Include="masmCompile.bat">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
