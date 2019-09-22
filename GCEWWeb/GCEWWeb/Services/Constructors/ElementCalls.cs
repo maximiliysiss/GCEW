@@ -21,4 +21,13 @@ namespace GCEWWeb.Services.Constructors
         public IElement Next { get; set; }
         public override ElementType ElementType => ElementType.Start;
     }
+
+    [TemplateSiteClass("ElementGlobalStart")]
+    public class ElementGlobalStart : IElement
+    {
+        [TemplateSiteProperty("caption")]
+        public string Caption => "Main Start";
+        public IElement Next { get; set; }
+        public override ElementType ElementType => ElementType.Start;
+    }
 }

@@ -9,23 +9,25 @@ class EngineFlowChart {
         this.svgId = generateUUID();
         this.svgElem = $(document.createElement("svg"));
         this.svgElem.attr("id", this.svgId);
-        this.svgElem.addClass("engine-workspace");
+        //this.svgElem.addClass("engine-workspace");
+        this.svgElem.attr("style", "width:100%; height:99.999%;");
         this.svgElem.attr("baseProfile", "full");
         this.svgElem.attr("xmlns:ev", "http://www.w3.org/2001/xml-events");
         this.svgElem.attr("xmlns", "http://www.w3.org/2000/svg");
         this.svgElem.attr("xmlns:xlink", "http://www.w3.org/1999/xlink");
         $(this.frame).append(this.svgElem);
+        this.chains = [];
 
         var workSpace = this;
 
-        $(this.svgElem).mousemove(function (event) {
+        $(this.frame).mousemove(function (event) {
             if (!workSpace.dynamicLine)
                 return;
             $(workSpace.dynamicLine.end).remove();
             workSpace.dynamicLine.end = workSpace.createEmptyForMouse(event);
         });
 
-        $(this.svgElem).mousedown(function (event) {
+        $(this.frame).mousedown(function (event) {
             if (workSpace.dynamicLine)
                 workSpace.destroyDynamicLine();
         });
@@ -52,19 +54,22 @@ class EngineFlowChart {
         console.log(elemType);
         var engine = this;
         var pos = this.position;
-        ajaxPost(this.constructUrl, { Value: elemType }, function (data) {
-            var elem = new EngineElement(data, [event.pageX - pos[0], event.pageY - pos[1]]);
+        ajaxPost(this.constructUrl, { Value: types[elemType] }, function (data) {
+            var elem = elementFactory(data, [event.pageX - pos[0], event.pageY - pos[1]], elemType);
+            // var elem = new EngineElement(data, [event.pageX - pos[0], event.pageY - pos[1]]);
             elem.frame = engine;
-            if (!this.elements)
-                this.elements = [];
-            this.elements.push(elem);
+            if (!engine.elements)
+                engine.elements = [];
+            engine.elements.push(elem);
             elem.paint();
         });
     }
 
     removeElement(element) {
         this.chains.filter(x => x.from === element || x.to === element).forEach(x => this.removeChain(x));
-        engineElements = engineElements.filter(x => x.pureElement["id"] !== element.getProperty("id"));
+        var elem = this.getById(element);
+        elem.remove();
+        this.elements = this.elements.filter(x => x.pureElement["guid"] !== element);
     }
 
     createEmptyForMouse(event) {
@@ -77,7 +82,7 @@ class EngineFlowChart {
     }
 
     startDynamicLine(event, element) {
-        this.dynamicLine = new LeaderLine($(element), this.createEmptyForMouse(event), { color: '#0099CC' });
+        this.dynamicLine = new LeaderLine(document.getElementById(element), this.createEmptyForMouse(event), { color: '#0099CC' });
     }
 
     destroyDynamicLine() {
@@ -86,12 +91,12 @@ class EngineFlowChart {
     }
 
     destroyAll() {
-        this.elements.forEach(x => this.removeElement(x));
+        this.elements.forEach(x => this.removeElement(x.pureElement["guid"]));
     }
 
     getById(id) {
-        var elem = engineElements.filter(x => x.pureElement["id"] === element.getProperty("id"));
-        if (elem.length == 0)
+        var elem = this.elements.filter(x => x.pureElement["guid"] === id);
+        if (elem.length === 0)
             return null;
         return elem[0];
     }

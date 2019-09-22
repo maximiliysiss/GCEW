@@ -21,6 +21,7 @@ function openFile(path) {
             componentState: { text: empty }
         };
         dockLayouts.root.contentItems[0].contentItems[1].addChild(newItemConfig);
+        actualEngine.addElement({ pageX: actualEngine.position[0] + 150, pageY: actualEngine.position[1] + 150 }, "GlobalStart");
         reHandlerContextMenus();
     });
 }

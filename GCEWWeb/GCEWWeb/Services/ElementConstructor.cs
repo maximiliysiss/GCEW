@@ -19,7 +19,8 @@ namespace GCEWWeb.Services
         Greater,
         Lower,
         Print,
-        Start
+        Start,
+        GlobalStart
     }
 
 
@@ -46,6 +47,7 @@ namespace GCEWWeb.Services
             elementFactory.AddFor(() => new ElementLower()).Where(ElementType.Lower);
             elementFactory.AddFor(() => new ElementPrint()).Where(ElementType.Print);
             elementFactory.AddFor(() => new ElementStart()).Where(ElementType.Start);
+            elementFactory.AddFor(() => new ElementGlobalStart()).Where(ElementType.GlobalStart);
             return elementFactory.Build(elementType);
         }
     }

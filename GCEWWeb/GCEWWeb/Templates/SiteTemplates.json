@@ -68,5 +68,10 @@
     "Name": "ElementStart",
     "Count": 3,
     "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementGlobalStart",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
   }
 ]

@@ -97,7 +97,7 @@
     $('.create-element-class').click(function (event) {
         var add = $(this).attr('addition');
         var workSpace = getActualWorkspace();
-        workSpace.addElement(event, types[add]);
+        workSpace.addElement(event, add);
     });
 
     function updateProjectTree() {
@@ -322,8 +322,19 @@
     function compileProject(ev) {
     }
 
-    function deleteAll(event) {
+    function deleteElement(ev) {
 
+        var id = $(contextMenuTarget).attr("id");
+        for (var i = 0; i < enginesFlowChart.length; i++) {
+            if (enginesFlowChart[i].getById(id)) {
+                enginesFlowChart[i].removeElement(id);
+                break;
+            }
+        }
+    }
+
+    function deleteAll(event) {
+        getActualWorkspace().destroyAll();
     }
 
     function createStart(event) {

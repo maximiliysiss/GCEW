@@ -63,7 +63,7 @@ namespace GCEWWeb.Utilities
                 );
 
                 await viewResult.View.RenderAsync(viewContext);
-                return sw.ToString().Replace("\r\n", string.Empty);
+                return sw.ToString().Replace("\r\n", string.Empty).Replace("\n", string.Empty);
             }
         }
 
