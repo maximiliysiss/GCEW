@@ -20,6 +20,11 @@ namespace gcew::trees::structural
 		condition->postWork(tree);
 	}
 
+	bool CycleTree::isInActiveTree(std::string name)
+	{
+		return Tree::isInActiveTree(name) || this->condition->isInActiveTree(name);
+	}
+
 	CycleTree::CycleTree(int index, std::string line, gcew::commons::RegexResult reg)
 		:Tree(index, line, reg)
 	{

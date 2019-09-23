@@ -44,6 +44,12 @@ namespace gcew::trees::structural
 		Tree::postWork(tree);
 	}
 
+	bool ForTree::isInActiveTree(std::string name)
+	{
+		return CycleTree::isInActiveTree(name) || this->iteration->isInActiveTree(name)
+			|| this->startAction->isInActiveTree(name);
+	}
+
 	ForTree::ForTree(int index, std::string & line)
 		:CycleTree(index, line, RegexResult::For)
 	{

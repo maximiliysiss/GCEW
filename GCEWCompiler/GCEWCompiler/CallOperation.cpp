@@ -13,7 +13,7 @@ bool gcew::trees::elements::operations::CallOperation::isCallFunction(std::strin
 
 void gcew::trees::elements::operations::CallOperation::postWork(void * tree)
 {
-	function = ((gcew::trees::structural::Tree*)tree)->findFunctionTree(name);
+	function = this->tree->findFunctionTree(name);
 	for (auto arg : arguments)
 		arg->postWork(tree);
 }
@@ -29,6 +29,14 @@ gcew::trees::elements::operations::CallOperation::CallOperation(int index, std::
 		str = trim(str);
 		arguments.push_back(gcew::commons::Parser::preParser(str));
 	});
+}
+
+bool gcew::trees::elements::operations::CallOperation::isInActiveTree(std::string name)
+{
+	auto result = false;
+	for (auto arg : arguments)
+		result = result || arg->isInActiveTree(name);
+	return result;
 }
 
 gcew::trees::elements::operations::CallOperation::~CallOperation()

@@ -21,6 +21,11 @@ gcew::trees::elements::operations::ReturnOperation::ReturnOperation(int index, s
 		ret = gcew::commons::Parser::preParser(parts[1]);
 }
 
+bool gcew::trees::elements::operations::ReturnOperation::isInActiveTree(std::string name)
+{
+	return this->ret->isInActiveTree(name);
+}
+
 gcew::trees::elements::operations::ReturnOperation::~ReturnOperation()
 {
 	if (functionTree)

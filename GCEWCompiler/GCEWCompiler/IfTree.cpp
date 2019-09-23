@@ -48,6 +48,11 @@ namespace gcew::trees::structural
 		expression = gcew::commons::Parser::preParser(line.substr(bracketOpen + 1, bracketClose - bracketOpen - 1));
 	}
 
+	bool IfTree::isInActiveTree(std::string name)
+	{
+		return Tree::isInActiveTree(name) || this->expression->isInActiveTree(name);
+	}
+
 	IfTree::~IfTree()
 	{
 	}

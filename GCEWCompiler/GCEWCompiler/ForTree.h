@@ -18,6 +18,7 @@ namespace gcew::trees::structural
 		virtual bool isCallFunction(std::string name) override;
 		virtual gcew::trees::elements::Variable * findVariableByName(std::string name) override;
 		virtual void postWork(void * tree) override;
+		virtual bool isInActiveTree(std::string name);
 		ForTree(int index, std::string & line);
 		~ForTree();
 		virtual void toCode(std::string & code) override;

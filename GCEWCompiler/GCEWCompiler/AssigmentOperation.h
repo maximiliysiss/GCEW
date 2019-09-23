@@ -23,7 +23,7 @@ namespace gcew::trees::elements::operations
 
 		// Inherited via Operation
 		virtual void postWork(void * tree) override;
-
+		virtual bool isInActiveTree(std::string name) override;
 		virtual void createData(std::string & code) override;
 	};
 }

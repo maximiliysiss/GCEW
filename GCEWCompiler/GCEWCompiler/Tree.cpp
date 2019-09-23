@@ -1,5 +1,6 @@
 #include "Tree.h"
 #include "FunctionTree.h"
+#include "CallOperation.h"
 
 namespace gcew::trees::structural
 {
@@ -33,12 +34,18 @@ namespace gcew::trees::structural
 		return result;
 	}
 
-	bool Tree::isCallFunction(std::string name)
+	bool Tree::isInTree(std::string name)
 	{
-		bool res = false;
-		for (auto oper : operations)
-			res = res || oper->isCallFunction(name);
-		return res;
+		auto root = this->getRoot();
+		return root->isInActiveTree(name);
+	}
+
+	bool Tree::isInActiveTree(std::string name)
+	{
+		bool result = false;
+		for (auto oper : this->operations)
+			result = result || oper->isInActiveTree(name);
+		return false;
 	}
 
 	void Tree::postWork(void * tree)

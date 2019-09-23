@@ -32,8 +32,9 @@ namespace gcew::trees::structural
 		virtual void createInitializeData(std::string & code);
 		virtual void createData(std::string & code);
 		virtual bool isBlockForOptimize();
+		bool isInTree(std::string name);
+		virtual bool isInActiveTree(std::string name) override;
 	public:
-		virtual bool isCallFunction(std::string name) override;
 		virtual void postWork(void * tree) override;
 		static Tree ** currentTree;
 		inline std::vector<Element*> getElements() const { return operations; }

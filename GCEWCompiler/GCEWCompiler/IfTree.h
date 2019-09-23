@@ -16,6 +16,7 @@ namespace gcew::trees::structural
 		virtual bool isCallFunction(std::string name) override;
 		virtual void toCode(std::string & code) override;
 		IfTree(int index, std::string line);
+		virtual bool isInActiveTree(std::string name) override;
 		inline void setElse(ElseTree* elseTree) { this->elseTree = elseTree; }
 		~IfTree();
 	};

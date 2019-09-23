@@ -60,10 +60,16 @@ Tree * generateTree(std::string path) {
 		case RegexResult::Type:
 		case RegexResult::Assigment:
 		case RegexResult::Break:
-		case RegexResult::Call:
 		case RegexResult::Continue:
 			root->addOperation(gcew::trees::construct_elements(reg, index, line));
 			break;
+		case RegexResult::Call:
+		{
+			CallOperation * call = (CallOperation*)gcew::trees::construct_elements(reg, index, line);
+			root->addOperation(call);
+			call->setTree(root);
+			break;
+		}
 		case RegexResult::Else:
 		{
 			ElseTree * elseTree = (ElseTree*)gcew::trees::construct_elements(reg, index, line);
@@ -93,7 +99,7 @@ Tree * generateTree(std::string path) {
 		case RegexResult::Return:
 		{
 			gcew::trees::elements::operations::ReturnOperation * ret = (ReturnOperation*)gcew::trees::construct_elements(reg, index, line);
-			ret->setFunctionTree((FunctionTree*)root);
+			ret->setFunctionTree((FunctionTree*)root->findFunctionTreeUp());
 			root->addOperation(ret);
 			break;
 		}

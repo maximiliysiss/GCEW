@@ -18,6 +18,7 @@ namespace gcew::trees::parser
 		BaseNode * left;
 		BaseNode * right;
 	public:
+		virtual void postWork(void * tree) override;
 		Node(std::string operation, BaseNode * left, BaseNode * right);
 		virtual void createData(std::string & code) override;
 		virtual void toCode(std::string & code) override;
