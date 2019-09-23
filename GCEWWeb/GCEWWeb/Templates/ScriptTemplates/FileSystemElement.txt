@@ -1,0 +1,6 @@
+﻿{
+    text: "{caption}",
+	selectable: false,
+	tags: ["{tag}", "{path}"],
+    nodes: [{innerElements}]
+},

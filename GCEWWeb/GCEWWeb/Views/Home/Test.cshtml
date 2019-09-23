@@ -1,0 +1,125 @@
+﻿@{ 
+    Layout = null;
+}
+<style>
+    h2 {
+        font: 14px Arial, sans-serif;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    html, body {
+        height: 100%;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    #wrapper {
+        height: 100%;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #menuContainer {
+        width: 20%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #222;
+    }
+
+        #menuContainer li {
+            border-bottom: 1px solid #000;
+            border-top: 1px solid #333;
+            cursor: pointer;
+            padding: 10px 5px;
+            color: #BBB;
+            background: #1a1a1a;
+            font: 12px Arial, sans-serif;
+        }
+
+            #menuContainer li:hover {
+                background: #111;
+                color: #CCC;
+            }
+
+    #layoutContainer {
+        width: 80%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 20%;
+        box-shadow: -3px 0px 9px 0px rgba( 0, 0, 0, 0.4 );
+    }
+</style>
+
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="//golden-layout.com/files/latest/js/goldenlayout.min.js"></script>
+<link type="text/css" rel="stylesheet" href="//golden-layout.com/files/latest/css/goldenlayout-base.css" />
+<link type="text/css" rel="stylesheet" href="//golden-layout.com/files/latest/css/goldenlayout-dark-theme.css" />
+
+<body>
+
+<div id="wrapper">
+    <ul id="menuContainer"></ul>
+    <div id="layoutContainer"></div>
+</div>
+
+    </body>
+
+<script>
+
+
+    var config = {
+        content: [{
+            type: 'row',
+            isClosable: false,
+            content: [{
+                type: 'component',
+                componentName: 'example',
+                componentState: { text: 'Component 1' }
+            },
+            {
+                type: 'component',
+                componentName: 'example',
+                componentState: { text: 'Component 2' }
+            }]
+        }]
+    };
+
+    var myLayout = new window.GoldenLayout(config, $('#layoutContainer'));
+
+    myLayout.registerComponent('example', function (container, state) {
+        container.getElement().html('<h2>' + state.text + '</h2>');
+    });
+
+    myLayout.init();
+
+    var addMenuItem = function (title, text) {
+        var element = $('<li>' + text + '</li>');
+        $('#menuContainer').append(element);
+
+        var newItemConfig = {
+            title: title,
+            type: 'component',
+            componentName: 'example',
+            componentState: { text: text }
+        };
+
+        element.click(function () {
+            myLayout.root.contentItems[0].addChild(newItemConfig);
+        });
+    };
+
+    addMenuItem('Add me!', 'You\'ve added me!');
+    addMenuItem('Me too!', 'You\'ve added me too!');
+</script>
+

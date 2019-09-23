@@ -1,0 +1,62 @@
+[
+  {
+    "Name": "File",
+    "Caption": "File",
+    "Function": "",
+    "InnerMenu": [
+      {
+        "Name": "New",
+        "Caption": "New",
+        "InnerMenu": [
+          {
+            "Name": "Project",
+            "Caption": "Project",
+            "Function": "createNewProject(event)"
+          },
+          {
+            "Name": "File",
+            "Caption": "Graphic File",
+            "Function": "addNewFile(event)"
+          }
+        ]
+      },
+      {
+        "Name": "Open",
+        "Caption": "Open",
+        "InnerMenu": [
+          {
+            "Name": "Project",
+            "Caption": "Project",
+            "Function": "openProject(event)"
+          }
+        ]
+      },
+      {
+        "Name": "ImportProject",
+        "Caption": "Import Project",
+        "Function": "importProject(event)"
+      },
+      {
+        "Name": "ExportProject",
+        "Caption": "Export Project",
+        "Function": "exportProject(event)"
+      }
+    ]
+  },
+  {
+    "Name": "About",
+    "Caption": "About Project",
+    "InnerMenu": [
+      {
+        "Name": "Support",
+        "Caption": "Support",
+        "Function": "openSupport(event)"
+      },
+      {
+        "Name": "AboutProject",
+        "Caption": "About project",
+        "Fuction": "aboutProject(event)"
+      }
+    ]
+  }
+]

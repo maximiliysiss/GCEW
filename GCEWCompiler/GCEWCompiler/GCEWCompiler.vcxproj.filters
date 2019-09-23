@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\trees">
+      <UniqueIdentifier>{0ec3a432-3e61-423a-8d50-f1a5cec98f38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\trees">
+      <UniqueIdentifier>{63284d94-b694-4318-8891-c8dbf89b5809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\trees\structural">
+      <UniqueIdentifier>{8bb608f9-8908-46f3-b3c1-fa453863d749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\trees\structural">
+      <UniqueIdentifier>{6de295cb-f3d0-4b0c-b9e3-21c9a70bd985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\trees\parser">
+      <UniqueIdentifier>{7c655f87-6902-48fe-9a27-afc497450722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\trees\parser">
+      <UniqueIdentifier>{1f6aa8b9-522c-467f-8281-78f9fd8588b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\trees\elements">
+      <UniqueIdentifier>{0c5dd3de-590e-48a2-898c-ae10317838c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\trees\elements">
+      <UniqueIdentifier>{ce54c5ed-02d6-4bfe-97a9-0a65a260b78c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\commons">
+      <UniqueIdentifier>{c78090e7-5744-4d96-a420-fb6651186ad3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\commons">
+      <UniqueIdentifier>{e7f5d2c8-db8c-488a-8a12-0409770477de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\regulars">
+      <UniqueIdentifier>{79ae6b51-7ff5-456e-860b-e28019ce6a70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\regulars">
+      <UniqueIdentifier>{494edd31-f3c7-4a3f-8496-cbfe5484557d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\libs">
+      <UniqueIdentifier>{e0d8acff-2949-40dd-86da-549958533a2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libs">
+      <UniqueIdentifier>{87e9a8ab-621f-457d-a6b2-fe90e6d511b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\trees\elements\operations">
+      <UniqueIdentifier>{500dfd5b-76a3-46a1-87e0-63563ae4022f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\trees\elements\operations">
+      <UniqueIdentifier>{e36e30c3-746d-4acc-9cd9-d15e5b5daedd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\trees\preprocessor">
+      <UniqueIdentifier>{7f02beae-3422-4403-a3ef-9ed5a401fcd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\trees\preprocessor">
+      <UniqueIdentifier>{312537ad-093d-4c7e-abba-d27a30fbc3f8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Tree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Header Files\commons</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeRegularBuilder.h">
+      <Filter>Header Files\regulars</Filter>
+    </ClInclude>
+    <ClInclude Include="Operation.h">
+      <Filter>Header Files\trees\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Variable.h">
+      <Filter>Header Files\trees\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Element.h">
+      <Filter>Header Files\trees\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomTypes.h">
+      <Filter>Header Files\trees\elements</Filter>
+    </ClInclude>
+    <ClInclude Include="CycleTree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
+    <ClInclude Include="Term.h">
+      <Filter>Header Files\trees\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="OneNode.h">
+      <Filter>Header Files\trees\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseNode.h">
+      <Filter>Header Files\trees\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\trees\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="ForTree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
+    <ClInclude Include="IfTree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
+    <ClInclude Include="ElseTree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments.h">
+      <Filter>Header Files\commons</Filter>
+    </ClInclude>
+    <ClInclude Include="CompileConfiguration.h">
+      <Filter>Header Files\commons</Filter>
+    </ClInclude>
+    <ClInclude Include="tinystr.h">
+      <Filter>Header Files\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml.h">
+      <Filter>Header Files\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="IncludeOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
+    <ClInclude Include="PreProcessor.h">
+      <Filter>Header Files\trees\preprocessor</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Header Files\commons</Filter>
+    </ClInclude>
+    <ClInclude Include="AssigmentOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
+    <ClInclude Include="CallOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
+    <ClInclude Include="ContinueOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
+    <ClInclude Include="ElementsContrustor.h">
+      <Filter>Header Files\trees</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionTree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
+    <ClInclude Include="PureAsmTree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnOperation.h">
+      <Filter>Header Files\trees\elements\operations</Filter>
+    </ClInclude>
+    <ClInclude Include="BoolNode.h">
+      <Filter>Header Files\trees\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="WhileTree.h">
+      <Filter>Header Files\trees\structural</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonLogger.h">
+      <Filter>Header Files\commons</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeRegularBuilder.cpp">
+      <Filter>Source Files\regulars</Filter>
+    </ClCompile>
+    <ClCompile Include="Operation.cpp">
+      <Filter>Source Files\trees\elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Variable.cpp">
+      <Filter>Source Files\trees\elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Element.cpp">
+      <Filter>Source Files\trees\elements</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomTypes.cpp">
+      <Filter>Source Files\trees\elements</Filter>
+    </ClCompile>
+    <ClCompile Include="CycleTree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="Term.cpp">
+      <Filter>Source Files\trees\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="OneNode.cpp">
+      <Filter>Source Files\trees\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseNode.cpp">
+      <Filter>Source Files\trees\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files\trees\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="ForTree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="IfTree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="ElseTree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruments.cpp">
+      <Filter>Source Files\commons</Filter>
+    </ClCompile>
+    <ClCompile Include="CompileConfiguration.cpp">
+      <Filter>Source Files\commons</Filter>
+    </ClCompile>
+    <ClCompile Include="tinystr.cpp">
+      <Filter>Source Files\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml.cpp">
+      <Filter>Source Files\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxmlerror.cpp">
+      <Filter>Source Files\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxmlparser.cpp">
+      <Filter>Source Files\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="IncludeOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="PreProcessor.cpp">
+      <Filter>Source Files\trees\preprocessor</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Source Files\commons</Filter>
+    </ClCompile>
+    <ClCompile Include="AssigmentOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="CallOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="ContinueOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="ElementsContrustor.cpp">
+      <Filter>Source Files\trees</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionTree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="PureAsmTree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnOperation.cpp">
+      <Filter>Source Files\trees\elements\operations</Filter>
+    </ClCompile>
+    <ClCompile Include="BoolNode.cpp">
+      <Filter>Source Files\trees\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="WhileTree.cpp">
+      <Filter>Source Files\trees\structural</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonLogger.cpp">
+      <Filter>Source Files\commons</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="masmCompile.bat">
+      <Filter>Source Files</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

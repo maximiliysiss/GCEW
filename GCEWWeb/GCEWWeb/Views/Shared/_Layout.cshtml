@@ -3,11 +3,28 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GCEWWeb</title>
+    <title>@ViewData["Title"]</title>
 
     <environment include="Development">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/header.css" />
+        <link rel="stylesheet" href="~/css/index.css" />
+        <link rel="stylesheet" href="~/css/leftpanel.css" />
+        <link rel="stylesheet" href="~/css/workspace.css" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="~/css/context-menu-css.css" />
+        <link rel="stylesheet" href="~/css/custom-tabs-css.css" />
+        <link rel="stylesheet" href="~/css/element-styles.css" />
+        <link rel="stylesheet" href="~/lib/toastr/build/toastr.css" />
+        <link rel="stylesheet" href="~/lib/patternfly-bootstrap-treeview-master/src/css/bootstrap-treeview.css" />
+        <link rel="stylesheet" href="~/css/custom-modal-window.css" />
+        <link type="text/css" rel="stylesheet" href="~/lib/goldenLayout/src/css/goldenlayout-base.css" />
+        <link type="text/css" rel="stylesheet" href="~/lib/goldenLayout/src/css/goldenlayout-light-theme.css" />
+        <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/css/util.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/Login_v14/css/main.css">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -17,58 +34,29 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">GCEWWeb</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <partial name="_CookieConsentPartial" />
+    <form method="post" id="new-project-form" style="display: none" action="@Url.Action("CreateProjectBy", "Home")">
+        <input name="RedirectToProject" id="RedirectToProject" type="hidden" value="true" />
+    </form>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - GCEWWeb</p>
-        </footer>
-    </div>
+    <div class="limiter custom-modal"  id="modal-enter-data">
+            <div class="wrap-login100 p-l-42 p-r-42 p-t-25 p-b-25  modal-content">
+                        <p id="modal-text-enter" class="txt1 p-b-11"></p>
+                        <div class="wrap-input100 validate-input m-b-12 alert-validate">
+                            <input type="text" id="modal-text-text" class="input100" />
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="container-login100-form-btn">
+                            <input modal="modal-enter-data" class="close-modal login100-form-btn" id="modal-text-btn" type="button" value="Enter" style="margin: 0 auto;"/>
+                        </div>
+                    </div></div>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+                <partial name="_CookieConsentPartial" />
 
-    @RenderSection("Scripts", required: false)
+                <div class="container body-content">
+                    @RenderBody()
+                </div>
+
+
 </body>
 </html>

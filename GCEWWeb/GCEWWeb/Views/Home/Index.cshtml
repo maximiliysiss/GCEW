@@ -1,94 +1,357 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var templatesSite = SiteTemplate<TemplateSite>.Instance();
+    IViewRenderService viewRender = ViewBag.RenderEngine;
+    ProjectConfiguration projectConfiguration = ViewBag.ProjectConfiguration;
 }
+@model Project
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
+
+<style>
+
+
+    .context-menu-container {
+        display: block;
+    }
+
+    line {
+        background-image: url("~/images/arrows.png");
+        background-repeat: repeat;
+    }
+
+    .st0 {
+    }
+
+    line:hover {
+        cursor: pointer;
+    }
+
+    .badge {
+        display: none;
+    }
+
+    .panel-compiler {
+        height: 34px;
+        padding-right: 20px;
+        margin: 5px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+        .panel-compiler > button {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+</style>
+<div class="window">
+    <div class="menu">
+        @Html.Raw(Html.MenuContainerHtml())
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+    <div class="panel-compiler">
+        <button onclick="compileProject(event)" class="btn btn-success">Compile</button>
+        <button class="btn btn-warning">Build</button>
+    </div>
+
+
+    @Html.Raw(Html.GenerateContextMenus())
+
+    <div class="window-in">
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
-</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/lib/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="~/js/context-menu-custom.js"></script>
+<script src="~/lib/toastr/toastr.js"></script>
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script src="~/lib/patternfly-bootstrap-treeview-master/src/js/bootstrap-treeview.js"></script>
+<script src="~/js/custom-modal-window.js"></script>
+<script type="text/javascript" src="//golden-layout.com/files/latest/js/goldenlayout.min.js"></script>
+<script src="~/lib/leader-line-master/leader-line.min.js"></script>
+<script src="~/js/net-connection.js"></script>
+<script src="~/js/utilities-engine.js"></script>
+<script src="~/js/model-engine.js"></script>
+<script src="~/js/flowchart-engine.js"></script>
+<script src="~/js/filesystem-engine.js"></script>
+<script>
+
+    var tree;
+    var dockLayouts;
+    var enginesFlowChart = [];
+    var actualEngine;
+
+    urlFileSystems = {
+        "OpenFile":"@Url.Action("OpenFile", "Project")",
+        "DeleteFile":"@Url.Action("DeleteFile", "Project")",
+        "CreateFileInFolder":"@Url.Action("CreateFileInFolder", "Project")",
+        "AddNewFolder":"@Url.Action("AddNewFolder", "Project")",
+        "DeleteFolder":"@Url.Action("DeleteFolder", "Project")"
+    };
+
+    var types = {
+        @Html.Raw(string.Join(",", projectConfiguration.CarouselTypes["Common"].Select(x => $@"""{x.Value}"":{((int)(x.Key)).ToString()}")))
+    };
+
+    url = '@Url.AbsoluteAction("CreateNewElement","Constructor")';
+
+    $('.create-element-class').click(function (event) {
+        var add = $(this).attr('addition');
+        var workSpace = getActualWorkspace();
+        workSpace.addElement(event, add);
+    });
+
+    function updateProjectTree() {
+        ajaxPost("@Url.Action("ProjectTree", "Project")", { id: @Model.ID}, function (data) {
+            var options = {
+                data: JSON.parse(data),
+            };
+
+            var tree = $('#tree-solution').treeview(options);
+            treeCreator(tree);
+        });
+    }
+
+    $(document).on('keydown', function (e) {
+        if (e.ctrlKey && e.which === 83) { // Check for the Ctrl key being pressed, and if the key = [S] (83)
+
+            var elem = findActiveDocumentRoot(dockLayouts);
+            if (!elem) {
+                toastr.warning("Not select file");
+                return;
+            }
+
+            var path = elem.props.path;
+            ajaxPost('@Url.Action("Save","Home")', { path: path, data: $(elem.componentState.text).prop('innerHTML') }, function (data) {
+                toastr.success("Saved");
+            });
+
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    function getActualWorkspace() {
+        if (!contextMenuTarget)
+            return null;
+
+        var svgs = contextMenuTarget.children('svg');
+        if (!svgs.length)
+            return null;
+
+        var actual = enginesFlowChart.filter(x => x.svgId === $(svgs[0]).attr('id'));
+        return actual.length ? actual[0]: null;
+    }
+
+    function treeCreator(tree) {
+        $(tree).on("rendered", function (e, n) {
+            var size = Object.getOwnPropertyNames(n).length;
+            for (var i = 0; i < size; i++) {
+                var tagNumber = "[data-nodeid*='" + n[i].nodeId + "']";
+                n[i].tags.forEach(function (tag) {
+                    switch (tag) {
+                        case "folder":
+                            $(tagNumber).attr("menu", "MenuFolder");
+                            break;
+                        case "file":
+                            $(tagNumber).attr("menu", "MenuFile");
+                            break;
+                    }
+                });
+                if (!$(tagNumber).attr("menu"))
+                    $(tagNumber).attr("menu", "MenuFileRoot");
+                var path = n[i].tags[1];
+                $(tagNumber).attr("path", path);
+                if ($(tagNumber).attr("menu") === "MenuFile") {
+                    $(tagNumber).click(function () {
+                        openFile($(this).attr("path"));
+                    });
+                }
+            }
+
+            reHandlerContextMenus();
+        });
+    }
+
+    // List of modals
+    // modal-enter-data
+    function createTextBoxForEnterData(text, onClick, modal = "modal-enter-data") {
+        $("#modal-text-enter").html(text);
+        $("#modal-text-btn").unbind('click').click(function () {
+            $("#" + modal).css("display", "none");
+        });
+        $("#modal-text-btn").click(onClick);
+        $("#" + modal).css("display", "block");
+    }
+
+    function fileSystemOperationWithInput(path) {
+        var input = $("#modal-text-text").val().trim();
+        if (input.length === 0)
+            return;
+        ajaxPost(path, { path: contextMenuTarget.attr("path"), fileName: input, id: @Model.ID },
+            function (data) {
+                if (data)
+                    updateProjectTree();
+                toastr["success"](data ? "Success" : "Failed");
+            });
+        $("#modal-text-text").val('');
+    }
+
+    function onAddNewFile(ev) {
+         var input = $("#modal-text-text").val().trim();
+         if (input.length === 0)
+             return;
+         ajaxPost("@Url.Action("CreateFile", "Project")", { name: input, projectID: @Model.ID },
+             function (data) {
+                 toastr["success"](data ? "Success" : "Failed");
+                 if (data)
+                     updateProjectTree();
+            });
+        $("#modal-text-text").val('');
+    }
+
+    function afterInit() {
+
+        emptyWorkspace = '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/Workspace"))';
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+        function onReloadMenus() {
+            reHandlerContextMenus();
+        }
+
+
+        $(function () {
+
+            $('.dropdown-submenu a.test').on("click", function (e) {
+                var visible = $(this).next("ul").is(":visible");
+                $(this).parent().parent().find("li ul").each(function () { $(this).css("display", "none"); });
+                if (!visible)
+                    $(this).next("ul").toggle();
+                if ($(this).next("ul").length > 0) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            });
+
+
+            @Html.Raw(Model.FileSystemTree)
+
+            var options = {
+                data: fileSystemTree,
+            };
+
+            tree = $('#tree-solution').treeview(options);
+            treeCreator(tree);
+
+        });
+
+        $(".menu-handler").contextmenu(function (event) {
+            var cursor = [event.pageX, event.pageY];
+            $(".context-menu-container").each(function () { $(this).css("display", "none"); });
+            var contextMenu = $("#" + $(this).attr("menu"));
+            if (contextMenu === null)
+                return;
+            contextMenu.css("display", "block");
+            contextMenu.children(function () { $(this).css("display", "block"); });
+            contextMenu.css("left", cursor[0]);
+            contextMenu.css("top", cursor[1]);
+        });
+    }
+
+
+    $(function () {
+        var config = {
+            settings: {
+                showPopoutIcon: false,
+            },
+            content: [{
+                type: 'row',
+                content: [{
+                    type: 'stack',
+                    width: 20,
+                    content: [{
+                        type: 'component',
+                        title: 'Solution',
+                        isClosable: false,
+                        componentState: { text: '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/SolutionPanel"))' },
+                        componentName: 'window-component'
+                    }, {
+                            type: 'component',
+                            isClosable: false,
+                            componentState: { text: '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/BuildLog"))' },
+                            componentName: 'window-component',
+                            title: 'Build log'
+                        }, {
+                            type: 'component',
+                            isClosable: false,
+                            componentState: { text: '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/Carousel",
+                                new RazorContextModel { Model = projectConfiguration.CarouselTypes, ViewRenderService = viewRender }))' },
+                            title: 'Carousel',
+                            componentName: 'window-component'
+                        }
+                    ]
+                }, {
+                        type: 'stack',
+                        content: [{
+                            title: 'Start',
+                            componentState: { text: '@Html.Raw(await viewRender.RenderToStringAsync("SitePartical/Start"))' },
+                            componentName: 'window-component',
+                            isClosable: false,
+                            type: 'component'
+                        }]
+                }]
+            }]
+        };
+
+        dockLayouts = new window.GoldenLayout(config, ".window-in");
+
+        dockLayouts.registerComponent('window-component', function (c, s) {
+            c.getElement().append(s.text);
+        });
+
+        dockLayouts.initialised += afterInit();
+        dockLayouts.init();
+    });
+
+    function compileProject(ev) {
+        var doc = findActiveDocumentRoot(dockLayouts);
+        var current = enginesFlowChart.filter(x => x.path === doc.props.path)[0];
+        console.log({ vars: current.elements, chains: current.chains });
+        var compilerSet = {
+            Vars: current.elements.map(x => {
+                return { type: x.type, elementid: x.elementId };
+            }), Chains: current.chains.map(x => {
+                return { from: x.from, to: x.to };
+            })
+        };
+        ajaxPost('@Url.Action("Compile", "Project")', compilerSet, function (data) {
+            toastr.success("Compiled");
+        });
+    }
+
+    function deleteElement(ev) {
+    }
+
+    function deleteAll(event) {
+        getActualWorkspace().destroyAll();
+    }
+
+</script>

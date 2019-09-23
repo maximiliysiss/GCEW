@@ -1,0 +1,133 @@
+[
+  {
+    "Name": "Workspace",
+    "InnerMenu": [
+      {
+        "Caption": "Create",
+        "InnerMenu": [
+          {
+            "Caption": "Primitive",
+            "InnerMenu": [
+              {
+                "Caption": "Addiction",
+                "Addition": "Addiction",
+                "Class": "create-element-class"
+              },
+              {
+                "Caption": "Substract",
+                "Addition": "Substract",
+                "Class": "create-element-class"
+              },
+              {
+                "Caption": "Divide",
+                "Addition": "Divide",
+                "Class": "create-element-class"
+              },
+              {
+                "Caption": "Multiply",
+                "Addition": "Multiply",
+                "Class": "create-element-class"
+              }
+            ]
+          },
+          {
+            "Caption": "Bool primitive",
+            "InnerMenu": [
+              {
+                "Caption": "Equal",
+                "Addition": "Equal",
+                "Class": "create-element-class"
+              },
+              {
+                "Caption": "Greater",
+                "Addition": "Greater",
+                "Class": "create-element-class"
+              },
+              {
+                "Caption": "Lower",
+                "Addition": "Lower",
+                "Class": "create-element-class"
+              }
+            ]
+          },
+          {
+            "Caption": "Variable",
+            "Addition": "Variable",
+            "Class": "create-element-class"
+          },
+          {
+            "Caption": "Print",
+            "Addition": "Print",
+            "Class": "create-element-class"
+          },
+          {
+            "Caption": "ChangeValue",
+            "Addition": "ChangeValue",
+            "Class": "create-element-class"
+          }
+        ]
+      },
+      {
+        "Caption": "Delete All",
+        "Function": "deleteAll(event)"
+      }
+    ]
+  },
+  {
+    "Name": "Element",
+    "InnerMenu": [
+      {
+        "Caption": "Delete",
+        "Function": "deleteElement(event)"
+      }
+    ]
+  },
+  {
+    "Name": "MenuFolder",
+    "InnerMenu": [
+      {
+        "Caption": "Add new folder",
+        "Function": "addFolder(event)"
+      },
+      {
+        "Caption": "Add graphic file",
+        "Function": "addFraphicFile(event)"
+      },
+      {
+        "Caption": "Delete",
+        "Function": "deleteFolder(event)"
+      }
+    ]
+  },
+  {
+    "Name": "MenuFile",
+    "InnerMenu": [
+      {
+        "Caption": "Delete",
+        "Function": "deleteFile(event)"
+      }
+    ]
+  },
+  {
+    "Name": "SolutionMenu",
+    "InnerMenu": [
+      {
+        "Caption": "Add new file",
+        "Function": "addNewFile(event)"
+      }
+    ]
+  },
+  {
+    "Name": "MenuFileRoot",
+    "InnerMenu": [
+      {
+        "Caption": "Add new folder",
+        "Function": "addFolder(event)"
+      },
+      {
+        "Caption": "Add graphic file",
+        "Function": "addFraphicFile(event)"
+      }
+    ]
+  }
+]

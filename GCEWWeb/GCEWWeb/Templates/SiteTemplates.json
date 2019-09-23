@@ -1,0 +1,77 @@
+﻿[
+  {
+    "Name": "TabWithClose",
+    "Count": 1,
+    "Arguments": [ "content" ]
+  },
+  {
+    "Name": "Tab",
+    "Count": 2,
+    "Arguments": [ "content", "close" ]
+  },
+  {
+    "Name": "TabButtons",
+    "Count": 2,
+    "Arguments": [ "content", "close" ]
+  },
+  {
+    "Name": "MenuElementRoot",
+    "Count": 2,
+    "Arguments": [ "caption", "innermenu" ]
+  },
+  {
+    "Name": "MenuElement",
+    "Count": 2,
+    "Arguments": [ "caption", "innermenu" ]
+  },
+  {
+    "Name": "MenuElementContext",
+    "Count": 3,
+    "Arguments": [ "caption", "innermenu", "function" ]
+  },
+  {
+    "Name": "ContextMenuRoot",
+    "Count": 2,
+    "Arguments": [ "name", "innermenu" ]
+  },
+  {
+    "Name": "ElementVariable",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementPrimitive",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementSubstract",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementDivide",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementPrimitiveBool",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementPrint",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementStart",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  },
+  {
+    "Name": "ElementGlobalStart",
+    "Count": 3,
+    "Arguments": [ "caption", "value", "type" ]
+  }
+]

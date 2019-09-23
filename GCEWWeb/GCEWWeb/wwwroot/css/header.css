@@ -1,0 +1,33 @@
+﻿.dropdown-submenu {
+    position: relative;
+    padding: 0px;
+}
+
+    .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -1px;
+    }
+
+.dropdown-toggle {
+    padding: 4px 6px;
+    border: none;
+    border-radius: 0px;
+    background-color: #eeeeee;
+}
+
+.menu {
+    padding-left: 10px;
+    background-color: #eeeeee;
+}
+
+.dropdown {
+    background-color: #eeeeee;
+    display: inline-block;
+    float: left;
+}
+
+
+.menu-element {
+    display: flex;
+}

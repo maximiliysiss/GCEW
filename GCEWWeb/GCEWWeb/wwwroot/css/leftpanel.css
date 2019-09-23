@@ -1,0 +1,7 @@
+﻿.solution-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: white;
+    max-width: 300px;
+}

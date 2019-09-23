@@ -1,0 +1,28 @@
+﻿<div id="{id}" class="element-container dragElement" style="position:absolute" menu="Element">
+    <div class="header">{caption}</div>
+    <div class="content">
+        <div class="checkbox">
+            <div>
+                <input id="{id}-f" class="flowHandlerInput engine-interaction-element input flow" type="radio" />
+            </div>
+            <div>
+                <input id="{id}-d" class="flowChartHandlerInput engine-interaction-element input arg dividend" type="radio" />
+                <label>Dividend</label>
+            </div>
+            <div>
+                <input id="{id}-dr" class="flowChartHandlerInput engine-interaction-element input arg dividerr" type="radio" />
+                <label>Divider</label>
+            </div>
+        </div>
+        <div class="value"></div>
+        <div class="checkbox output">
+            <div>
+                <input id="{id}-r" class="flowHandler engine-interaction-element output flow" type="radio" />
+            </div>
+            <div>
+                <label>Result</label>
+                <input id="{id}-r" class="flowChartHandler engine-interaction-element output arg" type="radio" />
+            </div>
+        </div>
+    </div>
+</div>
