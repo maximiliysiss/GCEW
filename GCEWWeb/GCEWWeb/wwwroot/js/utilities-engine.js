@@ -22,4 +22,8 @@ var getSize = function (elemJQuery) {
     return size;
 };
 
+var convertHtmlToString = function (id) {
+    return $('#' + id).prop('outerHTML');
+};
+
 var emptyWorkspace = '';

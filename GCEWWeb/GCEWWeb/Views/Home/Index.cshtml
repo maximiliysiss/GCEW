@@ -9,6 +9,7 @@
 
 <style>
 
+
     .context-menu-container {
         display: block;
     }
@@ -113,6 +114,17 @@
 
     $(document).on('keydown', function (e) {
         if (e.ctrlKey && e.which === 83) { // Check for the Ctrl key being pressed, and if the key = [S] (83)
+
+            var elem = findActiveDocumentRoot(dockLayouts);
+            if (!elem) {
+                toastr.warning("Not select file");
+                return;
+            }
+
+            var path = elem.props.path;
+            ajaxPost('@Url.Action("Save","Home")', { path: path, data: $(elem.componentState.text).prop('innerHTML') }, function (data) {
+                toastr.success("Saved");
+            });
 
             e.preventDefault();
             return false;
@@ -320,30 +332,26 @@
     });
 
     function compileProject(ev) {
+        var doc = findActiveDocumentRoot(dockLayouts);
+        var current = enginesFlowChart.filter(x => x.path === doc.props.path)[0];
+        console.log({ vars: current.elements, chains: current.chains });
+        var compilerSet = {
+            Vars: current.elements.map(x => {
+                return { type: x.type, elementid: x.elementId };
+            }), Chains: current.chains.map(x => {
+                return { from: x.from, to: x.to };
+            })
+        };
+        ajaxPost('@Url.Action("Compile", "Project")', compilerSet, function (data) {
+            toastr.success("Compiled");
+        });
     }
 
     function deleteElement(ev) {
-
-        var id = $(contextMenuTarget).attr("id");
-        for (var i = 0; i < enginesFlowChart.length; i++) {
-            if (enginesFlowChart[i].getById(id)) {
-                enginesFlowChart[i].removeElement(id);
-                break;
-            }
-        }
     }
 
     function deleteAll(event) {
         getActualWorkspace().destroyAll();
-    }
-
-    function createStart(event) {
-        var cursor = [50,50];
-        ajaxPost("@Url.Action("CreateNewElement", "Constructor")", { elementType : @((int)ElementType.Start) },
-            function (data) {
-                //addElement(data, cursor);
-            }
-        );
     }
 
 </script>

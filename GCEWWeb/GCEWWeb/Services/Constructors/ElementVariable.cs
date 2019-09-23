@@ -11,14 +11,12 @@ namespace GCEWWeb.Services.Constructors
         public ElementVariable()
         {
             Caption = "Variable";
-            Type = "Not Defined";
-            Value = "Not Defined";
         }
 
         [TemplateSiteProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; set; } = "int";
         [TemplateSiteProperty("value")]
-        public string Value { get; set; }
+        public string Value { get; set; } = "0";
         [TemplateSiteProperty("caption")]
         public string Caption { get; set; }
 

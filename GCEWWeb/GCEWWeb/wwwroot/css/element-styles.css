@@ -82,7 +82,7 @@
 
         .primitive > .content > input[type="radio"] {
             /*visibility: hidden;*/
-            display: none;
+            /*display: none;*/
         }
 
         .primitive > .content > .lefttop {
@@ -110,7 +110,7 @@
         }
 
         .primitive > .content > label::before {
-            content: "О";
+            /*content: "О";
             position: absolute;
-            color: #fff;
+            color: #fff;*/
         }

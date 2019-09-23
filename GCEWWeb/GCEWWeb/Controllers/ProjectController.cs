@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using GCEWWeb.Models;
+using GCEWWeb.Models.Compiler;
 using GCEWWeb.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -82,13 +83,20 @@ namespace GCEWWeb.Controllers
         [HttpPost]
         public IActionResult OpenFile(string path)
         {
-            return PartialView("../SitePartical/Workspace", path);
+            using (var file = new StreamReader(new FileStream(path, FileMode.Open)))
+                return PartialView("../SitePartical/Workspace", file.ReadToEnd());
         }
 
         [HttpPost]
         public bool Save(string name, string text, string link)
         {
             return true;
+        }
+
+        [HttpPost]
+        public string Compile(CompilerSet compilerSet)
+        {
+            return string.Empty;
         }
     }
 }

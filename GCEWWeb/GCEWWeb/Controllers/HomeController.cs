@@ -71,6 +71,14 @@ namespace GCEWWeb.Controllers
             return View("Index", project);
         }
 
+        [HttpPost]
+        public IActionResult Save(SaveModel saveModel)
+        {
+            using (var file = new StreamWriter(new FileStream(saveModel.Path, FileMode.Truncate)))
+                file.Write(saveModel.Data);
+            return Ok();
+        }
+
         public IActionResult Test()
         {
             return View();

@@ -8,6 +8,8 @@ namespace GCEWWeb.Services.Constructors
     [TemplateSiteClass("ElementPrint")]
     public class ElementPrint : IElement
     {
+        [TemplateSiteProperty("caption")]
+        public string Caption => "Print";
         public IElement Prev { get; set; }
         public IElement Next { get; set; }
         public IElement Variable { get; set; }
