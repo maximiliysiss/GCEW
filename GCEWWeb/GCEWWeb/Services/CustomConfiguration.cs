@@ -45,5 +45,6 @@ namespace GCEWWeb.Services
         /// <param name="name"></param>
         /// <returns></returns>
         public string GlobalProjectPathForUser(string name) => GlobalProjectPath.Replace("{name}", name);
+        public string CompilerPath { get; set; }
     }
 }
