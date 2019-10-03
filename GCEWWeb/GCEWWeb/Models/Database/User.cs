@@ -19,7 +19,7 @@ namespace GCEWWeb.Models.Database
         public string Login { get; set; }
         public string Name { get; set; }
         public string PasswordHash { get; set; }
-        public Plan Plan { get; set; }
+        public PlanPrices PlanPrices { get; set; }
         public bool IsPayed { get; set; }
         public UserRole UserRole { get; set; } = UserRole.User;
     }

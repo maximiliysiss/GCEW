@@ -73,7 +73,6 @@ namespace GCEWWeb.Controllers
         {
             return View(new Transaction
             {
-                Plan = plan,
                 TransactionAmount = DatabaseContext.PlanPrices.FirstOrDefault(x => x.Plan == plan).Price,
                 DateTime = DateTime.Now
             });
@@ -103,12 +102,15 @@ namespace GCEWWeb.Controllers
         [HttpPost]
         public IActionResult SelectUserPlanConfirmed(RegisterModel registerModel)
         {
+            var plan = DatabaseContext.PlanPrices.FirstOrDefault(x => x.Plan == registerModel.Plan);
+
             var user = new User
             {
                 Login = registerModel.Login,
                 Name = registerModel.Nickname,
                 PasswordHash = CryptService.CreateMD5(registerModel.Password),
-                IsPayed = registerModel.Plan == Plan.Free
+                IsPayed = registerModel.Plan == Plan.Free,
+                PlanPrices = plan
             };
             DatabaseContext.Users.Add(user);
             DatabaseContext.SaveChanges();

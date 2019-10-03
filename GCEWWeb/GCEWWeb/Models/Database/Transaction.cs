@@ -67,7 +67,6 @@ namespace GCEWWeb.Models.Database
         public User User { get; set; }
         [Required(ErrorMessage = "Pay system is Required")]
         public PaySystem PaySystem { get; set; }
-        public Plan Plan { get; set; }
         public double TransactionAmount { get; set; }
     }
 }
