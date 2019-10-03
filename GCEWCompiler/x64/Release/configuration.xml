@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<configuration Libs="C:\\Repositories\\GCEW\\GCEWCompiler\\Libs\\" Compile="GCEWCompile">
+	<typeOperations>
+		<typeOperation name="commons">
+			<operation type="43" value="fadd"/>
+			<operation type="45" value="fsub"/>
+			<operation type="42" value="fmul"/>
+			<operation type="47" value="fdiv"/>
+		</typeOperation>
+		<typeOperation name="int">
+			<operation type="43" value="fiadd"/>
+			<operation type="45" value="fisub"/>
+			<operation type="42" value="fimul"/>
+			<operation type="47" value="fidiv"/>
+			<operation type="0" value="fild"/>
+			<operation type="1" value="dword"/>
+			<operation type="2" value="fistp"/>
+			<operation type="10" value="ficom"/>
+		</typeOperation>
+		<typeOperation name="double">
+			<operation type="43" value="fadd"/>
+			<operation type="45" value="fsub"/>
+			<operation type="42" value="fmul"/>
+			<operation type="47" value="fdiv"/>
+			<operation type="0" value="fld"/>
+			<operation type="1" value="real8"/>
+			<operation type="2" value="fstp"/>
+			<operation type="10" value="fcom"/>
+		</typeOperation>
+		<typeOperation name="float">
+			<operation type="43" value="fadd"/>
+			<operation type="45" value="fsub"/>
+			<operation type="42" value="fmul"/>
+			<operation type="47" value="fdiv"/>
+			<operation type="0" value="fld"/>
+			<operation type="1" value="real8"/>
+			<operation type="2" value="fstp"/>
+			<operation type="10" value="fcom"/>
+		</typeOperation>
+		<typeOperation name="bool">
+			<operation type="1" value="byte"/>
+			<operation type="3" value="startbool"/>
+			<operation type="5" value="outtrue"/>
+			<operation type="6" value="outfalse"/>
+		</typeOperation>
+		<typeOperation name="string">
+			<operation type="1" value=""/>
+		</typeOperation>
+		<typeOperation name="for">
+			<operation type="3" value="forstart"/>
+			<operation type="7" value="for"/>
+			<operation type="8" value="iter"/>
+			<operation type="9" value="endfor"/>
+		</typeOperation>
+		<typeOperation name="while">
+			<operation type="3" value="whilestart"/>
+			<operation type="7" value="while"/>
+			<operation type="9" value="endwhile"/>
+		</typeOperation>
+		<typeOperation name="if">
+			<operation type="3" value="ifstart"/>
+			<operation type="7" value="ifbody"/>
+			<operation type="9" value="endif"/>
+		</typeOperation>
+		<typeOperation name="else">
+			<operation type="3" value="elsebody"/>
+			<operation type="9" value="endelse"/>
+		</typeOperation>
+		<typeOperation name="function">
+			<operation type="9" value="endfunction"/>
+		</typeOperation>
+	</typeOperations>
+</configuration>

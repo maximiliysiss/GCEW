@@ -7,8 +7,12 @@ GlobalProjects/
 *.cd
 *.asm
 *.txt
-*.exe
+*.iobj
+*.ipdb
+*.pdb
 *.obj
-x64/
+x64/Debug/
+GCEWCompiler/GCEWCompiler/x64/
 Debug/
 *.gcew
+TestProject/
