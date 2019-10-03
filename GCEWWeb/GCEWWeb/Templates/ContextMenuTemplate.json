@@ -31,26 +31,6 @@
             ]
           },
           {
-            "Caption": "Bool primitive",
-            "InnerMenu": [
-              {
-                "Caption": "Equal",
-                "Addition": "Equal",
-                "Class": "create-element-class"
-              },
-              {
-                "Caption": "Greater",
-                "Addition": "Greater",
-                "Class": "create-element-class"
-              },
-              {
-                "Caption": "Lower",
-                "Addition": "Lower",
-                "Class": "create-element-class"
-              }
-            ]
-          },
-          {
             "Caption": "Variable",
             "Addition": "Variable",
             "Class": "create-element-class"
@@ -58,11 +38,6 @@
           {
             "Caption": "Print",
             "Addition": "Print",
-            "Class": "create-element-class"
-          },
-          {
-            "Caption": "ChangeValue",
-            "Addition": "ChangeValue",
             "Class": "create-element-class"
           }
         ]
