@@ -24,7 +24,6 @@
         .element-container > .content > .checkbox {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             padding: 5px;
         }
@@ -65,8 +64,8 @@
     border: none;
     padding: 0px;
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 144px;
+    height: 113px;
 }
 
     .primitive > .header {
@@ -114,3 +113,8 @@
             position: absolute;
             color: #fff;*/
         }
+
+.checkbox label {
+    font-size: 10px;
+    padding-left: 0px;
+}
