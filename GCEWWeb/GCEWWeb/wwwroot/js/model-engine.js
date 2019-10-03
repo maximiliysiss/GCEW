@@ -19,6 +19,7 @@ class Chain {
     constructor(from, to, type) {
         this.from = from;
         this.to = to;
+        this.type = type;
         this.id = generateUUID();
         var color = type ? "#FF0000" : '#0099CC';
         this.line = new LeaderLine($("#" + from)[0], $("#" + to)[0], { color: color });
@@ -74,6 +75,14 @@ class EngineElement {
         return this.pureElement[name];
     }
 
+    getType() {
+        return "";
+    }
+
+    getValue() {
+        return "";
+    }
+
     get actualFrame() {
         return $('#' + this.frame.svgId);
     }
@@ -116,6 +125,13 @@ class Variable extends EngineElement {
     }
 }
 
+Variable.prototype.getType = function () {
+    return $(this.htmlActual).find(".value").first().val();
+};
+Variable.prototype.getValue = function () {
+    return $(this.htmlActual).find(".type").first().val();
+};
+
 class PrimitiveOperation extends EngineElement {
     constructor(pureElement, position, type) {
         super(pureElement, position, type);
@@ -123,8 +139,12 @@ class PrimitiveOperation extends EngineElement {
         var va = this;
 
         $(this.htmlElement).find(".engine-interaction-element").each(function () {
-            $(this).attr("id", generateUUID());
-            $(this).click(function (event) { va.onClickEvent(event, this); });
+            $(this).attr("id", va.elementId + generateUUID());
+            $(this).click(function (event) {
+                va.onClickEvent(event, this);
+                event.preventDefault();
+                event.stopPropagation();
+            });
         });
     }
 }

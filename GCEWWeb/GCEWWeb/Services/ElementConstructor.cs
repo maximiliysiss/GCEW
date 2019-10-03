@@ -1,4 +1,5 @@
-﻿using CommonLibrary.Utilities;
+﻿using CommonLibrary.Compiler;
+using CommonLibrary.Utilities;
 using GCEWWeb.Controllers;
 using GCEWWeb.Services.Constructors;
 using System;
@@ -8,22 +9,6 @@ using System.Threading.Tasks;
 
 namespace GCEWWeb.Services
 {
-    public enum ElementType : int
-    {
-        Variable,
-        Addiction,
-        Substract,
-        Divide,
-        Multiply,
-        Equal,
-        Greater,
-        Lower,
-        Print,
-        Start,
-        GlobalStart
-    }
-
-
     /// <summary>
     /// Factory for elements
     /// </summary>

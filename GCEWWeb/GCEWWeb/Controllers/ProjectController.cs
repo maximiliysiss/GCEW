@@ -1,9 +1,13 @@
 ﻿using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using GCEWWeb.Models;
 using GCEWWeb.Models.Compiler;
 using GCEWWeb.Services;
+using LanguageTranslation.Compiler;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 
 namespace GCEWWeb.Controllers
@@ -96,7 +100,40 @@ namespace GCEWWeb.Controllers
         [HttpPost]
         public string Compile(CompilerSet compilerSet)
         {
-            return string.Empty;
+            var project = DatabaseContext.Projects.Find(compilerSet.ProjectId);
+            if (project == null)
+                return string.Empty;
+            return new CompileConverter(compilerSet).Compile(this.Options.CompilerPath, project.Path);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Download(string link, int projectID)
+        {
+            if (!System.IO.File.Exists(link))
+                return NotFound();
+
+            var project = DatabaseContext.Projects.FirstOrDefault(x => x.ID == projectID);
+            if (project == null)
+                return NotFound();
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(link, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(link), $"{project.Name}.exe");
+        }
+
+        private string GetContentType(string path)
+        {
+            var provider = new FileExtensionContentTypeProvider();
+            string contentType;
+            if (!provider.TryGetContentType(path, out contentType))
+            {
+                contentType = "application/octet-stream";
+            }
+            return contentType;
         }
     }
 }

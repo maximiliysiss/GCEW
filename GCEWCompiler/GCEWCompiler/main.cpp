@@ -43,11 +43,11 @@ std::string correctFiles(std::string path, std::string pathTo) {
 	return resultPath;
 }
 
-Tree * generateTree(std::string path) {
+Tree* generateTree(std::string path) {
 	std::ifstream fileRead(path);
 	std::string line;
 	int index = 0;
-	Tree * root = new Tree(0, "", RegexResult::NotClassic);
+	Tree* root = new Tree(0, "", RegexResult::NotClassic);
 	Tree::currentTree = &root;
 	while (std::getline(fileRead, line)) {
 		line = trim(line);
@@ -65,14 +65,14 @@ Tree * generateTree(std::string path) {
 			break;
 		case RegexResult::Call:
 		{
-			CallOperation * call = (CallOperation*)gcew::trees::construct_elements(reg, index, line);
+			CallOperation* call = (CallOperation*)gcew::trees::construct_elements(reg, index, line);
 			root->addOperation(call);
 			call->setTree(root);
 			break;
 		}
 		case RegexResult::Else:
 		{
-			ElseTree * elseTree = (ElseTree*)gcew::trees::construct_elements(reg, index, line);
+			ElseTree* elseTree = (ElseTree*)gcew::trees::construct_elements(reg, index, line);
 			std::getline(fileRead, line);
 			auto prevIf = dynamic_cast<IfTree*>(*(root->getChildren().end() - 1));
 			if (prevIf) {
@@ -98,7 +98,7 @@ Tree * generateTree(std::string path) {
 			break;
 		case RegexResult::Return:
 		{
-			gcew::trees::elements::operations::ReturnOperation * ret = (ReturnOperation*)gcew::trees::construct_elements(reg, index, line);
+			gcew::trees::elements::operations::ReturnOperation* ret = (ReturnOperation*)gcew::trees::construct_elements(reg, index, line);
 			ret->setFunctionTree((FunctionTree*)root->findFunctionTreeUp());
 			root->addOperation(ret);
 			break;
@@ -110,48 +110,56 @@ Tree * generateTree(std::string path) {
 }
 
 
-int main(int argc, char ** argv)
+int main(int argc, char** argv)
 {
 	if (argc < 2) {
 		cout << "Not found arguments\n";
 		return EXIT_FAILURE;
 	}
+	std::cout << argv[0] << std::endl;
+	std::cout << argv[1] << std::endl;
 
-	gcew::commons::CompileConfiguration::path = "configuration.xml";
+	auto parentPath = path(argv[0]).parent_path();
 
-	auto & conf = gcew::commons::CompileConfiguration::instance();
+	try {
+		gcew::commons::CompileConfiguration::path = parentPath.string() + "\\configuration.xml";
 
-	std::string fileExecute = argv[1];
-	path p = absolute(path(fileExecute));
-	path fileFolder = p.parent_path();
-	fileFolder += path::preferred_separator;
-	conf.workPath = fileFolder.string();
-	fileFolder += conf.getCompilePath();
-	fileFolder += path::preferred_separator;
+		auto& conf = gcew::commons::CompileConfiguration::instance();
 
-	if (exists(fileFolder))
-		remove_all(fileFolder);
-	create_directory(fileFolder);
-	p = correctFiles(p.string(), fileFolder.string());
-	p = gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(p.string(), nullptr);
-	auto rootTree = generateTree(p.string());
-	rootTree->postWork(rootTree);
-	rootTree->optimize();
-	std::string code = rootTree->createCode();
-	fileFolder += "build\\";
-	if (exists(fileFolder))
-		remove_all(fileFolder);
-	create_directory(fileFolder);
-	std::string fileName = path(fileExecute).filename().string();
-	auto fileResult = fileFolder.string() + fileName.substr(0, fileName.find('.')) + "_build.asm";
+		std::string fileExecute = argv[1];
+		path p = absolute(path(fileExecute));
+		path fileFolder = p.parent_path();
+		fileFolder += path::preferred_separator;
+		conf.workPath = fileFolder.string();
+		fileFolder += conf.getCompilePath();
+		fileFolder += path::preferred_separator;
 
-	std::ofstream outFileCode(fileResult);
-	outFileCode << code;
-	outFileCode.close();
+		if (exists(fileFolder))
+			remove_all(fileFolder);
+		create_directory(fileFolder);
+		p = correctFiles(p.string(), fileFolder.string());
+		p = gcew::trees::preprocessor::PreProcessor::preProcessorIncluder(p.string(), nullptr);
+		auto rootTree = generateTree(p.string());
+		rootTree->postWork(rootTree);
+		rootTree->optimize();
+		std::string code = rootTree->createCode();
+		fileFolder += "build\\";
+		if (exists(fileFolder))
+			remove_all(fileFolder);
+		create_directory(fileFolder);
+		std::string fileName = path(fileExecute).filename().string();
+		auto fileResult = fileFolder.string() + fileName.substr(0, fileName.find('.')) + "_build.asm";
 
-	std::string cmd = "masmCompile.bat " + fileResult;
-	system(cmd.c_str());
-	std::cout << "Press any key to close...\n";
-	std::getchar();
+		std::ofstream outFileCode(fileResult);
+		outFileCode << code;
+		outFileCode.close();
+
+		std::string cmd = parentPath.string() + "\\masmCompile.bat " + fileResult;
+		system(cmd.c_str());
+	}
+	catch (std::exception ex) {
+		std::cout << ex.what() << std::endl;
+	}
+
 	return 0;
 }

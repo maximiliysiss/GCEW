@@ -13,7 +13,7 @@
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>C:\Repositories\GCEW\TestProject\main.gcew</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>C:\Repositories\GCEW\GCEWWeb\GCEWWeb\GlobalProjects\max@max.max\test\building\main.gcew</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

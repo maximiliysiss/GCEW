@@ -337,13 +337,21 @@
         console.log({ vars: current.elements, chains: current.chains });
         var compilerSet = {
             Vars: current.elements.map(x => {
-                return { type: x.type, elementid: x.elementId };
+                return { type: x.type, elementid: x.elementId, typevalue: x.getType(), value: x.getValue()  };
             }), Chains: current.chains.map(x => {
-                return { from: x.from, to: x.to };
-            })
+                return { from: x.from, to: x.to, type: x.type };
+            }), ProjectId: @Model.ID
         };
+
+        var target = ev.target;
+
         ajaxPost('@Url.Action("Compile", "Project")', compilerSet, function (data) {
-            toastr.success("Compiled");
+            if (data.length === 0)
+                toastr.error("Error compiled");
+            else {
+                toastr.success("Compiled " + data);
+                window.location = "@Url.AbsoluteAction("Download", "Project")?link=" + data + "&projectID=@Model.ID";
+            }
         });
     }
 
