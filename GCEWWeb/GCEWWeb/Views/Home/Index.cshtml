@@ -49,7 +49,7 @@
     </div>
     <div class="panel-compiler">
         <button onclick="compileProject(event)" class="btn btn-success">Compile</button>
-        <button class="btn btn-warning">Build</button>
+        @*<button class="btn btn-warning">Build</button>*@
     </div>
 
 
@@ -359,6 +359,10 @@
 
     function deleteAll(event) {
         getActualWorkspace().destroyAll();
+    }
+
+    function openProjects(event) {
+        window.location = '@Url.AbsoluteAction("Projects", "Home")';
     }
 
 </script>
