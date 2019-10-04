@@ -334,15 +334,14 @@
     function compileProject(ev) {
         var doc = findActiveDocumentRoot(dockLayouts);
         var current = enginesFlowChart.filter(x => x.path === doc.props.path)[0];
-        console.log({ vars: current.elements, chains: current.chains });
         var compilerSet = {
             Vars: current.elements.map(x => {
                 return { type: x.type, elementid: x.elementId, typevalue: x.getType(), value: x.getValue()  };
             }), Chains: current.chains.map(x => {
                 return { from: x.from, to: x.to, type: x.type };
-            }), ProjectId: @Model.ID
+            }).sort((a, b) => Number(a)>Number(b)), ProjectId: @Model.ID
         };
-
+        console.log(compilerSet);
         var target = ev.target;
 
         ajaxPost('@Url.Action("Compile", "Project")', compilerSet, function (data) {

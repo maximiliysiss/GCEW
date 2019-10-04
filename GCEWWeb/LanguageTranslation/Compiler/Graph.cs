@@ -119,7 +119,7 @@ namespace LanguageTranslation.Compiler
                     oper = "+";
                     break;
                 case ElementType.Divide:
-                    oper = "-";
+                    oper = "/";
                     break;
                 case ElementType.Multiply:
                     oper = "*";

@@ -48,7 +48,10 @@ class EngineFlowChart {
             return;
         if (!this.chains)
             this.chains = [];
-        this.chains.push(new Chain(from, to, type));
+
+        var chain = new Chain(from, to, type);
+        chain.number = $('#' + to).attr("number");
+        this.chains.push(chain);
     }
 
     removeChain(id) {
