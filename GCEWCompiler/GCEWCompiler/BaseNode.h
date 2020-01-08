@@ -4,7 +4,6 @@
 
 namespace gcew::trees::parser
 {
-
 	class BaseNode
 	{
 	protected:
@@ -13,6 +12,7 @@ namespace gcew::trees::parser
 		virtual void postWork(void * tree) {}
 		virtual void toCode(std::string& code) = 0;
 		virtual bool isCallFunction(std::string name) = 0;
+		virtual std::string tryGetType();
 		inline std::string getName() const { return name; }
 		BaseNode();
 		virtual void createData(std::string & code) {}

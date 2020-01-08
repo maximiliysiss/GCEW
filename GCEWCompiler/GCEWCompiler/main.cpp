@@ -161,5 +161,8 @@ int main(int argc, char** argv)
 		std::cout << ex.what() << std::endl;
 	}
 
+	std::cout << "Press Enter to Continue";
+	std::cin.ignore();
+
 	return 0;
 }

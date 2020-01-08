@@ -18,6 +18,7 @@ namespace gcew::trees::parser
 		BaseNode * left;
 		BaseNode * right;
 	public:
+		virtual std::string tryGetType() override;
 		virtual void postWork(void * tree) override;
 		Node(std::string operation, BaseNode * left, BaseNode * right);
 		virtual void createData(std::string & code) override;
@@ -26,6 +27,14 @@ namespace gcew::trees::parser
 
 		// Inherited via BaseNode
 		virtual bool isCallFunction(std::string name) override;
+	};
+
+	class SimpleCalculateNode : public Node {
+	protected:
+		bool isInteger;
+	public:
+		SimpleCalculateNode(std::string operation, BaseNode* left, BaseNode* right);
+		virtual void toCode(std::string& code) override;
 	};
 
 	class OperatorGreater : public Node, public BoolNode {
@@ -82,25 +91,25 @@ namespace gcew::trees::parser
 		virtual std::vector<std::string> toBoolCode(std::string & code) override;
 	};
 
-	class OperatorPlus : public Node {
+	class OperatorPlus : public SimpleCalculateNode {
 	public:
 		OperatorPlus(std::string operation, BaseNode * left, BaseNode * right);
 		virtual void toCode(std::string & code) override;
 	};
 
-	class OperatorMinus : public Node {
+	class OperatorMinus : public SimpleCalculateNode {
 	public:
 		OperatorMinus(std::string operation, BaseNode * left, BaseNode * right);
 		virtual void toCode(std::string & code) override;
 	};
 
-	class OperatorMultiply : public Node {
+	class OperatorMultiply : public SimpleCalculateNode {
 	public:
 		OperatorMultiply(std::string operation, BaseNode * left, BaseNode * right);
 		virtual void toCode(std::string & code) override;
 	};
 
-	class OperatorDivide : public Node {
+	class OperatorDivide : public SimpleCalculateNode {
 	public:
 		OperatorDivide(std::string operation, BaseNode * left, BaseNode * right);
 		virtual void toCode(std::string & code) override;

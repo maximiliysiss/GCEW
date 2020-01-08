@@ -34,6 +34,7 @@ namespace gcew::trees::parser
 	class CallNode : public OneNode {
 		gcew::trees::elements::Element * call;
 	public:
+		virtual std::string tryGetType() override;
 		virtual bool isCallFunction(std::string name) override;
 		virtual void createData(std::string & code) override;
 		virtual void postWork(void * tree) override;

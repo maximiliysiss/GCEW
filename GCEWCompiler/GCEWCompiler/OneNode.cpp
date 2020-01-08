@@ -33,6 +33,14 @@ namespace gcew::trees::parser
 	{
 	}
 
+	std::string CallNode::tryGetType()
+	{
+		if (dynamic_cast<gcew::trees::elements::operations::CallOperation*>(call)) {
+			return dynamic_cast<gcew::trees::elements::operations::CallOperation*>(call)->getOutputType();
+		}
+		return std::string();
+	}
+
 	bool CallNode::isCallFunction(std::string name)
 	{
 		return call->isCallFunction(name);

@@ -17,8 +17,12 @@ gcew::trees::elements::operations::ReturnOperation::ReturnOperation(int index, s
 	:Operation(index, line, RegexResult::Return)
 {
 	auto parts = gcew::commons::splitter(line.substr(0, line.length() - 1), ' ');
-	if (parts.size() > 1)
-		ret = gcew::commons::Parser::preParser(parts[1]);
+	if (parts.size() > 1) {
+		std::string tmp;
+		for (int i = 1; i < parts.size(); i++)
+			tmp += parts[i];
+		ret = gcew::commons::Parser::preParser(tmp);
+	}
 }
 
 bool gcew::trees::elements::operations::ReturnOperation::isInActiveTree(std::string name)

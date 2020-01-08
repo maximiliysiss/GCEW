@@ -78,6 +78,9 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>build.bat $(TargetDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -87,6 +90,9 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>build.bat $(TargetDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -194,6 +200,12 @@
     <Text Include="masmCompile.bat">
       <FileType>Document</FileType>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\x64\Release\configuration.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build.bat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

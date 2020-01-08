@@ -25,6 +25,7 @@ namespace gcew::trees::structural
 		virtual bool isBlockForOptimize() override;
 	public:
 		inline std::string getFuncName() const { return functionName; }
+		inline std::string getFuncOutputType() const { return outputType; }
 		inline bool isMain() const { return isMainFunction; }
 		virtual void toCode(std::string& code) override;
 		FunctionTree(int index, std::string line, gcew::regulars::RegexResult reg);

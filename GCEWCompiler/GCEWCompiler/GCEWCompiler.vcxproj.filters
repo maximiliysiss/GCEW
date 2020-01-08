@@ -281,4 +281,14 @@
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\x64\Release\configuration.xml">
+      <Filter>Source Files</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build.bat">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
